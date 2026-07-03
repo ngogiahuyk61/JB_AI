@@ -1,16 +1,14 @@
-# JapaneseAI — Render Blueprint (Backend .NET 8 API)
+# JapaneseAI — Render Blueprint (Backend .NET 8 API via Docker)
 # Docs: https://render.com/docs/blueprint-spec
 
 services:
   - type: web
     name: japaneseai-api
-    runtime: dotnet
+    runtime: docker
     region: singapore
     plan: free
     branch: main
-    rootDir: backend/src/JapaneseAI.Api
-    buildCommand: dotnet publish -c Release -o out
-    startCommand: dotnet out/JapaneseAI.Api.dll
+    rootDir: backend
     healthCheckPath: /health
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
