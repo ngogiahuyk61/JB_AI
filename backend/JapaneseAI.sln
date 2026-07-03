@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0E75C23C-E923-48A2-8250-1D05F4FF88B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapaneseAI.Api", "src\JapaneseAI.Api\JapaneseAI.Api.csproj", "{CD6E49FD-88A8-412B-87EE-13AC23649875}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapaneseAI.Core", "src\JapaneseAI.Core\JapaneseAI.Core.csproj", "{DD16F67D-ADD7-4475-8719-A8AD4726341B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapaneseAI.Infrastructure", "src\JapaneseAI.Infrastructure\JapaneseAI.Infrastructure.csproj", "{4A0C4684-B781-45F8-9DB2-6ED7782F9293}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD6E49FD-88A8-412B-87EE-13AC23649875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD6E49FD-88A8-412B-87EE-13AC23649875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD6E49FD-88A8-412B-87EE-13AC23649875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD6E49FD-88A8-412B-87EE-13AC23649875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD16F67D-ADD7-4475-8719-A8AD4726341B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD16F67D-ADD7-4475-8719-A8AD4726341B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD16F67D-ADD7-4475-8719-A8AD4726341B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD16F67D-ADD7-4475-8719-A8AD4726341B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A0C4684-B781-45F8-9DB2-6ED7782F9293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0C4684-B781-45F8-9DB2-6ED7782F9293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0C4684-B781-45F8-9DB2-6ED7782F9293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0C4684-B781-45F8-9DB2-6ED7782F9293}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CD6E49FD-88A8-412B-87EE-13AC23649875} = {0E75C23C-E923-48A2-8250-1D05F4FF88B0}
+		{DD16F67D-ADD7-4475-8719-A8AD4726341B} = {0E75C23C-E923-48A2-8250-1D05F4FF88B0}
+		{4A0C4684-B781-45F8-9DB2-6ED7782F9293} = {0E75C23C-E923-48A2-8250-1D05F4FF88B0}
+	EndGlobalSection
+EndGlobal

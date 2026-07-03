@@ -1,0 +1,23 @@
+# Tatoeba-style example sentences (curated subset)
+# Format: vocab_key \t japanese_sentence \t translation \t romaji
+# vocab_key matches Vocabulary.Kanji or Vocabulary.Kana
+電車	毎日電車で学校に行きます。	Mỗi ngày tôi đến trường bằng tàu điện.	Mainichi densha de gakkou ni ikimasu.
+勉強	毎日日本語を勉強しています。	Tôi học tiếng Nhật mỗi ngày.	Mainichi nihongo wo benkyou shite imasu.
+映画	友達と映画を見ました。	Tôi đã xem phim với bạn bè.	Tomodachi to eiga wo mimashita.
+天気	今日は天気がいいです。	Hôm nay thời tiết đẹp.	Kyou wa tenki ga ii desu.
+食べる	朝ごはんを食べます。	Tôi ăn bữa sáng.	Asagohan wo tabemasu.
+読む	毎日新聞を読みます。	Tôi đọc báo mỗi ngày.	Mainichi shinbun wo yomimasu.
+書く	手紙を書きます。	Tôi viết thư.	Tegami wo kakimasu.
+聞く	音楽を聞きます。	Tôi nghe nhạc.	Ongaku wo kikimasu.
+見る	テレビを見ます。	Tôi xem tivi.	Terebi wo mimasu.
+行く	学校に行きます。	Tôi đi đến trường.	Gakkou ni ikimasu.
+来る	友達が来ます。	Bạn bè của tôi sẽ đến.	Tomodachi ga kimasu.
+買う	本を買いました。	Tôi đã mua sách.	Hon wo kaimashita.
+飲む	お茶を飲みます。	Tôi uống trà.	Ocha wo nomimasu.
+話す	日本語で話します。	Tôi nói bằng tiếng Nhật.	Nihongo de hanashimasu.
+働く	会社で働いています。	Tôi đang làm việc ở công ty.	Kaisha de hataraite imasu.
+休む	日曜日に休みます。	Tôi nghỉ ngơi vào Chủ nhật.	Nichiyoubi ni yasumimasu.
+起きる	毎朝六時に起きます。	Tôi dậy lúc 6 giờ sáng mỗi ngày.	Maiasa rokuji ni okimasu.
+寝る	十時に寝ます。	Tôi đi ngủ lúc 10 giờ.	Juuji ni nemasu.
+待つ	バスを待っています。	Tôi đang đợi xe buýt.	Basu wo matte imasu.
+教える	先生が日本語を教えます。	Giáo viên dạy tiếng Nhật.	Sensei ga nihongo wo oshiemasu.

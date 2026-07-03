@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sample KANJIDIC2 subset for development. Download full file from http://www.edrdg.org/kanjidic/kanjidic2.xml -->
+<kanjidic2>
+<character>
+  <literal>電</literal>
+  <misc><stroke_count>13</stroke_count><jlpt>4</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">デン</reading>
+    <meaning>electricity</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">雨</rad_name></radical>
+</character>
+<character>
+  <literal>車</literal>
+  <misc><stroke_count>7</stroke_count><jlpt>5</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">シャ</reading>
+    <reading r_type="ja_kun">くるま</reading>
+    <meaning>car</meaning><meaning>wheel</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">車</rad_name></radical>
+</character>
+<character>
+  <literal>勉</literal>
+  <misc><stroke_count>10</stroke_count><jlpt>4</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">ベン</reading>
+    <meaning>exertion</meaning><meaning>endeavour</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">力</rad_name></radical>
+</character>
+<character>
+  <literal>強</literal>
+  <misc><stroke_count>11</stroke_count><jlpt>4</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">キョウ・ゴウ</reading>
+    <reading r_type="ja_kun">つよ.い</reading>
+    <meaning>strong</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">弓</rad_name></radical>
+</character>
+<character>
+  <literal>弱</literal>
+  <misc><stroke_count>10</stroke_count><jlpt>2</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">ジャク</reading>
+    <reading r_type="ja_kun">よわ.い</reading>
+    <meaning>weak</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">弓</rad_name></radical>
+</character>
+<character>
+  <literal>映</literal>
+  <misc><stroke_count>9</stroke_count><jlpt>3</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">エイ</reading>
+    <reading r_type="ja_kun">うつ.る</reading>
+    <meaning>reflect</meaning><meaning>projection</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">日</rad_name></radical>
+</character>
+<character>
+  <literal>画</literal>
+  <misc><stroke_count>8</stroke_count><jlpt>4</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">ガ・カク</reading>
+    <meaning>picture</meaning><meaning>drawing</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">田</rad_name></radical>
+</character>
+<character>
+  <literal>天</literal>
+  <misc><stroke_count>4</stroke_count><jlpt>5</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">テン</reading>
+    <reading r_type="ja_kun">あまつ</reading>
+    <meaning>heavens</meaning><meaning>sky</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">大</rad_name></radical>
+</character>
+<character>
+  <literal>気</literal>
+  <misc><stroke_count>6</stroke_count><jlpt>5</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">キ・ケ</reading>
+    <reading r_type="ja_kun">いき</reading>
+    <meaning>spirit</meaning><meaning>mind</meaning><meaning>air</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">气</rad_name></radical>
+</character>
+<character>
+  <literal>雨</literal>
+  <misc><stroke_count>8</stroke_count><jlpt>5</jlpt></misc>
+  <reading_meaning><rmgroup>
+    <reading r_type="ja_on">ウ</reading>
+    <reading r_type="ja_kun">あめ</reading>
+    <meaning>rain</meaning>
+  </rmgroup></reading_meaning>
+  <radical><rad_name rad_type="classical">雨</rad_name></radical>
+</character>
+</kanjidic2>

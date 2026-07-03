@@ -1,0 +1,25 @@
+# JapaneseAI — Render Blueprint (Backend .NET 8 API)
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: japaneseai-api
+    runtime: dotnet
+    region: singapore
+    plan: free
+    branch: main
+    rootDir: backend/src/JapaneseAI.Api
+    buildCommand: dotnet publish -c Release -o out
+    startCommand: dotnet out/JapaneseAI.Api.dll
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: DATABASE_PROVIDER
+        value: PostgreSQL
+      - key: ConnectionStrings__DefaultConnection
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false

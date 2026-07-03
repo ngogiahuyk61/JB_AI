@@ -1,0 +1,12 @@
+# Cloudflare Pages — build settings (also set in dashboard)
+# Framework preset: Vite
+# Build command:   npm ci && npm run build
+# Build output:    dist
+# Root directory:  frontend
+
+[build]
+command = "npm ci && npm run build"
+cwd = "frontend"
+
+[build.environment]
+NODE_VERSION = "20"
