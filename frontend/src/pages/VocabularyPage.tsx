@@ -632,9 +632,9 @@ export default function VocabularyPage() {
         {selectedWord && (
           <div style={{
             background: 'white', border: '1.5px solid var(--border)', borderRadius: 20,
-            overflow: 'hidden', position: 'sticky', top: 80,
+            overflow: 'hidden', position: 'sticky', top: 60,
             boxShadow: '0 8px 32px rgba(0,0,0,.08)',
-            maxHeight: 'calc(100vh - 120px)',
+            maxHeight: 'calc(100vh - 80px)',
             display: 'flex',
             flexDirection: 'column'
           }}>

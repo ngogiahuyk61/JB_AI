@@ -14,17 +14,17 @@ const files = [
 ];
 
 function parseRow(line) {
-  const m = line.match(/\(N'((?:[^']|'')*)',\s*N'((?:[^']|'')*)',\s*(N'((?:[^']|'')*)'|NULL),\s*N'((?:[^']|'')*)',\s*N'(N[1-5])',\s*N'([^']*)',\s*(NULL|N'[^']*'),\s*(\d+)/);
+  const m = line.match(/\(\s*N'((?:[^']|'')*)'\s*,\s*N'((?:[^']|'')*)'\s*,\s*(?:N'((?:[^']|'')*)'|NULL)\s*,\s*N'((?:[^']|'')*)'\s*,\s*N'(N[1-5])'\s*,\s*(?:N'((?:[^']|'')*)'|NULL)\s*,\s*(?:N'((?:[^']|'')*)'|NULL)\s*,\s*(\d+)/);
   if (!m) return null;
-  const unescape = (s) => s.replace(/''/g, "'");
+  const unescape = (s) => s ? s.replace(/''/g, "'") : '';
   return {
     kanji: unescape(m[1]),
     kana: unescape(m[2]),
-    hanViet: m[3] === 'NULL' ? null : unescape(m[4]),
-    vietnamese: unescape(m[5]),
-    jlptLevel: m[6],
-    partOfSpeech: m[7],
-    sortOrder: parseInt(m[9], 10),
+    hanViet: m[3] ? unescape(m[3]) : null,
+    vietnamese: unescape(m[4]),
+    jlptLevel: m[5],
+    partOfSpeech: m[6] ? unescape(m[6]) : null,
+    sortOrder: parseInt(m[8], 10),
   };
 }
 

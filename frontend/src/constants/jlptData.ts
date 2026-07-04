@@ -1,10 +1,8 @@
 // ============================================================
 // JLPT Vocabulary Database – Generated from Excel
 // N5: 728 words | N4: 968 words | N3: 821 words
-// Generated: 2026-07-01T16:37:00.321Z
+// Generated: 2026-07-04T05:53:40.023Z
 // ============================================================
-
-import { type KanjiDetail } from '../types';
 
 export interface VocabEntry {
   id: string;
@@ -15,10 +13,6 @@ export interface VocabEntry {
   level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
   pos: string;
   lesson?: number;
-  exampleSentence?: string;
-  exampleTranslation?: string;
-  exampleRomaji?: string;
-  kanjiDetails?: KanjiDetail[];
 }
 
 // ── JLPT N5 (728 từ) ──────────────────────────────
@@ -2126,7 +2120,6 @@ export const JLPT_N3: VocabEntry[] = [
   { id: 'n3_0397', kanji: "活躍する", kana: "かつやくする", hanViet: "Hoạt dược", vietnamese: "Hoạt động", level: 'N3', pos: '名詞' },
   { id: 'n3_0398', kanji: "競争する", kana: "きょうそうする", hanViet: "Cạnh tranh", vietnamese: "Cạnh tranh", level: 'N3', pos: '名詞' },
   { id: 'n3_0399', kanji: "成績", kana: "せいせき", hanViet: "Thành tích", vietnamese: "Thành tích", level: 'N3', pos: '名詞' },
-  { id: 'v1', kanji: '私', kana: 'わたし', hanViet: 'Tư', vietnamese: 'Tôi', level: 'N5', pos: '名詞', exampleSentence: '私は学生です。', exampleRomaji: 'Watashi wa gakusei desu.', exampleTranslation: 'Tôi là học sinh.' },
   { id: 'n3_0400', kanji: "応援する", kana: "おうえんする", hanViet: "Ứng viên", vietnamese: "Cổ vũ, hỗ trợ", level: 'N3', pos: '名詞' },
   { id: 'n3_0401', kanji: "拍手する", kana: "はくしゅする", hanViet: "Phách thủ", vietnamese: "Vỗ tay", level: 'N3', pos: '名詞' },
   { id: 'n3_0402', kanji: "噂する", kana: "うわさする", hanViet: "Đồn", vietnamese: "Lời đồn, bàn tán", level: 'N3', pos: '名詞' },

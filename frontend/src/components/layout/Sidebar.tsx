@@ -19,8 +19,8 @@ const NAV_ITEMS: NavItemConfig[] = [
   { icon: <BarChart2 size={18} />, label: 'Tổng quan', path: 'dashboard' },
   { icon: <FileSpreadsheet size={18} />, label: 'Flashcard', path: 'flashcard' },
   { icon: <FileText size={18} />, label: 'Thi thử AI', path: 'exam' },
-  { icon: <BookMarked size={18} />, label: 'Từ vựng JLPT', path: 'vocabulary', badge: 'N5・N4', badgeColor: '#4f46e5' },
-  { icon: <GraduationCap size={18} />, label: 'Bài học', path: 'lesson', badge: 'Sắp ra' },
+  { icon: <BookMarked size={18} />, label: 'Từ vựng JLPT', path: 'vocabulary', badge: 'N5→N1', badgeColor: '#4f46e5' },
+  { icon: <GraduationCap size={18} />, label: 'Bài học', path: 'lesson', badge: 'Mới', badgeColor: '#10b981' },
   { icon: <BarChart2 size={18} />, label: 'Bảng xếp hạng', path: 'ranking', badge: 'Sắp ra' },
   { icon: <Settings size={18} />, label: 'Cài đặt', path: 'settings' },
 ];

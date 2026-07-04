@@ -6,6 +6,7 @@ import FlashcardPage from './pages/FlashcardPage';
 import ExamPage from './pages/ExamPage';
 import DevPage from './pages/DevPage';
 import VocabularyPage from './pages/VocabularyPage';
+import LessonPage from './pages/LessonPage';
 import FloatingChat from './components/chat/FloatingChat';
 import { MessageCircle } from 'lucide-react';
 import './styles/index.css';
@@ -40,7 +41,7 @@ export default function App() {
       case 'flashcard': return <FlashcardPage />;
       case 'exam': return <ExamPage />;
       case 'vocabulary': return <VocabularyPage />;
-      case 'lesson': return <DevPage title="Bài học có cấu trúc" description="Bài học theo giáo trình Minna no Nihongo, Genki, N5→N1. Sẽ ra mắt sớm!" />;
+      case 'lesson': return <LessonPage />;
       case 'ranking': return <DevPage title="Bảng xếp hạng" description="So sánh tiến độ học với cộng đồng học tiếng Nhật. Sẽ ra mắt sớm!" />;
       case 'settings': return <SettingsPage />;
       default: return <DashboardPage />;
