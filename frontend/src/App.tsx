@@ -1,70 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from './components/layout/Sidebar';
+import React, { useState } from 'react';
+import BottomNav from './components/layout/BottomNav';
 import Topbar from './components/layout/Topbar';
 import DashboardPage from './pages/DashboardPage';
 import FlashcardPage from './pages/FlashcardPage';
 import ExamPage from './pages/ExamPage';
-import DevPage from './pages/DevPage';
 import VocabularyPage from './pages/VocabularyPage';
 import LessonPage from './pages/LessonPage';
 import FloatingChat from './components/chat/FloatingChat';
 import { MessageCircle } from 'lucide-react';
 import './styles/index.css';
 
-type Tab = 'dashboard' | 'flashcard' | 'exam' | 'vocabulary' | 'lesson' | 'ranking' | 'settings';
+type Tab = 'dashboard' | 'flashcard' | 'exam' | 'vocabulary' | 'lesson' | 'settings';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
-
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth < 768) setIsSidebarOpen(false);
-      else setIsSidebarOpen(true);
-    };
-    onResize();
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  // Collapse sidebar when going to flashcard study on smaller screens
-  useEffect(() => {
-    if (activeTab === 'flashcard' && window.innerWidth < 1200) {
-      setIsSidebarOpen(false);
-    }
-  }, [activeTab]);
 
   const renderPage = () => {
     switch (activeTab) {
-      case 'dashboard': return <DashboardPage />;
+      case 'dashboard': return <DashboardPage onNavigate={(tab) => setActiveTab(tab as Tab)} />;
       case 'flashcard': return <FlashcardPage />;
       case 'exam': return <ExamPage />;
       case 'vocabulary': return <VocabularyPage />;
       case 'lesson': return <LessonPage />;
-      case 'ranking': return <DevPage title="Bảng xếp hạng" description="So sánh tiến độ học với cộng đồng học tiếng Nhật. Sẽ ra mắt sớm!" />;
       case 'settings': return <SettingsPage />;
-      default: return <DashboardPage />;
+      default: return <DashboardPage onNavigate={(tab) => setActiveTab(tab as Tab)} />;
     }
   };
 
   return (
     <div className="app-layout">
-      <Sidebar
-        activeTab={activeTab}
-        onTabChange={(tab) => setActiveTab(tab as Tab)}
-        onChatOpen={() => setIsChatOpen(true)}
-        isOpen={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
-        jlptLevel="N4"
-      />
-
       <div className="main-content">
-        <Topbar activeTab={activeTab} onMenuClick={() => setIsSidebarOpen(s => !s)} />
+        <Topbar activeTab={activeTab} />
         <div className="page-content">
           {renderPage()}
         </div>
       </div>
+
+      <BottomNav activeTab={activeTab} onTabChange={(tab) => setActiveTab(tab as Tab)} />
 
       {/* Floating Chat */}
       <FloatingChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />

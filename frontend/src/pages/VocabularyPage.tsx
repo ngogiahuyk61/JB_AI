@@ -266,14 +266,7 @@ export default function VocabularyPage() {
   }, [selectedWord, dbOnline]);
 
   return (
-    <div className="page-inner" style={{
-      display: 'grid',
-      gridTemplateColumns: selectedWord ? '1fr 340px' : '1fr',
-      gap: 20,
-      alignItems: 'start'
-    }}>
-      {/* Left Column containing Header, Filters, and Word Grid */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <div className="page-inner" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 
       {/* Header Banner */}
       <div style={{
@@ -655,18 +648,18 @@ export default function VocabularyPage() {
             );
           })}
         </div>
-      </div>
 
-      {/* Detail Panel */}
+      {/* Detail Panel Bottom Sheet */}
       {selectedWord && (
         <div style={{
-          background: 'white', border: '1.5px solid var(--border)', borderRadius: 20,
-          overflow: 'hidden', position: 'sticky', top: 10,
-          boxShadow: '0 8px 32px rgba(0,0,0,.08)',
-          maxHeight: 'calc(100vh - 20px)',
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
+          position: 'fixed', inset: 0, zIndex: 100, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+          background: 'rgba(15,23,42,.6)', backdropFilter: 'blur(2px)'
+        }} onClick={() => setSelectedWord(null)}>
+          <div style={{
+            background: 'white', borderRadius: '24px 24px 0 0',
+            overflow: 'hidden', display: 'flex', flexDirection: 'column',
+            maxHeight: '85vh', boxShadow: '0 -8px 40px rgba(0,0,0,.2)'
+          }} onClick={e => e.stopPropagation()}>
             <div style={{ background: 'linear-gradient(135deg,#1e1b4b 0%,#4338ca 100%)', padding: '20px 20px 24px', color: 'white', position: 'relative', flexShrink: 0 }}>
               <button onClick={() => setSelectedWord(null)}
                 style={{ position: 'absolute', top: 14, right: 14, background: 'rgba(255,255,255,.15)', border: 'none', color: 'white', width: 28, height: 28, borderRadius: 8, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -758,7 +751,8 @@ export default function VocabularyPage() {
               </button>
             </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

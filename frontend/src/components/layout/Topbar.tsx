@@ -1,28 +1,24 @@
 import React from 'react';
-import { Menu } from 'lucide-react';
+import { BrainCircuit } from 'lucide-react';
 
 const PAGE_TITLES: Record<string, string> = {
-  dashboard: '📊 Tổng quan học tập',
-  flashcard: '🃏 Flashcard Thông Minh',
-  exam: '📝 Thi thử AI',
-  vocabulary: '📚 Từ vựng JLPT',
-  lesson: '🎓 Bài học',
-  ranking: '🏆 Bảng xếp hạng',
-  settings: '⚙️ Cài đặt',
+  dashboard: 'Sensei.AI',
+  flashcard: 'Flashcard',
+  exam: 'Thi thử AI',
+  vocabulary: 'Từ vựng JLPT',
+  lesson: 'Bài học',
+  settings: 'Cài đặt',
 };
 
 interface TopbarProps {
   activeTab: string;
-  onMenuClick: () => void;
 }
 
-export default function Topbar({ activeTab, onMenuClick }: TopbarProps) {
+export default function Topbar({ activeTab }: TopbarProps) {
   return (
     <header className="topbar">
-      <button className="menu-btn" onClick={onMenuClick} aria-label="Toggle menu">
-        <Menu size={22} />
-      </button>
-      <span className="topbar-title">{PAGE_TITLES[activeTab] || 'Sensei.AI'}</span>
+      {activeTab === 'dashboard' && <BrainCircuit size={24} style={{ color: '#a5b4fc' }} />}
+      <h1 className="topbar-title">{PAGE_TITLES[activeTab] || 'Sensei.AI'}</h1>
     </header>
   );
 }
