@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { BrainCircuit, X, Mic, MicOff, Send, Loader2, Volume2 } from 'lucide-react';
 import type { ChatMessage } from '../../types';
 import { geminiService, type ChatHistory } from '../../services/geminiService';
+import { ollamaService } from '../../services/ollamaService';
 import { speechService, SpeechRecognizer } from '../../services/speechService';
 
 const WELCOME_MSG: ChatMessage = {
@@ -22,6 +23,7 @@ export default function FloatingChat({ isOpen, onClose }: FloatingChatProps) {
   const [isThinking, setIsThinking] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [history, setHistory] = useState<ChatHistory[]>([]);
+  const [engine, setEngine] = useState<'Qwen3 (Local)' | 'Gemini' | 'Demo'>('Demo');
   const endRef = useRef<HTMLDivElement>(null);
   const recognizerRef = useRef<SpeechRecognizer | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -34,6 +36,19 @@ export default function FloatingChat({ isOpen, onClose }: FloatingChatProps) {
     if (isOpen) {
       endRef.current?.scrollIntoView({ behavior: 'smooth' });
       setTimeout(() => inputRef.current?.focus(), 300);
+      
+      // Kiểm tra engine hoạt động
+      const detectEngine = async () => {
+        const isOllamaOnline = await ollamaService.checkHealth();
+        if (isOllamaOnline) {
+          setEngine('Qwen3 (Local)');
+        } else if (geminiService.isAvailable()) {
+          setEngine('Gemini');
+        } else {
+          setEngine('Demo');
+        }
+      };
+      detectEngine();
     }
   }, [messages, isOpen, isThinking]);
 
@@ -51,31 +66,71 @@ export default function FloatingChat({ isOpen, onClose }: FloatingChatProps) {
     addMessage('user', text);
     setIsThinking(true);
 
-    // Add to history
     const newHistory: ChatHistory[] = [...history, { role: 'user', text }];
 
     try {
-      let reply: string;
-      if (geminiService.isAvailable()) {
-        reply = await geminiService.sendChatMessage(text, history);
+      const isOllamaOnline = await ollamaService.checkHealth();
+
+      if (isOllamaOnline) {
+        setEngine('Qwen3 (Local)');
+        // Tạo placeholder cho stream
+        const aiMsgId = Date.now().toString();
+        setMessages(prev => [...prev, { id: aiMsgId, role: 'ai', text: '', timestamp: new Date() }]);
+
+        let streamingText = '';
+        await ollamaService.streamMessage(
+          text,
+          history,
+          (chunk) => {
+            streamingText += chunk;
+            setMessages(prev =>
+              prev.map(msg => msg.id === aiMsgId ? { ...msg, text: streamingText } : msg)
+            );
+          },
+          (fullText) => {
+            setHistory([...newHistory, { role: 'model', text: fullText }]);
+            setIsThinking(false);
+
+            // Đọc phát âm
+            const hasJa = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(fullText);
+            if (hasJa) {
+              speechService.speakJapanese(fullText.slice(0, 200));
+            } else {
+              speechService.speakVietnamese(fullText.slice(0, 200));
+            }
+          }
+        );
+      } else if (geminiService.isAvailable()) {
+        setEngine('Gemini');
+        const reply = await geminiService.sendChatMessage(text, history);
+        addMessage('ai', reply);
+        setHistory([...newHistory, { role: 'model', text: reply }]);
+        setIsThinking(false);
+
+        const hasJa = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(reply);
+        if (hasJa) {
+          speechService.speakJapanese(reply.slice(0, 200));
+        } else {
+          speechService.speakVietnamese(reply.slice(0, 200));
+        }
       } else {
+        setEngine('Demo');
         await new Promise(r => setTimeout(r, 800));
-        reply = getMockReply(text);
-      }
+        const reply = getMockReply(text);
+        addMessage('ai', reply);
+        setHistory([...newHistory, { role: 'model', text: reply }]);
+        setIsThinking(false);
 
-      addMessage('ai', reply);
-      setHistory([...newHistory, { role: 'model', text: reply }]);
-
-      // TTS: đọc response
-      const hasJa = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(reply);
-      if (hasJa) {
-        speechService.speakJapanese(reply.slice(0, 200));
-      } else {
-        speechService.speakVietnamese(reply.slice(0, 200));
+        const hasJa = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(reply);
+        if (hasJa) {
+          speechService.speakJapanese(reply.slice(0, 200));
+        } else {
+          speechService.speakVietnamese(reply.slice(0, 200));
+        }
       }
-    } catch {
-      addMessage('ai', '😅 Xin lỗi, có lỗi xảy ra. Vui lòng thử lại!');
-    } finally {
+    } catch (e) {
+      console.error(e);
+      addMessage('ai', '😅 Lỗi kết nối AI chatbot local. Hãy kiểm tra xem Ollama đã được bật và cài model qwen3:4b chưa!');
       setIsThinking(false);
     }
   };
@@ -113,7 +168,7 @@ export default function FloatingChat({ isOpen, onClose }: FloatingChatProps) {
           <p style={{ fontWeight: 800, fontSize: 14 }}>Sensei AI 🎌</p>
           <p style={{ fontSize: 11, opacity: .7, display: 'flex', alignItems: 'center', gap: 4 }}>
             <span style={{ width: 6, height: 6, background: '#4ade80', borderRadius: '50%', display: 'inline-block', animation: 'pulse 2s ease infinite' }} />
-            {geminiService.isAvailable() ? 'Gemini 1.5 Flash · Free' : 'Chế độ Demo'}
+            Chạy bằng: {engine}
           </p>
         </div>
         <button onClick={onClose} style={{ background: 'rgba(255,255,255,.1)', border: 'none', color: 'white', width: 32, height: 32, borderRadius: 8, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

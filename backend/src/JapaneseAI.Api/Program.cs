@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using JapaneseAI.Infrastructure.Data;
+using JapaneseAI.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,22 @@ builder.Services.AddHttpClient("GoogleTTS", client =>
     client.DefaultRequestHeaders.Add("Accept", "audio/webm,audio/ogg,audio/wav,audio/*;q=0.9,*/*;q=0.5");
     client.DefaultRequestHeaders.Add("Accept-Language", "vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7");
     client.Timeout = TimeSpan.FromSeconds(10);
+});
+
+builder.Services.AddHttpClient("Ollama", client =>
+{
+    client.Timeout = TimeSpan.FromMinutes(3);
+});
+
+var ollamaBaseUrl = builder.Configuration["Ollama:BaseUrl"] ?? "http://localhost:11434";
+var ollamaModel = builder.Configuration["Ollama:Model"] ?? "qwen3:4b";
+
+builder.Services.AddSingleton(sp => 
+{
+    var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
+    var client = httpClientFactory.CreateClient("Ollama");
+    var logger = sp.GetRequiredService<ILogger<OllamaService>>();
+    return new OllamaService(client, logger, ollamaBaseUrl, ollamaModel);
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
