@@ -30,9 +30,15 @@ class SpeechService {
   private viVoice: SpeechSynthesisVoice | null = null;
   private _utteranceRefs: SpeechSynthesisUtterance[] = []; // GC防止
   private currentAudio: HTMLAudioElement | null = null; // Online fallback
+  private _rate = 1.0;
 
   public get voicesLoaded() { return this._voicesLoaded; }
   public get utteranceRefs() { return this._utteranceRefs; }
+  public get rate() { return this._rate; }
+
+  public setRate(rate: number) {
+    this._rate = Math.max(0.25, Math.min(2.0, rate));
+  }
 
   constructor() {
     if ('speechSynthesis' in window) {
@@ -78,6 +84,11 @@ class SpeechService {
       const googleDirectUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=${encodeURIComponent(cleanText)}&tl=vi&ttsspeed=0.9`;
 
       const audio = new Audio();
+      audio.defaultPlaybackRate = this._rate;
+      audio.playbackRate = this._rate;
+      audio.onplay = () => {
+        audio.playbackRate = this._rate;
+      };
       this.currentAudio = audio;
       const timeout = setTimeout(() => { this.cancelOnlineAudio(); resolve(); }, 10000);
 
@@ -131,7 +142,7 @@ class SpeechService {
 
       const utt = new SpeechSynthesisUtterance(text);
       utt.lang = options.lang;
-      utt.rate = options.rate ?? 0.9;
+      utt.rate = this._rate;
       utt.pitch = options.pitch ?? 1.0;
       utt.volume = options.volume ?? 1.0;
 
@@ -331,6 +342,7 @@ export const speakFlashcard = (kana: string, vietnamese: string, hanViet?: strin
   speechService.speakFlashcard(kana, vietnamese, hanViet);
 export const autoReadWords = (words: any[], config: any, startIndex = 0) => 
   speechService.autoReadWords(words, config, startIndex);
+export const setRate = (rate: number) => speechService.setRate(rate);
 export const cancelAutoRead = () => speechService.cancelAutoRead();
 export const pauseAutoRead = () => speechService.pauseAutoRead();
 export const resumeAutoRead = () => speechService.resumeAutoRead();

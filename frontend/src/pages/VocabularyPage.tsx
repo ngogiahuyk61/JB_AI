@@ -51,7 +51,13 @@ export default function VocabularyPage() {
   const [readKana, setReadKana] = useState(true);
   const [readVietnamese, setReadVietnamese] = useState(true);
   const [readHanViet, setReadHanViet] = useState(false);
+  const [speechRate, setSpeechRate] = useState(1.0);
   const autoReadWordsRef = useRef<VocabEntry[]>([]);
+
+  // Sync speech rate with service
+  useEffect(() => {
+    speechService.setRate(speechRate);
+  }, [speechRate]);
 
   // Check DB status & load stats on load
   useEffect(() => {
@@ -260,7 +266,14 @@ export default function VocabularyPage() {
   }, [selectedWord, dbOnline]);
 
   return (
-    <div className="page-inner" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <div className="page-inner" style={{
+      display: 'grid',
+      gridTemplateColumns: selectedWord ? '1fr 340px' : '1fr',
+      gap: 20,
+      alignItems: 'start'
+    }}>
+      {/* Left Column containing Header, Filters, and Word Grid */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 
       {/* Header Banner */}
       <div style={{
@@ -317,6 +330,21 @@ export default function VocabularyPage() {
             }}>
             <Volume2 size={15} /> 🎧 Nghe tự động
           </button>
+
+          {/* Speech Rate Slider Widget */}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px',
+            background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)',
+            borderRadius: 14, color: 'white', fontSize: 12, fontWeight: 700,
+            backdropFilter: 'blur(10px)', minWidth: 160
+          }}>
+            <Volume2 size={14} style={{ color: '#818cf8' }} />
+            <span>Giọng đọc: {speechRate.toFixed(2)}x</span>
+            <input type="range" min={0.25} max={2.0} step={0.05} value={speechRate}
+              onChange={e => setSpeechRate(Number(e.target.value))}
+              style={{ width: 70, accentColor: '#818cf8', cursor: 'pointer' }}
+            />
+          </div>
         </div>
       </div>
 
@@ -570,7 +598,7 @@ export default function VocabularyPage() {
         }
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: selectedWord ? '1fr 340px' : '1fr', gap: 20, alignItems: 'start' }}>
+
 
         {/* Vocab Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(210px,1fr))', gap: 10 }}>
@@ -627,17 +655,18 @@ export default function VocabularyPage() {
             );
           })}
         </div>
+      </div>
 
-        {/* Detail Panel */}
-        {selectedWord && (
-          <div style={{
-            background: 'white', border: '1.5px solid var(--border)', borderRadius: 20,
-            overflow: 'hidden', position: 'sticky', top: 60,
-            boxShadow: '0 8px 32px rgba(0,0,0,.08)',
-            maxHeight: 'calc(100vh - 80px)',
-            display: 'flex',
-            flexDirection: 'column'
-          }}>
+      {/* Detail Panel */}
+      {selectedWord && (
+        <div style={{
+          background: 'white', border: '1.5px solid var(--border)', borderRadius: 20,
+          overflow: 'hidden', position: 'sticky', top: 10,
+          boxShadow: '0 8px 32px rgba(0,0,0,.08)',
+          maxHeight: 'calc(100vh - 20px)',
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
             <div style={{ background: 'linear-gradient(135deg,#1e1b4b 0%,#4338ca 100%)', padding: '20px 20px 24px', color: 'white', position: 'relative', flexShrink: 0 }}>
               <button onClick={() => setSelectedWord(null)}
                 style={{ position: 'absolute', top: 14, right: 14, background: 'rgba(255,255,255,.15)', border: 'none', color: 'white', width: 28, height: 28, borderRadius: 8, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -730,7 +759,6 @@ export default function VocabularyPage() {
             </div>
           </div>
         )}
-      </div>
     </div>
   );
 }
