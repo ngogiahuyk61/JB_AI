@@ -128,9 +128,9 @@ export default function FloatingChat({ isOpen, onClose }: FloatingChatProps) {
           speechService.speakVietnamese(reply.slice(0, 200));
         }
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
-      addMessage('ai', '😅 Lỗi kết nối AI chatbot local. Hãy kiểm tra xem Ollama đã được bật và cài model qwen3:4b chưa!');
+      addMessage('ai', `😅 Lỗi kết nối AI chatbot local: ${e?.message || e}\n\nHãy kiểm tra xem Ollama đã được bật và cài model qwen3:4b chưa!`);
       setIsThinking(false);
     }
   };
