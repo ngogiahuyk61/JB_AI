@@ -162,7 +162,8 @@ class SpeechService {
           // Web Speech thất bại với tiếng Việt → fallback online TTS
           this.speakVietnameseOnline(text).then(resolve).catch(() => resolve());
         } else {
-          reject(new Error('TTS Error: ' + e.error));
+          console.warn('TTS Error:', e.error);
+          resolve(); // Resolve to prevent breaking async loops (e.g., auto-read) when voice is missing
         }
       };
 
@@ -175,7 +176,7 @@ class SpeechService {
     this.cancel();
 
     // Unlock audio trên mobile
-    await this.unlockAudio();
+    this.unlockAudio();
 
     // 1. Đọc Kana bằng giọng Nhật
     if (kana) {
@@ -211,7 +212,7 @@ class SpeechService {
   // Đọc nghĩa Tiếng Việt → Hán Việt (dùng cho nút "Tiếng Việt" ở trang Từ vựng)
   async speakVietnameseAndHanViet(vietnamese: string, hanViet?: string): Promise<void> {
     this.cancel();
-    await this.unlockAudio();
+    this.unlockAudio();
 
     if (vietnamese) {
       await this.speak(vietnamese, { lang: 'vi-VN', rate: 0.9 });
@@ -232,12 +233,11 @@ class SpeechService {
   }
 
   // Unlock audio cho mobile (silent utterance)
-  private async unlockAudio(): Promise<void> {
+  private unlockAudio(): void {
     if (!this.synth) return;
-    const silent = new SpeechSynthesisUtterance('');
+    const silent = new SpeechSynthesisUtterance(' '); // Non-empty string to force engine wake up
     silent.volume = 0;
     this.synth.speak(silent);
-    await this.delay(50);
   }
 
   private delay(ms: number): Promise<void> {
@@ -288,7 +288,7 @@ class SpeechService {
     this.cancelAutoRead();
     
     // Bắt buộc unlock audio ngay khi vừa gọi (rất quan trọng cho Android Mobile để bypass policy)
-    await this.unlockAudio();
+    this.unlockAudio();
 
     const ctrl = { cancelled: false, paused: false };
     this.autoReadController = ctrl;
