@@ -8,6 +8,7 @@ import { SPECIAL_CATEGORIES, type SpecialCategory } from '../constants/specialCa
 import { speechService, autoReadWords, cancelAutoRead, pauseAutoRead, resumeAutoRead } from '../services/speechService';
 import { analyzeWord } from '../constants/kanjiDB';
 import { apiService, getSpecialCategoryVocab } from '../services/apiService';
+import { useDeviceLayout } from '../hooks/useDeviceLayout';
 
 type LevelFilter = 'all' | 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
 type CategoryFilter = 'all' | SpecialCategory;
@@ -43,6 +44,8 @@ type KanjiDetailView = {
 };
 
 export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
+  const deviceLayout = useDeviceLayout();
+  const isMobile = deviceLayout === 'mobile';
   const [levelFilter, setLevelFilter] = useState<LevelFilter>('all');
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all');
   const [posFilter, setPosFilter] = useState('');
@@ -308,6 +311,14 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
     isDraggingRef.current = true;
   }, [calcIndexFromClientX]);
 
+  const handleSeekTouchStart = useCallback((e: React.TouchEvent) => {
+    // don't prevent default here or it might break scroll, but for seekbar it's fine
+    const idx = calcIndexFromClientX(e.touches[0].clientX);
+    setHoverIndex(idx);
+    setIsDragging(true);
+    isDraggingRef.current = true;
+  }, [calcIndexFromClientX]);
+
   const handleSeekBarHover = useCallback((e: React.MouseEvent) => {
     if (!isDraggingRef.current) {
       const idx = calcIndexFromClientX(e.clientX);
@@ -315,26 +326,38 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
     }
   }, [calcIndexFromClientX]);
 
-  // Global mouse move/up for drag outside the bar
+  // Global mouse/touch move/up for drag outside the bar
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
       if (!isDraggingRef.current) return;
       const idx = calcIndexFromClientX(e.clientX);
       setHoverIndex(idx);
     };
-    const onMouseUp = (e: MouseEvent) => {
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDraggingRef.current) return;
+      const idx = calcIndexFromClientX(e.touches[0].clientX);
+      setHoverIndex(idx);
+    };
+    const onMouseUp = (e: MouseEvent | TouchEvent) => {
       if (!isDraggingRef.current) return;
       isDraggingRef.current = false;
       setIsDragging(false);
-      const idx = calcIndexFromClientX(e.clientX);
+      const clientX = 'changedTouches' in e && e.changedTouches.length > 0 
+        ? e.changedTouches[0].clientX 
+        : ('clientX' in e ? e.clientX : 0);
+      const idx = calcIndexFromClientX(clientX);
       setHoverIndex(null);
       handleSeek(idx);
     };
     window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
     window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('touchend', onMouseUp);
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('touchend', onMouseUp);
     };
   }, [calcIndexFromClientX, handleSeek]);
 
@@ -562,12 +585,21 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
               <div style={{ fontSize: 11, opacity: 0.5, marginBottom: 6 }}>
                 Đang đọc: {autoReadIndex + 1} / {autoReadWordsRef.current.length}
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-                <span className="text-ja" style={{ fontSize: 36, fontWeight: 900 }}>{currentAutoWord.kanji}</span>
-                <div>
-                  <div className="text-ja" style={{ fontSize: 14, opacity: 0.8 }}>{currentAutoWord.kana}</div>
-                  {currentAutoWord.hanViet && <div style={{ fontSize: 12, color: '#f87171', fontWeight: 700 }}>{currentAutoWord.hanViet}</div>}
-                  <div style={{ fontSize: 14, fontWeight: 600, marginTop: 2 }}>{currentAutoWord.vietnamese}</div>
+              <div style={{
+                display: 'flex', 
+                alignItems: isMobile ? 'center' : 'center', 
+                justifyContent: isMobile ? 'center' : 'flex-start',
+                flexDirection: isMobile ? 'column' : 'row',
+                gap: isMobile ? 12 : 16, 
+                flexWrap: 'wrap',
+                textAlign: isMobile ? 'center' : 'left',
+                padding: isMobile ? '16px 0' : 0,
+              }}>
+                <span className="text-ja" style={{ fontSize: isMobile ? 56 : 36, fontWeight: 900, lineHeight: 1.2 }}>{currentAutoWord.kanji}</span>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: isMobile ? 'center' : 'flex-start' }}>
+                  <div className="text-ja" style={{ fontSize: isMobile ? 18 : 14, opacity: 0.8 }}>{currentAutoWord.kana}</div>
+                  {currentAutoWord.hanViet && <div style={{ fontSize: isMobile ? 16 : 12, color: '#fca5a5', fontWeight: 700, marginTop: isMobile ? 4 : 0 }}>{currentAutoWord.hanViet}</div>}
+                  <div style={{ fontSize: isMobile ? 20 : 14, fontWeight: 600, marginTop: isMobile ? 8 : 2 }}>{currentAutoWord.vietnamese}</div>
                 </div>
               </div>
               {/* Seekable progress bar */}
@@ -621,6 +653,7 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
                     <div
                       ref={seekBarRef}
                       onMouseDown={handleSeekMouseDown}
+                      onTouchStart={handleSeekTouchStart}
                       onMouseMove={handleSeekBarHover}
                       onMouseLeave={() => { if (!isDraggingRef.current) setHoverIndex(null); }}
                       style={{

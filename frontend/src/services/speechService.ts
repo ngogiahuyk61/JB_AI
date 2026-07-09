@@ -286,6 +286,9 @@ class SpeechService {
   ): Promise<boolean> {
     // Hủy phiên đọc trước đó (nếu có) để tránh lỗi trùng lặp giọng (ví dụ user click tua nhanh liên tục)
     this.cancelAutoRead();
+    
+    // Bắt buộc unlock audio ngay khi vừa gọi (rất quan trọng cho Android Mobile để bypass policy)
+    await this.unlockAudio();
 
     const ctrl = { cancelled: false, paused: false };
     this.autoReadController = ctrl;
