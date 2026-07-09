@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JapaneseAI.Core.Entities;
 using JapaneseAI.Infrastructure.Data;
+using System.Text.RegularExpressions;
 
 namespace JapaneseAI.Api.Controllers
 {
@@ -10,6 +11,7 @@ namespace JapaneseAI.Api.Controllers
     public class VocabularyController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private static readonly Regex TuLayPattern = new(@"([\u3041-\u3093]{2,4})\1", RegexOptions.Compiled);
 
         public VocabularyController(AppDbContext context)
         {
@@ -21,6 +23,8 @@ namespace JapaneseAI.Api.Controllers
         public async Task<ActionResult<IEnumerable<Vocabulary>>> GetVocabulary(
             [FromQuery] string? level,
             [FromQuery] string? pos,
+            [FromQuery] string? tags,
+            [FromQuery] string? category,
             [FromQuery] int limit = 100,
             [FromQuery] int offset = 0)
         {
@@ -36,15 +40,37 @@ namespace JapaneseAI.Api.Controllers
                 query = query.Where(v => v.PartOfSpeech == pos);
             }
 
-            var total = await query.CountAsync();
-            var items = await query.OrderBy(v => v.SortOrder)
+            if (!string.IsNullOrEmpty(tags))
+            {
+                query = query.Where(v => v.Tags != null && v.Tags.Contains(tags));
+            }
+
+            List<Vocabulary> items;
+            int total;
+
+            if (!string.IsNullOrEmpty(category) && IsN3SpecialCategory(category))
+            {
+                var baseQuery = query.Where(v => v.Tags != null && v.Tags.Contains("special") && v.JlptLevel == "N3");
+                var allN3Special = await baseQuery.OrderBy(v => v.SortOrder).ToListAsync();
+                var filtered = FilterN3SpecialByCategory(allN3Special, category);
+                total = filtered.Count;
+                items = filtered.Skip(offset).Take(Math.Min(limit, 1000)).ToList();
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(category))
+                {
+                    query = ApplyCategoryFilter(query, category);
+                }
+
+                total = await query.CountAsync();
+                items = await query.OrderBy(v => v.SortOrder)
                                    .Skip(offset)
                                    .Take(Math.Min(limit, 1000))
                                    .ToListAsync();
+            }
 
             Response.Headers.Append("X-Total-Count", total.ToString());
-            // NOTE: KanjiDetails NOT populated here for performance (too many items).
-            // Click on individual word to get detail via /api/vocabulary/{id}
             return Ok(items);
         }
 
@@ -95,8 +121,59 @@ namespace JapaneseAI.Api.Controllers
                 .Select(g => new { Level = g.Key, Count = g.Count() })
                 .ToListAsync();
 
-            return Ok(stats);
+            var n2Bs = await _context.Vocabulary
+                .CountAsync(v => v.Tags != null && v.Tags.Contains("n2_bs"));
+
+            var tuLay = await _context.Vocabulary
+                .CountAsync(v => v.Tags != null && v.Tags.Contains("tu_lay"));
+
+            var luongTu = await _context.Vocabulary
+                .CountAsync(v => v.Tags != null && v.Tags.Contains("luong_tu"));
+
+            return Ok(new
+            {
+                levels = stats,
+                special = new
+                {
+                    n2_bs = n2Bs,
+                    tu_lay = tuLay,
+                    luong_tu = luongTu,
+                    total = n2Bs + tuLay + luongTu
+                }
+            });
         }
+
+        private static IQueryable<Vocabulary> ApplyCategoryFilter(IQueryable<Vocabulary> query, string category)
+        {
+            var key = category.Trim().ToLowerInvariant().Replace("-", "_").Replace(" ", "_");
+
+            return key switch
+            {
+                "n2_bs" => query.Where(v => v.Tags != null && v.Tags.Contains("n2_bs")),
+                "tu_lay" or "từ_láy" => query.Where(v => v.Tags != null && v.Tags.Contains("tu_lay")),
+                "luong_tu" or "lượng_từ" => query.Where(v => v.Tags != null && v.Tags.Contains("luong_tu")),
+                _ => query
+            };
+        }
+
+        private static bool IsN3SpecialCategory(string category)
+        {
+            // Now handled directly by ApplyCategoryFilter — no longer needed for N3-only filtering
+            return false;
+        }
+
+        private static List<Vocabulary> FilterN3SpecialByCategory(List<Vocabulary> items, string category)
+        {
+            // Kept for backward compat but no longer called
+            var key = category.Trim().ToLowerInvariant().Replace("-", "_").Replace(" ", "_");
+            return key switch
+            {
+                "tu_lay" or "từ_láy" => items.Where(v => v.Tags != null && v.Tags.Contains("tu_lay")).ToList(),
+                "luong_tu" or "lượng_từ" => items.Where(v => v.Tags != null && v.Tags.Contains("luong_tu")).ToList(),
+                _ => items
+            };
+        }
+
 
         private async Task PopulateKanjiDetailsAsync(List<Vocabulary> items)
         {

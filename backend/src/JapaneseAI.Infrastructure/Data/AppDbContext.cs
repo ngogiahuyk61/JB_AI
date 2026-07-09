@@ -29,7 +29,7 @@ namespace JapaneseAI.Infrastructure.Data
                 entity.Property(e => e.HanViet).HasMaxLength(500);
                 entity.Property(e => e.Vietnamese).IsRequired().HasMaxLength(1000);
                 entity.Property(e => e.JlptLevel).IsRequired().HasMaxLength(10);
-                entity.Property(e => e.PartOfSpeech).HasMaxLength(50);
+                entity.Property(e => e.PartOfSpeech).HasMaxLength(200);
                 entity.Property(e => e.Tags).HasMaxLength(200);
                 entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
 

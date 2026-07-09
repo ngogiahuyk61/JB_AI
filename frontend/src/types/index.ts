@@ -3,8 +3,36 @@
 // ============================================================
 
 export type JlptLevel = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+export type KaiwaLevel = JlptLevel | 'N2-BS';
 export type CardStatus = 'new' | 'learning' | 'known';
 export type MessageRole = 'user' | 'ai';
+export type GuidedAssessment = 'correct' | 'almost_correct' | 'incorrect';
+export type KaiwaSessionState = 'idle' | 'greeting' | 'awaiting_answer' | 'awaiting_choice' | 'assessing' | 'correcting';
+export type LearningMode = 'guided_kaiwa' | 'free_chat';
+export type TurnIntent = 'greeting' | 'lesson_answer' | 'grammar_question';
+export type InteractionMode = 'kaiwa_hybrid' | 'grammar_text';
+
+export interface KaiwaSession {
+  learningMode: LearningMode;
+  selectedLevel: KaiwaLevel;
+  currentQuestion: string;
+  lastAssessment?: GuidedAssessment;
+  sessionState: KaiwaSessionState;
+  turnIntent?: TurnIntent;
+}
+
+export function createInitialKaiwaSession(): KaiwaSession {
+  return {
+    learningMode: 'guided_kaiwa',
+    selectedLevel: 'N5',
+    currentQuestion: '',
+    sessionState: 'idle',
+  };
+}
+
+export function toGuidedKaiwaMode(level: JlptLevel): string {
+  return `guided_kaiwa_${level.toLowerCase()}`;
+}
 
 // ── Vocabulary ──────────────────────────────────────────────
 export interface Vocabulary {
@@ -99,8 +127,24 @@ export interface ChatMessage {
   id: string;
   role: MessageRole;
   text: string;
+  thinkingText?: string;
+  guidedData?: GuidedKaiwaFeedback;
+  metadata?: GuidedKaiwaFeedback;
   timestamp: Date;
   isLoading?: boolean;
+}
+
+export interface GuidedKaiwaFeedback {
+  assessment: GuidedAssessment;
+  mainJa: string;
+  romaji: string;
+  coachingVi: string;
+  shadowingJa?: string;
+  shadowingRomaji?: string;
+  currentQuestion?: string;
+  isGreetingTurn?: boolean;
+  lessonNumber?: number;
+  grammarPoint?: string;
 }
 
 export interface AIResponse {

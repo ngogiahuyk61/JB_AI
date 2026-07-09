@@ -1,0 +1,3766 @@
+STARTING TEST...
+Fetching from backend...
+STATUS: 200
+RAW CHUNK: :
+
+
+RAW CHUNK: data: %5BTHINK%5DOkay
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20said
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Let
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20check
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20instructions
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20I
+
+
+RAW CHUNK: data: %5BTHINK%5D%20need
+
+
+RAW CHUNK: data: %5BTHINK%5D%20to
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20friendly
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D%20at
+
+
+RAW CHUNK: data: %5BTHINK%5D%20N
+
+
+RAW CHUNK: data: %5BTHINK%5D5
+
+
+RAW CHUNK: data: %5BTHINK%5D-N
+
+
+RAW CHUNK: data: %5BTHINK%5D3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20level
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Include
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Rom
+
+
+RAW CHUNK: data: %5BTHINK%5Daji
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20parentheses
+
+
+RAW CHUNK: data: %5BTHINK%5D%20and
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Vietnamese
+
+
+RAW CHUNK: data: %5BTHINK%5D%20translation
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DFirst
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5DHello
+
+
+RAW CHUNK: data: %5BTHINK%5D%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20So
+
+
+RAW CHUNK: data: %5BTHINK%5D%20my
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D%20back
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Maybe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20something
+
+
+RAW CHUNK: data: %5BTHINK%5D%20like
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Xin
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ch%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Wait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20but
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%20given
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Xin
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ch%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20So
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20might
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20testing
+
+
+RAW CHUNK: data: %5BTHINK%5D%20if
+
+
+RAW CHUNK: data: %5BTHINK%5D%20I
+
+
+RAW CHUNK: data: %5BTHINK%5D%20follow
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DWait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20which
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20same
+
+
+RAW CHUNK: data: %5BTHINK%5D%20as
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20So
+
+
+RAW CHUNK: data: %5BTHINK%5D%20I
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20friendly
+
+
+RAW CHUNK: data: %5BTHINK%5D%20reply
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Let
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20think
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DIn
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Xin
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ch%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20But
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20said
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20reply
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Wait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20maybe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20asking
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20to
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20to
+
+
+RAW CHUNK: data: %5BTHINK%5D%20their
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DWait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%28
+
+
+RAW CHUNK: data: %5BTHINK%5DHello
+
+
+RAW CHUNK: data: %5BTHINK%5D%29%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20as
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Sense
+
+
+RAW CHUNK: data: %5BTHINK%5Di
+
+
+RAW CHUNK: data: %5BTHINK%5D%20AI
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20I
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20friendly
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Let
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20construct
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DFor
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%E4%BB%8A%E6%97%A5%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%8A
+
+
+RAW CHUNK: data: %5BTHINK%5D%E5%85%83
+
+
+RAW CHUNK: data: %5BTHINK%5D%E6%B0%97
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%A7%E3%81%99%E3%81%8B
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%9F
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Today
+
+
+RAW CHUNK: data: %5BTHINK%5D%20o
+
+
+RAW CHUNK: data: %5BTHINK%5Dgen
+
+
+RAW CHUNK: data: %5BTHINK%5Dki
+
+
+RAW CHUNK: data: %5BTHINK%5D%20des
+
+
+RAW CHUNK: data: %5BTHINK%5Du
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ka
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Ch
+
+
+RAW CHUNK: data: %5BTHINK%5D%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20h%C3%B4m
+
+
+RAW CHUNK: data: %5BTHINK%5D%20n
+
+
+RAW CHUNK: data: %5BTHINK%5Day
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%20c%C3%B3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%E1%BB%8Fe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%C3%B4ng
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DWait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20but
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20I
+
+
+RAW CHUNK: data: %5BTHINK%5D%20need
+
+
+RAW CHUNK: data: %5BTHINK%5D%20to
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Let
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20make
+
+
+RAW CHUNK: data: %5BTHINK%5D%20sure
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20level
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20N
+
+
+RAW CHUNK: data: %5BTHINK%5D5
+
+
+RAW CHUNK: data: %5BTHINK%5D-N
+
+
+RAW CHUNK: data: %5BTHINK%5D3
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20The
+
+
+RAW CHUNK: data: %5BTHINK%5D%20phrase
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%E4%BB%8A%E6%97%A5%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%8A
+
+
+RAW CHUNK: data: %5BTHINK%5D%E5%85%83
+
+
+RAW CHUNK: data: %5BTHINK%5D%E6%B0%97
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%A7%E3%81%99%E3%81%8B
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%9F
+
+
+RAW CHUNK: data: %5BTHINK%5D%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20bit
+
+
+RAW CHUNK: data: %5BTHINK%5D%20more
+
+
+RAW CHUNK: data: %5BTHINK%5D%20advanced
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20maybe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20N
+
+
+RAW CHUNK: data: %5BTHINK%5D3
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20But
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20level
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20N
+
+
+RAW CHUNK: data: %5BTHINK%5D5
+
+
+RAW CHUNK: data: %5BTHINK%5D-N
+
+
+RAW CHUNK: data: %5BTHINK%5D3
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20maybe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20it
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20okay
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DWait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%20shows
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D%20when
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20says
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Wait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%20says
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5DExample
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Xin
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ch%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%20So
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20and
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D%20same
+
+
+RAW CHUNK: data: %5BTHINK%5D%20phrase
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Rom
+
+
+RAW CHUNK: data: %5BTHINK%5Daji
+
+
+RAW CHUNK: data: %5BTHINK%5D%20and
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Vietnamese
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DBut
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20this
+
+
+RAW CHUNK: data: %5BTHINK%5D%20case
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20sending
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20I
+
+
+RAW CHUNK: data: %5BTHINK%5D%20need
+
+
+RAW CHUNK: data: %5BTHINK%5D%20to
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20friendly
+
+
+RAW CHUNK: data: %5BTHINK%5D%20reply
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Let
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20think
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20The
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20maybe
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%8A
+
+
+RAW CHUNK: data: %5BTHINK%5D%E5%85%83
+
+
+RAW CHUNK: data: %5BTHINK%5D%E6%B0%97
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%A7%E3%81%99%E3%81%8B
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%9F
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20O
+
+
+RAW CHUNK: data: %5BTHINK%5Dgen
+
+
+RAW CHUNK: data: %5BTHINK%5Dki
+
+
+RAW CHUNK: data: %5BTHINK%5D%20des
+
+
+RAW CHUNK: data: %5BTHINK%5Du
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ka
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Ch
+
+
+RAW CHUNK: data: %5BTHINK%5D%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%20c%C3%B3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%E1%BB%8Fe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%C3%B4ng
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DWait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20but
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20just
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%22%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D%20back
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Let
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20check
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20requirements
+
+
+RAW CHUNK: data: %5BTHINK%5D%20again
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DThe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20instructions
+
+
+RAW CHUNK: data: %5BTHINK%5D%20say
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5DChat
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20friendly
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%28
+
+
+RAW CHUNK: data: %5BTHINK%5DJ
+
+
+RAW CHUNK: data: %5BTHINK%5DL
+
+
+RAW CHUNK: data: %5BTHINK%5DPT
+
+
+RAW CHUNK: data: %5BTHINK%5D%20N
+
+
+RAW CHUNK: data: %5BTHINK%5D5
+
+
+RAW CHUNK: data: %5BTHINK%5D-N
+
+
+RAW CHUNK: data: %5BTHINK%5D3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20level
+
+
+RAW CHUNK: data: %5BTHINK%5D%29.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Always
+
+
+RAW CHUNK: data: %5BTHINK%5D%20include
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Rom
+
+
+RAW CHUNK: data: %5BTHINK%5Daji
+
+
+RAW CHUNK: data: %5BTHINK%5D%20transl
+
+
+RAW CHUNK: data: %5BTHINK%5Diteration
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20parentheses
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20and
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20short
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Vietnamese
+
+
+RAW CHUNK: data: %5BTHINK%5D%20translation
+
+
+RAW CHUNK: data: %5BTHINK%5D%20at
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20end
+
+
+RAW CHUNK: data: %5BTHINK%5D%20of
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20sentence
+
+
+RAW CHUNK: data: %5BTHINK%5D.%22%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DSo
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20sentence
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20friendly
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D%20at
+
+
+RAW CHUNK: data: %5BTHINK%5D%20N
+
+
+RAW CHUNK: data: %5BTHINK%5D5
+
+
+RAW CHUNK: data: %5BTHINK%5D-N
+
+
+RAW CHUNK: data: %5BTHINK%5D3
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Rom
+
+
+RAW CHUNK: data: %5BTHINK%5Daji
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20parentheses
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20and
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Vietnamese
+
+
+RAW CHUNK: data: %5BTHINK%5D%20translation
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DThe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%20given
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Xin
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ch%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DBut
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20reply
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Wait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20maybe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20starting
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20conversation
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20first
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DWait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%22%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%20needs
+
+
+RAW CHUNK: data: %5BTHINK%5D%20to
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20The
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%20shows
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20same
+
+
+RAW CHUNK: data: %5BTHINK%5D%20as
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Rom
+
+
+RAW CHUNK: data: %5BTHINK%5Daji
+
+
+RAW CHUNK: data: %5BTHINK%5D%20and
+
+
+RAW CHUNK: data: %5BTHINK%5D%20translation
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20But
+
+
+RAW CHUNK: data: %5BTHINK%5D%20perhaps
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20testing
+
+
+RAW CHUNK: data: %5BTHINK%5D%20if
+
+
+RAW CHUNK: data: %5BTHINK%5D%20I
+
+
+RAW CHUNK: data: %5BTHINK%5D%20can
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20appropriately
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DWait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20maybe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20saying
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%28
+
+
+RAW CHUNK: data: %5BTHINK%5DHello
+
+
+RAW CHUNK: data: %5BTHINK%5D%29%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20friendly
+
+
+RAW CHUNK: data: %5BTHINK%5D%20reply
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Let
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20make
+
+
+RAW CHUNK: data: %5BTHINK%5D%20it
+
+
+RAW CHUNK: data: %5BTHINK%5D%20simple
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DFor
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%E4%BB%8A%E6%97%A5%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%84%E3%81%84
+
+
+RAW CHUNK: data: %5BTHINK%5D%E5%A4%A9
+
+
+RAW CHUNK: data: %5BTHINK%5D%E6%B0%97
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%A7%E3%81%99%E3%81%AD
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Today
+
+
+RAW CHUNK: data: %5BTHINK%5D%20wa
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ii
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ten
+
+
+RAW CHUNK: data: %5BTHINK%5Dki
+
+
+RAW CHUNK: data: %5BTHINK%5D%20des
+
+
+RAW CHUNK: data: %5BTHINK%5Du
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ne
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Ch
+
+
+RAW CHUNK: data: %5BTHINK%5D%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20h%C3%B4m
+
+
+RAW CHUNK: data: %5BTHINK%5D%20n
+
+
+RAW CHUNK: data: %5BTHINK%5Day
+
+
+RAW CHUNK: data: %5BTHINK%5D%20tr%E1%BB%9Di
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%C4%91%E1%BA%B9p
+
+
+RAW CHUNK: data: %5BTHINK%5D%20l%E1%BA%AFm
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DBut
+
+
+RAW CHUNK: data: %5BTHINK%5D%20let
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20check
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20level
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%E4%BB%8A%E6%97%A5%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%84%E3%81%84
+
+
+RAW CHUNK: data: %5BTHINK%5D%E5%A4%A9
+
+
+RAW CHUNK: data: %5BTHINK%5D%E6%B0%97
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%A7%E3%81%99%E3%81%AD
+
+
+RAW CHUNK: data: %5BTHINK%5D%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20N
+
+
+RAW CHUNK: data: %5BTHINK%5D3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20maybe
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Alternatively
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20simpler
+
+
+RAW CHUNK: data: %5BTHINK%5D%20phrase
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DAlternatively
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%8A
+
+
+RAW CHUNK: data: %5BTHINK%5D%E5%85%83
+
+
+RAW CHUNK: data: %5BTHINK%5D%E6%B0%97
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%A7%E3%81%99%E3%81%8B
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%9F
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20O
+
+
+RAW CHUNK: data: %5BTHINK%5Dgen
+
+
+RAW CHUNK: data: %5BTHINK%5Dki
+
+
+RAW CHUNK: data: %5BTHINK%5D%20des
+
+
+RAW CHUNK: data: %5BTHINK%5Du
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ka
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Ch
+
+
+RAW CHUNK: data: %5BTHINK%5D%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%20c%C3%B3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%E1%BB%8Fe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%C3%B4ng
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DYes
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20common
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D%20phrase
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5DO
+
+
+RAW CHUNK: data: %5BTHINK%5Dgen
+
+
+RAW CHUNK: data: %5BTHINK%5Dki
+
+
+RAW CHUNK: data: %5BTHINK%5D%20des
+
+
+RAW CHUNK: data: %5BTHINK%5Du
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ka
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5DHow
+
+
+RAW CHUNK: data: %5BTHINK%5D%20are
+
+
+RAW CHUNK: data: %5BTHINK%5D%20you
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%22
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DBut
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Let
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20go
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DWait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%20given
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20instructions
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5DExample
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Xin
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ch%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%20So
+
+
+RAW CHUNK: data: %5BTHINK%5D%20when
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20says
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20same
+
+
+RAW CHUNK: data: %5BTHINK%5D%20phrase
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Rom
+
+
+RAW CHUNK: data: %5BTHINK%5Daji
+
+
+RAW CHUNK: data: %5BTHINK%5D%20and
+
+
+RAW CHUNK: data: %5BTHINK%5D%20translation
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DBut
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20this
+
+
+RAW CHUNK: data: %5BTHINK%5D%20case
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20sending
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20reply
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Wait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20maybe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20trying
+
+
+RAW CHUNK: data: %5BTHINK%5D%20to
+
+
+RAW CHUNK: data: %5BTHINK%5D%20start
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20conversation
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20with
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20friendly
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DWait
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20perhaps
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20start
+
+
+RAW CHUNK: data: %5BTHINK%5D%20of
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20conversation
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20first
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20But
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%22%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%20needs
+
+
+RAW CHUNK: data: %5BTHINK%5D%20to
+
+
+RAW CHUNK: data: %5BTHINK%5D%20respond
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DLet
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20write
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20friendly
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20at
+
+
+RAW CHUNK: data: %5BTHINK%5D%20N
+
+
+RAW CHUNK: data: %5BTHINK%5D5
+
+
+RAW CHUNK: data: %5BTHINK%5D-N
+
+
+RAW CHUNK: data: %5BTHINK%5D3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20level
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DFor
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%E5%85%83
+
+
+RAW CHUNK: data: %5BTHINK%5D%E6%B0%97
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%A7%E3%81%99%E3%81%8B
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%9F
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Gen
+
+
+RAW CHUNK: data: %5BTHINK%5Dki
+
+
+RAW CHUNK: data: %5BTHINK%5D%20des
+
+
+RAW CHUNK: data: %5BTHINK%5Du
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ka
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Ch
+
+
+RAW CHUNK: data: %5BTHINK%5D%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%20c%C3%B3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%E1%BB%8Fe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%C3%B4ng
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DBut
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%20might
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20expecting
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20to
+
+
+RAW CHUNK: data: %5BTHINK%5D%20their
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DAlternatively
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%20could
+
+
+RAW CHUNK: data: %5BTHINK%5D%20say
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%88
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%89
+
+
+RAW CHUNK: data: %5BTHINK%5D-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Ch
+
+
+RAW CHUNK: data: %5BTHINK%5D%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%21%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DBut
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20example
+
+
+RAW CHUNK: data: %5BTHINK%5D%20shows
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Rom
+
+
+RAW CHUNK: data: %5BTHINK%5Daji
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20parentheses
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20and
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Vietnamese
+
+
+RAW CHUNK: data: %5BTHINK%5D%20translation
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20at
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20end
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DSo
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%8A
+
+
+RAW CHUNK: data: %5BTHINK%5D%E5%85%83
+
+
+RAW CHUNK: data: %5BTHINK%5D%E6%B0%97
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%A7%E3%81%99%E3%81%8B
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%9F
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20O
+
+
+RAW CHUNK: data: %5BTHINK%5Dgen
+
+
+RAW CHUNK: data: %5BTHINK%5Dki
+
+
+RAW CHUNK: data: %5BTHINK%5D%20des
+
+
+RAW CHUNK: data: %5BTHINK%5Du
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ka
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Ch
+
+
+RAW CHUNK: data: %5BTHINK%5D%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%20c%C3%B3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%E1%BB%8Fe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%C3%B4ng
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DYes
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20standard
+
+
+RAW CHUNK: data: %5BTHINK%5D%20greeting
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DLet
+
+
+RAW CHUNK: data: %5BTHINK%5D%20me
+
+
+RAW CHUNK: data: %5BTHINK%5D%20check
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20JL
+
+
+RAW CHUNK: data: %5BTHINK%5DPT
+
+
+RAW CHUNK: data: %5BTHINK%5D%20level
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20%22
+
+
+RAW CHUNK: data: %5BTHINK%5DO
+
+
+RAW CHUNK: data: %5BTHINK%5Dgen
+
+
+RAW CHUNK: data: %5BTHINK%5Dki
+
+
+RAW CHUNK: data: %5BTHINK%5D%20des
+
+
+RAW CHUNK: data: %5BTHINK%5Du
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ka
+
+
+RAW CHUNK: data: %5BTHINK%5D%22
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20common
+
+
+RAW CHUNK: data: %5BTHINK%5D%20phrase
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20and
+
+
+RAW CHUNK: data: %5BTHINK%5D%20it
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20at
+
+
+RAW CHUNK: data: %5BTHINK%5D%20N
+
+
+RAW CHUNK: data: %5BTHINK%5D5
+
+
+RAW CHUNK: data: %5BTHINK%5D%20level
+
+
+RAW CHUNK: data: %5BTHINK%5D.
+
+
+RAW CHUNK: data: %5BTHINK%5D%20So
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20acceptable
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DSo
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%3A
+
+
+RAW CHUNK: data: %5BTHINK%5D%20
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%81
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%8A
+
+
+RAW CHUNK: data: %5BTHINK%5D%E5%85%83
+
+
+RAW CHUNK: data: %5BTHINK%5D%E6%B0%97
+
+
+RAW CHUNK: data: %5BTHINK%5D%E3%81%A7%E3%81%99%E3%81%8B
+
+
+RAW CHUNK: data: %5BTHINK%5D%EF%BC%9F
+
+
+RAW CHUNK: data: %5BTHINK%5D%28
+
+
+RAW CHUNK: data: %5BTHINK%5DK
+
+
+RAW CHUNK: data: %5BTHINK%5Donn
+
+
+RAW CHUNK: data: %5BTHINK%5Dichi
+
+
+RAW CHUNK: data: %5BTHINK%5Dwa
+
+
+RAW CHUNK: data: %5BTHINK%5D%21
+
+
+RAW CHUNK: data: %5BTHINK%5D%20O
+
+
+RAW CHUNK: data: %5BTHINK%5Dgen
+
+
+RAW CHUNK: data: %5BTHINK%5Dki
+
+
+RAW CHUNK: data: %5BTHINK%5D%20des
+
+
+RAW CHUNK: data: %5BTHINK%5Du
+
+
+RAW CHUNK: data: %5BTHINK%5D%20ka
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%29
+
+
+RAW CHUNK: data: %5BTHINK%5D%20-
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Ch
+
+
+RAW CHUNK: data: %5BTHINK%5D%C3%A0o
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %5BTHINK%5D%20c%C3%B3
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%E1%BB%8Fe
+
+
+RAW CHUNK: data: %5BTHINK%5D%20kh%C3%B4ng
+
+
+RAW CHUNK: data: %5BTHINK%5D%3F%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DBut
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20user
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20message
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20in
+
+
+RAW CHUNK: data: %5BTHINK%5D%20Japanese
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20so
+
+
+RAW CHUNK: data: %5BTHINK%5D%20the
+
+
+RAW CHUNK: data: %5BTHINK%5D%20assistant
+
+
+RAW CHUNK: data: %5BTHINK%5D%27s
+
+
+RAW CHUNK: data: %5BTHINK%5D%20response
+
+
+RAW CHUNK: data: %5BTHINK%5D%20is
+
+
+RAW CHUNK: data: %5BTHINK%5D%20a
+
+
+RAW CHUNK: data: %5BTHINK%5D%20reply
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A%0A
+
+
+RAW CHUNK: data: %5BTHINK%5DYes
+
+
+RAW CHUNK: data: %5BTHINK%5D%2C
+
+
+RAW CHUNK: data: %5BTHINK%5D%20that
+
+
+RAW CHUNK: data: %5BTHINK%5D%20should
+
+
+RAW CHUNK: data: %5BTHINK%5D%20be
+
+
+RAW CHUNK: data: %5BTHINK%5D%20it
+
+
+RAW CHUNK: data: %5BTHINK%5D.%0A
+
+
+RAW CHUNK: data: %E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF
+
+
+RAW CHUNK: data: %EF%BC%81
+
+
+RAW CHUNK: data: %E3%81%8A
+
+
+RAW CHUNK: data: %E5%85%83
+
+
+RAW CHUNK: data: %E6%B0%97
+
+
+RAW CHUNK: data: %E3%81%A7%E3%81%99%E3%81%8B
+
+
+RAW CHUNK: data: %EF%BC%9F
+
+
+RAW CHUNK: data: %28
+
+
+RAW CHUNK: data: K
+
+
+RAW CHUNK: data: onn
+
+
+RAW CHUNK: data: ichi
+
+
+RAW CHUNK: data: wa
+
+
+RAW CHUNK: data: %21
+
+
+RAW CHUNK: data: %20O
+
+
+RAW CHUNK: data: gen
+
+
+RAW CHUNK: data: ki
+
+
+RAW CHUNK: data: %20des
+
+
+RAW CHUNK: data: u
+
+
+RAW CHUNK: data: %20ka
+
+
+RAW CHUNK: data: %3F%29
+
+
+RAW CHUNK: data: %20-
+
+
+RAW CHUNK: data: %20Ch
+
+
+RAW CHUNK: data: %C3%A0o
+
+
+RAW CHUNK: data: %20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %2C
+
+
+RAW CHUNK: data: %20b%E1%BA%A1n
+
+
+RAW CHUNK: data: %20c%C3%B3
+
+
+RAW CHUNK: data: %20kh%E1%BB%8Fe
+
+
+RAW CHUNK: data: %20kh%C3%B4ng
+
+
+RAW CHUNK: data: %3F
+
+
+STREAM COMPLETED

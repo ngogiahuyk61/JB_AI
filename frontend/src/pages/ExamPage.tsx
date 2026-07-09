@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { UploadCloud, FileType, Loader2, CheckCircle, XCircle, RotateCcw, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
+import { UploadCloud, Loader2, CheckCircle, XCircle, RotateCcw, ChevronRight } from 'lucide-react';
 import { geminiService } from '../services/geminiService';
 import { apiService } from '../services/apiService';
 import { ALL_VOCAB, type VocabEntry } from '../constants/jlptData';

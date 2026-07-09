@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function DevPage({ title, description }: { title: string; description?: string }) {
   return (
     <div className="page-inner">

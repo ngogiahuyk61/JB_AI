@@ -283,41 +283,47 @@ class SpeechService {
       onWordEnd?: (index: number) => void;
     },
     startIndex = 0
-  ): Promise<void> {
+  ): Promise<boolean> {
+    // Hủy phiên đọc trước đó (nếu có) để tránh lỗi trùng lặp giọng (ví dụ user click tua nhanh liên tục)
+    this.cancelAutoRead();
+
     const ctrl = { cancelled: false, paused: false };
     this.autoReadController = ctrl;
 
     for (let i = startIndex; i < words.length; i++) {
-      if (ctrl.cancelled) break;
+      if (ctrl.cancelled) return false;
 
       // Wait if paused
       while (ctrl.paused && !ctrl.cancelled) {
         await this.delay(200);
       }
-      if (ctrl.cancelled) break;
+      if (ctrl.cancelled) return false;
 
       const word = words[i];
       config.onWordStart?.(i);
+      
+      // Delay to let React flush the UI update before the speech locks the thread
+      await this.delay(50);
 
-      // Read kana (Japanese)
+      // 1. Read kana (Japanese)
       if (config.readKana && word.kana) {
         await this.speak(word.kana, { lang: 'ja-JP', rate: 0.85 });
-        await this.delay(300);
+        await this.delay(250);
       }
 
-      if (ctrl.cancelled || ctrl.paused) { if (ctrl.paused) { i--; continue; } break; }
+      if (ctrl.cancelled || ctrl.paused) { if (ctrl.paused) { i--; continue; } return false; }
 
-      // Read Vietnamese meaning
-      if (config.readVietnamese && word.vietnamese) {
-        await this.speak(word.vietnamese, { lang: 'vi-VN', rate: 0.9 });
-        await this.delay(200);
-      }
-
-      if (ctrl.cancelled) break;
-
-      // Read Han Viet
+      // 2. Read Han Viet
       if (config.readHanViet && word.hanViet && word.hanViet !== 'NULL' && word.hanViet !== '') {
         await this.speak(word.hanViet, { lang: 'vi-VN', rate: 0.85 });
+        await this.delay(200);
+      }
+      
+      if (ctrl.cancelled) return false;
+
+      // 3. Read Vietnamese meaning
+      if (config.readVietnamese && word.vietnamese) {
+        await this.speak(word.vietnamese, { lang: 'vi-VN', rate: 0.9 });
       }
 
       config.onWordEnd?.(i);
@@ -329,6 +335,7 @@ class SpeechService {
     }
 
     this.autoReadController = null;
+    return true;
   }
 }
 
@@ -351,11 +358,31 @@ export const resumeAutoRead = () => speechService.resumeAutoRead();
 // ============================================================
 // Speech Recognition – Browser STT (Japanese / Vietnamese)
 // ============================================================
+export type SpeechRecognitionLang = 'ja-JP' | 'vi-VN';
+
+function formatSpeechRecognitionError(errorCode?: string): string {
+  switch (errorCode) {
+    case 'not-allowed':
+    case 'service-not-allowed':
+      return 'Mic đang bị chặn quyền truy cập. Hãy cho phép microphone trong trình duyệt.';
+    case 'audio-capture':
+      return 'Không tìm thấy microphone hoạt động trên thiết bị này.';
+    case 'network':
+      return 'Speech Recognition bị lỗi mạng. Hãy kiểm tra kết nối và thử lại.';
+    case 'no-speech':
+      return 'Không nghe thấy giọng nói. Hãy nói gần mic hơn và thử lại.';
+    case 'aborted':
+      return 'Đã dừng ghi âm.';
+    default:
+      return errorCode ? `Speech Recognition lỗi: ${errorCode}` : 'Speech Recognition gặp lỗi không xác định.';
+  }
+}
+
 export class SpeechRecognizer {
   private recognition: any = null;
   private isListening = false;
 
-  constructor(lang: 'ja-JP' | 'vi-VN' = 'ja-JP') {
+  constructor(lang: SpeechRecognitionLang = 'ja-JP') {
     const SpeechRecognitionAPI =
       (window as any).SpeechRecognition ||
       (window as any).webkitSpeechRecognition;
@@ -383,14 +410,18 @@ export class SpeechRecognizer {
       this.isListening = true;
 
       this.recognition.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
+        const transcript = event.results?.[0]?.[0]?.transcript?.trim();
         this.isListening = false;
+        if (!transcript) {
+          reject(new Error('Không nhận được nội dung từ microphone.'));
+          return;
+        }
         resolve(transcript);
       };
 
       this.recognition.onerror = (e: any) => {
         this.isListening = false;
-        reject(new Error(e.error));
+        reject(new Error(formatSpeechRecognitionError(e?.error)));
       };
 
       this.recognition.onend = () => {

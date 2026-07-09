@@ -1,14 +1,20 @@
-import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import {
   Search, Volume2, BookOpen, Filter, X, ChevronDown, Play,
-  Pause, Square, SkipForward, Shuffle, List, Zap, Server
+  Pause, Square, SkipForward, Zap, Server
 } from 'lucide-react';
 import { ALL_VOCAB, POS_LABELS, type VocabEntry } from '../constants/jlptData';
+import { SPECIAL_CATEGORIES, type SpecialCategory } from '../constants/specialCategories';
 import { speechService, autoReadWords, cancelAutoRead, pauseAutoRead, resumeAutoRead } from '../services/speechService';
 import { analyzeWord } from '../constants/kanjiDB';
-import { apiService } from '../services/apiService';
+import { apiService, getSpecialCategoryVocab } from '../services/apiService';
 
 type LevelFilter = 'all' | 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+type CategoryFilter = 'all' | SpecialCategory;
+
+interface VocabularyPageProps {
+  onNavigate?: (tab: string) => void;
+}
 
 const LEVEL_COLORS: Record<string, { bg: string; text: string; border: string; gradient: string }> = {
   N5: { bg: '#f0fdf4', text: '#166534', border: '#86efac', gradient: '#22c55e' },
@@ -26,8 +32,19 @@ const POS_COLORS: Record<string, string> = {
 
 type AutoReadState = 'idle' | 'playing' | 'paused';
 
-export default function VocabularyPage() {
+type KanjiDetailView = {
+  char: string;
+  hanViet: string;
+  meaning: string;
+  onReading: string;
+  kunReading: string;
+  radical: string;
+  strokeCount: number;
+};
+
+export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
   const [levelFilter, setLevelFilter] = useState<LevelFilter>('all');
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all');
   const [posFilter, setPosFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedWord, setSelectedWord] = useState<VocabEntry | null>(null);
@@ -39,20 +56,23 @@ export default function VocabularyPage() {
   const [loading, setLoading] = useState(false);
   const [detailLoading, setDetailLoading] = useState(false);
   const [dbOnline, setDbOnline] = useState(false);
-  const [stats, setStats] = useState({ n5: 728, n4: 968, n3: 821, n2: 0, n1: 0 });
+  const [stats, setStats] = useState({ n5: 728, n4: 968, n3: 821, n2: 0, n1: 0, n2_bs: 0, tu_lay: 0, luong_tu: 0 });
 
   // Auto-read state
   const [showAutoRead, setShowAutoRead] = useState(false);
   const [autoReadLevels, setAutoReadLevels] = useState<Set<string>>(new Set(['N5']));
-  const [autoReadMode, setAutoReadMode] = useState<'sequential' | 'random'>('sequential');
-  const [autoReadDelay, setAutoReadDelay] = useState(3000); // ms
+  const [autoReadMode] = useState<'sequential' | 'random'>('sequential');
+  const [autoReadDelay] = useState(3000); // ms
   const [autoReadState, setAutoReadState] = useState<AutoReadState>('idle');
   const [autoReadIndex, setAutoReadIndex] = useState(0);
-  const [readKana, setReadKana] = useState(true);
-  const [readVietnamese, setReadVietnamese] = useState(true);
-  const [readHanViet, setReadHanViet] = useState(false);
   const [speechRate, setSpeechRate] = useState(1.0);
   const autoReadWordsRef = useRef<VocabEntry[]>([]);
+
+  // Seek bar state
+  const seekBarRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const isDraggingRef = useRef(false);
 
   // Sync speech rate with service
   useEffect(() => {
@@ -64,18 +84,19 @@ export default function VocabularyPage() {
     const init = async () => {
       const isOnline = await apiService.checkHealth();
       setDbOnline(isOnline);
-      if (isOnline) {
-        try {
-          const apiStats = await apiService.getStats();
-          setStats({
-            n5: apiStats.N5 ?? stats.n5,
-            n4: apiStats.N4 ?? stats.n4,
-            n3: apiStats.N3 ?? stats.n3,
-            n2: apiStats.N2 ?? 0,
-            n1: apiStats.N1 ?? 0,
-          });
-        } catch {}
-      }
+      try {
+        const apiStats = await apiService.getStats();
+        setStats({
+          n5: apiStats.N5 ?? stats.n5,
+          n4: apiStats.N4 ?? stats.n4,
+          n3: apiStats.N3 ?? stats.n3,
+          n2: apiStats.N2 ?? 0,
+          n1: apiStats.N1 ?? 0,
+          n2_bs: apiStats.n2_bs ?? 0,
+          tu_lay: apiStats.tu_lay ?? 0,
+          luong_tu: apiStats.luong_tu ?? 0,
+        });
+      } catch {}
     };
     init();
   }, []);
@@ -91,9 +112,10 @@ export default function VocabularyPage() {
           data = await apiService.searchVocabulary(searchQuery);
         } else {
           data = await apiService.getVocabulary({
-            level: levelFilter,
+            level: categoryFilter !== 'all' ? undefined : levelFilter,
             pos: posFilter,
-            limit: 1000 // Load larger list for browsing
+            category: categoryFilter !== 'all' ? categoryFilter : undefined,
+            limit: 1000
           });
         }
         if (active) {
@@ -112,18 +134,26 @@ export default function VocabularyPage() {
 
     fetchVocab();
     return () => { active = false; };
-  }, [levelFilter, posFilter, searchQuery, dbOnline]);
+  }, [levelFilter, categoryFilter, posFilter, searchQuery, dbOnline]);
 
-  // Words for auto-read (from API when online, embedded data when offline)
+  // Words for auto-read (always pull from local ALL_VOCAB to get all items regardless of pagination)
   const autoReadWordList = useMemo(() => {
     if (autoReadLevels.size === 0) return [];
-    const source = dbOnline && vocabList.length > 0 ? vocabList : ALL_VOCAB;
-    let list = source.filter(v => autoReadLevels.has(v.level));
+    
+    // N5-N1 core items
+    const selectedJlpt = ['N5', 'N4', 'N3', 'N2', 'N1'].filter(l => autoReadLevels.has(l));
+    let list = ALL_VOCAB.filter(v => selectedJlpt.includes(v.level));
+    
+    // Special categories
+    if (autoReadLevels.has('n2_bs')) list = [...list, ...getSpecialCategoryVocab('n2_bs')];
+    if (autoReadLevels.has('tu_lay')) list = [...list, ...getSpecialCategoryVocab('tu_lay')];
+    if (autoReadLevels.has('luong_tu')) list = [...list, ...getSpecialCategoryVocab('luong_tu')];
+
     if (autoReadMode === 'random') {
       list = [...list].sort(() => Math.random() - 0.5);
     }
     return list;
-  }, [autoReadLevels, autoReadMode, dbOnline, vocabList]);
+  }, [autoReadLevels, autoReadMode]);
 
   const availablePos = useMemo(() => {
     return Object.keys(POS_LABELS);
@@ -172,19 +202,21 @@ export default function VocabularyPage() {
     autoReadWords(
       words,
       {
-        readKana,
-        readVietnamese,
-        readHanViet,
+        readKana: true,
+        readVietnamese: true,
+        readHanViet: true,
         delayBetweenWords: autoReadDelay,
         onWordStart: (i: number) => setAutoReadIndex(i),
         onWordEnd: () => {},
       },
       0
-    ).then(() => {
-      setAutoReadState('idle');
-      setAutoReadIndex(0);
+    ).then((completed) => {
+      if (completed) {
+        setAutoReadState('idle');
+        setAutoReadIndex(0);
+      }
     });
-  }, [autoReadWordList, autoReadMode, readKana, readVietnamese, readHanViet, autoReadDelay]);
+  }, [autoReadWordList, autoReadMode, autoReadDelay]);
 
   const handlePause = () => {
     pauseAutoRead();
@@ -213,14 +245,98 @@ export default function VocabularyPage() {
     autoReadWords(
       autoReadWordsRef.current,
       {
-        readKana, readVietnamese, readHanViet,
+        readKana: true, readVietnamese: true, readHanViet: true,
         delayBetweenWords: autoReadDelay,
         onWordStart: (i: number) => setAutoReadIndex(i),
         onWordEnd: () => {},
       },
       nextIdx
-    ).then(() => { setAutoReadState('idle'); setAutoReadIndex(0); });
+    ).then((completed) => { 
+      if (completed) {
+        setAutoReadState('idle'); 
+        setAutoReadIndex(0); 
+      }
+    });
   };
+
+  // ── Seek bar ──
+  const calcIndexFromClientX = useCallback((clientX: number): number => {
+    const bar = seekBarRef.current;
+    if (!bar || autoReadWordsRef.current.length === 0) return 0;
+    const rect = bar.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    return Math.min(
+      Math.floor(ratio * autoReadWordsRef.current.length),
+      autoReadWordsRef.current.length - 1
+    );
+  }, []);
+
+  const handleSeek = useCallback((targetIndex: number) => {
+    if (autoReadWordsRef.current.length === 0) return;
+    const idx = Math.max(0, Math.min(targetIndex, autoReadWordsRef.current.length - 1));
+    cancelAutoRead();
+    setAutoReadIndex(idx);
+    setAutoReadState(prev => {
+      if (prev === 'playing') {
+        // restart reading from new index immediately (autoReadWords has internal delay)
+        autoReadWords(
+          autoReadWordsRef.current,
+          {
+            readKana: true, readVietnamese: true, readHanViet: true,
+            delayBetweenWords: autoReadDelay,
+            onWordStart: (i: number) => setAutoReadIndex(i),
+            onWordEnd: () => {},
+          },
+          idx
+        ).then((completed) => { 
+          if (completed) {
+            setAutoReadState('idle'); 
+            setAutoReadIndex(0); 
+          }
+        });
+        return 'playing';
+      }
+      return prev; // paused → stay paused at new position
+    });
+  }, [autoReadDelay]);
+
+  const handleSeekMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    const idx = calcIndexFromClientX(e.clientX);
+    setHoverIndex(idx);
+    setIsDragging(true);
+    isDraggingRef.current = true;
+  }, [calcIndexFromClientX]);
+
+  const handleSeekBarHover = useCallback((e: React.MouseEvent) => {
+    if (!isDraggingRef.current) {
+      const idx = calcIndexFromClientX(e.clientX);
+      setHoverIndex(idx);
+    }
+  }, [calcIndexFromClientX]);
+
+  // Global mouse move/up for drag outside the bar
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isDraggingRef.current) return;
+      const idx = calcIndexFromClientX(e.clientX);
+      setHoverIndex(idx);
+    };
+    const onMouseUp = (e: MouseEvent) => {
+      if (!isDraggingRef.current) return;
+      isDraggingRef.current = false;
+      setIsDragging(false);
+      const idx = calcIndexFromClientX(e.clientX);
+      setHoverIndex(null);
+      handleSeek(idx);
+    };
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, [calcIndexFromClientX, handleSeek]);
 
   const toggleLevel = (level: string) => {
     setAutoReadLevels(prev => {
@@ -234,7 +350,7 @@ export default function VocabularyPage() {
   // Cleanup on unmount
   useEffect(() => () => cancelAutoRead(), []);
 
-  const mergedKanjiDetails = useMemo(() => {
+  const mergedKanjiDetails = useMemo((): KanjiDetailView[] => {
     if (!selectedWord) return [];
 
     if (selectedWord.kanjiDetails && selectedWord.kanjiDetails.length > 0) {
@@ -267,6 +383,26 @@ export default function VocabularyPage() {
 
   return (
     <div className="page-inner" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+
+      {/* Flashcard CTA */}
+      {onNavigate && (
+        <button
+          type="button"
+          onClick={() => onNavigate('flashcard')}
+          style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+            padding: '14px 18px', borderRadius: 14, border: '1.5px solid #c7d2fe',
+            background: 'linear-gradient(135deg,#eef2ff,#e0e7ff)', cursor: 'pointer',
+            textAlign: 'left', width: '100%',
+          }}
+        >
+          <div>
+            <div style={{ fontWeight: 800, fontSize: 14, color: 'var(--primary)' }}>🃏 Luyện Flashcard từ Excel</div>
+            <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 2 }}>Upload file .xlsx hoặc học từ JLPT / N2-BS / Từ láy</div>
+          </div>
+          <span style={{ fontSize: 20 }}>→</span>
+        </button>
+      )}
 
       {/* Header Banner */}
       <div style={{
@@ -312,6 +448,19 @@ export default function VocabularyPage() {
               <div style={{ fontSize: 10, opacity: 0.8, marginTop: 2 }}>từ {s.level}</div>
             </div>
           ))}
+          {SPECIAL_CATEGORIES.filter(c => {
+            const counts = { n2_bs: stats.n2_bs, tu_lay: stats.tu_lay, luong_tu: stats.luong_tu };
+            return counts[c.id] > 0;
+          }).map(c => (
+            <div key={c.id} style={{
+              background: 'rgba(255,255,255,.12)', backdropFilter: 'blur(10px)',
+              borderRadius: 14, padding: '10px 16px', textAlign: 'center', minWidth: 70,
+              border: '1px solid rgba(255,255,255,.2)'
+            }}>
+              <div style={{ fontSize: 20, fontWeight: 900, color: c.border }}>{({ n2_bs: stats.n2_bs, tu_lay: stats.tu_lay, luong_tu: stats.luong_tu })[c.id].toLocaleString()}</div>
+              <div style={{ fontSize: 10, opacity: 0.8, marginTop: 2 }}>{c.label}</div>
+            </div>
+          ))}
           <button
             onClick={() => setShowAutoRead(p => !p)}
             style={{
@@ -323,21 +472,6 @@ export default function VocabularyPage() {
             }}>
             <Volume2 size={15} /> 🎧 Nghe tự động
           </button>
-
-          {/* Speech Rate Slider Widget */}
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 8, padding: '10px 16px',
-            background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.3)',
-            borderRadius: 14, color: 'white', fontSize: 12, fontWeight: 700,
-            backdropFilter: 'blur(10px)', minWidth: 160
-          }}>
-            <Volume2 size={14} style={{ color: '#818cf8' }} />
-            <span>Giọng đọc: {speechRate.toFixed(2)}x</span>
-            <input type="range" min={0.25} max={2.0} step={0.05} value={speechRate}
-              onChange={e => setSpeechRate(Number(e.target.value))}
-              style={{ width: 70, accentColor: '#818cf8', cursor: 'pointer' }}
-            />
-          </div>
         </div>
       </div>
 
@@ -358,82 +492,63 @@ export default function VocabularyPage() {
             </span>
           </div>
 
-          {/* Level selection */}
-          <div style={{ marginBottom: 14 }}>
-            <div style={{ fontSize: 11, opacity: 0.6, textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 8 }}>
-              Chọn cấp độ (có thể chọn nhiều)
-            </div>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              {['N5', 'N4', 'N3', 'N2', 'N1'].map(lv => {
-                const lvColor = LEVEL_COLORS[lv];
-                const active = autoReadLevels.has(lv);
-                return (
-                  <button key={lv} onClick={() => toggleLevel(lv)}
-                    style={{
-                      padding: '8px 18px', borderRadius: 10, border: `2px solid ${active ? lvColor.gradient : 'rgba(255,255,255,.2)'}`,
-                      background: active ? `${lvColor.gradient}30` : 'rgba(255,255,255,.05)',
-                      color: active ? lvColor.gradient : 'rgba(255,255,255,.6)',
-                      cursor: 'pointer', fontWeight: 800, fontSize: 14, transition: 'all 150ms',
-                    }}>
-                    {lv} {active && '✓'}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Settings row */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 14, marginBottom: 16 }}>
-            {/* Mode */}
-            <div>
-              <div style={{ fontSize: 11, opacity: 0.6, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Chế độ</div>
-              <div style={{ display: 'flex', background: 'rgba(255,255,255,.1)', borderRadius: 10, padding: 3, gap: 3 }}>
-                {[
-                  { mode: 'sequential' as const, icon: <List size={13} />, label: 'Tuần tự' },
-                  { mode: 'random' as const, icon: <Shuffle size={13} />, label: 'Ngẫu nhiên' },
-                ].map(m => (
-                  <button key={m.mode} onClick={() => setAutoReadMode(m.mode)}
-                    style={{
-                      flex: 1, padding: '7px 10px', border: 'none', borderRadius: 8, cursor: 'pointer',
-                      background: autoReadMode === m.mode ? 'rgba(99,102,241,.6)' : 'transparent',
-                      color: 'white', fontSize: 12, fontWeight: 700,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
-                    }}>
-                    {m.icon} {m.label}
-                  </button>
-                ))}
+          {/* Level selection & Speech Rate */}
+          <div style={{ marginBottom: 16, display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'flex-start' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ fontSize: 11, opacity: 0.6, textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 8 }}>
+                Chọn cấp độ (có thể chọn nhiều)
+              </div>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                {['N5', 'N4', 'N3', 'N2', 'N1'].map(lv => {
+                  const lvColor = LEVEL_COLORS[lv];
+                  const active = autoReadLevels.has(lv);
+                  return (
+                    <button key={lv} onClick={() => toggleLevel(lv)}
+                      style={{
+                        padding: '8px 18px', borderRadius: 10, border: `2px solid ${active ? lvColor.gradient : 'rgba(255,255,255,.2)'}`,
+                        background: active ? `${lvColor.gradient}30` : 'rgba(255,255,255,.05)',
+                        color: active ? lvColor.gradient : 'rgba(255,255,255,.6)',
+                        cursor: 'pointer', fontWeight: 800, fontSize: 14, transition: 'all 150ms',
+                      }}>
+                      {lv} {active && '✓'}
+                    </button>
+                  );
+                })}
+              </div>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                {SPECIAL_CATEGORIES.map(cat => {
+                  const active = autoReadLevels.has(cat.id);
+                  return (
+                    <button key={cat.id} onClick={() => toggleLevel(cat.id)}
+                      style={{
+                        padding: '8px 18px', borderRadius: 10, border: `2px solid ${active ? cat.border : 'rgba(255,255,255,.2)'}`,
+                        background: active ? `${cat.bg}40` : 'rgba(255,255,255,.05)',
+                        color: active ? cat.border : 'rgba(255,255,255,.6)',
+                        cursor: 'pointer', fontWeight: 800, fontSize: 13, transition: 'all 150ms',
+                      }}>
+                      {cat.label} {active && '✓'}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Speed */}
             <div>
-              <div style={{ fontSize: 11, opacity: 0.6, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>
-                Tốc độ: {(autoReadDelay / 1000).toFixed(1)}s/từ
+              <div style={{ fontSize: 11, opacity: 0.6, textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 8 }}>
+                Cài đặt giọng đọc
               </div>
-              <input type="range" min={1000} max={8000} step={500}
-                value={autoReadDelay} onChange={e => setAutoReadDelay(Number(e.target.value))}
-                style={{ width: '100%', accentColor: '#6366f1' }}
-              />
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, opacity: 0.5, marginTop: 2 }}>
-                <span>Nhanh (1s)</span><span>Chậm (8s)</span>
-              </div>
-            </div>
-
-            {/* What to read */}
-            <div>
-              <div style={{ fontSize: 11, opacity: 0.6, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Đọc gì</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {[
-                  { key: 'kana', label: '🇯🇵 Phát âm Kana', val: readKana, set: setReadKana },
-                  { key: 'vi', label: '🇻🇳 Nghĩa tiếng Việt', val: readVietnamese, set: setReadVietnamese },
-                  { key: 'hv', label: '📖 Hán Việt', val: readHanViet, set: setReadHanViet },
-                ].map(opt => (
-                  <label key={opt.key} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 13 }}>
-                    <input type="checkbox" checked={opt.val} onChange={e => opt.set(e.target.checked)}
-                      style={{ width: 16, height: 16, accentColor: '#6366f1' }} />
-                    {opt.label}
-                  </label>
-                ))}
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 12, padding: '8px 16px',
+                background: 'rgba(255,255,255,.1)', border: '1px solid rgba(255,255,255,.2)',
+                borderRadius: 10, color: 'white', fontSize: 13, fontWeight: 700,
+                backdropFilter: 'blur(10px)', height: '40px'
+              }}>
+                <Volume2 size={16} style={{ color: '#818cf8' }} />
+                <span>Giọng đọc: {speechRate.toFixed(2)}x</span>
+                <input type="range" min={0.25} max={2.0} step={0.05} value={speechRate}
+                  onChange={e => setSpeechRate(Number(e.target.value))}
+                  style={{ width: 80, accentColor: '#818cf8', cursor: 'pointer', margin: 0 }}
+                />
               </div>
             </div>
           </div>
@@ -455,18 +570,101 @@ export default function VocabularyPage() {
                   <div style={{ fontSize: 14, fontWeight: 600, marginTop: 2 }}>{currentAutoWord.vietnamese}</div>
                 </div>
               </div>
-              {/* Progress bar */}
-              <div style={{ marginTop: 10, height: 4, background: 'rgba(255,255,255,.1)', borderRadius: 4 }}>
-                <div style={{
-                  height: '100%', borderRadius: 4,
-                  background: 'linear-gradient(90deg,#6366f1,#a855f7)',
-                  width: `${((autoReadIndex + 1) / autoReadWordsRef.current.length) * 100}%`,
-                  transition: 'width 300ms ease',
-                }} />
-              </div>
+              {/* Seekable progress bar */}
+              {(() => {
+                const total = autoReadWordsRef.current.length || 1;
+                const displayIndex = hoverIndex !== null ? hoverIndex : autoReadIndex;
+                const pct = Math.min(((displayIndex + 1) / total) * 100, 100);
+                const isInteracting = isDragging || hoverIndex !== null;
+                const previewWord = hoverIndex !== null ? autoReadWordsRef.current[hoverIndex] : null;
+                return (
+                  <div style={{ marginTop: 14, position: 'relative', paddingBottom: 4 }}>
+                    {/* Tooltip */}
+                    {previewWord && (
+                      <div style={{
+                        position: 'absolute',
+                        bottom: 'calc(100% + 4px)',
+                        left: `clamp(40px, ${pct}%, calc(100% - 40px))`,
+                        transform: 'translateX(-50%)',
+                        background: 'rgba(10,10,30,.96)',
+                        color: 'white',
+                        padding: '6px 12px',
+                        borderRadius: 10,
+                        fontSize: 12,
+                        whiteSpace: 'nowrap',
+                        pointerEvents: 'none',
+                        boxShadow: '0 4px 20px rgba(0,0,0,.5)',
+                        border: '1px solid rgba(99,102,241,.5)',
+                        zIndex: 10,
+                        textAlign: 'center',
+                      }}>
+                        <div style={{ fontWeight: 900, fontSize: 15, fontFamily: 'Noto Serif JP, serif', letterSpacing: 1 }}>
+                          {previewWord.kanji}
+                        </div>
+                        {previewWord.kana !== previewWord.kanji && (
+                          <div style={{ opacity: 0.65, fontSize: 11 }}>{previewWord.kana}</div>
+                        )}
+                        <div style={{ opacity: 0.5, fontSize: 10, marginTop: 2 }}>
+                          {(hoverIndex ?? 0) + 1} / {total}
+                        </div>
+                        {/* Arrow */}
+                        <div style={{
+                          position: 'absolute', top: '100%', left: '50%',
+                          transform: 'translateX(-50%)',
+                          borderWidth: '5px 5px 0',
+                          borderStyle: 'solid',
+                          borderColor: 'rgba(10,10,30,.96) transparent transparent',
+                        }} />
+                      </div>
+                    )}
+                    {/* Track */}
+                    <div
+                      ref={seekBarRef}
+                      onMouseDown={handleSeekMouseDown}
+                      onMouseMove={handleSeekBarHover}
+                      onMouseLeave={() => { if (!isDraggingRef.current) setHoverIndex(null); }}
+                      style={{
+                        height: isInteracting ? 8 : 4,
+                        background: 'rgba(255,255,255,.15)',
+                        borderRadius: 99,
+                        cursor: isDragging ? 'grabbing' : 'pointer',
+                        position: 'relative',
+                        transition: 'height 150ms ease',
+                        userSelect: 'none',
+                      }}
+                    >
+                      {/* Filled track */}
+                      <div style={{
+                        height: '100%',
+                        borderRadius: 99,
+                        background: 'linear-gradient(90deg,#6366f1,#a855f7)',
+                        width: `${pct}%`,
+                        transition: isDragging ? 'none' : 'width 250ms ease',
+                        pointerEvents: 'none',
+                      }} />
+                      {/* Thumb dot */}
+                      <div style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: `${pct}%`,
+                        transform: 'translate(-50%, -50%)',
+                        width: isDragging ? 16 : 12,
+                        height: isDragging ? 16 : 12,
+                        borderRadius: '50%',
+                        background: 'white',
+                        boxShadow: isDragging
+                          ? '0 0 0 4px rgba(99,102,241,.35), 0 2px 8px rgba(0,0,0,.5)'
+                          : '0 2px 6px rgba(0,0,0,.4)',
+                        opacity: isInteracting ? 1 : 0,
+                        transition: isDragging ? 'width 100ms, height 100ms, box-shadow 100ms' : 'all 150ms ease',
+                        pointerEvents: 'none',
+                      }} />
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           )}
-
           {/* Controls */}
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             {autoReadState === 'idle' && (
@@ -532,16 +730,35 @@ export default function VocabularyPage() {
             </button>
           )}
         </div>
-        <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: 12, padding: 3, gap: 2 }}>
+        <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: 12, padding: 3, gap: 2, flexWrap: 'wrap' }}>
           {(['all', 'N5', 'N4', 'N3', 'N2', 'N1'] as const).map(lv => (
-            <button key={lv} onClick={() => { setLevelFilter(lv); setSearchQuery(''); }}
+            <button key={lv} onClick={() => { setLevelFilter(lv); setCategoryFilter('all'); setSearchQuery(''); }}
               style={{
                 padding: '8px 14px', border: 'none', borderRadius: 10, cursor: 'pointer',
                 fontSize: 13, fontWeight: 700, transition: 'all 150ms ease',
-                background: levelFilter === lv && !searchQuery ? 'white' : 'transparent',
-                color: levelFilter === lv && !searchQuery ? 'var(--primary)' : 'var(--text-secondary)',
-                boxShadow: levelFilter === lv && !searchQuery ? '0 1px 4px rgba(0,0,0,.1)' : 'none',
+                background: levelFilter === lv && categoryFilter === 'all' && !searchQuery ? 'white' : 'transparent',
+                color: levelFilter === lv && categoryFilter === 'all' && !searchQuery ? 'var(--primary)' : 'var(--text-secondary)',
+                boxShadow: levelFilter === lv && categoryFilter === 'all' && !searchQuery ? '0 1px 4px rgba(0,0,0,.1)' : 'none',
               }}>{lv === 'all' ? 'Tất cả' : lv}</button>
+          ))}
+        </div>
+        <div style={{ display: 'flex', background: '#fef3c7', borderRadius: 12, padding: 3, gap: 2, flexWrap: 'wrap' }}>
+          {SPECIAL_CATEGORIES.map(cat => (
+            <button key={cat.id}
+              onClick={() => {
+                setCategoryFilter(categoryFilter === cat.id ? 'all' : cat.id);
+                setLevelFilter('all');
+                setSearchQuery('');
+              }}
+              style={{
+                padding: '8px 12px', borderRadius: 10, cursor: 'pointer',
+                fontSize: 12, fontWeight: 700, transition: 'all 150ms ease',
+                background: categoryFilter === cat.id ? cat.bg : 'transparent',
+                color: categoryFilter === cat.id ? cat.color : 'var(--text-secondary)',
+                border: categoryFilter === cat.id ? `1.5px solid ${cat.border}` : '1.5px solid transparent',
+              }}>
+              {cat.label}
+            </button>
           ))}
         </div>
         <button onClick={() => setShowFilters(f => !f)}
@@ -587,7 +804,11 @@ export default function VocabularyPage() {
         {loading && <span style={{ width: 12, height: 12, borderRadius: '50%', border: '2px solid var(--primary)', borderTopColor: 'transparent', display: 'inline-block', animation: 'spin 1s linear infinite' }} />}
         {searchQuery
           ? <span>🔍 Tìm thấy <strong style={{ color: 'var(--primary)' }}>{vocabList.length}</strong> từ cho "{searchQuery}"</span>
-          : <span>Hiển thị <strong style={{ color: 'var(--primary)' }}>{vocabList.length.toLocaleString()}</strong> từ{levelFilter !== 'all' ? ` JLPT ${levelFilter}` : ''}{posFilter ? ` · ${POS_LABELS[posFilter]}` : ''}</span>
+          : <span>Hiển thị <strong style={{ color: 'var(--primary)' }}>{vocabList.length.toLocaleString()}</strong> từ
+            {categoryFilter !== 'all'
+              ? ` · ${SPECIAL_CATEGORIES.find(c => c.id === categoryFilter)?.label}`
+              : levelFilter !== 'all' ? ` JLPT ${levelFilter}` : ''}
+            {posFilter ? ` · ${POS_LABELS[posFilter]}` : ''}</span>
         }
       </div>
 

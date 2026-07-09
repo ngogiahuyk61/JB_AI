@@ -1,5 +1,4 @@
-import React from 'react';
-import { BookOpen, Flame, CheckCircle, TrendingUp, Target, Calendar } from 'lucide-react';
+import { BookOpen, Flame, CheckCircle, TrendingUp } from 'lucide-react';
 import type { UserStats } from '../types';
 
 const MOCK_STATS: UserStats = {

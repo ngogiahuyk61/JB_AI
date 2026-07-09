@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, type ChangeEvent } from 'react';
 import {
   UploadCloud, FileSpreadsheet, Shuffle, ListOrdered,
   Trash2, ChevronLeft, ChevronRight, Play, BrainCircuit,
@@ -10,6 +10,7 @@ import { speechService } from '../services/speechService';
 import { geminiService } from '../services/geminiService';
 import { analyzeWord } from '../constants/kanjiDB';
 import { ALL_VOCAB, POS_LABELS, type VocabEntry } from '../constants/jlptData';
+import { SPECIAL_CATEGORIES, type SpecialCategory } from '../constants/specialCategories';
 import { apiService } from '../services/apiService';
 
 type KanjiPanelData = {
@@ -32,10 +33,12 @@ type SourceMode = 'excel' | 'jlpt';
 
 export default function FlashcardPage() {
   const [phase, setPhase] = useState<Phase>('upload');
-  const [sourceMode, setSourceMode] = useState<SourceMode>('excel');
+  const [sourceMode, setSourceMode] = useState<SourceMode>('jlpt');
   // JLPT source state
   const [jlptLevels, setJlptLevels] = useState<Set<string>>(new Set(['N5']));
+  const [jlptCategory, setJlptCategory] = useState<SpecialCategory | ''>('');
   const [jlptPos, setJlptPos] = useState('');
+  const [specialStats, setSpecialStats] = useState({ n2_bs: 0, tu_lay: 0, luong_tu: 0 });
   const [jlptCount, setJlptCount] = useState<number | 'all'>('all');
   const [autoSpeak, setAutoSpeak] = useState(true);
 
@@ -65,7 +68,21 @@ export default function FlashcardPage() {
     }
   }, []);
 
-  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const initStats = async () => {
+      try {
+        const stats = await apiService.getStats();
+        setSpecialStats({
+          n2_bs: stats.n2_bs ?? 0,
+          tu_lay: stats.tu_lay ?? 0,
+          luong_tu: stats.luong_tu ?? 0,
+        });
+      } catch { /* ignore */ }
+    };
+    initStats();
+  }, []);
+
+  const handleFile = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setLoading(true); setError('');
@@ -94,17 +111,24 @@ export default function FlashcardPage() {
       if (sourceMode === 'jlpt') {
         const isOnline = await apiService.checkHealth();
         if (isOnline) {
-          // Fetch from backend API for each active level
-          const levelsList = Array.from(jlptLevels);
           let apiVocab: VocabEntry[] = [];
-          
-          for (const lv of levelsList) {
-            const items = await apiService.getVocabulary({
-              level: lv,
+
+          if (jlptCategory) {
+            apiVocab = await apiService.getVocabulary({
+              category: jlptCategory,
               pos: jlptPos || undefined,
-              limit: 1000 // Ensure we grab enough cards
+              limit: 1000,
             });
-            apiVocab = [...apiVocab, ...items];
+          } else {
+            const levelsList = Array.from(jlptLevels);
+            for (const lv of levelsList) {
+              const items = await apiService.getVocabulary({
+                level: lv,
+                pos: jlptPos || undefined,
+                limit: 1000,
+              });
+              apiVocab = [...apiVocab, ...items];
+            }
           }
           
           if (shuffle) apiVocab = apiVocab.sort(() => Math.random() - 0.5);
@@ -131,7 +155,7 @@ export default function FlashcardPage() {
       }
 
       if (all.length === 0) {
-        setError('Chọn ít nhất 1 nhóm từ vựng!');
+        setError(jlptCategory ? 'Không có từ trong nhóm này. Hãy bật backend + DB.' : 'Chọn ít nhất 1 nhóm từ vựng!');
         setLoading(false);
         return;
       }
@@ -243,7 +267,9 @@ export default function FlashcardPage() {
     const jlptPosOptions = Array.from(new Set(
       ALL_VOCAB.filter(v => jlptLevels.has(v.level)).map(v => v.pos)
     )).filter(Boolean);
-    const jlptStats = ALL_VOCAB.filter(v => jlptLevels.has(v.level) && (!jlptPos || v.pos === jlptPos)).length;
+    const jlptStats = jlptCategory
+      ? ({ n2_bs: specialStats.n2_bs, tu_lay: specialStats.tu_lay, luong_tu: specialStats.luong_tu })[jlptCategory] || 0
+      : ALL_VOCAB.filter(v => jlptLevels.has(v.level) && (!jlptPos || v.pos === jlptPos)).length;
 
     return (
       <div className="page-inner" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -289,22 +315,56 @@ export default function FlashcardPage() {
 
             {/* Level select */}
             <div style={{ background: 'white', borderRadius: 16, padding: 20, border: '1px solid var(--border)' }}>
-              <h4 style={{ fontWeight: 800, marginBottom: 14, fontSize: 14 }}>📊 Chọn cấp độ</h4>
+              <h4 style={{ fontWeight: 800, marginBottom: 14, fontSize: 14 }}>📊 Chọn cấp độ JLPT</h4>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 {(['N5', 'N4', 'N3', 'N2', 'N1'] as const).map(lv => {
                   const count = ALL_VOCAB.filter(v => v.level === lv).length;
-                  const active = jlptLevels.has(lv);
+                  const active = !jlptCategory && jlptLevels.has(lv);
                   return (
                     <button key={lv}
-                      onClick={() => setJlptLevels(prev => { const next = new Set(prev); if (next.has(lv)) next.delete(lv); else next.add(lv); return next; })}
+                      onClick={() => {
+                        setJlptCategory('');
+                        setJlptLevels(prev => { const next = new Set(prev); if (next.has(lv)) next.delete(lv); else next.add(lv); return next; });
+                      }}
+                      disabled={!!jlptCategory}
                       style={{
-                        padding: '12px 24px', borderRadius: 14, cursor: 'pointer', fontWeight: 800, fontSize: 15,
+                        padding: '12px 24px', borderRadius: 14, cursor: jlptCategory ? 'not-allowed' : 'pointer', fontWeight: 800, fontSize: 15,
                         border: `2px solid ${active ? 'var(--primary)' : 'var(--border)'}`,
                         background: active ? 'var(--primary-50)' : 'white',
                         color: active ? 'var(--primary)' : 'var(--text-secondary)',
+                        opacity: jlptCategory ? 0.5 : 1,
                         transition: 'all 150ms',
                       }}>
                       {lv} <span style={{ fontSize: 11, opacity: 0.7 }}>({count.toLocaleString()} từ)</span>
+                      {active && ' ✓'}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Special categories */}
+            <div style={{ background: 'white', borderRadius: 16, padding: 20, border: '1px solid var(--border)' }}>
+              <h4 style={{ fontWeight: 800, marginBottom: 14, fontSize: 14 }}>⭐ Bộ đặc biệt</h4>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                {SPECIAL_CATEGORIES.map(cat => {
+                  const count = ({ n2_bs: specialStats.n2_bs, tu_lay: specialStats.tu_lay, luong_tu: specialStats.luong_tu })[cat.id];
+                  const active = jlptCategory === cat.id;
+                  return (
+                    <button key={cat.id}
+                      onClick={() => {
+                        setJlptCategory(active ? '' : cat.id);
+                        if (!active) setJlptLevels(new Set());
+                      }}
+                      style={{
+                        padding: '12px 20px', borderRadius: 14, cursor: 'pointer', fontWeight: 800, fontSize: 14,
+                        border: `2px solid ${active ? cat.border : 'var(--border)'}`,
+                        background: active ? cat.bg : 'white',
+                        color: active ? cat.color : 'var(--text-secondary)',
+                        transition: 'all 150ms',
+                      }}>
+                      {cat.label}
+                      {count > 0 && <span style={{ fontSize: 11, opacity: 0.7, marginLeft: 6 }}>({count})</span>}
                       {active && ' ✓'}
                     </button>
                   );
@@ -368,15 +428,17 @@ export default function FlashcardPage() {
                   {Math.min(jlptCount === 'all' ? jlptStats : jlptCount, jlptStats).toLocaleString()} thẻ
                 </div>
                 <div style={{ fontSize: 12, color: '#166534', opacity: 0.8, marginTop: 2 }}>
-                  Level: {Array.from(jlptLevels).join(', ') || '(chưa chọn)'} · {jlptPos ? POS_LABELS[jlptPos] || jlptPos : 'Tất cả loại từ'}
+                  {jlptCategory
+                    ? `Bộ: ${SPECIAL_CATEGORIES.find(c => c.id === jlptCategory)?.label}`
+                    : `Level: ${Array.from(jlptLevels).join(', ') || '(chưa chọn)'}`} · {jlptPos ? POS_LABELS[jlptPos] || jlptPos : 'Tất cả loại từ'}
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
-                <button onClick={() => startStudy(false)} disabled={jlptLevels.size === 0}
+                <button onClick={() => startStudy(false)} disabled={!jlptCategory && jlptLevels.size === 0}
                   className="btn btn-outline btn-lg" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <ListOrdered size={18} /> Tuần tự
                 </button>
-                <button onClick={() => startStudy(true)} disabled={jlptLevels.size === 0}
+                <button onClick={() => startStudy(true)} disabled={!jlptCategory && jlptLevels.size === 0}
                   className="btn btn-primary btn-lg" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <Shuffle size={18} /> Học ngẫu nhiên
                 </button>

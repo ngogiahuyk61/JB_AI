@@ -69,13 +69,36 @@ export interface ChatHistory {
   text: string;
 }
 
+export interface ChatRequestOptions {
+  systemPrompt?: string;
+  maxHistoryTurns?: number;
+  mode?: 'guided_kaiwa' | 'free_chat';
+  level?: string;
+  currentQuestion?: string;
+  lastAssessment?: string;
+  sessionState?: string;
+  turnIntent?: string;
+}
+
+function buildSessionContextPrompt(options: ChatRequestOptions): string {
+  const lines: string[] = [];
+  if (options.mode) lines.push(`Session mode: ${options.mode}`);
+  if (options.level) lines.push(`JLPT level: ${options.level}`);
+  if (options.currentQuestion) lines.push(`Current lesson question: ${options.currentQuestion}`);
+  if (options.lastAssessment) lines.push(`Last assessment: ${options.lastAssessment}`);
+  if (options.sessionState) lines.push(`Session state: ${options.sessionState}`);
+  if (options.turnIntent) lines.push(`Turn intent: ${options.turnIntent}`);
+  return lines.length ? `\n${lines.join('\n')}` : '';
+}
+
 export async function sendChatMessage(
   userMessage: string,
-  history: ChatHistory[] = []
+  history: ChatHistory[] = [],
+  options: ChatRequestOptions = {}
 ): Promise<string> {
   const contents: GeminiContent[] = [
     // History trước
-    ...history.map(h => ({
+    ...history.slice(-(options.maxHistoryTurns ?? 6)).map(h => ({
       role: h.role,
       parts: [{ text: h.text }],
     })),
@@ -83,10 +106,13 @@ export async function sendChatMessage(
     { role: 'user', parts: [{ text: userMessage }] },
   ];
 
+  const basePrompt = options.systemPrompt || SENSEI_SYSTEM_PROMPT;
+  const sessionContext = buildSessionContextPrompt(options);
+
   return callGemini({
     contents,
-    systemInstruction: { parts: [{ text: SENSEI_SYSTEM_PROMPT }] },
-    generationConfig: { temperature: 0.7, maxOutputTokens: 300 },
+    systemInstruction: { parts: [{ text: `${basePrompt}${sessionContext}` }] },
+    generationConfig: { temperature: 0.35, maxOutputTokens: 180, topP: 0.85 },
   });
 }
 

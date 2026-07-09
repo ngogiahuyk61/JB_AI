@@ -21,8 +21,13 @@ builder.Services.AddHttpClient("Ollama", client =>
     client.Timeout = TimeSpan.FromMinutes(3);
 });
 
-var ollamaBaseUrl = builder.Configuration["Ollama:BaseUrl"] ?? "http://localhost:11434";
-var ollamaModel = builder.Configuration["Ollama:Model"] ?? "qwen3:4b";
+var ollamaBaseUrl = builder.Configuration["Ollama:BaseUrl"]
+    ?? Environment.GetEnvironmentVariable("OLLAMA_BASE_URL")
+    ?? "http://localhost:11434";
+
+var ollamaModel = builder.Configuration["Ollama:Model"]
+    ?? Environment.GetEnvironmentVariable("OLLAMA_MODEL")
+    ?? "qwen3:4b";
 
 builder.Services.AddSingleton(sp => 
 {

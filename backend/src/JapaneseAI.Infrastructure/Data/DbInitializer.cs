@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using JapaneseAI.Core.Entities;
@@ -123,7 +124,7 @@ namespace JapaneseAI.Infrastructure.Data
                     new { Kanji = "大学", Sentence = "大学で勉強しています。", Translation = "Tôi đang học ở đại học.", Romaji = "Daigaku de benkyou shite imasu." },
                     new { Kanji = "会社", Sentence = "父は会社員です。", Translation = "Bố tôi là nhân viên công ty.", Romaji = "Chichi wa kaishain desu." },
                     new { Kanji = "友達", Sentence = "友達と映画を見ました。", Translation = "Tôi đã xem phim với bạn bè.", Romaji = "Tomodachi to eiga wo mimashita." },
-                    new { Kanji = "今日", Sentence = "今日は天気がいいです。", Translation = "Hôm nay thời tiết đẹp.", Romaji = "Kyou wa tenki ga ii desu." },
+                    new { Kanji = "今日", Sentence = "Hôm nay thời tiết đẹp.", Translation = "Hôm nay thời tiết đẹp.", Romaji = "Kyou wa tenki ga ii desu." },
                 };
 
                 foreach (var item in vocabsToUpdate)
@@ -148,6 +149,10 @@ namespace JapaneseAI.Infrastructure.Data
 
                 // Check if already seeded (vocabulary)
                 var currentVocabCount = await context.Vocabulary.CountAsync();
+
+                // Resolve vocabulary JSON once so we can use it for seeding or merging
+                var vocabJson = DataPathResolver.ResolveFile("vocabulary", "all_vocabulary.json");
+
                 if (currentVocabCount > 0)
                 {
                     if (currentVocabCount < 2000)
@@ -160,21 +165,45 @@ namespace JapaneseAI.Infrastructure.Data
                     }
                     else
                     {
-                        logger.LogInformation("Database already seeded with full vocabulary ({Count} records).", currentVocabCount);
+                        logger.LogInformation("Database already seeded with full vocabulary ({Count} records). Attempting merge from vocabulary JSON if available.", currentVocabCount);
+
+                        if (vocabJson != null)
+                        {
+                            try
+                            {
+                                await VocabularyJsonImporter.ImportAsync(context, vocabJson, logger);
+                                logger.LogInformation("Vocabulary JSON merge complete.");
+                            }
+                            catch (Exception mergeEx)
+                            {
+                                logger.LogWarning(mergeEx, "Vocabulary JSON merge had errors – continuing to apply special tags.");
+                                // Reset EF change tracker to avoid stale state
+                                context.ChangeTracker.Clear();
+                            }
+                            // Apply special tags (n2_bs, tu_lay, luong_tu) always, even if merge had errors
+                            await ApplySpecialTagsAsync(context, vocabJson, logger);
+                        }
+                        else
+                        {
+                            logger.LogInformation("No vocabulary JSON found to merge.");
+                        }
+
                         return;
                     }
                 }
 
-                // PostgreSQL / Neon: import from JSON bundle
+                // If we reach here DB is empty (or was cleaned), import full JSON if available
+                if (vocabJson != null)
+                {
+                    await VocabularyJsonImporter.ImportAsync(context, vocabJson, logger);
+                    logger.LogInformation("Vocabulary JSON import done.");
+                    // Apply special tags after fresh import
+                    await ApplySpecialTagsAsync(context, vocabJson, logger);
+                    return;
+                }
+
                 if (isPostgres)
                 {
-                    var vocabJson = DataPathResolver.ResolveFile("vocabulary", "all_vocabulary.json");
-                    if (vocabJson != null)
-                    {
-                        await VocabularyJsonImporter.ImportAsync(context, vocabJson, logger);
-                        logger.LogInformation("PostgreSQL vocabulary JSON import done.");
-                        return;
-                    }
                     logger.LogWarning("No vocabulary JSON found for PostgreSQL seed.");
                     return;
                 }
@@ -263,6 +292,204 @@ namespace JapaneseAI.Infrastructure.Data
             {
                 logger.LogError(ex, "An error occurred during database initialization/seeding.");
             }
+        }
+
+        /// <summary>
+        /// Reads all_vocabulary.json and applies special tags (n2_bs, tu_lay, luong_tu) to
+        /// matching records already in the database.
+        /// - N2-BS: matched by HanViet (uppercase, trimmed)
+        /// - Từ láy / Lượng từ: matched by Kana
+        /// Inserts brand-new records (e.g. entirely new Từ láy words) if not found.
+        /// </summary>
+        private static async Task ApplySpecialTagsAsync(AppDbContext context, string jsonPath, ILogger logger)
+        {
+            try
+            {
+                if (!File.Exists(jsonPath)) return;
+
+                var json = await File.ReadAllTextAsync(jsonPath);
+                var rows = JsonSerializer.Deserialize<List<SpecialVocabRow>>(
+                    json,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                ) ?? new List<SpecialVocabRow>();
+
+                var specialRows = rows
+                    .Where(r => !string.IsNullOrWhiteSpace(r.Tags) && r.Tags!.Contains("special"))
+                    .ToList();
+
+                if (specialRows.Count == 0)
+                {
+                    logger.LogInformation("ApplySpecialTags: no special rows found in JSON.");
+                    return;
+                }
+
+                logger.LogInformation("ApplySpecialTags: processing {Count} special rows from JSON...", specialRows.Count);
+
+                int updated = 0;
+                int inserted = 0;
+
+                // ── Partition by category ──
+                var n2BsRows   = specialRows.Where(r => r.Tags!.Contains("n2_bs")).ToList();
+                var tuLayRows  = specialRows.Where(r => r.Tags!.Contains("tu_lay")).ToList();
+                var luongTuRows = specialRows.Where(r => r.Tags!.Contains("luong_tu")).ToList();
+
+                // ── N2-BS: match by HanViet (normalised upper-case) ──
+                var n2BsHanViets = n2BsRows
+                    .Where(r => !string.IsNullOrWhiteSpace(r.HanViet))
+                    .Select(r => r.HanViet!.Trim().ToUpperInvariant())
+                    .Distinct()
+                    .ToList();
+
+                // Also build a kana-based lookup for N2-BS rows whose HanViet is empty
+                var n2BsKanas = n2BsRows
+                    .Where(r => string.IsNullOrWhiteSpace(r.HanViet) && !string.IsNullOrWhiteSpace(r.Kana))
+                    .Select(r => r.Kana!.Trim())
+                    .Distinct()
+                    .ToList();
+
+                if (n2BsHanViets.Count > 0)
+                {
+                    var dbN2Records = await context.Vocabulary
+                        .Where(v => v.JlptLevel == "N2" && v.HanViet != null && n2BsHanViets.Contains(v.HanViet.ToUpper()))
+                        .ToListAsync();
+
+                    foreach (var dbRec in dbN2Records)
+                    {
+                        if (string.IsNullOrEmpty(dbRec.Tags) || !dbRec.Tags.Contains("special"))
+                        {
+                            dbRec.Tags = MergeTags(dbRec.Tags, "special,n2_bs");
+                            updated++;
+                        }
+                    }
+                }
+
+                // ── Từ láy: match by Kana ──
+                var tuLayKanas = tuLayRows
+                    .Where(r => !string.IsNullOrWhiteSpace(r.Kana))
+                    .Select(r => r.Kana!.Trim())
+                    .Distinct()
+                    .ToList();
+
+                if (tuLayKanas.Count > 0)
+                {
+                    var dbTuLayRecords = await context.Vocabulary
+                        .Where(v => v.JlptLevel == "N3" && tuLayKanas.Contains(v.Kana))
+                        .ToListAsync();
+
+                    var foundKanas = dbTuLayRecords.Select(r => r.Kana).ToHashSet();
+
+                    foreach (var dbRec in dbTuLayRecords)
+                    {
+                        if (string.IsNullOrEmpty(dbRec.Tags) || !dbRec.Tags.Contains("special"))
+                        {
+                            dbRec.Tags = MergeTags(dbRec.Tags, "special,tu_lay");
+                            updated++;
+                        }
+                    }
+
+                    // Insert brand-new Từ láy words not yet in DB
+                    var toInsertTuLay = tuLayRows
+                        .Where(r => !string.IsNullOrWhiteSpace(r.Kana) && !foundKanas.Contains(r.Kana!.Trim()))
+                        .ToList();
+
+                    foreach (var r in toInsertTuLay)
+                    {
+                        var kana = r.Kana!.Trim();
+                        context.Vocabulary.Add(new Vocabulary
+                        {
+                            Kanji = string.IsNullOrWhiteSpace(r.Kanji) ? kana : r.Kanji.Trim(),
+                            Kana  = kana,
+                            HanViet = r.HanViet?.Trim(),
+                            Vietnamese = r.Vietnamese?.Trim() ?? string.Empty,
+                            JlptLevel = "N3",
+                            PartOfSpeech = r.PartOfSpeech?.Trim(),
+                            Tags = "special,tu_lay",
+                            SortOrder = r.SortOrder ?? 0,
+                        });
+                        inserted++;
+                    }
+                }
+
+                // ── Lượng từ: match by Kana ──
+                var luongTuKanas = luongTuRows
+                    .Where(r => !string.IsNullOrWhiteSpace(r.Kana))
+                    .Select(r => r.Kana!.Trim())
+                    .Distinct()
+                    .ToList();
+
+                if (luongTuKanas.Count > 0)
+                {
+                    var dbLuongTuRecords = await context.Vocabulary
+                        .Where(v => v.JlptLevel == "N3" && luongTuKanas.Contains(v.Kana))
+                        .ToListAsync();
+
+                    var foundKanas = dbLuongTuRecords.Select(r => r.Kana).ToHashSet();
+
+                    foreach (var dbRec in dbLuongTuRecords)
+                    {
+                        if (string.IsNullOrEmpty(dbRec.Tags) || !dbRec.Tags.Contains("special"))
+                        {
+                            dbRec.Tags = MergeTags(dbRec.Tags, "special,luong_tu");
+                            updated++;
+                        }
+                    }
+
+                    // Insert brand-new Lượng từ words not yet in DB
+                    var toInsertLuongTu = luongTuRows
+                        .Where(r => !string.IsNullOrWhiteSpace(r.Kana) && !foundKanas.Contains(r.Kana!.Trim()))
+                        .ToList();
+
+                    foreach (var r in toInsertLuongTu)
+                    {
+                        var kana = r.Kana!.Trim();
+                        context.Vocabulary.Add(new Vocabulary
+                        {
+                            Kanji = string.IsNullOrWhiteSpace(r.Kanji) ? kana : r.Kanji.Trim(),
+                            Kana  = kana,
+                            HanViet = r.HanViet?.Trim(),
+                            Vietnamese = r.Vietnamese?.Trim() ?? string.Empty,
+                            JlptLevel = "N3",
+                            PartOfSpeech = r.PartOfSpeech?.Trim(),
+                            Tags = "special,luong_tu",
+                            SortOrder = r.SortOrder ?? 0,
+                        });
+                        inserted++;
+                    }
+                }
+
+                await context.SaveChangesAsync();
+                logger.LogInformation("ApplySpecialTags complete: {Updated} updated, {Inserted} inserted.", updated, inserted);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "ApplySpecialTags failed.");
+            }
+        }
+
+        private static string MergeTags(string? existing, string incoming)
+        {
+            var existingSet = (existing ?? string.Empty)
+                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(t => t.Trim().ToLowerInvariant())
+                .Where(t => t.Length > 0)
+                .ToHashSet();
+
+            foreach (var tag in incoming.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                existingSet.Add(tag.Trim().ToLowerInvariant());
+
+            return string.Join(',', existingSet);
+        }
+
+        private class SpecialVocabRow
+        {
+            public string? Kanji { get; set; }
+            public string? Kana { get; set; }
+            public string? HanViet { get; set; }
+            public string? Vietnamese { get; set; }
+            public string? JlptLevel { get; set; }
+            public string? PartOfSpeech { get; set; }
+            public string? Tags { get; set; }
+            public int? SortOrder { get; set; }
         }
 
         private static string[] CleanSqlScript(string sql)

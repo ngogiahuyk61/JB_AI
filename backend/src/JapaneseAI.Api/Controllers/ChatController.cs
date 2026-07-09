@@ -21,7 +21,7 @@ public class ChatController : ControllerBase
     public async Task<IActionResult> GetHealth()
     {
         var available = await _ollamaService.IsAvailableAsync();
-        return Ok(new { status = available ? "online" : "offline", model = "qwen3:4b" });
+        return Ok(new { status = available ? "online" : "offline", model = _ollamaService.ModelName });
     }
 
     /// <summary>Chat thường (không stream).</summary>
@@ -33,7 +33,7 @@ public class ChatController : ControllerBase
 
         try
         {
-            var reply = await _ollamaService.ChatAsync(request.Message, request.History);
+            var reply = await _ollamaService.ChatAsync(request.Message, request.History, request.SystemPrompt, request.ToSessionContext());
             return Ok(new ChatResponse { Reply = reply });
         }
         catch (OllamaException ex)
@@ -61,9 +61,13 @@ public class ChatController : ControllerBase
         Response.Headers.CacheControl = "no-cache";
         Response.Headers.Connection = "keep-alive";
 
+        // Gửi SSE comment khởi tạo để ép gửi headers về client lập tức (tránh timeout)
+        await Response.WriteAsync(":\n\n");
+        await Response.Body.FlushAsync();
+
         try
         {
-            await foreach (var chunk in _ollamaService.StreamChatAsync(request.Message, request.History, HttpContext.RequestAborted))
+            await foreach (var chunk in _ollamaService.StreamChatAsync(request.Message, request.History, request.SystemPrompt, request.ToSessionContext(), HttpContext.RequestAborted))
             {
                 // SSE format: data: <chunk>\n\n
                 // Encode chunk to avoid raw line breaks issues
@@ -90,6 +94,26 @@ public class ChatRequest
 {
     public string Message { get; set; } = "";
     public List<ChatTurn>? History { get; set; }
+    public string? SystemPrompt { get; set; }
+    public string? Mode { get; set; }
+    public string? Level { get; set; }
+    public string? CurrentQuestion { get; set; }
+    public string? LastAssessment { get; set; }
+    public string? SessionState { get; set; }
+    public string? TurnIntent { get; set; }
+
+    public ChatSessionContext ToSessionContext()
+    {
+        return new ChatSessionContext
+        {
+            Mode = Mode,
+            Level = Level,
+            CurrentQuestion = CurrentQuestion,
+            LastAssessment = LastAssessment,
+            SessionState = SessionState,
+            TurnIntent = TurnIntent,
+        };
+    }
 }
 
 public class ChatResponse

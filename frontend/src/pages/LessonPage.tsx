@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BookOpen, Volume2, ArrowRight, Play, Award, HelpCircle } from 'lucide-react';
+import { useState } from 'react';
+import { BookOpen, Volume2 } from 'lucide-react';
 import { speechService } from '../services/speechService';
 
 interface VerbConjugation {

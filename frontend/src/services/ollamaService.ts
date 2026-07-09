@@ -14,35 +14,68 @@ export interface ChatHistory {
   text: string;
 }
 
-function mapHistoryToOllama(history: ChatHistory[]): ChatTurn[] {
-  return history.map(h => ({
+export interface ChatRequestOptions {
+  systemPrompt?: string;
+  mode?: 'guided_kaiwa' | 'free_chat';
+  level?: string;
+  currentQuestion?: string;
+  lastAssessment?: string;
+  sessionState?: string;
+  turnIntent?: string;
+  maxHistoryTurns?: number;
+}
+
+const HEALTH_CACHE_TTL_MS = 15000;
+let healthCache: { value: boolean; expiresAt: number } | null = null;
+
+function mapHistoryToOllama(history: ChatHistory[], maxHistoryTurns = 6): ChatTurn[] {
+  return history.slice(-maxHistoryTurns).map(h => ({
     role: h.role === 'user' ? 'user' : 'assistant',
     content: h.text
   }));
 }
 
 export async function checkOllamaHealth(): Promise<boolean> {
+  const now = Date.now();
+  if (healthCache && healthCache.expiresAt > now) {
+    return healthCache.value;
+  }
+
   try {
     const res = await fetch(`${API_BASE}/chat/health`);
-    if (!res.ok) return false;
+    if (!res.ok) {
+      healthCache = { value: false, expiresAt: now + HEALTH_CACHE_TTL_MS };
+      return false;
+    }
     const data = await res.json();
-    return data.status === 'online';
+    const isOnline = data.status === 'online';
+    healthCache = { value: isOnline, expiresAt: now + HEALTH_CACHE_TTL_MS };
+    return isOnline;
   } catch {
+    healthCache = { value: false, expiresAt: now + HEALTH_CACHE_TTL_MS };
     return false;
   }
 }
 
 export async function sendOllamaMessage(
   userMessage: string,
-  history: ChatHistory[] = []
+  history: ChatHistory[] = [],
+  options: ChatRequestOptions = {}
 ): Promise<string> {
-  const ollamaHistory = mapHistoryToOllama(history);
+  const ollamaHistory = mapHistoryToOllama(history, options.maxHistoryTurns ?? 6);
   const res = await fetch(`${API_BASE}/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       message: userMessage,
-      history: ollamaHistory
+      history: ollamaHistory,
+      systemPrompt: options.systemPrompt,
+      mode: options.mode,
+      level: options.level,
+      currentQuestion: options.currentQuestion,
+      lastAssessment: options.lastAssessment,
+      sessionState: options.sessionState,
+      turnIntent: options.turnIntent,
     })
   });
 
@@ -65,16 +98,24 @@ export async function sendOllamaMessage(
 export async function streamOllamaMessage(
   userMessage: string,
   history: ChatHistory[] = [],
-  onChunk: (chunk: string) => void,
-  onComplete: (fullText: string) => void
+  onChunk: (chunk: string, isThinking: boolean) => void,
+  onComplete: (fullText: string, fullThinking: string) => void,
+  options: ChatRequestOptions = {}
 ): Promise<void> {
-  const ollamaHistory = mapHistoryToOllama(history);
+  const ollamaHistory = mapHistoryToOllama(history, options.maxHistoryTurns ?? 6);
   const response = await fetch(`${API_BASE}/chat/stream`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       message: userMessage,
-      history: ollamaHistory
+      history: ollamaHistory,
+      systemPrompt: options.systemPrompt,
+      mode: options.mode,
+      level: options.level,
+      currentQuestion: options.currentQuestion,
+      lastAssessment: options.lastAssessment,
+      sessionState: options.sessionState,
+      turnIntent: options.turnIntent,
     })
   });
 
@@ -90,6 +131,7 @@ export async function streamOllamaMessage(
   const decoder = new TextDecoder('utf-8');
   let buffer = '';
   let fullText = '';
+  let fullThinking = '';
 
   try {
     while (true) {
@@ -115,8 +157,12 @@ export async function streamOllamaMessage(
           
           try {
             const decodedChunk = decodeURIComponent(rawData);
-            fullText += decodedChunk;
-            onChunk(decodedChunk);
+            if (decodedChunk.startsWith('[THINK]')) {
+              continue;
+            } else {
+              fullText += decodedChunk;
+              onChunk(decodedChunk, false);
+            }
           } catch (e) {
             console.error('Failed to decode chunk:', rawData, e);
           }
@@ -125,7 +171,7 @@ export async function streamOllamaMessage(
     }
   } finally {
     reader.releaseLock();
-    onComplete(fullText);
+    onComplete(fullText, fullThinking);
   }
 }
 

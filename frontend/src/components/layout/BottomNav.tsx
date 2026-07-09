@@ -1,17 +1,9 @@
-import React from 'react';
-import { Home, BookMarked, GraduationCap, Settings } from 'lucide-react';
+import { NAV_ITEMS, type AppTab } from '../../constants/navItems';
 
 interface BottomNavProps {
   activeTab: string;
-  onTabChange: (tab: string) => void;
+  onTabChange: (tab: AppTab) => void;
 }
-
-const NAV_ITEMS = [
-  { id: 'dashboard', label: 'Tổng quan', icon: Home },
-  { id: 'vocabulary', label: 'Từ vựng', icon: BookMarked },
-  { id: 'lesson', label: 'Bài học', icon: GraduationCap },
-  { id: 'settings', label: 'Cài đặt', icon: Settings },
-];
 
 export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   return (
@@ -22,13 +14,14 @@ export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
         return (
           <button
             key={item.id}
+            type="button"
             className={`nav-item ${isActive ? 'active' : ''}`}
             onClick={() => onTabChange(item.id)}
           >
             <div className="nav-item-icon-wrapper">
               <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
             </div>
-            <span className="nav-item-label">{item.label}</span>
+            <span className="nav-item-label">{item.shortLabel ?? item.label}</span>
           </button>
         );
       })}

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import BottomNav from './components/layout/BottomNav';
+import SidebarNav from './components/layout/SidebarNav';
 import Topbar from './components/layout/Topbar';
 import DashboardPage from './pages/DashboardPage';
 import FlashcardPage from './pages/FlashcardPage';
@@ -8,28 +9,34 @@ import VocabularyPage from './pages/VocabularyPage';
 import LessonPage from './pages/LessonPage';
 import FloatingChat from './components/chat/FloatingChat';
 import { MessageCircle } from 'lucide-react';
+import { useAppLayout } from './hooks/useAppLayout';
+import type { AppTab } from './constants/navItems';
 import './styles/index.css';
 
-type Tab = 'dashboard' | 'flashcard' | 'exam' | 'vocabulary' | 'lesson' | 'settings';
-
 export default function App() {
-  const [activeTab, setActiveTab] = useState<Tab>('dashboard');
+  const [activeTab, setActiveTab] = useState<AppTab>('dashboard');
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const layout = useAppLayout();
+  const isDesktop = layout === 'desktop';
 
   const renderPage = () => {
     switch (activeTab) {
-      case 'dashboard': return <DashboardPage onNavigate={(tab) => setActiveTab(tab as Tab)} />;
+      case 'dashboard': return <DashboardPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
       case 'flashcard': return <FlashcardPage />;
       case 'exam': return <ExamPage />;
-      case 'vocabulary': return <VocabularyPage />;
+      case 'vocabulary': return <VocabularyPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
       case 'lesson': return <LessonPage />;
       case 'settings': return <SettingsPage />;
-      default: return <DashboardPage onNavigate={(tab) => setActiveTab(tab as Tab)} />;
+      default: return <DashboardPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
     }
   };
 
   return (
-    <div className="app-layout">
+    <div className={`app-layout ${isDesktop ? 'app-layout--desktop' : 'app-layout--mobile'}`}>
+      {isDesktop && (
+        <SidebarNav activeTab={activeTab} onTabChange={setActiveTab} />
+      )}
+
       <div className="main-content">
         <Topbar activeTab={activeTab} />
         <div className="page-content">
@@ -37,12 +44,12 @@ export default function App() {
         </div>
       </div>
 
-      <BottomNav activeTab={activeTab} onTabChange={(tab) => setActiveTab(tab as Tab)} />
+      {!isDesktop && (
+        <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      )}
 
-      {/* Floating Chat */}
       <FloatingChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
 
-      {/* FAB */}
       {!isChatOpen && (
         <button className="fab-chat" onClick={() => setIsChatOpen(true)} aria-label="Mở chat AI">
           <MessageCircle size={26} />
