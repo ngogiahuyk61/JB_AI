@@ -137,7 +137,7 @@ class SpeechService {
       return this.speakOnlineTTS(text, 'ja');
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (!this.synth || !text.trim()) {
         resolve();
         return;
