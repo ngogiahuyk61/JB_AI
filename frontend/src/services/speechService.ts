@@ -71,17 +71,17 @@ class SpeechService {
 
 
 
-  // Đọc tiếng Việt qua C# Backend TTS Proxy (Primary) → Google Translate TTS trực tiếp (Fallback)
+  // Đọc online (Primary: C# Backend proxy, Fallback: Google Translate TTS)
   // Backend proxy bypass được Google bot-detection vì là server-to-server request
-  private speakVietnameseOnline(text: string): Promise<void> {
+  private speakOnlineTTS(text: string, lang: string = 'vi'): Promise<void> {
     return new Promise((resolve) => {
       this.cancelOnlineAudio();
       const cleanText = text.slice(0, 200);
 
       // PRIMARY: Backend proxy (C# API → Google TTS server-side)
-      const backendUrl = `${API_BASE}/tts?text=${encodeURIComponent(cleanText)}&lang=vi`;
+      const backendUrl = `${API_BASE}/tts?text=${encodeURIComponent(cleanText)}&lang=${lang}`;
       // FALLBACK: Direct Google URL (đôi khi vẫn hoạt động)
-      const googleDirectUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=${encodeURIComponent(cleanText)}&tl=vi&ttsspeed=0.9`;
+      const googleDirectUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=${encodeURIComponent(cleanText)}&tl=${lang}&ttsspeed=0.9`;
 
       const audio = new Audio();
       audio.defaultPlaybackRate = this._rate;
@@ -128,10 +128,13 @@ class SpeechService {
     if (!text.trim()) return Promise.resolve();
 
     // Tiếng Việt: Ưu tiên Google TTS online (giọng Việt chuẩn, đã xác nhận hoạt động)
-    // Nếu không có local vi-VN voice được cài trên Windows, Web Speech API sẽ im lặng
-    // nên ta dùng speakVietnameseOnline (Google TTS + Youdao fallback) thay thế
-    if (options.lang === 'vi-VN' && !this.viVoice) {
-      return this.speakVietnameseOnline(text);
+    if (options.lang === 'vi-VN' && navigator.onLine) {
+      return this.speakOnlineTTS(text, 'vi');
+    }
+
+    // Tiếng Nhật: Nếu không có local ja-JP voice được cài, dùng online TTS để chữa cháy
+    if (options.lang === 'ja-JP' && !this.jaVoice && navigator.onLine) {
+      return this.speakOnlineTTS(text, 'ja');
     }
 
     return new Promise((resolve, reject) => {
@@ -146,26 +149,40 @@ class SpeechService {
       utt.pitch = options.pitch ?? 1.0;
       utt.volume = options.volume ?? 1.0;
 
-      // Gán voice cụ thể nếu tìm thấy, nếu không để browser tự chọn (Chrome sẽ dùng online TTS)
+      // Gán voice cụ thể nếu tìm thấy, nếu không để browser tự chọn
       if (options.lang === 'ja-JP' && this.jaVoice) utt.voice = this.jaVoice;
       if (options.lang === 'vi-VN' && this.viVoice) utt.voice = this.viVoice;
-      // → Nếu viVoice === null và lang='vi-VN': KHAI KHÔNG gán voice → Chrome tự xử lý vi-VN
 
       // Giữ tham chiếu tránh GC bug Chrome
       this._utteranceRefs = [utt];
 
-      utt.onend = () => resolve();
+      // Đề phòng engine Web Speech bị treo vĩnh viễn trên Android
+      const maxWait = Math.max(5000, text.length * 300);
+      let timeoutId: any;
+      const clearRefs = () => { clearTimeout(timeoutId); };
+
+      utt.onend = () => {
+        clearRefs();
+        resolve();
+      };
+      
       utt.onerror = (e) => {
+        clearRefs();
         if (e.error === 'interrupted' || e.error === 'canceled') {
           resolve();
         } else if (options.lang === 'vi-VN') {
-          // Web Speech thất bại với tiếng Việt → fallback online TTS
-          this.speakVietnameseOnline(text).then(resolve).catch(() => resolve());
+          this.speakOnlineTTS(text, 'vi').then(resolve).catch(() => resolve());
         } else {
           console.warn('TTS Error:', e.error);
-          resolve(); // Resolve to prevent breaking async loops (e.g., auto-read) when voice is missing
+          resolve(); // Resolve to prevent breaking async loops
         }
       };
+
+      timeoutId = setTimeout(() => {
+        console.warn('TTS Timeout (engine hang detection), forcefully resolving.', text);
+        this.synth?.cancel();
+        resolve();
+      }, maxWait);
 
       this.synth.speak(utt);
     });
