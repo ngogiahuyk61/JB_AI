@@ -1,8 +1,27 @@
 // ============================================================
-// Speech Service – Web Speech API + AudioContext TTS (Android-safe)
+// Speech Service – AudioContext TTS (Android-safe, production-ready)
 // ============================================================
 
-import { API_BASE } from '../config/api';
+import { API_BASE as CONFIG_API_BASE } from '../config/api';
+
+// ── Production URL auto-detection ─────────────────────────────────────────
+// Nếu Cloudflare Pages chưa set VITE_API_BASE_URL (build ra localhost),
+// tự động dùng Render backend khi chạy trên production domain.
+function resolveApiBase(): string {
+  if (typeof window === 'undefined') return CONFIG_API_BASE;
+  const host = window.location.hostname;
+  // Nếu đang chạy trên production nhưng API_BASE vẫn là localhost → fallback
+  if (
+    CONFIG_API_BASE.includes('localhost') &&
+    !host.includes('localhost') &&
+    !host.includes('127.0.0.1')
+  ) {
+    return 'https://japaneseai-api.onrender.com/api';
+  }
+  return CONFIG_API_BASE;
+}
+
+const API_BASE = resolveApiBase();
 
 // ResponsiveVoice global type declaration
 declare global {
@@ -24,8 +43,6 @@ export interface SpeechOptions {
 }
 
 // ── AudioContext Singleton (bypass Android autoplay policy) ──────────────
-// AudioContext chạy trong context "resumable" – sau 1 user gesture thì
-// context.state = 'running' và toàn bộ audio đều hoạt động.
 let audioCtx: AudioContext | null = null;
 
 function getAudioContext(): AudioContext {
@@ -35,10 +52,6 @@ function getAudioContext(): AudioContext {
   return audioCtx;
 }
 
-/**
- * Resume AudioContext – MUST be called inside a user gesture event handler.
- * Nếu context đang 'suspended' (Android Chrome default), resume nó.
- */
 async function resumeAudioContext(): Promise<void> {
   try {
     const ctx = getAudioContext();
@@ -50,17 +63,11 @@ async function resumeAudioContext(): Promise<void> {
   }
 }
 
-/**
- * Play audio bytes qua AudioContext – KHÔNG bị Android autoplay policy chặn
- * miễn là AudioContext đã được resume() trong user gesture trước đó.
- */
 function playAudioBuffer(arrayBuffer: ArrayBuffer, rate: number): Promise<void> {
   return new Promise(async (resolve) => {
     try {
       const ctx = getAudioContext();
-      if (ctx.state === 'suspended') {
-        await ctx.resume();
-      }
+      if (ctx.state === 'suspended') await ctx.resume();
       const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
       const source = ctx.createBufferSource();
       source.buffer = audioBuffer;
@@ -75,16 +82,63 @@ function playAudioBuffer(arrayBuffer: ArrayBuffer, rate: number): Promise<void> 
   });
 }
 
+// ── Google TTS qua Audio Element (tránh CORS với fetch) ──────────────────
+// Audio Element không cần CORS preflight nên bypass được restriction
+function playGoogleTTSViaAudioElement(text: string, lang: string, rate: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const cleanText = text.slice(0, 200);
+    const urls = [
+      `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&q=${encodeURIComponent(cleanText)}&tl=${lang}&ttsspeed=0.9`,
+      `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=${encodeURIComponent(cleanText)}&tl=${lang}&ttsspeed=0.9`,
+    ];
+
+    let urlIndex = 0;
+
+    const tryNext = () => {
+      if (urlIndex >= urls.length) { resolve(false); return; }
+      const audio = new Audio();
+      audio.crossOrigin = 'anonymous'; // thử với CORS header
+      audio.defaultPlaybackRate = rate;
+
+      const timeout = setTimeout(() => { audio.src = ''; resolve(false); }, 8000);
+
+      audio.onended = () => { clearTimeout(timeout); resolve(true); };
+      audio.onerror = () => {
+        clearTimeout(timeout);
+        // Thử không có crossOrigin (chấp nhận opaque, chỉ phát không cần decode)
+        if (audio.crossOrigin === 'anonymous') {
+          const audio2 = new Audio(urls[urlIndex]);
+          audio2.defaultPlaybackRate = rate;
+          const t2 = setTimeout(() => { audio2.src = ''; urlIndex++; tryNext(); }, 8000);
+          audio2.onended = () => { clearTimeout(t2); resolve(true); };
+          audio2.onerror = () => { clearTimeout(t2); urlIndex++; tryNext(); };
+          audio2.play().catch(() => { clearTimeout(t2); urlIndex++; tryNext(); });
+        } else {
+          urlIndex++;
+          tryNext();
+        }
+      };
+
+      audio.src = urls[urlIndex];
+      audio.play().catch(() => {
+        clearTimeout(timeout);
+        urlIndex++;
+        tryNext();
+      });
+    };
+
+    tryNext();
+  });
+}
+
 class SpeechService {
   private synth: SpeechSynthesis | null = null;
   private _voicesLoaded = false;
   private jaVoice: SpeechSynthesisVoice | null = null;
   private viVoice: SpeechSynthesisVoice | null = null;
-  private _utteranceRefs: SpeechSynthesisUtterance[] = []; // GC防止
-  private currentAudio: HTMLAudioElement | null = null; // legacy fallback
+  private _utteranceRefs: SpeechSynthesisUtterance[] = [];
   private currentAbortCtrl: AbortController | null = null;
   private _rate = 1.0;
-  // Track if user has triggered a gesture (for Android unlock)
   private _audioUnlocked = false;
 
   public get voicesLoaded() { return this._voicesLoaded; }
@@ -107,7 +161,6 @@ class SpeechService {
     const voices = this.synth?.getVoices() || [];
     if (voices.length === 0) return;
 
-    // Ưu tiên Google Voices (chất lượng tốt nhất)
     this.jaVoice =
       voices.find(v => v.name.includes('Google') && v.lang.startsWith('ja')) ||
       voices.find(v => v.lang === 'ja-JP') ||
@@ -122,80 +175,57 @@ class SpeechService {
       null;
 
     this._voicesLoaded = true;
+    console.log('[TTS] Voices loaded. ja:', this.jaVoice?.name, 'vi:', this.viVoice?.name);
   }
 
-  // ── PRIMARY: Fetch audio bytes từ backend → phát qua AudioContext ──────
-  // AudioContext không bị Android autoplay policy chặn sau khi được resume()
-  private async speakViaAudioContext(text: string, lang: string): Promise<boolean> {
+  /**
+   * Android Chrome: getVoices() trả empty lần đầu, phải đợi voiceschanged.
+   * Hàm này chờ tối đa 1s.
+   */
+  private async ensureVoicesLoaded(): Promise<void> {
+    if (this._voicesLoaded || !this.synth) return;
+    const voices = this.synth.getVoices();
+    if (voices.length > 0) { this.loadVoices(); return; }
+
+    return new Promise((resolve) => {
+      const timeout = setTimeout(() => { resolve(); }, 1000);
+      const handler = () => {
+        clearTimeout(timeout);
+        this.loadVoices();
+        resolve();
+      };
+      window.speechSynthesis.addEventListener('voiceschanged', handler, { once: true });
+    });
+  }
+
+  // ── Backend proxy (C# → Google TTS server-side, qua AudioContext) ────────
+  private async speakViaBackendProxy(text: string, lang: string): Promise<boolean> {
     const cleanText = text.slice(0, 200);
     const backendUrl = `${API_BASE}/tts?text=${encodeURIComponent(cleanText)}&lang=${lang}`;
 
-    // Abort controller để cancel nếu user dừng
     this.currentAbortCtrl?.abort();
     const ctrl = new AbortController();
     this.currentAbortCtrl = ctrl;
 
     try {
-      const res = await fetch(backendUrl, {
-        signal: ctrl.signal,
-      });
-      if (!res.ok) throw new Error(`TTS HTTP ${res.status}`);
-      const arrayBuffer = await res.arrayBuffer();
-      if (arrayBuffer.byteLength < 500) throw new Error('Audio too small');
-
-      // Resume context trong trường hợp browser tự suspend
-      await resumeAudioContext();
-      await playAudioBuffer(arrayBuffer, this._rate);
-      return true;
-    } catch (e: any) {
-      if (e?.name === 'AbortError') return false;
-      console.warn('[AudioCtx] Backend TTS failed, trying Google direct:', e?.message);
-      return false;
-    }
-  }
-
-  // ── FALLBACK: Thử trực tiếp Google Translate TTS (server-side) ─────────
-  private async speakViaGoogleDirect(text: string, lang: string): Promise<boolean> {
-    const cleanText = text.slice(0, 200);
-    const googleUrl = `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&q=${encodeURIComponent(cleanText)}&tl=${lang}&ttsspeed=0.9`;
-
-    this.currentAbortCtrl?.abort();
-    const ctrl = new AbortController();
-    this.currentAbortCtrl = ctrl;
-
-    try {
-      const res = await fetch(googleUrl, { signal: ctrl.signal });
-      if (!res.ok) throw new Error(`Google TTS HTTP ${res.status}`);
+      console.log('[TTS] Trying backend proxy:', backendUrl.substring(0, 60));
+      const res = await fetch(backendUrl, { signal: ctrl.signal });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const arrayBuffer = await res.arrayBuffer();
       if (arrayBuffer.byteLength < 500) throw new Error('Audio too small');
 
       await resumeAudioContext();
       await playAudioBuffer(arrayBuffer, this._rate);
+      console.log('[TTS] Backend proxy OK');
       return true;
     } catch (e: any) {
       if (e?.name === 'AbortError') return false;
-      console.warn('[AudioCtx] Google direct TTS also failed:', e?.message);
+      console.warn('[TTS] Backend proxy failed:', e?.message);
       return false;
     }
   }
 
-  // ── Online TTS: Backend proxy → Google direct → Web Speech fallback ──
-  private async speakOnlineTTS(text: string, lang: string = 'vi'): Promise<void> {
-    // Thử backend proxy (AudioContext)
-    const backendOk = await this.speakViaAudioContext(text, lang);
-    if (backendOk) return;
-
-    // Thử Google direct (AudioContext)  
-    const googleOk = await this.speakViaGoogleDirect(text, lang);
-    if (googleOk) return;
-
-    // Last resort: Web Speech API (có thể không có giọng Việt trên Android)
-    if (lang === 'ja' && this.jaVoice) {
-      await this.speakWebSpeech(text, 'ja-JP');
-    }
-  }
-
-  // ── Đọc qua Web Speech API (local TTS engine) ────────────────────────
+  // ── Web Speech API (local TTS engine) ────────────────────────────────────
   private speakWebSpeech(text: string, lang: 'ja-JP' | 'vi-VN'): Promise<void> {
     return new Promise((resolve) => {
       if (!this.synth || !text.trim()) { resolve(); return; }
@@ -213,7 +243,6 @@ class SpeechService {
 
       const maxWait = Math.max(5000, text.length * 300);
       let timeoutId: ReturnType<typeof setTimeout>;
-
       const done = () => { clearTimeout(timeoutId); resolve(); };
 
       utt.onend = done;
@@ -221,13 +250,13 @@ class SpeechService {
         if (e.error === 'interrupted' || e.error === 'canceled') {
           done();
         } else {
-          console.warn('[WebSpeech] Error:', e.error);
+          console.warn('[WebSpeech] Error:', e.error, '| lang:', lang, '| voice:', utt.voice?.name);
           done();
         }
       };
 
       timeoutId = setTimeout(() => {
-        console.warn('[WebSpeech] Timeout, forcefully resolving.');
+        console.warn('[WebSpeech] Timeout, resolving.');
         this.synth?.cancel();
         resolve();
       }, maxWait);
@@ -236,70 +265,82 @@ class SpeechService {
     });
   }
 
-  // ── Public API ────────────────────────────────────────────────────────
+  // ── Public: speak() ───────────────────────────────────────────────────────
+  async speak(text: string, options: SpeechOptions): Promise<void> {
+    if (!text.trim()) return;
 
-  // Đọc 1 đoạn text với ngôn ngữ xác định
-  speak(text: string, options: SpeechOptions): Promise<void> {
-    if (!text.trim()) return Promise.resolve();
+    // Đảm bảo voices đã load (fix Android race condition)
+    await this.ensureVoicesLoaded();
 
-    // Tiếng Việt: LUÔN dùng online TTS (AudioContext) vì Android hiếm khi có giọng Việt
-    if (options.lang === 'vi-VN' && navigator.onLine) {
-      return this.speakOnlineTTS(text, 'vi');
+    if (options.lang === 'ja-JP') {
+      // Tiếng Nhật: Ưu tiên Web Speech (Android Chrome có sẵn ja-JP voice)
+      if (this.jaVoice) {
+        console.log('[TTS] Japanese via WebSpeech:', this.jaVoice.name);
+        return this.speakWebSpeech(text, 'ja-JP');
+      }
+      // Không có local voice → dùng backend proxy
+      if (navigator.onLine) {
+        const ok = await this.speakViaBackendProxy(text, 'ja');
+        if (ok) return;
+        // Fallback: Google direct qua Audio Element (không cần CORS)
+        await playGoogleTTSViaAudioElement(text, 'ja', this._rate);
+      }
+      return;
     }
 
-    // Tiếng Nhật: Dùng local voice nếu có, nếu không dùng online TTS
-    if (options.lang === 'ja-JP') {
-      if (this.jaVoice) {
-        return this.speakWebSpeech(text, 'ja-JP');
-      } else if (navigator.onLine) {
-        return this.speakOnlineTTS(text, 'ja');
+    if (options.lang === 'vi-VN') {
+      // Tiếng Việt: ưu tiên backend proxy (Google TTS), vì Android không có giọng Việt
+      if (navigator.onLine) {
+        const ok = await this.speakViaBackendProxy(text, 'vi');
+        if (ok) return;
+        // Fallback: Google direct qua Audio Element
+        const googleOk = await playGoogleTTSViaAudioElement(text, 'vi', this._rate);
+        if (googleOk) return;
+        // Last resort: nếu có giọng Việt local
+        if (this.viVoice) {
+          return this.speakWebSpeech(text, 'vi-VN');
+        }
+        console.warn('[TTS] Vietnamese TTS: tất cả phương án thất bại. Backend URL:', API_BASE);
+      } else if (this.viVoice) {
+        return this.speakWebSpeech(text, 'vi-VN');
       }
     }
-
-    // Offline + no local voice
-    return Promise.resolve();
   }
 
-  // Đọc chuỗi: Kana → nghĩa Việt → Hán Việt
+  // ── Speak flashcard: Kana → Việt → HánViệt ───────────────────────────────
   async speakFlashcard(kana: string, vietnamese: string, hanViet?: string): Promise<void> {
     this.cancel();
-    await resumeAudioContext(); // Unlock AudioContext
+    await this.unlockAudio();
 
-    // 1. Đọc Kana bằng giọng Nhật
     if (kana) {
       await this.speak(kana, { lang: 'ja-JP', rate: 0.85 });
       await this.delay(300);
     }
 
-    // 2. Đọc nghĩa tiếng Việt
     if (vietnamese) {
       await this.speak(vietnamese, { lang: 'vi-VN', rate: 0.9 });
       await this.delay(200);
     }
 
-    // 3. Đọc Hán Việt (nếu có)
     const cleanHV = hanViet?.trim();
     if (cleanHV && cleanHV !== 'TỰ' && cleanHV !== 'NULL' && cleanHV !== '') {
       await this.speak(cleanHV, { lang: 'vi-VN', rate: 0.85, pitch: 0.9 });
     }
   }
 
-  // Đọc câu ví dụ tiếng Nhật
   speakJapanese(text: string): void {
     this.cancel();
     this.speak(text, { lang: 'ja-JP', rate: 0.85 }).catch(() => {});
   }
 
-  // Đọc text tiếng Việt
   speakVietnamese(text: string): void {
     this.cancel();
     this.speak(text, { lang: 'vi-VN', rate: 0.9 }).catch(() => {});
   }
 
-  // Đọc nghĩa Tiếng Việt → Hán Việt (dùng cho nút "Tiếng Việt" ở trang Từ vựng)
   async speakVietnameseAndHanViet(vietnamese: string, hanViet?: string): Promise<void> {
     this.cancel();
-    await resumeAudioContext();
+    await this.unlockAudio();
 
     if (vietnamese) {
       await this.speak(vietnamese, { lang: 'vi-VN', rate: 0.9 });
@@ -312,42 +353,27 @@ class SpeechService {
     }
   }
 
-  // Dừng đọc
   cancel(): void {
     this.currentAbortCtrl?.abort();
     this.currentAbortCtrl = null;
     this.synth?.cancel();
     this._utteranceRefs = [];
-    this.cancelLegacyAudio();
-  }
-
-  // Legacy audio element cleanup
-  private cancelLegacyAudio() {
-    if (this.currentAudio) {
-      try {
-        this.currentAudio.pause();
-        this.currentAudio.src = '';
-      } catch {}
-      this.currentAudio = null;
-    }
   }
 
   /**
-   * QUAN TRỌNG: Gọi trong user gesture handler (onClick/onTouchStart)
-   * để unlock AudioContext trên Android Chrome.
-   * Chỉ cần gọi 1 lần duy nhất.
+   * PHẢI gọi trong user gesture (onClick) để unlock AudioContext trên Android.
    */
   async unlockAudio(): Promise<void> {
     if (this._audioUnlocked) return;
     await resumeAudioContext();
     this._audioUnlocked = true;
 
-    // Cũng unlock Web Speech API với 1 silent utterance
     if (this.synth) {
       const silent = new SpeechSynthesisUtterance(' ');
       silent.volume = 0;
       this.synth.speak(silent);
     }
+    console.log('[TTS] AudioContext unlocked. State:', getAudioContext().state, '| API_BASE:', API_BASE);
   }
 
   private delay(ms: number): Promise<void> {
@@ -365,7 +391,7 @@ class SpeechService {
     };
   }
 
-  // ── Auto-read sequence ────────────────────────────────────────────────
+  // ── Auto-read ──────────────────────────────────────────────────────────────
   private autoReadController: { cancelled: boolean; paused: boolean } | null = null;
 
   cancelAutoRead() {
@@ -395,8 +421,6 @@ class SpeechService {
     startIndex = 0
   ): Promise<boolean> {
     this.cancelAutoRead();
-
-    // Unlock AudioContext ngay khi bắt đầu auto-read (đã trong user gesture)
     await this.unlockAudio();
 
     const ctrl = { cancelled: false, paused: false };
@@ -412,10 +436,8 @@ class SpeechService {
 
       const word = words[i];
       config.onWordStart?.(i);
-
       await this.delay(50);
 
-      // 1. Read kana (Japanese)
       if (config.readKana && word.kana) {
         await this.speak(word.kana, { lang: 'ja-JP', rate: 0.85 });
         await this.delay(250);
@@ -423,7 +445,6 @@ class SpeechService {
 
       if (ctrl.cancelled || ctrl.paused) { if (ctrl.paused) { i--; continue; } return false; }
 
-      // 2. Read Han Viet
       if (config.readHanViet && word.hanViet && word.hanViet !== 'NULL' && word.hanViet !== '') {
         await this.speak(word.hanViet, { lang: 'vi-VN', rate: 0.85 });
         await this.delay(200);
@@ -431,7 +452,6 @@ class SpeechService {
 
       if (ctrl.cancelled) return false;
 
-      // 3. Read Vietnamese meaning
       if (config.readVietnamese && word.vietnamese) {
         await this.speak(word.vietnamese, { lang: 'vi-VN', rate: 0.9 });
       }
@@ -451,12 +471,12 @@ class SpeechService {
 // Singleton
 export const speechService = new SpeechService();
 
-// Export bindings for backward compatibility with VocabularyPage
+// Export bindings for backward compatibility
 export const speakJapanese = (text: string) => speechService.speakJapanese(text);
 export const speakVietnamese = (text: string) => speechService.speakVietnamese(text);
-export const speakFlashcard = (kana: string, vietnamese: string, hanViet?: string) => 
+export const speakFlashcard = (kana: string, vietnamese: string, hanViet?: string) =>
   speechService.speakFlashcard(kana, vietnamese, hanViet);
-export const autoReadWords = (words: any[], config: any, startIndex = 0) => 
+export const autoReadWords = (words: any[], config: any, startIndex = 0) =>
   speechService.autoReadWords(words, config, startIndex);
 export const setRate = (rate: number) => speechService.setRate(rate);
 export const cancelAutoRead = () => speechService.cancelAutoRead();
@@ -465,7 +485,7 @@ export const resumeAutoRead = () => speechService.resumeAutoRead();
 
 
 // ============================================================
-// Speech Recognition – Browser STT (Japanese / Vietnamese)
+// Speech Recognition – Browser STT
 // ============================================================
 export type SpeechRecognitionLang = 'ja-JP' | 'vi-VN';
 
