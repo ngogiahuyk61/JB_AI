@@ -60,11 +60,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     }
 });
 
-// CORS — localhost + env FRONTEND_URL (Cloudflare Pages)
+// CORS — localhost + Cloudflare Pages production + env overrides
 var corsOrigins = new List<string>
 {
     "http://localhost:5173", "https://localhost:5173",
     "http://localhost:5174", "https://localhost:5174",
+    // Cloudflare Pages production domains (hardcoded để đảm bảo hoạt động kể cả không set env var)
+    "https://jb-ai.pages.dev",
+    "https://www.jb-ai.pages.dev",
 };
 
 var frontendUrl = builder.Configuration["FRONTEND_URL"]
