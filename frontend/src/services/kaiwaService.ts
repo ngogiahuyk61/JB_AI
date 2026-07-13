@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api/kaiwa';
+const API_BASE = import.meta.env.VITE_API_BASE ? `${import.meta.env.VITE_API_BASE}/api/kaiwa` : 'http://localhost:5000/api/kaiwa';
 
 export type KaiwaMode = 'random' | 'intro' | 'lesson' | 'summary';
 
