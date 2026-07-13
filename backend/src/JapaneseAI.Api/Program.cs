@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using JapaneseAI.Infrastructure.Data;
 using JapaneseAI.Infrastructure.Services;
+using JapaneseAI.Infrastructure.Services.Kaiwa;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,12 @@ builder.Services.AddHttpClient("Ollama", client =>
     client.Timeout = TimeSpan.FromMinutes(3);
 });
 
+builder.Services.AddHttpClient("ollama", client =>
+{
+    client.BaseAddress = new Uri("http://localhost:11434");
+    client.Timeout = TimeSpan.FromMinutes(3);
+});
+
 var ollamaBaseUrl = builder.Configuration["Ollama:BaseUrl"]
     ?? Environment.GetEnvironmentVariable("OLLAMA_BASE_URL")
     ?? "http://localhost:11434";
@@ -36,6 +43,12 @@ builder.Services.AddSingleton(sp =>
     var logger = sp.GetRequiredService<ILogger<OllamaService>>();
     return new OllamaService(client, logger, ollamaBaseUrl, ollamaModel);
 });
+
+// Kaiwa services
+builder.Services.AddScoped<KaiwaService>();
+builder.Services.AddHttpClient<TranscriptionService>();
+builder.Services.AddHttpClient<TranslationService>();
+builder.Services.AddHttpClient<EvaluationService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");

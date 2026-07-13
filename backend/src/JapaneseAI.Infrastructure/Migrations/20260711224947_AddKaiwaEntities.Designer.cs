@@ -3,6 +3,7 @@ using System;
 using JapaneseAI.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JapaneseAI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260711224947_AddKaiwaEntities")]
+    partial class AddKaiwaEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,156 +111,6 @@ namespace JapaneseAI.Infrastructure.Migrations
                     b.HasIndex("VocabularyId");
 
                     b.ToTable("Flashcards", (string)null);
-                });
-
-            modelBuilder.Entity("JapaneseAI.Core.Entities.Kaiwa.KaiwaAnswerHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CorrectSentence")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<string>("Feedback")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
-
-                    b.Property<string>("GrammarExplanation")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
-
-                    b.Property<int>("GrammarScore")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("NaturalnessScore")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("OverallScore")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("RetryCount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("UserAnswer")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<int>("VocabularyScore")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedAt");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("KaiwaAnswerHistories", (string)null);
-                });
-
-            modelBuilder.Entity("JapaneseAI.Core.Entities.Kaiwa.KaiwaExpectedAnswer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AnswerText")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
-
-                    b.Property<bool>("IsPreferred")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("KaiwaExpectedAnswers", (string)null);
-                });
-
-            modelBuilder.Entity("JapaneseAI.Core.Entities.Kaiwa.KaiwaLesson", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("JlptLevel")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)")
-                        .HasDefaultValue("N5");
-
-                    b.Property<int>("OrderIndex")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("TitleVi")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderIndex");
-
-                    b.ToTable("KaiwaLessons", (string)null);
-                });
-
-            modelBuilder.Entity("JapaneseAI.Core.Entities.Kaiwa.KaiwaQuestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("JapaneseText")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<int>("LessonId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("OrderIndex")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LessonId", "OrderIndex");
-
-                    b.ToTable("KaiwaQuestions", (string)null);
                 });
 
             modelBuilder.Entity("JapaneseAI.Core.Entities.KanjiDictionary", b =>
@@ -458,54 +311,9 @@ namespace JapaneseAI.Infrastructure.Migrations
                     b.Navigation("Vocabulary");
                 });
 
-            modelBuilder.Entity("JapaneseAI.Core.Entities.Kaiwa.KaiwaAnswerHistory", b =>
-                {
-                    b.HasOne("JapaneseAI.Core.Entities.Kaiwa.KaiwaQuestion", "Question")
-                        .WithMany("History")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("JapaneseAI.Core.Entities.Kaiwa.KaiwaExpectedAnswer", b =>
-                {
-                    b.HasOne("JapaneseAI.Core.Entities.Kaiwa.KaiwaQuestion", "Question")
-                        .WithMany("ExpectedAnswers")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("JapaneseAI.Core.Entities.Kaiwa.KaiwaQuestion", b =>
-                {
-                    b.HasOne("JapaneseAI.Core.Entities.Kaiwa.KaiwaLesson", "Lesson")
-                        .WithMany("Questions")
-                        .HasForeignKey("LessonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lesson");
-                });
-
             modelBuilder.Entity("JapaneseAI.Core.Entities.Deck", b =>
                 {
                     b.Navigation("Flashcards");
-                });
-
-            modelBuilder.Entity("JapaneseAI.Core.Entities.Kaiwa.KaiwaLesson", b =>
-                {
-                    b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("JapaneseAI.Core.Entities.Kaiwa.KaiwaQuestion", b =>
-                {
-                    b.Navigation("ExpectedAnswers");
-
-                    b.Navigation("History");
                 });
 #pragma warning restore 612, 618
         }

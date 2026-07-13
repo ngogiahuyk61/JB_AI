@@ -1,0 +1,186 @@
+Dưới đây là full checklist ngữ pháp từ Bài 1 → Bài 25.
+
+Bài 1 - Giới thiệu bản thân
+N1 は N2 です (là)
+N1 は N2 じゃありません (không phải)
+N1 は N2 ですか (có phải...không?)
+N1 も N2 です (cũng)
+N1 の N2 (sở hữu)
+Bài 2 - Chỉ định
+これ・それ・あれ
+この・その・あの + Danh từ
+そうです
+そうじゃありません
+AかBか (A hay B)
+N の (thay thế danh từ)
+Bài 3 - Địa điểm
+ここ・そこ・あそこ
+こちら・そちら・あちら
+N は Place です
+N は Place にあります
+N の Place
+Bài 4 - Thời gian
+～時
+～分
+～曜日
+Vます
+Vません
+Vました
+Vませんでした
+に (thời điểm)
+から
+まで
+と (với)
+Bài 5 - Đi đâu
+へ
+に
+を (đi qua)
+Vます
+なんで (bằng gì)
+～と
+Bài 6 - Hành động
+を
+で
+いっしょに
+なんで
+Vます
+Bài 7 - Cho nhận
+をあげます
+をもらいます
+をくれます
+に
+Bài 8 - Tính từ
+Tính từ い
+～いです
+～くないです
+～かったです
+～くなかったです
+Tính từ な
+～です
+～じゃありません
+～でした
+～じゃありませんでした
+とても
+あまり
+Bài 9 - Thích
+が好きです
+がきらいです
+が上手です
+が下手です
+よく
+だいたい
+Bài 10 - Có
+あります
+います
+に
+は
+上・下・中・外...
+～や～
+Bài 11 - Đếm
+～人
+～つ
+～枚
+～本
+～台
+～匹
+いくつ
+どのくらい
+Bài 12 - Quá khứ
+Vました
+Vませんでした
+Adj quá khứ
+Nでした
+どうでしたか
+Bài 13 - Muốn
+Vたいです
+～たいですか
+～へ行きたいです
+～ませんか
+Bài 14 - Thể て
+Vてください
+Vています
+Vてもいいです
+Vてはいけません
+Bài 15 - Đang
+Vています (đang)
+Vています (thói quen)
+知っています
+住んでいます
+Bài 16 - Nối câu
+Vて
+Adjくて
+Adjで
+Nで
+Bài 17 - Không biết
+Vないでください
+Vなくてもいいです
+Vなければなりません
+Vなくちゃ
+Bài 18 - Biết làm
+V辞書形
+Vことができます
+趣味はVことです
+よく
+Bài 19 - Kinh nghiệm
+Vた
+Vたことがあります
+～たり～たりします
+なります
+Bài 20 - Thể thường
+普通形
+Plain Present
+Plain Past
+Plain Negative
+Plain Past Negative
+と言います
+Bài 21 - Nghĩ
+～と思います
+～と言いました
+～でしょう
+Bài 22 - Bổ nghĩa danh từ
+V普通形 + N
+Adj + N
+NのN
+Person が V
+Bài 23 - Khi
+とき
+Vるとき
+Vたとき
+Nのとき
+Adjとき
+Bài 24 - Cho tôi
+Vてあげます
+Vてもらいます
+Vてくれます
+Bài 25 - Điều kiện
+Vたら
+Vても
+Adjても
+Nでも
+もし
+Các trợ từ (Particles) cần thuộc
+は
+が
+を
+に
+へ
+で
+と
+の
+も
+や
+から
+まで
+よ
+ね
+か
+Các dạng chia động từ cần thuộc
+ます
+ません
+ました
+ませんでした
+辞書形
+ない形
+て形
+た形
+普通形

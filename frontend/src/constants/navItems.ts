@@ -1,7 +1,7 @@
-import { Home, BookMarked, Layers, GraduationCap, Settings } from 'lucide-react';
+import { Home, BookMarked, Layers, GraduationCap, Settings, MessageSquareMore } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-export type AppTab = 'dashboard' | 'flashcard' | 'exam' | 'vocabulary' | 'lesson' | 'settings';
+export type AppTab = 'dashboard' | 'flashcard' | 'exam' | 'vocabulary' | 'lesson' | 'settings' | 'kaiwa';
 
 export interface NavItem {
   id: AppTab;
@@ -15,5 +15,6 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'vocabulary', label: 'Từ vựng', shortLabel: 'Từ vựng', icon: BookMarked },
   { id: 'flashcard', label: 'Flashcard', shortLabel: 'Flashcard', icon: Layers },
   { id: 'lesson', label: 'Bài học', shortLabel: 'Bài học', icon: GraduationCap },
+  { id: 'kaiwa', label: 'Kaiwa N5', shortLabel: 'Kaiwa', icon: MessageSquareMore },
   { id: 'settings', label: 'Cài đặt', shortLabel: 'Cài đặt', icon: Settings },
 ];

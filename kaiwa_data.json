@@ -1,0 +1,4202 @@
+[
+  {
+    "lessonTitle": "自己紹介",
+    "lessonTitleVi": "Tự Giới Thiệu",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "あなたの名前は何ですか。",
+        "answer": "わたしの なまえは [Tên của bạn] です。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "どこから来ましたか。",
+        "answer": "ベトナムの トゥドゥックから きました。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "仕事は何ですか。",
+        "answer": "ITエンジニアです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "専門は何ですか。",
+        "answer": "ITと AIです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "会社の名前は何ですか。",
+        "answer": "DMSプロジェクトです。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "組合の名前は何ですか。",
+        "answer": "[Tên nghiệp đoàn]です。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "家族は何人ですか。",
+        "answer": "かぞくは 4にんです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "趣味は何ですか。",
+        "answer": "AIの ソフトウェアを つくることです。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "いつ日本へ行きますか。",
+        "answer": "2026ねんの おわりに いきます。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "日本のどこへ行きますか。",
+        "answer": "とうきょうへ いきます。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "何歳ですか。",
+        "answer": "24さいです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第1課",
+    "lessonTitleVi": "Bài 1",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "あなたはサントスさんですか。",
+        "answer": "いいえ、サントスじゃ ありません。わたしは [Tên của bạn] です。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "あなたは教師ですか。",
+        "answer": "いいえ、きょうしじゃ ありません。ITエンジニアです。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "あの方はABCの先生ですか。",
+        "answer": "はい、あのかたは ABCの せんせいです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "タンさんは銀行員ですか。",
+        "answer": "はい、タンさんは ぎんこういんです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "今年、何歳ですか。",
+        "answer": "ことし、24さいです。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "あなたはABCの実習生ですか。",
+        "answer": "いいえ、ABCの じっしゅうせいじゃ ありません。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "佐藤さんは学生ですか。",
+        "answer": "はい、さとうさんは がくせいです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "あなたは第1センターの先生ですか。",
+        "answer": "いいえ、だい1センターの せんせいじゃ ありません。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "アインさんはベトナム人ですか。",
+        "answer": "はい、アインさんは ベトナムじんです。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "鈴木先生は日本人ですか。",
+        "answer": "はい、すずきせんせいは にほんじんです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "あなたは医者ですか。",
+        "answer": "いいえ、いしゃじゃ ありません。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "山田さんはABCの社員ですか。",
+        "answer": "はい、やまださんは ABCの しゃいんです。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "フンさんはエンジニアですか。",
+        "answer": "はい、フンさんは エンジニアです。わたしも エンジニアです。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "あのかたはどなたですか。",
+        "answer": "あのかたは センターの ひとです。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "タムさんは研究者ですか。",
+        "answer": "はい、タムさんは けんきゅうしゃです。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "あなたは第1センターの実習生ですか。",
+        "answer": "はい、だい1センターの じっしゅうせいです。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "アンさんはベトナム人です。",
+        "answer": "あなたもベトナム人ですか。 はい、わたしも ベトナムじんです。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "おいくつですか。",
+        "answer": "24さいです。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "あの人はサントスさんですか。",
+        "answer": "はい、あのひとは サントスさんです。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "あなたは学生ですか。",
+        "answer": "いいえ、がくせいじゃ ありません。エンジニアです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第2課",
+    "lessonTitleVi": "Bài 2",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "これは何ですか。",
+        "answer": "これは パソコンです。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "あれは本ですか、辞書ですか。",
+        "answer": "あれは じしょです。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "それはあなたのボールペンですか。",
+        "answer": "はい、わたしの ボールペンです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "それは何の雑誌ですか。",
+        "answer": "ITの ざっしです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "この鉛筆は誰のですか。",
+        "answer": "わたしの です。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "あれはテレホンカードですか。",
+        "answer": "名詞ですか。 名刺（めいし）です。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "ゆあさ先生は日本人ですか。",
+        "answer": "韓国人ですか。 にほんじんです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "これはあなたのノートですか。",
+        "answer": "はい、わたしの ノートです。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "それは何の辞書ですか。",
+        "answer": "にほんごの じしょです。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "それは「7」ですか、「1」ですか。",
+        "answer": "「7」です。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "このノートは佐藤さんのですか。",
+        "answer": "いいえ、さとうさんのじゃ ありません。わたしの です。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "この本は何の本ですか。",
+        "answer": "AIの ほんです。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "これは誰の手帳ですか。",
+        "answer": "わたしの てちょうです。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "それは何ですか。",
+        "answer": "これは かぎです。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "それは誰の鍵ですか。",
+        "answer": "わたしの かぎです。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "タム先生は何の先生ですか。",
+        "answer": "にほんごの せんせいです。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "それは「ツ」ですか、「シ」ですか。",
+        "answer": "「ツ」です。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "これは誰の傘ですか。",
+        "answer": "わたしの かさです。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "あれは誰のカメラですか。",
+        "answer": "ともだちの カメラです。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "この筆箱は誰のですか。",
+        "answer": "わたしの です。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第3課",
+    "lessonTitleVi": "Bài 3",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "お国はどちらですか ベトナムです。",
+        "answer": ""
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "会社はどちらですか。",
+        "answer": "わたしの かいしゃは DMSプロジェクト（ITの かいしゃ）です。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "すみません、トイレはどこですか。",
+        "answer": "トイレは あそこです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "事務所は何階ですか。",
+        "answer": "じむしょは 1かいです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "あなたの教室は何階ですか。",
+        "answer": "わたしの きょうしつは 2かいです。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "あなたのコンピューターはどこのですか。",
+        "answer": "わたしの コンピューターは デル（Dell）の です。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "あなたの携帯電話は日本の携帯ですか。",
+        "answer": "いいえ、にほんの けいたいじゃ ありません。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "あなたの時計はいくらですか。",
+        "answer": "わたしの とけいは 5,000えんです。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "受付はどこですか。",
+        "answer": "うけつけは 1かいです。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "あなたの本はいくらですか。",
+        "answer": "わたしの ほんは 1,000えんです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "そのネクタイはどこのですか。",
+        "answer": "これは ベトナムの です。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "あなたの筆箱はいくらですか。",
+        "answer": "わたしの ふでばこは 500えんです。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "あなたの部屋はどこですか。",
+        "answer": "わたしの へやは 2かいです。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "食堂はどこですか。",
+        "answer": "しょくどうは 1かいです。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "鈴木先生は事務所ですか。",
+        "answer": "はい、すずきせんせいは じむしょです。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "すみません、エレベーターはどこですか。",
+        "answer": "エレベーターは あそこです。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "ふるさとはどこですか。",
+        "answer": "わたしの ふるさとは ホーチミンしの トゥドゥックです。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "トゥ先生はどこですか。",
+        "answer": "トゥせんせいは きょうしつです。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "TOYOTA は何の会社ですか。",
+        "answer": "くるまの かいしゃです。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "タム先生の会社はどちらですか。",
+        "answer": "タムせんせいの かいしゃは ABCです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第4課",
+    "lessonTitleVi": "Bài 4",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "今何時ですか。",
+        "answer": "じゃ、日本は今何時ですか。 いま 6じです。にほんは いま 8じです。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "第1センターは何時から何時までですか。",
+        "answer": "だい1センターは 8じから 5じまで です。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "毎朝、何時に起きますか。",
+        "answer": "まいあさ 6じに おきます。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "昨日の晩、何時に寝ましたか。",
+        "answer": "きのうの ばん 11じに ねました。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "昨日の晩、勉強しましたか。",
+        "answer": "はい、きのうの ばん ITと ソフトウェアを べんきょうしました。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "昨日何時から何時まで勉強しましたか。",
+        "answer": "8じから 10じまで べんきょうしました。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "あなたの国の銀行は何時から何時までですか。",
+        "answer": "わたしの くにの ぎんこうは 8じから 4じはんまで です。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "ABC会社は何時から何時まで働きますか。",
+        "answer": "ABCかいしゃは 8じから 5じまで はたらきます。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "毎晩、何時に寝ますか。",
+        "answer": "まいばん 11じに ねます。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "昼休みは何時から何時までですか。",
+        "answer": "ひるやすみは 12じから 1じまで です。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "センターの休みは何曜日ですか。",
+        "answer": "センターの やすみは どようびと にちようびです。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "今朝、何時に起きましたか。",
+        "answer": "けさ 6じに おきました。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "休みの日、何時に起きますか。",
+        "answer": "やすみの ひ、7じに おきます。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "日本語の勉強は何時に終わりますか。",
+        "answer": "にほんごの べんきょうは 5じに おわります。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "土曜日は何時から何時まで勉強しますか。",
+        "answer": "どようびは 8じから 11じまで べんきょうします。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "夜、何時から何時まで勉強しますか。",
+        "answer": "よる 8じから 10じまで べんきょうします。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "センターは何曜日から何曜日までですか。",
+        "answer": "げつようびから きんようびまで です。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "あなたのお父さんは日曜日も働きますか。",
+        "answer": "いいえ、はたらきません。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "あなたの電話番号は何番ですか。",
+        "answer": "わたしの でんわばんごうは 090-1234-5678です。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "うちの電話番号は何番ですか。",
+        "answer": "うちの でんわばんごうは 028-1234-5678です。"
+      },
+      {
+        "no": 21,
+        "orderIndex": 21,
+        "question": "ハー先生の電話番号は何番ですか。",
+        "answer": "ハーせんせいの でんわばんごうは 080-8765-4321です。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第5課",
+    "lessonTitleVi": "Bài 5",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "今日は何月何日ですか。",
+        "answer": "きょうは 7がつ 11にちです。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "今日は何曜日ですか。",
+        "answer": "きょうは どようびです。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "来週の金曜日は何日ですか。",
+        "answer": "らいしゅうの きんようびは 17にちです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "いつ第1センターへ来ましたか。",
+        "answer": "1がつに きました。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "あなたは誰と第1センターへ来ましたか。",
+        "answer": "ともだちと きました。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "先週の日曜日、どこへ行きましたか。",
+        "answer": "スーパーへ いきました。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "何で日本へ行きますか。",
+        "answer": "ひこうきで にほんへ いきます。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "一人でふるさとへ帰りますか。",
+        "answer": "はい、ひとりで かえります。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "何でうちへ帰りますか。",
+        "answer": "バイクで うちへ かえります。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "今週の日曜日、ふるさとへ帰りますか。",
+        "answer": "はい、かえります。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "今日、スーパーへ行きますか。",
+        "answer": "はい、いきます。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "日曜日、市場へ行きますか。",
+        "answer": "いいえ、いきません。スーパーへ いきます。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "いつ日本へ行きますか。",
+        "answer": "2026ねんの おわりに にほんへ いきます。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "誰と日本へ行きますか。",
+        "answer": "ひとりで いきます。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "飛行機で日本へ行きますか。",
+        "answer": "はい、ひこうきで いきます。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "日本のどこへ行きますか。",
+        "answer": "とうきょうへ いきます。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "ハロン湾へ行きましたか。",
+        "answer": "いいえ、いきませんでした。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "日曜日、家族と公園へ行きますか。",
+        "answer": "はい、かぞくと こうえんへ いきます。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "何でノイバイ空港へ行きますか。",
+        "answer": "バスで いきます。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "お国はどちらですか。",
+        "answer": "ベトナムです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第6課",
+    "lessonTitleVi": "Bài 6",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "タバコを吸いますか。",
+        "answer": "いいえ、すいません。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "お酒を飲みますか。",
+        "answer": "いいえ、のみません。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "明日何をしますか。",
+        "answer": "あした ITと にほんご（JLPT N3）を べんきょうします。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "休みの日、いつも何をしますか。",
+        "answer": "やすみの ひ、いつも にほんごを べんきょうします。それから、かのじょと あいます。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "日本で休みの日、勉強しますか、寝ますか。",
+        "answer": "にほんごや ITインフラを べんきょうします。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "毎朝、新聞を読みますか。",
+        "answer": "いいえ、よみません。インターネットで ニュースを みます。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "いつもどこで昼ごはんを食べますか。",
+        "answer": "いつも うちで ひるごはんを たべます。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "今朝、何を食べましたか。",
+        "answer": "けさ パンと たまごを たべました。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "毎日、どこでスポーツをしますか。",
+        "answer": "まいにち うちの ちかくの こうえんで します。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "あなたのシャツはどこで買いましたか。",
+        "answer": "いくらでしたか。 スーパーで かいました。200,000ドンでした。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "どこで恋人に会いますか。",
+        "answer": "カフェで かのじょに あいます。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "毎晩、何時に晩ご飯を食べますか。",
+        "answer": "まいばん 7じに ばんごはんを たべます。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "今、誰と会話をしますか。",
+        "answer": "いま ともだちと かいわを します。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "夜、一人で勉強しますか。",
+        "answer": "はい、よる ひとりで AIを べんきょうします。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "私と一緒にコーヒーを飲みませんか。",
+        "answer": "ええ、のみましょう。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "いっしょに、昼ごはんを食べませんか。",
+        "answer": "ええ、たべましょう。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "一緒に、公園へ行きませんか。",
+        "answer": "ええ、いきましょう。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "カラオケへ行きませんか。",
+        "answer": "すみません、カラオケは ちょっと…"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "どこで日本語を勉強しますか。",
+        "answer": "うちで にほんごを べんきょうします。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "ホーチミンの誕生日はいつですか。",
+        "answer": "5がつ 19にちです。"
+      },
+      {
+        "no": 21,
+        "orderIndex": 21,
+        "question": "生年月日はいつですか。",
+        "answer": "2002ねんです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第7課",
+    "lessonTitleVi": "Bài 7",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "日本人は何でご飯を食べますか。",
+        "answer": "はしで ごはんを たべます。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "何でレポートを送りましたか。",
+        "answer": "メール（DMS）で レポートを おくりました。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "日本語で日記を書きますか。",
+        "answer": "いいえ、かきません。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "何で紙を切りますか。",
+        "answer": "はさみで かみを きります。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "携帯電話で日本語を聞きますか。",
+        "answer": "はい、けいたいでんわで にほんごを ききます。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "これは日本語で何ですか。",
+        "answer": "それは パソコンです。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "「Thankyou」は日本語で何ですか。",
+        "answer": "「ありがとう」です。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "日本で家族に手紙を書きますか。",
+        "answer": "いいえ、かきません。メールを おくります。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "去年の誕生日にプレゼントをもらいましたか。",
+        "answer": "はい、もらいました。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "誰にもらいましたか。",
+        "answer": "かのじょに もらいました。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "3月8日、あなたは花をもらいましたか。",
+        "answer": "いいえ、もらいませんでした。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "友達の誕生日に何をあげましたか。",
+        "answer": "ともだちの たんじょうびに ほんを あげました。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "毎日、家族に電話をかけますか。",
+        "answer": "はい、まいにち かぞくに でんわを かけます。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "今、誰に日本語を習いますか。",
+        "answer": "せんせいに ならいます。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "毎月、誰にお金をもらいますか。",
+        "answer": "かいしゃ（GS25）に もらいます。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "2月14日に恋人に何をあげましたか。",
+        "answer": "かのじょに チョコレートを あげました。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "あなたは友達にお金を借しましたか。",
+        "answer": "いいえ、かしませんでした。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "ABC会社から本と辞書をもらいましたか。",
+        "answer": "いいえ、もらいませんでした。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "もう晩ご飯を食べましたか。",
+        "answer": "はい、もう たべました。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "もう第7課の宿題をしましたか。",
+        "answer": "はい、もう しました。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第8課",
+    "lessonTitleVi": "Bài 8",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "ABC は大きい会社ですか。",
+        "answer": "はい、おおきい かいしゃです。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "日本はどんな国ですか。",
+        "answer": "にほんは きれいな くにです。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "山田先生はどんな人ですか。",
+        "answer": "やまだせんせいは しんせつな ひとです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "日本語の勉強はどうですか。",
+        "answer": "にほんごの べんきょうは むずかしいですが、おもしろいです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "第1センターはにぎやかなところですか。",
+        "answer": "はい、にぎやかな ところです。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "今日の天気はどうですか。",
+        "answer": "きょうの てんきは あついです。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "日本の車はどうですか。",
+        "answer": "にほんの くるまは とても いいです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "富士山はどんな山ですか。",
+        "answer": "ふじさんは きれいな やまです。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "将来、どんな人と結婚しますか。",
+        "answer": "8ねん つきあっている かのじょと けっこんします。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "あなたの部屋は新しいですか。",
+        "answer": "はい、わたしの へやは あたらしいです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "あなたの故郷はどんなところですか。",
+        "answer": "トゥドゥックは にぎやかで べんりな ところです。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "ハノイはどんな町ですか。",
+        "answer": "ハノイは ふるい まちです。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "コーヒー、もう一杯いかがですか。",
+        "answer": "いいえ、けっこうです。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "あなたの携帯電話はどれですか。",
+        "answer": "わたしの けいたいでんわは これです。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "ハイさんのロッカーはどれですか。",
+        "answer": "ハイさんの ロッカーは それです。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "どこの米が有名ですか。",
+        "answer": "ベトナムの こめが ゆうめいです。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "会社の食堂のご飯は美味しいですか。",
+        "answer": "はい、おいしいです。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "毎日運動しますか。",
+        "answer": "はい、まいにち うんどうします。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "どんなスポーツをしますか。",
+        "answer": "ジョギングを します。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "ホイアンはどんなところですか。",
+        "answer": "ホイアンは ふるくて きれいな ところです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第1~8課まとめ",
+    "lessonTitleVi": "Ôn tập Bài 1 đến Bài 8",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "あなたは銀行員ですか。",
+        "answer": "いいえ、ぎんこういんじゃありません。ITエンジニアです。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "これはボールペンですか。",
+        "answer": "シャープペンシルですか。 ボールペンです。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "この本はリンさんのですか、イーさんのですか。",
+        "answer": "リンさんの です。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "これは何の本ですか。",
+        "answer": "AIの ほんです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "その時計は誰のですか。",
+        "answer": "わたしの です。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "これは何のノートですか。",
+        "answer": "にほんごの ノートです。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "石田先生は何の先生ですか。",
+        "answer": "にほんごの せんせいです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "故郷はどちらですか。",
+        "answer": "わたしの ふるさとは トゥドゥックです。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "うちはどこですか。",
+        "answer": "うちは トゥドゥックです。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "あなたの教室は何階ですか。",
+        "answer": "わたしの きょうしつは 2かいです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "東京は今、何時ですか。",
+        "answer": "（Nếu ở VN là 6 giờ tối）いま よる 8じです。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "第1センターは何時から何時までですか。",
+        "answer": "8じから 5じまで です。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "昼休みは何時からですか。",
+        "answer": "12じから です。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "日本語の勉強は何時に終わりますか。",
+        "answer": "5じに おわります。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "今朝、何時に起きましたか。",
+        "answer": "6じに おきました。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "次の日曜日どこへ行きますか。",
+        "answer": "カフェへ いきます。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "週末、何で故郷へ帰りますか。",
+        "answer": "バイクで かえります。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "昨日、誰とスーパーへ行きましたか。",
+        "answer": "かのじょと いきました。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "毎晩、誰と宿題をしますか。",
+        "answer": "ひとりで しゅくだいを します。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "お酒を飲みますか。",
+        "answer": "いいえ、のみません。"
+      },
+      {
+        "no": 21,
+        "orderIndex": 21,
+        "question": "毎朝、5Sをしますか。",
+        "answer": "はい、します。"
+      },
+      {
+        "no": 22,
+        "orderIndex": 22,
+        "question": "夜、何時から何時まで勉強しますか。",
+        "answer": "よる 8じから 10じまで べんきょうします。"
+      },
+      {
+        "no": 23,
+        "orderIndex": 23,
+        "question": "一緒にコーヒーを飲みませんか。",
+        "answer": "ええ、のみましょう。"
+      },
+      {
+        "no": 24,
+        "orderIndex": 24,
+        "question": "いつもどこでご飯を食べますか。",
+        "answer": "いつも うちで たべます。"
+      },
+      {
+        "no": 25,
+        "orderIndex": 25,
+        "question": "11月20日に誰に花をあげましたか。",
+        "answer": "せんせいに はなを あげました。"
+      },
+      {
+        "no": 26,
+        "orderIndex": 26,
+        "question": "誰に日本語を習いますか。",
+        "answer": "せんせいに ならいます。"
+      },
+      {
+        "no": 27,
+        "orderIndex": 27,
+        "question": "もう飛行機のチケットを買いましたか。",
+        "answer": "いいえ、まだです。"
+      },
+      {
+        "no": 28,
+        "orderIndex": 28,
+        "question": "もう昼ごはんを食べましたか。",
+        "answer": "はい、もう たべました。"
+      },
+      {
+        "no": 29,
+        "orderIndex": 29,
+        "question": "昨日、家族に電話をかけましたか。",
+        "answer": "はい、かけました。"
+      },
+      {
+        "no": 30,
+        "orderIndex": 30,
+        "question": "ホイアンは古い町ですか。",
+        "answer": "はい、ふるい まちです。"
+      },
+      {
+        "no": 31,
+        "orderIndex": 31,
+        "question": "「Thank you」は日本語で何ですか。",
+        "answer": "「ありがとう」です。"
+      },
+      {
+        "no": 32,
+        "orderIndex": 32,
+        "question": "日本語の勉強はどうですか。",
+        "answer": "むずかしいですが、おもしろいです。"
+      },
+      {
+        "no": 33,
+        "orderIndex": 33,
+        "question": "お母さんはどんな人ですか。",
+        "answer": "やさしい ひとです。"
+      },
+      {
+        "no": 34,
+        "orderIndex": 34,
+        "question": "今日のテストはどうでしたか。",
+        "answer": "むずかしかったです。"
+      },
+      {
+        "no": 35,
+        "orderIndex": 35,
+        "question": "ABC会社はどんな会社ですか。",
+        "answer": "おおきい かいしゃです。"
+      },
+      {
+        "no": 36,
+        "orderIndex": 36,
+        "question": "誕生日はいつですか。",
+        "answer": "5がつ 19にちです。"
+      },
+      {
+        "no": 37,
+        "orderIndex": 37,
+        "question": "センターのご飯はどうですか。",
+        "answer": "とても おいしいです。"
+      },
+      {
+        "no": 38,
+        "orderIndex": 38,
+        "question": "果物の中で何が好きですか。",
+        "answer": "りんごが すきです。"
+      },
+      {
+        "no": 39,
+        "orderIndex": 39,
+        "question": "タム先生はどんな人ですか。",
+        "answer": "おもしろい ひとです。"
+      },
+      {
+        "no": 40,
+        "orderIndex": 40,
+        "question": "日本の車はどうですか。",
+        "answer": "とても いいです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第9課",
+    "lessonTitleVi": "Bài 9",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "あなたは魚が好きですか。",
+        "answer": "はい、すきです。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "日本料理が好きですか。",
+        "answer": "はい、すきです。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "どんな食べ物が好きですか。",
+        "answer": "くだものが すきです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "どんな人が好きですか。",
+        "answer": "やさしい ひとが すきです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "あなたは料理が上手ですか。",
+        "answer": "下手ですか。 いいえ、へたです。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "どんなスポーツが上手ですか。",
+        "answer": "ジョギングが じょうずです。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "嘘をつく人（うそをつくひと）が嫌いですか。",
+        "answer": "はい、きらいです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "カラオケが好きですか。",
+        "answer": "嫌いですか。 カラオケは きらいです。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "あなたの先生はどんな人ですか。",
+        "answer": "しんせつな ひとです。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "音楽が好きですか。",
+        "answer": "はい、すきです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "毎日、音楽を聞きますか。",
+        "answer": "どんな音楽を聞きますか。 はい、まいにち ききます。ポップスを ききます。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "ビールが好きですか。",
+        "answer": "いいえ、すきじゃありません。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "いつお酒を飲みますか。",
+        "answer": "おさけを のみません。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "英語が分かりますか。",
+        "answer": "はい、わかります。（IELTS 6.0を べんきょうして います）"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "漢字が全然分かりませんか。",
+        "answer": "いいえ、すこし わかります。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "第9課の文法が分かりますか。",
+        "answer": "はい、わかります。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "細かいお金がありますか。",
+        "answer": "はい、あります。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "今晩、約束がありますか。",
+        "answer": "いいえ、ありません。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "どうして日本語を勉強しますか。",
+        "answer": "にほんの ITインフラの しごとを したいですから。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "どうして日本へ行きますか。",
+        "answer": "にほんで はたらきたいですから。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第10課",
+    "lessonTitleVi": "Bài 10",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "あなたの家族はどこにいますか。",
+        "answer": "わたしの かぞくは トゥドゥックに います。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "うちに何がありますか。",
+        "answer": "うちに パソコンと テレビが あります。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "ロッカーの中に何がありますか。",
+        "answer": "ほんと じしょが あります。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "センターの近くにスーパーがありますか。",
+        "answer": "はい、あります。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "トゥ先生は今どこにいますか。",
+        "answer": "トゥせんせいは きょうしつに います。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "第1センターに日本人が何人いますか。",
+        "answer": "3にん います。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "机の上に何がありますか。",
+        "answer": "つくえの うえに パソコンが あります。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "カラオケはどこにありますか。",
+        "answer": "カラオケは えきの ちかくに あります。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "あなたの後ろに何がありますか。",
+        "answer": "わたしの うしろに つくえが あります。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "ハーさんの前に誰がいますか。",
+        "answer": "どんな人ですか。 ハーさんの まえに リンさんが います。やさしい ひとです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "家にテレビがありますか。",
+        "answer": "はい、あります。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "後ろに誰がいますか。",
+        "answer": "うしろに やまださんが います。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "ニャンさんの部屋に何がありますか。",
+        "answer": "ニャンさんの へやに ベッドと つくえが あります。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "毎日、暇な時間がありますか。",
+        "answer": "何をしますか。 はい、あります。かのじょと あいます。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "食堂はどこにありますか。",
+        "answer": "しょくどうは 1かいに あります。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "ATM はどこにありますか。",
+        "answer": "ATMは ぎんこうの まえに あります。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "あなたのロッカーの中に薬がありますか。",
+        "answer": "いいえ、ありません。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "センターの近くに美味しいレストランがありますか。",
+        "answer": "はい、あります。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "犬はどこにいますか。",
+        "answer": "いぬは にわに います。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "トイレはどこにありますか。",
+        "answer": "トイレは あそこに あります。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第11課",
+    "lessonTitleVi": "Bài 11",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "この教室に机がいくつありますか。",
+        "answer": "20ぐらい あります。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "教室に実習生が何人いますか。",
+        "answer": "15にん います。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "あなたの家にバイクが何台ありますか。",
+        "answer": "2だい あります。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "一週間に何回家族に電話をかけますか。",
+        "answer": "3かい かけます。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "あなたはどのくらい日本語を勉強しましたか。",
+        "answer": "半年（はんとし）ぐらい べんきょうしました。いま N3を べんきょうして います。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "ベトナムから日本まで飛行機でどのくらいかかりますか。",
+        "answer": "6じかんぐらい かかります。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "第1センターに外国人の先生が何人いますか。",
+        "answer": "2にん います。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "一日に何時間で勉強しますか。",
+        "answer": "4じかんぐらい べんきょうします。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "一ヶ月に何回うちへ帰りますか。",
+        "answer": "うちは トゥドゥックですから、まいにち かえります。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "毎日、何時間ぐらい寝ますか。",
+        "answer": "7じかんぐらい ねます。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "センターから家までバスでどのくらいかかりますか。",
+        "answer": "30ぷんぐらい かかります。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "一週間に何日勉強しますか。",
+        "answer": "5か べんきょうします。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "日本でどのくらい実習しますか。",
+        "answer": "3ねんぐらい じっしゅうします。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "日本でどのくらい働きますか。",
+        "answer": "5ねんぐらい はたらきます。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "日本にどのくらいいますか。",
+        "answer": "5ねんぐらい います。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "家に猫が何匹いますか。",
+        "answer": "猫（ねこ）は いません。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "あなたの辞書は何冊ありますか。",
+        "answer": "2さつ あります。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "フンさんのワイシャツは何枚ありますか。",
+        "answer": "5まいぐらい あります。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "50円切手を2枚と120円葉書を5枚を買いました。",
+        "answer": "全部でいくらですか。 ぜんぶで 700えんです。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "82円の切手を10枚買いました。",
+        "answer": "全部でいくらですか。 820えんです。"
+      },
+      {
+        "no": 21,
+        "orderIndex": 21,
+        "question": "教室に女の人が6人います。",
+        "answer": "男の人が5人います。全部で何人ですか。 ぜんぶで 11にんです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第12課",
+    "lessonTitleVi": "Bài 12",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "昨日雨でしたか。",
+        "answer": "いいえ、あめじゃ ありませんでした。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "昨日、天気は良かったですか。",
+        "answer": "はい、よかったです。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "ベトナムでいつが一番寒いですか。",
+        "answer": "1がつが いちばん さむいです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "ベトナムでいつが一番暑いですか。",
+        "answer": "5がつが いちばん あついです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "ベトナムでどこが一番有名ですか。",
+        "answer": "ハロン湾（わん）が いちばん ゆうめいです。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "日本語で何が一番難しいですか。",
+        "answer": "漢字（かんじ）が いちばん むずかしいです。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "クラスで誰が一番日本語が上手ですか。",
+        "answer": "リンさんが いちばん じょうずです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "スポーツで何が一番上手ですか。",
+        "answer": "ジョギングが いちばん じょうずです。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "ベトナムの料理で何が美味しいですか。",
+        "answer": "フォー（Pho）が いちばん おいしいです。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "アメリカと日本とどちらが大きいですか。",
+        "answer": "アメリカの ほうが おおきいです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "会話のテストは簡単ですか。",
+        "answer": "いいえ、かんたんじゃ ありません。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "ハノイはホーチミンより人が多いですか。",
+        "answer": "いいえ、ホーチミンの ほうが おおいです。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "ノイバイ空港までタクシーとバスとどちらが早いですか。",
+        "answer": "タクシーの ほうが はやいです。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "一年でいつが一番好きですか。",
+        "answer": "春（はる）が いちばん すきです。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "クラスで誰が一番若いですか。",
+        "answer": "ハイさんが いちばん わかいです。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "昨日のテストは難しかったですか。",
+        "answer": "はい、むずかしかったです。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "日本はベトナムより寒いですか。",
+        "answer": "はい、にほんは ベトナムより さむいです。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "日本で富士山が一番綺麗な山ですか。",
+        "answer": "はい、ふじさんが いちばん きれいな やまです。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "健康とお金とどちらが大切ですか。",
+        "answer": "健康（けんこう）の ほうが たいせつです。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "先週のパーテイはどうでしたか。",
+        "answer": "とても たのしかったです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第13課",
+    "lessonTitleVi": "Bài 13",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "あなたは今何が一番欲しいですか。",
+        "answer": "N3（エヌさん）が ほしいです。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "どんな車が欲しいですか。",
+        "answer": "にほんの くるまが ほしいです。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "お金がたくさんあります。",
+        "answer": "何をしたいですか。 かのじょと りょこうに いきたいです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "日本でどこへ遊びに行きたいですか。",
+        "answer": "とうきょうへ あそびに いきたいです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "今誰に一番会いたいですか。",
+        "answer": "かのじょに いちばん あいたいです。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "今日は何時ごろスポーツの練習がありますか。",
+        "answer": "6じごろ あります。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "週末どこかへ行きますか。",
+        "answer": "はい、カフェへ いきます。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "日本へ何をしに行きますか。",
+        "answer": "ITインフラの しごとを しに いきます。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "日本でお金があります。",
+        "answer": "何をしたいですか。 パソコンを かいたいです。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "お母さんの誕生日に何をあげたいですか。",
+        "answer": "ケーキを あげたいです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "あなたは今日、疲れました。",
+        "answer": "何をしたいですか。 はやく ねたいです。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "日本料理で何を食べたいですか。",
+        "answer": "すしを たべたいです。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "将来どんな人と結婚したいですか。",
+        "answer": "8ねん つきあっている かのじょと けっこんしたいです。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "どんな友達が欲しいですか。",
+        "answer": "しんせつな ともだちが ほしいです。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "ベトナムでどこへ旅行に行きたいですか。",
+        "answer": "ダナンへ りょこうに いきたいです。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "日本で休みの日、何をしたいですか。",
+        "answer": "にほんごを べんきょうしたいです。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "仕事中日本人の言葉が分かりません。",
+        "answer": "どうしますか。 英語（えいご）で はなします。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "毎日、誰とスポーツをしますか。",
+        "answer": "一人でしますか。 はい、ひとりで します。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "第1センターに何をしに来ましたか。",
+        "answer": "にほんごを べんきょうしに きました。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "センターの庭でどんな運動をしますか。",
+        "answer": "ジョギングを します。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第14課",
+    "lessonTitleVi": "Bài 14",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "すみません、この漢字の読み方を教えてください。",
+        "answer": "はい、いいですよ。/ はい、おしえます。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "すみませんが、そのネームカードを見せてください。",
+        "answer": "はい、どうぞ。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "右手をまっすぐ上げてください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "あなたは今、何をしていますか。",
+        "answer": "わたしは いま、ITと AIを べんきょうして います。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "ここにあなたの名前をカタカナで書いてください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "少し口をあげてください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "昨日を勉強しましたか。",
+        "answer": "2つ言ってください。 (Câu gốc có thể bị thiếu chữ 何, ý hỏi hôm qua học gì) きのう、ITと にほんごを べんきょうしました。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "仕事中、お腹が痛いです。",
+        "answer": "誰に連絡しますか。 マネージャーに れんらくします。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "ご両親は何をしていますか。",
+        "answer": "りょうしんは ホーチミンしで はたらいて います。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "毎日タンさんは5sをしていますか。",
+        "answer": "はい、して います。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "春巻きの作り方を教えてください。",
+        "answer": "はい、いいですよ。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "もう少しゆっくり話してください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "暑いですね。",
+        "answer": "窓を開けましょうか。 はい、おねがいします。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "すみません、水を取ってください。",
+        "answer": "はい、どうぞ。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "今雨が降っていますか。",
+        "answer": "いいえ、ふって いません。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "どのくらい日本語を勉強していますか。",
+        "answer": "半年（はんとし）ぐらい べんきょうして います。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "今アインさんはたばこを吸っていますか。",
+        "answer": "いいえ、すって いません。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "左手を出してください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "毎朝、教室を掃除していますか。",
+        "answer": "はい、そうじして います。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "今第何課まで勉強していますか。",
+        "answer": "だい25かまで べんきょうして います。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第15課",
+    "lessonTitleVi": "Bài 15",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "教室でたばこを吸ってもいいですか。",
+        "answer": "いいえ、すっては いけません。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "日本でホンさんの寮に友達が遊びに来てもいいですか。",
+        "answer": "ええ、いいですよ。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "仕事中トイレへ行ってもいいですか。",
+        "answer": "はい、いいですよ。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "授業中、携帯電話を使ってもいいですか。",
+        "answer": "いいえ、つかっては いけません。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "寮で友達の物を使ってもいいですか。",
+        "answer": "いいえ、つかっては いけません。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "タン先生の電話番号を知っていますか。",
+        "answer": "いいえ、しりません。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "日本で休みの日に何をしますか。",
+        "answer": "ITと 英語（えいご）を べんきょうして います。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "SAMSUNG は何を作っていますか。",
+        "answer": "けいたいでんわを つくって います。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "トゥ先生は今、事務所で何をしていますか。",
+        "answer": "ほんを よんで います。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "眠いですから、ちょっと顔を洗ってもいいですか。",
+        "answer": "はい、いいですよ。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "ここで遊んではいけませんか。",
+        "answer": "はい、あそんでは いけません。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "センターのどこでたばこを吸ってもいいですか。",
+        "answer": "にわで すっても いいです。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "教室で喧嘩してもいいですか。",
+        "answer": "いいえ、けんかしては いけません。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "子供はお酒を飲んでもいいですか。",
+        "answer": "いいえ、のんでは いけません。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "例えば日本で恋人ができました。",
+        "answer": "寮に遊びに来てもいいですか。 いいえ、きては いけません。 (Thường ký túc xá không cho phép)"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "ベトナムで、お酒を飲んでから、運転してもいいですか。",
+        "answer": "いいえ、うんてんしては いけません。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "子供はタバコを吸ってはいけません。",
+        "answer": "どうしてですか。 からだに わるいですから。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "日本のパソコンを持っていますか。",
+        "answer": "はい、もって います。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "あなたは結婚していますか。",
+        "answer": "いいえ、けっこんして いません。かのじょが います。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "佐藤さんのお父さんはどんな仕事をしていますか。",
+        "answer": "かいしゃいんです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第16課",
+    "lessonTitleVi": "Bài 16",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "タン先生はどんな人ですか。",
+        "answer": "しんせつで、おもしろい ひとです。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "あなたの故郷までバスでどうやって行きますか。",
+        "answer": "ここから バスに のって、トゥドゥックで おります。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "3年後、ベトナムに帰ってから、何をしますか。",
+        "answer": "ベトナムへ かえってから、ITの かいしゃで はたらきます。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "明日は何をしますか。",
+        "answer": "あしたは 7じに おきて、DMSの プロジェクトを します。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "ベトナムの料理は安いですか。",
+        "answer": "はい、おいしくて、やすいです。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "日本へ行ってから、日本語を勉強しますか。",
+        "answer": "はい、にほんへ いってから、にほんごを べんきょうします。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "勉強が終わってから、何をしますか。",
+        "answer": "べんきょうが おわってから、かのじょと あいます。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "午後、授業が終わってから、運動しますか。",
+        "answer": "はい、うんどうします。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "トウセンター長は親切で、やさしい人ですか。",
+        "answer": "はい、しんせつで やさしい ひとです。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "国へ帰ってから、すぐ結婚したいですか。",
+        "answer": "はい、すぐ けっこんしたいです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "どんな人と結婚したいですか。",
+        "answer": "やさしくて、きれいな ひとと けっこんしたいです。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "今日の天気は涼しいですか。",
+        "answer": "いいえ、あつくて、てんきが いいです。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "センターの料理はおいしくて、安いですか。",
+        "answer": "はい、おいしくて、やすいです。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "あなたの部屋はどうですか。",
+        "answer": "わたしの へやは ひろくて、きれいです。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "あなたの出身地はどんなところですか。",
+        "answer": "トゥドゥックは にぎやかで、べんりな ところです。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "どうやって日本へ行きますか。",
+        "answer": "くうこうから ひこうきに のって、にほんへ いきます。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "ここからノイバイ空港までどうやって行きますか。",
+        "answer": "タクシーに のって、くうこうで おります。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "旅行はどうでしたか。",
+        "answer": "てんきが よくて、たのしかったです。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "タム先生はどんな人ですか。",
+        "answer": "やさしくて、おもしろい ひとです。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "日本語の勉強はどうですか。",
+        "answer": "むずかしいですが、とても おもしろいです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第17課",
+    "lessonTitleVi": "Bài 17",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "私は医者です。",
+        "answer": "今日の夜はお風呂に入らないでください。ゆっくり休んでください。 はい、わかりました。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "薬は朝だけ飲みます。",
+        "answer": "夜、飲まなくてもいいですよ。 はい、わかりました。ありがとうございます。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "明日、海へ見に行きませんか。",
+        "answer": "ええ、いきましょう。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "日本へ行って市役所へ外国人登録に行かなくてもいいですか。",
+        "answer": "いいえ、いかなければ なりません。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "日本へ行くまでに荷物を準備しなければなりませんか。",
+        "answer": "はい、じゅんびしなければ なりません。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "どうして日本語を勉強しないといけませんか。",
+        "answer": "にほんで ITインフラの しごとを したいですから。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "3年後、お金がたくさんあります。",
+        "answer": "働かなくてもいいですか。 いいえ、はたらかなければ なりません。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "日曜日は何時までにセンターへ帰らなければなりませんか。",
+        "answer": "10じまでに かえらなければ なりません。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "日本へ行ってから、日本語を勉強しなくてもいいですか。",
+        "answer": "いいえ、べんきょうしなければ なりません。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "日本へ行きます。",
+        "answer": "何を持って行かなければなりませんか。 パソコンと じしょを もって いかなければ なりません。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "毎朝、何時までに教室に来なければならないか。",
+        "answer": "8じまでに こなければ なりません。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "あなたは何月までセンターで勉強しなければなりませんか。",
+        "answer": "12がつまで べんきょうしなければ なりません。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "テストの紙に名前を書かなくてもいいですか。",
+        "answer": "いいえ、かかなければ なりません。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "日本で仕事を休みたいです。",
+        "answer": "誰に電話しないといけませんか。 かいしゃの ひとに でんわしなければ なりません。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "あなたは何年間、日本で働かなければならなりませんか。",
+        "answer": "5ねんかん はたらかなければ なりません。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "毎日、何をしなければなりませんか。",
+        "answer": "ITと にほんごを べんきょうしなければ なりません。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "日本人の家で、くつを脱がなくてもいいですか。",
+        "answer": "いいえ、ぬがなければ なりません。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "空港でパスポートを見せなくてもいいですか。",
+        "answer": "いいえ、みせなければ なりません。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "ここでたばこを吸わないでください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "何時まで勉強しなければなりませんか。",
+        "answer": "10じまで べんきょうしなければ なりません。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第18課",
+    "lessonTitleVi": "Bài 18",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "工場で仕事をする前に機械をチェックしないといけませんか。",
+        "answer": "はい、チェックしなければ なりません。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "日本の会社で8時からです。",
+        "answer": "何時までに会社へ行きますか。 7じはんまでに いかなければ なりません。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "あなたは朝早く来ます。",
+        "answer": "何をしますか。 ITの ほんを よみます。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "あなたは英語を話すことができますか。",
+        "answer": "はい、すこし はなす ことが できます。（IELTS 6.0を べんきょうして います）"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "センターの庭でどんなスポーツをすることができますか。",
+        "answer": "ジョギングを する ことが できます。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "ベトナムで何歳からタバコを吸うことができますか。",
+        "answer": "18さいから すう ことが できます。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "趣味は何ですか。",
+        "answer": "わたしの しゅみは AIの ソフトウェアを つくる ことです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "車の運転ができますか。",
+        "answer": "いいえ、できません。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "日本語ができますか。",
+        "answer": "はい、できます。いま N3を べんきょうして います。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "漢字を書くことができますか。",
+        "answer": "はい、すこし かく ことが できます。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "どんな外国語を話すことができますか。",
+        "answer": "英語（えいご）と にほんごを はなす ことが できます。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "ベトナムで何歳から運転できますか。",
+        "answer": "18さいから うんてんできます。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "ご飯を食べる前に何をしますか。",
+        "answer": "てを あらいます。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "寮を出る前に何をしますか。",
+        "answer": "パソコンを けします。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "日本料理を作ることができますか。",
+        "answer": "いいえ、できません。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "ギターを弾くことができますか。",
+        "answer": "いいえ、できません。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "寝る前に何をしますか。",
+        "answer": "にほんごを べんきょうします。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "どのくらい本を借りることができますか。",
+        "answer": "3さつ かりる ことが できます。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "何メートルぐらい泳ぐことができますか。",
+        "answer": "50メートルぐらい およぐ ことが できます。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "カードで払うことができますか。",
+        "answer": "はい、できます。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第19課",
+    "lessonTitleVi": "Bài 19",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "日本料理を食べたことがありますか。",
+        "answer": "はい、たべた ことが あります。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "相撲を見たことがありますか。",
+        "answer": "いいえ、みた ことが ありません。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "あなたは人を好きになったことがありますか。",
+        "answer": "はい、あります。いまの かのじょです。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "日本へ行ったことがありますか。",
+        "answer": "いいえ、いった ことが ありません。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "カラオケへ行ったことがありますか。",
+        "answer": "はい、いった ことが あります。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "日本料理を作ったことがありますか。",
+        "answer": "いいえ、つくった ことが ありません。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "日本で何をしたいですか。",
+        "answer": "ITインフラの しごとを したいです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "ベトナムでどこへ旅行に行ったことがありますか。",
+        "answer": "ダナンへ いった ことが あります。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "あなたは日本の社長に会ったことがありますか。",
+        "answer": "いいえ、あった ことが ありません。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "ハロン湾へ行ったことがありますか。",
+        "answer": "いいえ、いった ことが ありません。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "飛行機に乗ったことがありますか。",
+        "answer": "いいえ、のった ことが ありません。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "ダイエットをしたことがありますか。",
+        "answer": "いいえ、した ことが ありません。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "お酒を飲んだことがありますか。",
+        "answer": "はい、すこし のんだ ことが あります。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "ベトナムで働いたことがありますか。",
+        "answer": "はい、GS25で はたらいた ことが あります。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "あなたの社長はベトナムに来ましたか。",
+        "answer": "いいえ、きませんでした。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "ベトナムに帰ってから、日本語の先生になりたいですか。",
+        "answer": "いいえ、ITエンジニアに なりたいです。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "授業が終わってから、何をしますか。",
+        "answer": "かのじょと あいます。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "次の誕生日で何歳になりますか。",
+        "answer": "25さいに なります。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "日本語が上手になりたいですか。",
+        "answer": "はい、じょうずに なりたいです。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "服が安くなりました。",
+        "answer": "買いたいですか。 はい、かいたいです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第20課",
+    "lessonTitleVi": "Bài 20",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "日曜日、どこか行く？",
+        "answer": "うん、カフェへ 行く。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "今朝、頭が痛かった？",
+        "answer": "ううん、痛くなかった。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "今日のテストは難しかった？",
+        "answer": "うん、難しかった。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "日本語、面白い？",
+        "answer": "うん、面白い。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "相撲のチケットがあるけど、一緒に行かない？",
+        "answer": "ごめん、ちょっと用事がある。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "犬と猫とどっちが好き？",
+        "answer": "犬の ほうが 好き。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "日本語で何が好き？",
+        "answer": "漢字が 好き。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "日本語の勉強はどう？",
+        "answer": "難しいけど、面白い。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "今週末は休み？",
+        "answer": "うん、休み。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "明日、京都へ行かない？",
+        "answer": "ごめん、用事がある。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "細かいお金を持っている？",
+        "answer": "ちょっと貸して！ うん、持っている。はい、どうぞ。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "将来どんな人と結婚したい？",
+        "answer": "8年（ねん）付き合っている 彼女と 結婚したい。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "今朝、何を食べた？",
+        "answer": "パンと 卵を 食べた。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "料理ができる？",
+        "answer": "ううん、できない。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "今までどのくらい日本語を勉強した？",
+        "answer": "半年ぐらい 勉強した。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "5Sを知っている？",
+        "answer": "うん、知っている。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "毎日、何時から5Sをする？",
+        "answer": "8時から する。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "出身地はどこ？",
+        "answer": "トゥドゥックだよ。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "どうして日本へ行く？",
+        "answer": "ITインフラの 仕事を したいから。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "日本のどこで働く？",
+        "answer": "東京で 働く。"
+      },
+      {
+        "no": 21,
+        "orderIndex": 21,
+        "question": "あなたの専門はなに？",
+        "answer": "ITと AI（React, Djangoなど）だよ。"
+      },
+      {
+        "no": 22,
+        "orderIndex": 22,
+        "question": "日本で3年間、お金をいくら貯めたい？",
+        "answer": "たくさん 貯めたい。"
+      },
+      {
+        "no": 23,
+        "orderIndex": 23,
+        "question": "ベトナムでどんな仕事をしていた？",
+        "answer": "AIの ソフトウェアを 作っていたよ。"
+      },
+      {
+        "no": 24,
+        "orderIndex": 24,
+        "question": "ABCに入る前に学生だった？",
+        "answer": "うん、UTC2の 学生だったよ。"
+      },
+      {
+        "no": 25,
+        "orderIndex": 25,
+        "question": "夢はなに？",
+        "answer": "日本で ITメンテナンスの 仕事を することだよ。"
+      },
+      {
+        "no": 26,
+        "orderIndex": 26,
+        "question": "兄弟は何人？",
+        "answer": "2人だよ。"
+      },
+      {
+        "no": 27,
+        "orderIndex": 27,
+        "question": "日本語を聞くのが難しい？",
+        "answer": "うん、難しい。"
+      },
+      {
+        "no": 28,
+        "orderIndex": 28,
+        "question": "ベトナムで有名なところはどこ？",
+        "answer": "ハロン湾だよ。"
+      },
+      {
+        "no": 29,
+        "orderIndex": 29,
+        "question": "コーヒー飲まない？",
+        "answer": "うん、飲む。"
+      },
+      {
+        "no": 30,
+        "orderIndex": 30,
+        "question": "明日、ひま？",
+        "answer": "うん、ひま。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第21課",
+    "lessonTitleVi": "Bài 21",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "トゥ先生はどこにいると思いますか。",
+        "answer": "教室に いると 思います。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "ベトナムと日本とどちらが寒いと思いますか。",
+        "answer": "日本の ほうが 寒いと 思います。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "明日は雨が降ると思いますか。",
+        "answer": "いいえ、降らないと 思います。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "佐藤先生は事務所で何をしていると思いますか。",
+        "answer": "本を 読んでいると 思います。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "ダナンとニャチャンとどちらが綺麗だと思いますか。",
+        "answer": "ダナンの ほうが 綺麗だと 思います。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "ベトナムの仕事と日本の仕事とどちらが大変だと思いますか。",
+        "answer": "日本の 仕事の ほうが 大変だと 思います。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "北海道とハノイとどちらが寒いと思いますか。",
+        "answer": "北海道の ほうが 寒いと 思います。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "日本語を勉強していてどう思いますか。",
+        "answer": "難しいですが、面白いと 思います。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "日本の製品についてどう思いますか。",
+        "answer": "とても いいと 思います。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "日本の仕事についてどう思いますか。",
+        "answer": "大変だと 思います。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "日本の交通についてどう思いますか。",
+        "answer": "便利だと 思います。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "健康とお金とどちらが大切だと思いますか。",
+        "answer": "健康の ほうが 大切だと 思います。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "ハー先生は今どこにいると思いますか。",
+        "answer": "事務所に いると 思います。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "日本の物価が高いでしょう。",
+        "answer": "はい、高いと 思います。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "日本語が難しいでしょう。",
+        "answer": "はい、難しいと 思います。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "寝る前、何と言いますか。",
+        "answer": "「おやすみなさい」と 言います。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "あなたは日本に行きます。",
+        "answer": "家族は何と言いますか。 「頑張って」と 言うと 思います。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "日本で仕事が終わってから、日本人に何と言いますか。",
+        "answer": "「お疲れ様でした」と 言います。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "友達にプレゼントをもらいました。",
+        "answer": "なんと言いますか。 「ありがとうございます」と 言います。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "家族はあなたが、日本へ行くことについてどう思いますか。",
+        "answer": "嬉しいと 思います。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第22課",
+    "lessonTitleVi": "Bài 22",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "昨日、習った日本語を2つ言ってください。",
+        "answer": "「ありがとう」と 「すみません」です。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "日本に行く前に準備しなければならないものは何ですか。",
+        "answer": "パソコンと お金です。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "日本でしてはいけないことは何ですか。",
+        "answer": "喧嘩（けんか）です。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "日本で働きに行くところはどこですか。",
+        "answer": "東京の ITの 会社です。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "あなたが知っている日本料理を2つ言ってください。",
+        "answer": "寿司（すし）と 刺身（さしみ）です。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "日本でする仕事を教えてください。",
+        "answer": "ITインフラや メンテナンスの 仕事です。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "あなたがよく食べる果物を2つ言ってください。",
+        "answer": "りんごと みかんです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "センターであなたが毎日ご飯をたべるところはどこですか。",
+        "answer": "1階（かい）の 食堂です。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "センターのどこでタバコを吸うことができますかすか。",
+        "answer": "庭（にわ）で 吸うことが できます。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "あなたより背が高い人と結婚したいですか。",
+        "answer": "いいえ、わたしより 背が 低い 彼女と 結婚したいです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "あなたのクラスにメガネをかけている人は何人いますか。",
+        "answer": "5人 います。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "あなたのクラスに携帯電話を持っている人は何人いますか。",
+        "answer": "15人 います。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "日本に持って行かなければならないものは何ですか。",
+        "answer": "パソコンと 服（ふく）です。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "ここからあなたの家まで何時間くらいで帰ることができますか。",
+        "answer": "30分（ぷん）ぐらいです。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "規則を守らない実習生についてどう思いますか。",
+        "answer": "良くないと 思います。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "去年の誕生日に貰ったプレゼントはどうでしたか。",
+        "answer": "とても 良かったです。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "あなたの座っている椅子はどれですか。",
+        "answer": "これです。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "あなたがいつも買い物をしているスーパーは野菜が安いですか。",
+        "answer": "はい、安いです。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "あなたの前にいる人は誰ですか。",
+        "answer": "(Ghi chú: Đã nối câu 19 và 20 bị ngắt dòng ở bản gốc) リンさんです。"
+      },
+      {
+        "no": 21,
+        "orderIndex": 20,
+        "question": "あなたは今、住んでいる国は日本ですか。",
+        "answer": "いいえ、ベトナムです。"
+      },
+      {
+        "no": 22,
+        "orderIndex": 21,
+        "question": "お母さんが作る料理の中で何が一番、おいしいですか。",
+        "answer": "フォーが 一番 おいしいです。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第23課",
+    "lessonTitleVi": "Bài 23",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "日本人はお酒を飲む時、「乾杯」を言いますが、ベトナムは何と言いますか。",
+        "answer": "ベトナムは「モッ、ハイ、バー、ヨー」と 言います。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "頭が痛いとき、どうしますか。",
+        "answer": "薬（くすり）を 飲みます。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "学生の時、旅行をしましたか。",
+        "answer": "はい、UTC2の 学生の 時、旅行を しました。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "日本人は出かける時、何と言いますか。",
+        "answer": "「行ってきます」と 言います。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "週末うちへ帰った時、何をしますか。",
+        "answer": "彼女と 会います。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "新聞を読む時、メガネをかけますか。",
+        "answer": "いいえ、かけません。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "友達が病気になった時、何をしてあげますか。",
+        "answer": "薬を 買って あげます。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "時間がある時、うちへ遊びに来てください。",
+        "answer": "はい、ありがとうございます。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "初めて日本語を勉強した時、どう思いましたか。",
+        "answer": "難しいですが、面白いと 思いました。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "あなたはいつも事務所に入る時、何と言いますか。",
+        "answer": "「失礼します」と 言います。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "初めてセンターへ来た時、どう思いましたか。",
+        "answer": "綺麗だと 思いました。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "授業中、日本語が分からない時、どうしますか。",
+        "answer": "先生に 聞きます。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "日本人は仕事が終わった時、何と言いますか。",
+        "answer": "「お疲れ様でした」と 言います。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "日本語を勉強するとき、何が一番難しいですか。",
+        "answer": "漢字が 一番 難しいです。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "日本人は社長室に入る時、何と言いますか。",
+        "answer": "「失礼します」と 言います。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "授業中、トレイに行きたい時、先生に何と言いますか。",
+        "answer": "「すみません、トイレへ 行っても いいですか」と 言います。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "人の鉛筆をおってしまったとき、どうしますか。",
+        "answer": "「すみません」と 言います。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "冷蔵庫に何もない時、どうしますか。",
+        "answer": "GS25へ 買いに 行きます。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "工場で社長の指示が分からないとき、どうしますか。",
+        "answer": "英語で 聞きます。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "日本で残業が少ないとき、どうしますか。",
+        "answer": "AIと ITを 勉強します。"
+      },
+      {
+        "no": 21,
+        "orderIndex": 21,
+        "question": "日本に行くとき、何を持っていかなければなりませんか。",
+        "answer": "その中でなにが一番大切ですか。 お金と パスポートです。パスポートが 一番 大切です。"
+      },
+      {
+        "no": 22,
+        "orderIndex": 22,
+        "question": "日本で日本語を話すことができないと、どうなりますか。",
+        "answer": "仕事が 大変に なります。"
+      },
+      {
+        "no": 23,
+        "orderIndex": 23,
+        "question": "日本で喧嘩すると、どうなりますか。",
+        "answer": "国へ 帰らなければ なりません。"
+      },
+      {
+        "no": 24,
+        "orderIndex": 24,
+        "question": "日本語が上手になるとベトナムでどんな仕事ができますか。",
+        "answer": "ITインフラの 仕事が できます。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第24課",
+    "lessonTitleVi": "Bài 24",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "このスピーカーの音を小さくしてくれませんか。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "私にこの言葉の意味を説明してくれませんか。",
+        "answer": "はい、いいですよ。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "私に歌を歌ってくれませんか。",
+        "answer": "すみません、歌は ちょっと…。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "あなたは母の日にお母さんに何をしてあげますか。",
+        "answer": "花を 買って あげます。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "週末、日本料理のお店へ連れて行ってくれませんか。",
+        "answer": "ええ、いいですよ。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "今度、ハロン湾へ連れて行ってくれませんか。",
+        "answer": "ええ、行きましょう。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "あなたの誕生日に家族はどんなプレゼントをくれると思いますか。",
+        "answer": "服を くれると 思います。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "誰に日本語を教えてもらいましたか。",
+        "answer": "先生に 教えて もらいました。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "今までにベトナムのどこへ旅行に行ったことがありますか。",
+        "answer": "今度、先生をそこに連れて行ってくれませんか。 ダナンへ 行った ことが あります。ええ、連れて 行きますよ。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "日本へ行く前に、家族に何をしてあげたいですか。",
+        "answer": "お金を あげたいです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "誰にセンターのお金を払ってもらいましたか。",
+        "answer": "両親に 払って もらいました。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "今年のクリスマスに誰にプレゼントを買ってあげますか。",
+        "answer": "彼女に 買って あげます。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "お正月にお母さんはどんな料理を作ってくれますか。",
+        "answer": "バインチュンを 作って くれます。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "初めてセンターへ来たとき、誰に案内してもらいましたか。",
+        "answer": "先生に 案内して もらいました。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "あなたは毎日、誰に料理を作ってもらいますか。",
+        "answer": "母に 作って もらいます。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "病気のとき、誰が手伝ってくれますか。",
+        "answer": "彼女が 手伝って くれます。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "旅行の写真を見せてくれませんか。",
+        "answer": "はい、どうぞ。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "3年後、ベトナムへ帰ってから家族に何をしてあげたいですか。",
+        "answer": "家を 買って あげたいです。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "子どものとき、誰に勉強を教えてもらいましたか。",
+        "answer": "母に 教えて もらいました。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "日本へ行く前、友達は何をしてくれると思いますか。",
+        "answer": "パーティーを して くれると 思います。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "第25課",
+    "lessonTitleVi": "Bài 25",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "ベトナムへ帰って来たら、すぐ働きますか。",
+        "answer": "はい、すぐ ITの 会社で 働きます。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "日本へ行ったら、家族にお金を送りますか。",
+        "answer": "はい、送ります。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "日本へ行って雪が降ったら、どうしますか。",
+        "answer": "写真を 撮ります。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "今、お金があったら、家族をどこへ連れて行ってあげたいですか。",
+        "answer": "ダナンへ 連れて 行って あげたいです。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "仕事中、日本人の言葉が分からなかったら、どうしますか。",
+        "answer": "「もう一度 お願いします」と 言います。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "友達が病気になったら、何をしてあげますか。",
+        "answer": "薬を 買って あげます。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "3年後、お金がたくさんあったら、働かなくてもいいですか。",
+        "answer": "いいえ、働かなければ なりません。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "日本でお金があったら、何をしたいですか。",
+        "answer": "新しい パソコンを 買いたいです。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "お金がたくさんあったら、どこへ旅行に行きたいですか。",
+        "answer": "日本の 京都へ 行きたいです。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "日曜日ひまだったら、どこへ行きたいですか。",
+        "answer": "カフェへ 行きたいです。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "日本で友達と喧嘩したら、どうなりますか。",
+        "answer": "国へ 帰らなければ なりません。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "どうしたら、日本語が上手になりますか。",
+        "answer": "毎日 勉強したら、上手に なります。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "仕事のとき、問題が起きたら、どうしますか。",
+        "answer": "会社の 人に 聞きます。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "日本で道がわからなかったら、どうしますか。",
+        "answer": "スマホを 見ます。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "パスポートをなくしたら、どうしますか。",
+        "answer": "大使館（たいしかん）へ 行きます。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "日本へ行って忙しくても、日本語を勉強したいですか。",
+        "answer": "はい、勉強したいです。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "お金がなくても、毎日楽しいですか。",
+        "answer": "はい、楽しいです。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "雨が降っても、散歩しますか。",
+        "answer": "いいえ、しません。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "病気で休みたいとき、誰に連絡しなければなりませんか。",
+        "answer": "マネージャーに 連絡しなければ なりません。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "授業中、眠くても勉強しなければなりませんか。",
+        "answer": "はい、勉強しなければ なりません。"
+      },
+      {
+        "no": 21,
+        "orderIndex": 21,
+        "question": "授業中、先生に聞いても分からないとき、どうしますか。",
+        "answer": "友達に 聞きます。"
+      },
+      {
+        "no": 22,
+        "orderIndex": 22,
+        "question": "日本へ行ったら、センターで勉強したことを忘れてもいいですか。",
+        "answer": "いいえ、忘れては いけません。"
+      },
+      {
+        "no": 23,
+        "orderIndex": 23,
+        "question": "日本で友達が病気になったら、あなたは何をしてあげますか。",
+        "answer": "病院へ 連れて 行って あげます。"
+      },
+      {
+        "no": 24,
+        "orderIndex": 24,
+        "question": "3年後、ベトナムへ帰っても、日本語を使う仕事をしたいですか。",
+        "answer": "はい、日本語と ITインフラの 仕事を したいです。"
+      },
+      {
+        "no": 25,
+        "orderIndex": 25,
+        "question": "週末、先生が日本の文化について教えてあげましょうか。",
+        "answer": "はい、お願いします。"
+      }
+    ]
+  },
+  {
+    "lessonTitle": "会話まとめ: 1-25",
+    "lessonTitleVi": "Phần Ôn Tập Tổng Hợp 100 câu",
+    "questions": [
+      {
+        "no": 1,
+        "orderIndex": 1,
+        "question": "毎日、何時から何時まで勉強しますか。",
+        "answer": "8時から 10時まで 勉強します。"
+      },
+      {
+        "no": 2,
+        "orderIndex": 2,
+        "question": "昼休みは何時から何時までですか。",
+        "answer": "12時から 1時まで です。"
+      },
+      {
+        "no": 3,
+        "orderIndex": 3,
+        "question": "食堂は何時からですか。",
+        "answer": "11時半から です。"
+      },
+      {
+        "no": 4,
+        "orderIndex": 4,
+        "question": "センターの休みはいつですか。",
+        "answer": "土曜日と 日曜日です。"
+      },
+      {
+        "no": 5,
+        "orderIndex": 5,
+        "question": "毎晩、自分で何時間ぐらい勉強しますか。",
+        "answer": "2時間ぐらい 勉強します。"
+      },
+      {
+        "no": 6,
+        "orderIndex": 6,
+        "question": "今朝の試験はどうでしたか。",
+        "answer": "難しかったです。"
+      },
+      {
+        "no": 7,
+        "orderIndex": 7,
+        "question": "日本語の勉強はどうですか。",
+        "answer": "難しいですが、面白いです。"
+      },
+      {
+        "no": 8,
+        "orderIndex": 8,
+        "question": "第1センター生活はどうですか。",
+        "answer": "楽しいです。"
+      },
+      {
+        "no": 9,
+        "orderIndex": 9,
+        "question": "ふるさとはどんなところですか。",
+        "answer": "トゥドゥックは にぎやかな 所です。"
+      },
+      {
+        "no": 10,
+        "orderIndex": 10,
+        "question": "お母さんはどんな人ですか。",
+        "answer": "優しい 人です。"
+      },
+      {
+        "no": 11,
+        "orderIndex": 11,
+        "question": "机の上に何がありますか。",
+        "answer": "パソコンが あります。"
+      },
+      {
+        "no": 12,
+        "orderIndex": 12,
+        "question": "教室に実習生が何人いますか。",
+        "answer": "15人 います。"
+      },
+      {
+        "no": 13,
+        "orderIndex": 13,
+        "question": "あなたの前にだれがいますか。",
+        "answer": "先生が います。"
+      },
+      {
+        "no": 14,
+        "orderIndex": 14,
+        "question": "あなたの家にどんな動物がいますか。",
+        "answer": "動物は いません。"
+      },
+      {
+        "no": 15,
+        "orderIndex": 15,
+        "question": "タム先生はどこで教えていますか。",
+        "answer": "教室で 教えて います。"
+      },
+      {
+        "no": 16,
+        "orderIndex": 16,
+        "question": "兄弟がいますか。",
+        "answer": "はい、います。"
+      },
+      {
+        "no": 17,
+        "orderIndex": 17,
+        "question": "どのくらい日本語を勉強しましたか。",
+        "answer": "半年ぐらい 勉強しました。"
+      },
+      {
+        "no": 18,
+        "orderIndex": 18,
+        "question": "センターの近くに喫茶店がありますか。",
+        "answer": "はい、あります。"
+      },
+      {
+        "no": 19,
+        "orderIndex": 19,
+        "question": "昨日、雨でしたか。",
+        "answer": "いいえ、雨じゃ ありませんでした。"
+      },
+      {
+        "no": 20,
+        "orderIndex": 20,
+        "question": "先週は忙しかったですか。",
+        "answer": "はい、忙しかったです。"
+      },
+      {
+        "no": 21,
+        "orderIndex": 21,
+        "question": "今日のテストはどうでしたか。",
+        "answer": "難しかったです。"
+      },
+      {
+        "no": 22,
+        "orderIndex": 22,
+        "question": "ハノイと北海道とどちらが寒いですか。",
+        "answer": "北海道の ほうが 寒いです。"
+      },
+      {
+        "no": 23,
+        "orderIndex": 23,
+        "question": "果物の中で何が一番好きですか。",
+        "answer": "りんごが 一番 好きです。"
+      },
+      {
+        "no": 24,
+        "orderIndex": 24,
+        "question": "ベトナムでどこが一番有名ですか。",
+        "answer": "ハロン湾が 一番 有名です。"
+      },
+      {
+        "no": 25,
+        "orderIndex": 25,
+        "question": "クラスで誰が一番日本語が上手ですか。",
+        "answer": "リンさんが 一番 上手です。"
+      },
+      {
+        "no": 26,
+        "orderIndex": 26,
+        "question": "スポーツで何が一番好きですか。",
+        "answer": "ジョギングが 一番 好きです。"
+      },
+      {
+        "no": 27,
+        "orderIndex": 27,
+        "question": "ハノイはホーチミンより人が多いですか。",
+        "answer": "いいえ、ホーチミンの ほうが 多いです。"
+      },
+      {
+        "no": 28,
+        "orderIndex": 28,
+        "question": "クラスで誰が一番若いですか。",
+        "answer": "ハイさんが 一番 若いです。"
+      },
+      {
+        "no": 29,
+        "orderIndex": 29,
+        "question": "世界でどこが一番大きいですか。",
+        "answer": "ロシアが 一番 大きいです。"
+      },
+      {
+        "no": 30,
+        "orderIndex": 30,
+        "question": "乗り物で新幹線が一番早いですか。",
+        "answer": "いいえ、飛行機の ほうが 早いです。"
+      },
+      {
+        "no": 33,
+        "orderIndex": 31,
+        "question": "季節でいつが一番好きですか。",
+        "answer": "春が 一番 好きです。"
+      },
+      {
+        "no": 34,
+        "orderIndex": 32,
+        "question": "一年でいつが暑いですか。",
+        "answer": "5月が 暑いです。"
+      },
+      {
+        "no": 35,
+        "orderIndex": 33,
+        "question": "日本とベトナムとどちらが大きいですか。",
+        "answer": "日本の ほうが 大きいです。"
+      },
+      {
+        "no": 36,
+        "orderIndex": 34,
+        "question": "あなたと私とどちらがベトナム語が上手ですか。",
+        "answer": "私の ほうが 上手です。"
+      },
+      {
+        "no": 37,
+        "orderIndex": 35,
+        "question": "あなたとフンさんとどちらが背が高いですか。",
+        "answer": "フンさんの ほうが 高いです。"
+      },
+      {
+        "no": 38,
+        "orderIndex": 36,
+        "question": "お金と健康とどちらが大切ですか。",
+        "answer": "健康の ほうが 大切です。"
+      },
+      {
+        "no": 39,
+        "orderIndex": 37,
+        "question": "野球とサッカーとどちらが好きですか。",
+        "answer": "サッカーの ほうが 好きです。"
+      },
+      {
+        "no": 40,
+        "orderIndex": 38,
+        "question": "夏と冬とどちらが好きですか。",
+        "answer": "冬の ほうが 好きです。"
+      },
+      {
+        "no": 41,
+        "orderIndex": 39,
+        "question": "春と秋とどちらが好きですか。",
+        "answer": "春の ほうが 好きです。"
+      },
+      {
+        "no": 42,
+        "orderIndex": 40,
+        "question": "教室でたばこを吸ってもいいですか。",
+        "answer": "いいえ、吸っては いけません。"
+      },
+      {
+        "no": 43,
+        "orderIndex": 41,
+        "question": "ここで寝てもいいですか。",
+        "answer": "いいえ、寝ては いけません。"
+      },
+      {
+        "no": 44,
+        "orderIndex": 42,
+        "question": "辞書を借りてもいいですか。",
+        "answer": "はい、いいですよ。"
+      },
+      {
+        "no": 45,
+        "orderIndex": 43,
+        "question": "部屋で料理を作ってもいいですか。",
+        "answer": "はい、いいですよ。"
+      },
+      {
+        "no": 46,
+        "orderIndex": 44,
+        "question": "日本の工場でベトナム語を話してもいいですか。",
+        "answer": "いいえ、話しては いけません。"
+      },
+      {
+        "no": 47,
+        "orderIndex": 45,
+        "question": "教室で電話をかけてもいいですか。",
+        "answer": "いいえ、かけては いけません。"
+      },
+      {
+        "no": 48,
+        "orderIndex": 46,
+        "question": "寮で喧嘩してもいいですか。",
+        "answer": "いいえ、喧嘩しては いけません。"
+      },
+      {
+        "no": 49,
+        "orderIndex": 47,
+        "question": "教室で電話を使ってもいいですか。",
+        "answer": "いいえ、使っては いけません。"
+      },
+      {
+        "no": 50,
+        "orderIndex": 48,
+        "question": "今から一緒にお茶をのみにいきませんか。",
+        "answer": "ええ、行きましょう。"
+      },
+      {
+        "no": 51,
+        "orderIndex": 49,
+        "question": "今、ご飯を食べに行きませんか。",
+        "answer": "ええ、行きましょう。"
+      },
+      {
+        "no": 52,
+        "orderIndex": 50,
+        "question": "明日、ハロン湾へ行きませんか。",
+        "answer": "すみません、明日は ちょっと...。"
+      },
+      {
+        "no": 53,
+        "orderIndex": 51,
+        "question": "今、遊びに行きませんか。",
+        "answer": "すみません、今から 勉強します。"
+      },
+      {
+        "no": 54,
+        "orderIndex": 52,
+        "question": "今、映画を見に行きませんか。",
+        "answer": "ええ、行きましょう。"
+      },
+      {
+        "no": 55,
+        "orderIndex": 53,
+        "question": "一緒に喫茶店に入りませんか。",
+        "answer": "ええ、入りましょう。"
+      },
+      {
+        "no": 56,
+        "orderIndex": 54,
+        "question": "明日、出かけなければなりませんか。",
+        "answer": "いいえ、出かけなくても いいです。"
+      },
+      {
+        "no": 57,
+        "orderIndex": 55,
+        "question": "明日、試験があります。",
+        "answer": "今晩、何をしなければなりませんか。 勉強しなければ なりません。"
+      },
+      {
+        "no": 58,
+        "orderIndex": 56,
+        "question": "毎日、何時に起きなければなりませんか。",
+        "answer": "6時に 起きなければ なりません。"
+      },
+      {
+        "no": 59,
+        "orderIndex": 57,
+        "question": "日曜日も早く起きなければなりませんか。",
+        "answer": "いいえ、早く 起きなくても いいです。"
+      },
+      {
+        "no": 60,
+        "orderIndex": 58,
+        "question": "8時から仕事を始めます。",
+        "answer": "何時までに会社に行かなければなりませんか。 7時半までに 行かなければ なりません。"
+      },
+      {
+        "no": 61,
+        "orderIndex": 59,
+        "question": "ベトナムで子供は何歳から学校へ行かなければなりませんか。",
+        "answer": "6歳から 行かなければ なりません。"
+      },
+      {
+        "no": 62,
+        "orderIndex": 60,
+        "question": "毎朝、何時までに教室に入らなければなりませんか。",
+        "answer": "8時までに 入らなければ なりません。"
+      },
+      {
+        "no": 63,
+        "orderIndex": 61,
+        "question": "日本へ行く前に何を準備しなければなりませんか。",
+        "answer": "お金と パスポートを 準備しなければ なりません。"
+      },
+      {
+        "no": 64,
+        "orderIndex": 62,
+        "question": "日本語ができますか。",
+        "answer": "はい、できます。"
+      },
+      {
+        "no": 65,
+        "orderIndex": 63,
+        "question": "漢字を読むことができますか。",
+        "answer": "はい、少し 読むことが できます。"
+      },
+      {
+        "no": 66,
+        "orderIndex": 64,
+        "question": "泳ぐことができますか。",
+        "answer": "はい、できます。"
+      },
+      {
+        "no": 67,
+        "orderIndex": 65,
+        "question": "電話でホテルの予約ができますか。",
+        "answer": "はい、できます。"
+      },
+      {
+        "no": 68,
+        "orderIndex": 66,
+        "question": "教室でたばこを吸うことができますか。",
+        "answer": "いいえ、できません。"
+      },
+      {
+        "no": 69,
+        "orderIndex": 67,
+        "question": "部屋で料理を作ることができますか。",
+        "answer": "はい、できます。"
+      },
+      {
+        "no": 70,
+        "orderIndex": 68,
+        "question": "ベトナムで何歳から車を運転することができますか。",
+        "answer": "18歳から できます。"
+      },
+      {
+        "no": 71,
+        "orderIndex": 69,
+        "question": "自転車に乗ることができますか。",
+        "answer": "はい、できます。"
+      },
+      {
+        "no": 72,
+        "orderIndex": 70,
+        "question": "日本へ行ったことがありますか。",
+        "answer": "いいえ、行った ことが ありません。"
+      },
+      {
+        "no": 73,
+        "orderIndex": 71,
+        "question": "ダイエットをしたことがありますか。",
+        "answer": "いいえ、ありません。"
+      },
+      {
+        "no": 74,
+        "orderIndex": 72,
+        "question": "すしを食べたことがありますか。",
+        "answer": "はい、あります。"
+      },
+      {
+        "no": 75,
+        "orderIndex": 73,
+        "question": "馬に乗ったことがありますか。",
+        "answer": "いいえ、ありません。"
+      },
+      {
+        "no": 76,
+        "orderIndex": 74,
+        "question": "富士山に登ったことがありますか。",
+        "answer": "いいえ、ありません。"
+      },
+      {
+        "no": 77,
+        "orderIndex": 75,
+        "question": "日本のレストランで食べたことがありますか。",
+        "answer": "いいえ、ありません。"
+      },
+      {
+        "no": 78,
+        "orderIndex": 76,
+        "question": "すもうを見たことがありますか。",
+        "answer": "いいえ、ありません。"
+      },
+      {
+        "no": 79,
+        "orderIndex": 77,
+        "question": "歌舞伎を見たことがありますか。",
+        "answer": "いいえ、ありません。"
+      },
+      {
+        "no": 80,
+        "orderIndex": 78,
+        "question": "ホテルに泊まったことがありますか。",
+        "answer": "はい、あります。"
+      },
+      {
+        "no": 81,
+        "orderIndex": 79,
+        "question": "日本についてどう思いますか。",
+        "answer": "綺麗だと 思います。"
+      },
+      {
+        "no": 82,
+        "orderIndex": 80,
+        "question": "日本の交通についてどう思いますか。",
+        "answer": "便利だと 思います。"
+      },
+      {
+        "no": 83,
+        "orderIndex": 81,
+        "question": "桜についてどう思いますか。",
+        "answer": "とても 綺麗だと 思います。"
+      },
+      {
+        "no": 84,
+        "orderIndex": 82,
+        "question": "明日、雨が降ると思いますか。",
+        "answer": "いいえ、降らないと 思います。"
+      },
+      {
+        "no": 85,
+        "orderIndex": 83,
+        "question": "新しい言葉が分からないとき、どうしますか。",
+        "answer": "辞書で 調べます。"
+      },
+      {
+        "no": 86,
+        "orderIndex": 84,
+        "question": "眠いとき、何をしますか。",
+        "answer": "顔を 洗います。"
+      },
+      {
+        "no": 87,
+        "orderIndex": 85,
+        "question": "さびしいとき、どうしますか。",
+        "answer": "彼女に 電話を かけます。"
+      },
+      {
+        "no": 88,
+        "orderIndex": 86,
+        "question": "寝るとき、何と言いますか。",
+        "answer": "「おやすみなさい」と 言います。"
+      },
+      {
+        "no": 89,
+        "orderIndex": 87,
+        "question": "家へ帰ったとき、家族に何と言いますか。",
+        "answer": "「ただいま」と 言います。"
+      },
+      {
+        "no": 90,
+        "orderIndex": 88,
+        "question": "事務所に入るとき、何と言いますか。",
+        "answer": "「失礼します」と 言います。"
+      },
+      {
+        "no": 91,
+        "orderIndex": 89,
+        "question": "出かけるとき、何と言いますか。",
+        "answer": "「行ってきます」と 言います。"
+      },
+      {
+        "no": 92,
+        "orderIndex": 90,
+        "question": "朝、友達に会ったとき、何と言いますか。",
+        "answer": "「おはようございます」と 言います。"
+      },
+      {
+        "no": 93,
+        "orderIndex": 91,
+        "question": "ドアを開けてください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 94,
+        "orderIndex": 92,
+        "question": "エアコンを消してください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 95,
+        "orderIndex": 93,
+        "question": "テレビをつけてください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 96,
+        "orderIndex": 94,
+        "question": "まっすぐ行ってください。",
+        "answer": "はい、わかりました。"
+      },
+      {
+        "no": 97,
+        "orderIndex": 95,
+        "question": "暑いですね。",
+        "answer": "扇風機をつけましょうか。 はい、お願いします。"
+      },
+      {
+        "no": 98,
+        "orderIndex": 96,
+        "question": "大きいですね。",
+        "answer": "持ちましょうか。 すみません、お願いします。"
+      },
+      {
+        "no": 99,
+        "orderIndex": 97,
+        "question": "手伝いましょうか。",
+        "answer": "はい、お願いします。"
+      },
+      {
+        "no": 100,
+        "orderIndex": 98,
+        "question": "駅まで迎えに行きましょうか。",
+        "answer": "いいえ、結構です"
+      }
+    ]
+  }
+]

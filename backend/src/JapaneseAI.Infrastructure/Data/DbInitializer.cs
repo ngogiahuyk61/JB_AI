@@ -21,6 +21,20 @@ namespace JapaneseAI.Infrastructure.Data
 
                 await context.Database.MigrateAsync();
 
+                // ── Import Kaiwa data từ JSON (chạy 1 lần) ──
+                var kaiwaJsonPath = DataPathResolver.ResolveFile("kaiwa", "kaiwa_data.json")
+                    ?? Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "..", "kaiwa_data.json");
+
+                if (File.Exists(kaiwaJsonPath))
+                {
+                    var kaiwaImporter = new KaiwaImporter(context, Microsoft.Extensions.Logging.Abstractions.NullLogger<KaiwaImporter>.Instance);
+                    await kaiwaImporter.ImportAsync(kaiwaJsonPath);
+                }
+                else
+                {
+                    logger.LogInformation("[KaiwaImporter] kaiwa_data.json not found, skipping. Expected path: {path}", kaiwaJsonPath);
+                }
+
                 // ── Import KANJIDIC2 nếu có file, hoặc seed mẫu ──
                 var kanjidic2Path = DataPathResolver.ResolveFile("kanjidic2", "kanjidic2.xml")
                     ?? DataPathResolver.ResolveFile("kanjidic2", "sample_kanjidic2.xml");
@@ -29,6 +43,7 @@ namespace JapaneseAI.Infrastructure.Data
                 {
                     await KanjiDic2Importer.ImportAsync(context, kanjidic2Path, logger);
                 }
+
 
                 // Luôn đảm bảo các Kanji mẫu thông dụng N5/N4 có mặt trong DB
                 var requiredKanji = new List<KanjiDictionary>

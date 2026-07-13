@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using JapaneseAI.Core.Entities;
+using JapaneseAI.Core.Entities.Kaiwa;
 
 namespace JapaneseAI.Infrastructure.Data
 {
@@ -14,6 +15,12 @@ namespace JapaneseAI.Infrastructure.Data
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Deck> Decks { get; set; } = null!;
         public DbSet<Flashcard> Flashcards { get; set; } = null!;
+
+        // Kaiwa entities
+        public DbSet<KaiwaLesson> KaiwaLessons { get; set; } = null!;
+        public DbSet<KaiwaQuestion> KaiwaQuestions { get; set; } = null!;
+        public DbSet<KaiwaExpectedAnswer> KaiwaExpectedAnswers { get; set; } = null!;
+        public DbSet<KaiwaAnswerHistory> KaiwaAnswerHistories { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -106,6 +113,58 @@ namespace JapaneseAI.Infrastructure.Data
                       .WithMany()
                       .HasForeignKey(e => e.VocabularyId)
                       .OnDelete(DeleteBehavior.SetNull);
+            });
+            // KaiwaLesson configuration
+            modelBuilder.Entity<KaiwaLesson>(entity =>
+            {
+                entity.ToTable("KaiwaLessons");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Title).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.TitleVi).HasMaxLength(200);
+                entity.Property(e => e.JlptLevel).HasMaxLength(5).HasDefaultValue("N5");
+                entity.HasIndex(e => e.OrderIndex);
+            });
+
+            // KaiwaQuestion configuration
+            modelBuilder.Entity<KaiwaQuestion>(entity =>
+            {
+                entity.ToTable("KaiwaQuestions");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.JapaneseText).IsRequired().HasMaxLength(500);
+                entity.HasIndex(e => new { e.LessonId, e.OrderIndex });
+                entity.HasOne(e => e.Lesson)
+                      .WithMany(l => l.Questions)
+                      .HasForeignKey(e => e.LessonId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // KaiwaExpectedAnswer configuration
+            modelBuilder.Entity<KaiwaExpectedAnswer>(entity =>
+            {
+                entity.ToTable("KaiwaExpectedAnswers");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.AnswerText).IsRequired().HasMaxLength(1000);
+                entity.HasOne(e => e.Question)
+                      .WithMany(q => q.ExpectedAnswers)
+                      .HasForeignKey(e => e.QuestionId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // KaiwaAnswerHistory configuration
+            modelBuilder.Entity<KaiwaAnswerHistory>(entity =>
+            {
+                entity.ToTable("KaiwaAnswerHistories");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.UserAnswer).HasMaxLength(500);
+                entity.Property(e => e.Feedback).HasMaxLength(1000);
+                entity.Property(e => e.GrammarExplanation).HasMaxLength(1000);
+                entity.Property(e => e.CorrectSentence).HasMaxLength(500);
+                entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                entity.HasIndex(e => e.CreatedAt);
+                entity.HasOne(e => e.Question)
+                      .WithMany(q => q.History)
+                      .HasForeignKey(e => e.QuestionId)
+                      .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
