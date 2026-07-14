@@ -47,6 +47,23 @@ export default function KaiwaPage() {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    const updateViewportHeight = () => {
+      const nextHeight = window.visualViewport?.height ?? window.innerHeight;
+      document.documentElement.style.setProperty('--app-viewport-height', `${nextHeight}px`);
+    };
+
+    updateViewportHeight();
+    const viewport = window.visualViewport;
+    viewport?.addEventListener('resize', updateViewportHeight);
+    window.addEventListener('resize', updateViewportHeight);
+
+    return () => {
+      viewport?.removeEventListener('resize', updateViewportHeight);
+      window.removeEventListener('resize', updateViewportHeight);
+    };
+  }, []);
+
   const addMessage = (msg: Omit<ChatMessage, 'id'>) => {
     const id = Math.random().toString(36).substring(7);
     setMessages(prev => [...prev, { ...msg, id }]);
@@ -113,12 +130,18 @@ export default function KaiwaPage() {
   };
 
   // ── Speech Recognition (Whisper API) ──────────────────────────────────────
+  const getSupportedAudioMimeType = () => {
+    if (typeof MediaRecorder === 'undefined') return '';
+    const preferredTypes = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus', 'audio/wav'];
+    return preferredTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
+  };
+
   const startRecording = async () => {
     window.speechSynthesis.cancel();
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      // Use webm for browser compatibility
-      const mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+      const mimeType = getSupportedAudioMimeType();
+      const mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
       mediaRecorderRef.current = mediaRecorder;
       audioChunksRef.current = [];
 
@@ -128,21 +151,26 @@ export default function KaiwaPage() {
         }
       };
 
+      mediaRecorder.onerror = () => {
+        setError('Ghi âm bị lỗi. Hãy thử lại sau.');
+        setIsRecording(false);
+        stream.getTracks().forEach(track => track.stop());
+      };
+
       mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        
-        // Dừng tracks để nhả microphone
+        const blobType = mediaRecorder.mimeType || mimeType || 'audio/webm';
+        const audioBlob = new Blob(audioChunksRef.current, { type: blobType });
+
         stream.getTracks().forEach(track => track.stop());
         setIsRecording(false);
-        
-        // Thêm tin nhắn loading cho STT
+
         const loadingId = Math.random().toString(36).substring(7);
         setMessages(prev => [...prev, { id: loadingId, type: 'loading', text: 'Đang nhận diện giọng nói (Groq) ⚡...' }]);
-        
+
         try {
           const transcript = await kaiwaService.transcribeAudio(audioBlob);
           setMessages(prev => prev.filter(m => m.id !== loadingId));
-          
+
           if (!transcript || transcript.trim() === '') {
             setError('Không nghe rõ bạn nói gì, vui lòng thử lại.');
           } else {
@@ -215,9 +243,9 @@ export default function KaiwaPage() {
   };
 
   // ── Render ─────────────────────────────────────────────────────────────────
-  const containerStyle: React.CSSProperties = isExpanded 
-    ? { position: 'fixed', inset: 0, zIndex: 50, background: '#111827' }
-    : { minHeight: '100vh', background: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)', padding: '20px 16px' };
+  const containerStyle: React.CSSProperties = isExpanded
+    ? { position: 'fixed', inset: 0, zIndex: 50, background: '#111827', height: 'var(--app-viewport-height, 100dvh)' }
+    : { minHeight: 'var(--app-viewport-height, 100dvh)', background: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)', padding: '20px 16px' };
 
   return (
     <div style={{ ...containerStyle, display: 'flex', flexDirection: 'column', fontFamily: "'Inter', sans-serif" }}>
@@ -473,7 +501,7 @@ export default function KaiwaPage() {
       {/* ── INPUT BAR ─────────────────────────────────────────── */}
       {appState === 'chat' && (
         <div style={{
-          position: 'sticky', bottom: 0, padding: '16px',
+          position: 'sticky', bottom: 0, padding: '16px 16px calc(16px + env(safe-area-inset-bottom))',
           background: 'rgba(17, 24, 39, 0.8)', backdropFilter: 'blur(20px)',
           borderTop: '1px solid rgba(255,255,255,0.1)', zIndex: 10
         }}>
