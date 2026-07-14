@@ -137,9 +137,11 @@ export default function KaiwaPage() {
   };
 
   const startRecording = async () => {
+    console.log('[Kaiwa] startRecording invoked', { hasMediaDevices: !!navigator.mediaDevices, hasGetUserMedia: !!navigator.mediaDevices?.getUserMedia, isSecureContext: window.isSecureContext });
     window.speechSynthesis.cancel();
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      console.log('[Kaiwa] microphone granted', stream.getAudioTracks().length);
       const mimeType = getSupportedAudioMimeType();
       const mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
       mediaRecorderRef.current = mediaRecorder;
@@ -187,7 +189,7 @@ export default function KaiwaPage() {
       setIsRecording(true);
       setError('');
     } catch (err) {
-      console.error('Error accessing microphone:', err);
+      console.error('[Kaiwa] Error accessing microphone:', err);
       setError('Không thể truy cập Microphone. Vui lòng cấp quyền trong trình duyệt.');
     }
   };
@@ -508,7 +510,14 @@ export default function KaiwaPage() {
           <div style={{ maxWidth: 800, margin: '0 auto', display: 'flex', gap: 12 }}>
             <button
               type="button"
-              onClick={isRecording ? stopRecording : startRecording}
+              onClick={() => {
+                console.log('[Kaiwa] mic button clicked', { isRecording });
+                if (isRecording) {
+                  stopRecording();
+                } else {
+                  startRecording();
+                }
+              }}
               style={{
                 flexShrink: 0, width: 50, height: 50, borderRadius: 25, border: 'none', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white',
