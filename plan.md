@@ -193,6 +193,14 @@ Co the giai doan dau van render plain text, nhung ve kien truc nen chuan bi de n
 
 ## 8. Ke hoach thuc hien de xuat
 
+### Cập nhật Android Kaiwa (đã thực hiện)
+
+- Đã bổ sung fallback thu âm bằng MediaRecorder cho trình duyệt Android khi Web Speech API không hoạt động hoặc bị chặn.
+- Khi người dùng bấm nút mic, hệ thống sẽ ưu tiên nhận diện giọng nói nếu có hỗ trợ, nếu không sẽ chuyển sang thu âm và gửi audio để transcribe.
+- Đã điều chỉnh layout overlay Kaiwa để dùng chiều cao viewport thực tế (`--app-viewport-height`) nên khi phóng to/fullscreen, thanh mic và ô nhập văn bản vẫn luôn hiện ở cuối màn hình.
+- Đã tăng padding dưới cùng cho input row để tránh bị che bởi safe area của điện thoại.
+
+
 ### Phase 1. Chot chien luoc hoi thoai ngan
 
 Muc tieu:

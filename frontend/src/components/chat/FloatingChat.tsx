@@ -13,6 +13,7 @@ import type {
 import { createInitialKaiwaSession } from '../../types';
 import { geminiService, type ChatHistory } from '../../services/geminiService';
 import { ollamaService } from '../../services/ollamaService';
+import { kaiwaService } from '../../services/kaiwaService';
 import { speechService, SpeechRecognizer, type SpeechRecognitionLang } from '../../services/speechService';
 import { useDeviceLayout } from '../../hooks/useDeviceLayout';
 import { KAIWA_LEVELS, buildLevelWelcomeText, getKaiwaLevelConfig } from '../../constants/kaiwaLevels';
@@ -225,6 +226,9 @@ export default function FloatingChat({ isOpen, onClose }: FloatingChatProps) {
   const endRef = useRef<HTMLDivElement>(null);
   const recognizerRef = useRef<SpeechRecognizer | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
 
   const isKaiwaHybrid = interactionMode === 'kaiwa_hybrid';
   const isGuided = kaiwaSession.learningMode === 'guided_kaiwa';
@@ -249,6 +253,32 @@ export default function FloatingChat({ isOpen, onClose }: FloatingChatProps) {
       detectEngine();
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    const updateViewportHeight = () => {
+      const nextHeight = window.visualViewport?.height ?? window.innerHeight;
+      document.documentElement.style.setProperty('--app-viewport-height', `${nextHeight}px`);
+    };
+
+    updateViewportHeight();
+    const viewport = window.visualViewport;
+    viewport?.addEventListener('resize', updateViewportHeight);
+    window.addEventListener('resize', updateViewportHeight);
+
+    return () => {
+      viewport?.removeEventListener('resize', updateViewportHeight);
+      window.removeEventListener('resize', updateViewportHeight);
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+        mediaRecorderRef.current.stop();
+      }
+      mediaStreamRef.current?.getTracks().forEach(track => track.stop());
+    };
+  }, []);
 
   const overlayClass = [
     'chat-overlay',
@@ -482,27 +512,100 @@ export default function FloatingChat({ isOpen, onClose }: FloatingChatProps) {
     }
   };
 
+  const getSupportedAudioMimeType = () => {
+    if (typeof MediaRecorder === 'undefined') return '';
+    const preferredTypes = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus', 'audio/wav'];
+    return preferredTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
+  };
+
+  const startMediaRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mimeType = getSupportedAudioMimeType();
+      const recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
+      mediaRecorderRef.current = recorder;
+      mediaStreamRef.current = stream;
+      audioChunksRef.current = [];
+
+      recorder.ondataavailable = (event) => {
+        if (event.data.size > 0) audioChunksRef.current.push(event.data);
+      };
+
+      recorder.onerror = () => {
+        setVoiceError('Ghi âm bị lỗi. Hãy thử lại sau.');
+        setIsListening(false);
+        stream.getTracks().forEach(track => track.stop());
+        mediaStreamRef.current = null;
+      };
+
+      recorder.onstop = async () => {
+        const blobType = recorder.mimeType || mimeType || 'audio/webm';
+        const audioBlob = new Blob(audioChunksRef.current, { type: blobType });
+        stream.getTracks().forEach(track => track.stop());
+        mediaStreamRef.current = null;
+        setIsListening(false);
+        setVoiceError('');
+
+        try {
+          const transcript = await kaiwaService.transcribeAudio(audioBlob);
+          if (!transcript?.trim()) {
+            setVoiceError('Không nghe rõ giọng nói. Hãy thử lại.');
+            return;
+          }
+          await handleSend(transcript);
+        } catch (error) {
+          console.error('Audio transcription failed', error);
+          setVoiceError('Không thể nhận diện giọng nói. Hãy thử lại.');
+        }
+      };
+
+      recorder.start();
+      setIsListening(true);
+    } catch (error) {
+      console.error('Microphone access failed', error);
+      setIsListening(false);
+      setVoiceError('Không thể truy cập Microphone. Hãy cấp quyền mic trong trình duyệt.');
+    }
+  };
+
   const toggleMic = async () => {
     if (!isKaiwaHybrid) return;
-    if (!recognizerRef.current?.available) {
-      setVoiceError('Trinh duyet khong ho tro Speech Recognition. Hay dung Chrome hoac Edge.');
-      return;
-    }
+
     if (isListening) {
-      recognizerRef.current.stop();
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+        mediaRecorderRef.current.stop();
+        return;
+      }
+      if (recognizerRef.current?.listening) {
+        recognizerRef.current.stop();
+        setIsListening(false);
+        return;
+      }
       setIsListening(false);
       return;
     }
+
     setVoiceError('');
     setIsListening(true);
-    try {
-      const transcript = await recognizerRef.current.listen();
-      setIsListening(false);
-      await handleSend(transcript);
-    } catch (e: unknown) {
-      setIsListening(false);
-      setVoiceError(e instanceof Error ? e.message : 'Mic loi. Hay thu lai.');
+
+    if (recognizerRef.current?.available) {
+      try {
+        const transcript = await recognizerRef.current.listen();
+        setIsListening(false);
+        await handleSend(transcript);
+        return;
+      } catch (error) {
+        console.warn('Speech recognition unavailable, falling back to recording', error);
+      }
     }
+
+    if (typeof MediaRecorder === 'undefined' || !navigator.mediaDevices?.getUserMedia) {
+      setIsListening(false);
+      setVoiceError('Thiết bị này chưa hỗ trợ thu âm. Hãy dùng Chrome hoặc Edge trên Android.');
+      return;
+    }
+
+    await startMediaRecording();
   };
 
   if (!isOpen) return null;
