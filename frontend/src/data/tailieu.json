@@ -1,0 +1,2659 @@
+{
+  "adverbs": [
+    {
+      "jp": "あまり...ない",
+      "vi": "không....lắm"
+    },
+    {
+      "jp": "かなり",
+      "vi": "khá là ,tương đối"
+    },
+    {
+      "jp": "ずいぶん",
+      "vi": "khá là ,tương đối"
+    },
+    {
+      "jp": "つまり",
+      "vi": "A hay chính là B / Có nghĩa là / Nói cách khác là"
+    },
+    {
+      "jp": "ぴったり",
+      "vi": "ぴたり"
+    },
+    {
+      "jp": "やはり、やっぱり",
+      "vi": "Quả đúng như mình nghĩ / Cuối cùng thì cũng vẫn là / Rốt cục thì"
+    },
+    {
+      "jp": "いきなり",
+      "vi": "Bất thình lình ,đột nhiên"
+    },
+    {
+      "jp": "うっかり",
+      "vi": "Lơ đễnh ,xao nhãng"
+    },
+    {
+      "jp": "がっかり(する)",
+      "vi": "Thất vọng"
+    },
+    {
+      "jp": "ぎっしり",
+      "vi": "Chật kín ,sin sít"
+    },
+    {
+      "jp": "ぐっすり",
+      "vi": "Ngủ say tít ,ngủ thiếp đi"
+    },
+    {
+      "jp": "こっそり",
+      "vi": "Nhẹ nhàng (để ko gây tiếng động) , Len lén ( để ko ai nhìn thấy)"
+    },
+    {
+      "jp": "さっぱり",
+      "vi": "Trong trẻo ,sảng khoái (rửa mặt xong) ; Nhẹ, nhạt (món ăn)"
+    },
+    {
+      "jp": "さっぱり...ない",
+      "vi": "Một chút cũng không, hoàn toàn không."
+    },
+    {
+      "jp": "ぐったり",
+      "vi": "Mệt nhoài ,mệt phờ người"
+    },
+    {
+      "jp": "しっかり",
+      "vi": "Chắc chắn ,vững chắc"
+    },
+    {
+      "jp": "すっきり",
+      "vi": "Cô đọng ,súc tích (văn chương) / Tỉnh táo ,sảng khoái (ngủ dậy ) / Đầy đủ ,hoàn toàn (十分)"
+    },
+    {
+      "jp": "そっくり",
+      "vi": "Giống y hệt ,giống như đúc_tất cả, hoàn toàn(全部)"
+    },
+    {
+      "jp": "にっこり",
+      "vi": "Nhoẻn miệng cười"
+    },
+    {
+      "jp": "のんびり",
+      "vi": "Thong thả,thành thơi không lo nghĩ ,ung dung"
+    },
+    {
+      "jp": "はっきり",
+      "vi": "Rõ ràng_mạch lạc"
+    },
+    {
+      "jp": "ばったり",
+      "vi": "Đột nhiên ,bất thình lình (突然) / Tình cờ ,ngẫu nhiên (偶然) / Tiếng kêu đột ngột phát ra"
+    },
+    {
+      "jp": "ぼんやり",
+      "vi": "Mờ nhạt ,mờ ảo (cảnh sắc) Lờ đờ ,vô hồn ( trạng thái)"
+    },
+    {
+      "jp": "びっくり(する)",
+      "vi": "Ngạc nhiên"
+    },
+    {
+      "jp": "ゆっくり",
+      "vi": "Thong thả ,chậm rãi"
+    },
+    {
+      "jp": "めっきり",
+      "vi": "Đột ngột (thay đổi)"
+    },
+    {
+      "jp": "たっぷり",
+      "vi": "Thừa thãi ,dư thừa ,đầy tràn (thời gian ,đồ ăn)"
+    },
+    {
+      "jp": "おもいきり",
+      "vi": "おもいっきり"
+    },
+    {
+      "jp": "今に (いまに)",
+      "vi": "Một lúc nào đó sẽ"
+    },
+    {
+      "jp": "主に (おもに)",
+      "vi": "Chủ yếu là, cái chính là"
+    },
+    {
+      "jp": "現に (げんに)",
+      "vi": "Hiện tại là ,thực tế thì"
+    },
+    {
+      "jp": "先に (さきに)",
+      "vi": "Làm A trước"
+    },
+    {
+      "jp": "更に (さらに)",
+      "vi": "Hơn nữa (bổ sung)_Hơn (mức đang có)"
+    },
+    {
+      "jp": "直に (じかに)",
+      "vi": "Một cách trực tiếp"
+    },
+    {
+      "jp": "実に (じつに)",
+      "vi": "Một cách thực sự ,thực sự là"
+    },
+    {
+      "jp": "すぐに",
+      "vi": "Ngay lập tức"
+    },
+    {
+      "jp": "既に (すでに)",
+      "vi": "Đã....từ truớc đó"
+    },
+    {
+      "jp": "偶に",
+      "vi": "Thỉnh thoảng ,hiếm khi ,đôi khi"
+    },
+    {
+      "jp": "正に (まさに)",
+      "vi": "Đúng là ,chính xác là"
+    },
+    {
+      "jp": "単に(たんに)",
+      "vi": "Đơn giản là"
+    },
+    {
+      "jp": "常に (つねに)",
+      "vi": "Thường hay, thường xuyên"
+    },
+    {
+      "jp": "将に (まさに)",
+      "vi": "Ngay bây giờ ,sắp sửa"
+    },
+    {
+      "jp": "特に(とくに)",
+      "vi": "Đặc biệt là"
+    },
+    {
+      "jp": "共に (ともに)",
+      "vi": "Chung ,cùng nhau"
+    },
+    {
+      "jp": "別に (べつに)",
+      "vi": "Điều khác biệt là"
+    },
+    {
+      "jp": "割に (わりに)",
+      "vi": "A thì...so với ...."
+    },
+    {
+      "jp": "一度に (いちどに)",
+      "vi": "Làm ...cùng một lúc"
+    },
+    {
+      "jp": "大いに (おおいに)",
+      "vi": "Vô cùng ,rất"
+    },
+    {
+      "jp": "代わりに (かわりに)",
+      "vi": "Thay thế cho"
+    },
+    {
+      "jp": "急に (きゅうに)",
+      "vi": "Ngay lập tức ,cấp bách"
+    },
+    {
+      "jp": "しきりに",
+      "vi": "Thường xuyên (しばしば) Trầm trọng ,nghiêm trọng"
+    },
+    {
+      "jp": "次第に (しだいに)",
+      "vi": "Dần dần, tiếp theo là"
+    },
+    {
+      "jp": "確かに (たしかに)",
+      "vi": "Chính xác là , đúng là"
+    },
+    {
+      "jp": "直ちに (ただちに)",
+      "vi": "Ngay lập tức (すぐに)_Một cách trực tiếp"
+    },
+    {
+      "jp": "とっくに",
+      "vi": "Đã ...từ trước đó lâu rồi_Ngay lập tức,cấp bách"
+    },
+    {
+      "jp": "途端に (とたんに)",
+      "vi": "Ngay lập tức ,ngay tức khắc"
+    },
+    {
+      "jp": "にわかに",
+      "vi": "Đột nhiên , chợt ( nhớ ra điều gì )"
+    },
+    {
+      "jp": "初めに (はじめに)",
+      "vi": "Ban đầu ,trước tiên"
+    },
+    {
+      "jp": "めったに",
+      "vi": "Hầu hết ,đa phần"
+    },
+    {
+      "jp": "やたらに",
+      "vi": "Một cách ko phân biệt / Một cách ko ý định / Một cách ko để ý tới / Một cách quá độ"
+    },
+    {
+      "jp": "どんなに",
+      "vi": "Như thế nào (mức độ)"
+    },
+    {
+      "jp": "明らかに(あきらかに)",
+      "vi": "Rõ ràng ,Đương nhiên"
+    },
+    {
+      "jp": "一斉に(いっせいに)",
+      "vi": "Làm ...cùng một lúc"
+    },
+    {
+      "jp": "互いに (たがいに)",
+      "vi": "Lẫn nhau"
+    },
+    {
+      "jp": "非常に (ひじょうに)",
+      "vi": "Vô cùng ,cực kì ,rất"
+    },
+    {
+      "jp": "必死に(ひっしに)",
+      "vi": "Quyết tử ,nhất quyêt"
+    },
+    {
+      "jp": "一人でに(ひとりでに)",
+      "vi": "Tự động ,tự nhiên"
+    },
+    {
+      "jp": "真っ先に(まっさきに)",
+      "vi": "Suốt từ lúc nãy"
+    },
+    {
+      "jp": "要するに(ようするに)",
+      "vi": "Nói tóm lại"
+    },
+    {
+      "jp": "割合に(わりあいに)",
+      "vi": "Một chút ,một ít"
+    },
+    {
+      "jp": "あちこち",
+      "vi": "Đây đó"
+    },
+    {
+      "jp": "生き生き",
+      "vi": "Sống động ( y như thật) / Tươi sống ( rau quả) / Đầy sức sống (tính cách)"
+    },
+    {
+      "jp": "いちいち",
+      "vi": "Lần lượt từng cái một"
+    },
+    {
+      "jp": "いよいよ",
+      "vi": "Càng ...càng... / Quả đúng như mình nghĩ ( やはり) / Rốt cục thì"
+    },
+    {
+      "jp": "いらいら",
+      "vi": "tức tối, trạng thái nóng nảy bực bội"
+    },
+    {
+      "jp": "うるうる",
+      "vi": "Loanh quanh,luẩn quẩn (ko mục đích)_Lòng vòng ( đi lại)"
+    },
+    {
+      "jp": "各々(おのおの)",
+      "vi": "Từng cái từng cái một"
+    },
+    {
+      "jp": "方々(かたがた)",
+      "vi": "Từng người từng người một"
+    },
+    {
+      "jp": "しばしば",
+      "vi": "Thường xuyên"
+    },
+    {
+      "jp": "徐々に(じょじょに)",
+      "vi": "Dần dần từng chút một (少しずつ)"
+    },
+    {
+      "jp": "次々(つぎつぎ)",
+      "vi": "Liên tiếp hết cái này đến cái khác"
+    },
+    {
+      "jp": "続々(ぞくぞく)",
+      "vi": "Liên tục"
+    },
+    {
+      "jp": "それぞれ",
+      "vi": "Dần dần , lần lượt từng cái từng cái một"
+    },
+    {
+      "jp": "そろそろ",
+      "vi": "Chuẩn bị ,sắp sửa"
+    },
+    {
+      "jp": "度々(たびたび)",
+      "vi": "Thường xuyên"
+    },
+    {
+      "jp": "偶々(たまたま)",
+      "vi": "Thỉnh thoảng, hiếm khi_Ngẫu nhiên,tình cờ(偶然)"
+    },
+    {
+      "jp": "だんだん",
+      "vi": "どんどん"
+    },
+    {
+      "jp": "近々(ちかぢか)",
+      "vi": "Gần sát ,cận kề"
+    },
+    {
+      "jp": "次々(つぎつぎ)",
+      "vi": "Liên tiếp hết cái này đến cái khác"
+    },
+    {
+      "jp": "凸凹(でこぼこ)",
+      "vi": "Lồi lõm"
+    },
+    {
+      "jp": "てんてん",
+      "vi": "Tiếng lăn (bóng)_Liên tiếp hết cái này đến cái khác"
+    },
+    {
+      "jp": "とうとう",
+      "vi": "Cuối cùng , rốt cục"
+    },
+    {
+      "jp": "時々(ときどき)",
+      "vi": "Thỉnh thoảng"
+    },
+    {
+      "jp": "中々(なかなか)...",
+      "vi": "Mãi mà không..."
+    },
+    {
+      "jp": "のろのろ",
+      "vi": "Chậm rãi ,thong thả ,ì ạch"
+    },
+    {
+      "jp": "にこにこ",
+      "vi": "Mỉm cười , tủm tỉm"
+    },
+    {
+      "jp": "こそこそ",
+      "vi": "nhẹ nhàng_lén lút"
+    },
+    {
+      "jp": "はきはき",
+      "vi": "rành mạch, lưu loát nói_rõ ràng, minh bạch"
+    },
+    {
+      "jp": "ぴかぴか",
+      "vi": "lấp lánh, sáng loáng"
+    },
+    {
+      "jp": "広々(ひろびろ)",
+      "vi": "rộng rãi"
+    },
+    {
+      "jp": "ぶつぶつ",
+      "vi": "làu bàu, cằn nhằn / lất phất trạng thái hình giọt, hình hạt / lục ục nước sôi"
+    },
+    {
+      "jp": "ふわふわ",
+      "vi": "lơ lửng, bồng bềng_mềm mại, nhẹ nhàng"
+    },
+    {
+      "jp": "別々(べつべつ)",
+      "vi": "riêng biệt, riêng rẽ"
+    },
+    {
+      "jp": "まあまあ",
+      "vi": "bình thường"
+    },
+    {
+      "jp": "まごまご",
+      "vi": "bối rối, lúng túng"
+    },
+    {
+      "jp": "ますます",
+      "vi": "dần dần, ngày càng..."
+    },
+    {
+      "jp": "めいめい",
+      "vi": "lần lượt từng người một"
+    },
+    {
+      "jp": "元々(もともと)",
+      "vi": "nguyên là, vốn dĩ là_từ xưa đến nay vẫn vậy, vẫn thế"
+    },
+    {
+      "jp": "ゆうゆう",
+      "vi": "thong thả, bình tĩnh_dư dật, dư thừa"
+    },
+    {
+      "jp": "順々(じゅんじゅん)",
+      "vi": "lần lượt theo thứ tự"
+    },
+    {
+      "jp": "少々(しょうしょう)",
+      "vi": "một chút, một lúc"
+    },
+    {
+      "jp": "着々(ちゃくちゃく)",
+      "vi": "dần dần từng tí một"
+    },
+    {
+      "jp": "所々(ところどころ)",
+      "vi": "chỗ này chỗ kia"
+    },
+    {
+      "jp": "めちゃくちゃ ; めちゃめちゃ",
+      "vi": "vô cùng, cực kì,...dã man_bừa bãi, lộn xộn"
+    },
+    {
+      "jp": "めっちゃく",
+      "vi": "bừa bãi, lộnxộn"
+    },
+    {
+      "jp": "一等(いっとう)",
+      "vi": "nhất, đứng đầu"
+    },
+    {
+      "jp": "一時(いちじ)",
+      "vi": "một giờ_tạm thời, nhất thời"
+    },
+    {
+      "jp": "一段(いちだん)",
+      "vi": "ngày càng_hơn hẳn"
+    },
+    {
+      "jp": "一度に(いちどに)",
+      "vi": "làm..cùng lúc, làm một thể"
+    },
+    {
+      "jp": "一番(いちばん)",
+      "vi": "thứ nhất, dẫn đầu"
+    },
+    {
+      "jp": "一部(いちぶ)",
+      "vi": "một phần, một vài, một bộ phận nhỏ"
+    },
+    {
+      "jp": "一種(いっしゅ)",
+      "vi": "một loại"
+    },
+    {
+      "jp": "一瞬(いっしゅん)",
+      "vi": "một lúc, chớp nhoáng"
+    },
+    {
+      "jp": "一層(いっそう)",
+      "vi": "hơn hẳn so với_...hơn_càng ngày càng..."
+    },
+    {
+      "jp": "一体(いったい)",
+      "vi": "toàn bộ, tổng thể_chẳng hiểu là..như thế nào, rốt cục là thế nào"
+    },
+    {
+      "jp": "一斉に(いっせいに)",
+      "vi": "nhất loạt, làm một thể, làm cùng lúc"
+    },
+    {
+      "jp": "一般に(いっぱんに)",
+      "vi": "thông thường, nhìn chung, phổ biến"
+    },
+    {
+      "jp": "一定(いってい)",
+      "vi": "nhất định, cố định (không thay đổi)"
+    },
+    {
+      "jp": "一方(いっぽう)",
+      "vi": "ngược lại, một mặt là.."
+    },
+    {
+      "jp": "一生(いっしょう)",
+      "vi": "một đời, cả đời"
+    },
+    {
+      "jp": "再三(さいさん)",
+      "vi": "vài lần, thỉnh thoảng"
+    },
+    {
+      "jp": "方一(ほういち)",
+      "vi": "nếu chẳng may, không may là"
+    },
+    {
+      "jp": "第一に(だいいちに)",
+      "vi": "lớn nhất, quan trọng nhất_đứng đầu"
+    },
+    {
+      "jp": "一旦(いったん)",
+      "vi": "một lần, một lượt_một lúc, một lát"
+    },
+    {
+      "jp": "一杯(いっぱい)",
+      "vi": "nước đầy / no, đủ / một cốc nước , một bát cơm"
+    },
+    {
+      "jp": "いずれ",
+      "vi": "cái nào lực chọn / dù sao đi nữa, dù thế nào thì cũng / không sớm thì muộn, chẳng mấy chốc"
+    },
+    {
+      "jp": "いずれ",
+      "vi": "trong bất cứ tình huống nào đi nữa..."
+    },
+    {
+      "jp": "いつか",
+      "vi": "một lúc nào đó"
+    },
+    {
+      "jp": "いつも",
+      "vi": "lúc nào cũng, luôn luôn"
+    },
+    {
+      "jp": "この間",
+      "vi": "(この)"
+    },
+    {
+      "jp": "この頃(このごろ)",
+      "vi": "dạo này, dạo gần đây"
+    },
+    {
+      "jp": "この程(このほど)",
+      "vi": "lần này, lượt này (lịch sự)"
+    },
+    {
+      "jp": "今後(こんご)",
+      "vi": "từ nay về sau"
+    },
+    {
+      "jp": "今度(こんど)",
+      "vi": "lần này, chuyến này (lần gần nhất so với thời điểm nói)"
+    },
+    {
+      "jp": "今回(こんかい)",
+      "vi": "lần này, lượt này"
+    },
+    {
+      "jp": "最近(さいきん)",
+      "vi": "gần đây"
+    },
+    {
+      "jp": "先日(せんじつ)",
+      "vi": "hôm trước"
+    },
+    {
+      "jp": "今日(きょう)",
+      "vi": "hôm nay"
+    },
+    {
+      "jp": "本日(ほんじつ)",
+      "vi": "Hôm nay (lịch sự)"
+    },
+    {
+      "jp": "昨日(さくじつ)",
+      "vi": "hôm qua(lịch sự)"
+    },
+    {
+      "jp": "当時(とうじ)",
+      "vi": "đương thời, (thời đại diễn ra sự kiện)"
+    },
+    {
+      "jp": "当日(とうじつ)",
+      "vi": "hôm đó, (ngày diễn ra sự kiện)"
+    },
+    {
+      "jp": "その内(そのうち)",
+      "vi": "Trong đó"
+    },
+    {
+      "jp": "少し",
+      "vi": "một chút, một ít"
+    },
+    {
+      "jp": "少しも...ない",
+      "vi": "một chút cũng không..., hoàn toàn không..."
+    },
+    {
+      "jp": "少なくとも",
+      "vi": "ít nhất thì cũng..., chí ít thì cũng.., tối thiểu là"
+    },
+    {
+      "jp": "多分 (たぶん)...だろう",
+      "vi": "có lẽ, có thể là..."
+    },
+    {
+      "jp": "極(ごく)",
+      "vi": "cực kì, cực, vô cùng"
+    },
+    {
+      "jp": "是非(ぜひ)",
+      "vi": "nhất định sẽ làm...(ý chí người nói)"
+    },
+    {
+      "jp": "不図(ふと)",
+      "vi": "bất thần, đột nhiên nhớ ra"
+    },
+    {
+      "jp": "ほぼ",
+      "vi": "khoảng chừng, đại khái"
+    },
+    {
+      "jp": "元",
+      "vi": "ban đầu là, vốn dĩ là"
+    },
+    {
+      "jp": "やや",
+      "vi": "ước chừng, khoảng chừng / khá là, tương đối / một thời gian ngắn, chả mấy chốc mà.."
+    },
+    {
+      "jp": "より",
+      "vi": "hơn..(mức độ đang có)"
+    },
+    {
+      "jp": "きっと",
+      "vi": "nhất định sẽ, chắc chắn (phỏng đoán)"
+    },
+    {
+      "jp": "さっき",
+      "vi": "lúc nãy"
+    },
+    {
+      "jp": "ざっと",
+      "vi": "đại khái, đại để, khoảng / đột ngột, bất thình lình / ngắn gọn, vắn tắt, sơ lược"
+    },
+    {
+      "jp": "すっと",
+      "vi": "cành cây vươn dài thẳng tắp / nhanh nhẹn, vụt một cái, mau lẹ / thở phào nhẹ nhõm"
+    },
+    {
+      "jp": "ずっと",
+      "vi": "...suốt, mãi, (tiếp diễn trong thời gian dài không ngừng)"
+    },
+    {
+      "jp": "そうっと",
+      "vi": "そっと"
+    },
+    {
+      "jp": "たった",
+      "vi": "chỉ có khoảng, chỉ có"
+    },
+    {
+      "jp": "どっと",
+      "vi": "nhất loạt đồng thanh, nhất loạt cùng..._cùng xúm lại một chỗ"
+    },
+    {
+      "jp": "もっと",
+      "vi": "...hơn (so với mức mình đang có)"
+    },
+    {
+      "jp": "やっと",
+      "vi": "cuối cùng thì đã, rốt cuộc đã (chỉ kết quả)"
+    },
+    {
+      "jp": "いわば",
+      "vi": "nói chung, nhìn chung, (như những thứ khác)"
+    },
+    {
+      "jp": "うんと",
+      "vi": "cực kì, vô cùng (mức độ)"
+    },
+    {
+      "jp": "およそ",
+      "vi": "khoảng chừng, cỡ khoảng (ước lượng)"
+    },
+    {
+      "jp": "さすが",
+      "vi": "dù thế nào thì cũng, cuối cùng thì cũng.._Bao nhiêu đi nữa thì cũng..."
+    },
+    {
+      "jp": "実は(じつは)",
+      "vi": "thực sự là (dùng để trình bày lí do)"
+    },
+    {
+      "jp": "全て(すべて)",
+      "vi": "tất cả, tất tật, toàn bộ"
+    },
+    {
+      "jp": "せめて",
+      "vi": "ít nhất là, tốt thiểu cũng"
+    },
+    {
+      "jp": "せいぜい",
+      "vi": "Tối đa là , nhiều nhất là / 確か(たしか)...が thì đành rằng....nhưng mà...."
+    },
+    {
+      "jp": "確かに(たしかに)",
+      "vi": "chắc chắn là, chính xác là, đúng là"
+    },
+    {
+      "jp": "どうか",
+      "vi": "dùng để nhờ vả lịch sự (何卒) / dùng để cầu xin một cách thành khẩn / làm nên một cái gì đó, một cái gì đó có thể / một cái gì đó bất thường, không thể hiểu nổi, không thể tưởng tượng nổi / không biết có...hay không (かどうか) / nhất định sẽ (是非)"
+    },
+    {
+      "jp": "どうせ",
+      "vi": "dù thế nào đi nữa, trong bất cứ tình huống nào đi nữa"
+    },
+    {
+      "jp": "どうも",
+      "vi": "vô cùng, hết sức, rất, lắm_không tài nào mà làm...được, không thể nào ..được"
+    },
+    {
+      "jp": "どこか",
+      "vi": "ở đâu đó, chỗ nào đó"
+    },
+    {
+      "jp": "普段(ふだん)",
+      "vi": "thông thường, bình thường thì, thường thường"
+    },
+    {
+      "jp": "普通(ふつう)",
+      "vi": "mức bình thường (không tốt không xấu)"
+    },
+    {
+      "jp": "本の(ほんの...)",
+      "vi": "thành thật, thật sự_một chút lòng thành"
+    },
+    {
+      "jp": "まさか...だろう",
+      "vi": "không lẽ nào lại, không lí nào, không chừng lại (dự đoán)"
+    },
+    {
+      "jp": "まるで...ようだ",
+      "vi": "hoàn toàn giống, cứ y như là (ví von so sánh)"
+    },
+    {
+      "jp": "ちょうど...ようだ",
+      "vi": "cứ hệt như là, cứ y như là"
+    },
+    {
+      "jp": "むしろ...の方が...",
+      "vi": "thà...còn hơn"
+    },
+    {
+      "jp": "むしろ",
+      "vi": "nghiêng về A hơn (khiso sánh A và B)"
+    },
+    {
+      "jp": "もしも",
+      "vi": "Giả sử, nếu như"
+    },
+    {
+      "jp": "もし...たら...",
+      "vi": "giả sử , nếu như"
+    },
+    {
+      "jp": "たとえ...ても...",
+      "vi": "ví dụ như, giả sử"
+    },
+    {
+      "jp": "やがて",
+      "vi": "ngay lập tức / chẳng bao lâu nữa / vẫn như thế (giữ nguyên trạng tháicũ)"
+    },
+    {
+      "jp": "余計(よけい)",
+      "vi": "thừa thãi, dư thừa / thêm vào đó (その上) / vô ích, vô tác dụng, ngốc nghếch / hơn hẳn, hơn(一層) / わざと hơn thế nữa(更に) / cố ý, cố tình, ép buộc / một chút, một tí / một cách riêng rẽ, làm từng cái một / một cách chính thức"
+    },
+    {
+      "jp": "割と(わりと)",
+      "vi": "A...so với...(không bằng mức độ lẽ ra phải có)"
+    },
+    {
+      "jp": "あいにく",
+      "vi": "rất tiếc là, tiếc là..."
+    },
+    {
+      "jp": "あくまで",
+      "vi": "nói cho đến cùng thì..., suy cho cùng_ làm đến nơi đến chốn"
+    },
+    {
+      "jp": "あらゆる",
+      "vi": "hết thảy, hết tất cả"
+    },
+    {
+      "jp": "案外(あんがい)",
+      "vi": "bất ngờ là, không ngờ là , ngoài tầm suy nghĩ"
+    },
+    {
+      "jp": "いくぶん",
+      "vi": "một phần nào đó"
+    },
+    {
+      "jp": "いつでも",
+      "vi": "lúc nào cũng được"
+    },
+    {
+      "jp": "今にも",
+      "vi": "bây giờ vẫnvậy, giờ cũng thế"
+    },
+    {
+      "jp": "いわゆる",
+      "vi": "...nói chung, như mọi đối tượng khác cùng loại"
+    },
+    {
+      "jp": "大勢(おおぜい)",
+      "vi": "nhiều chỉ người"
+    },
+    {
+      "jp": "おそらく...だろう",
+      "vi": "có lẽ, chắc là"
+    },
+    {
+      "jp": "思わず(おもわず)",
+      "vi": "không ngờ, bất thần"
+    },
+    {
+      "jp": "かえって",
+      "vi": "ngược lại"
+    },
+    {
+      "jp": "必ず(かならず)",
+      "vi": "nhất định sẽ, nhất định phải"
+    },
+    {
+      "jp": "きちんと",
+      "vi": "chỉn chu, ngăn nắp, gọn gàng_đứng đắn, đàng hoàng, nghiêm túc"
+    },
+    {
+      "jp": "偶然(ぐうぜん)",
+      "vi": "ngẫu nhiên, tình cờ"
+    },
+    {
+      "jp": "結構(けっこう)",
+      "vi": "được_no, đủ_tốt"
+    },
+    {
+      "jp": "さっさと",
+      "vi": "mau lẹ, nhanh nhẹn"
+    },
+    {
+      "jp": "早速(さっそく)",
+      "vi": "thoáng chốc, trong chốc lát"
+    },
+    {
+      "jp": "しいんと",
+      "vi": "im thin thít_lặng như tờ"
+    },
+    {
+      "jp": "しばらく",
+      "vi": "một chốc, một lát"
+    },
+    {
+      "jp": "せっかく",
+      "vi": "mất công, tốn công sức"
+    },
+    {
+      "jp": "せっかく...のに...",
+      "vi": "mất công làm...vậy mà..."
+    },
+    {
+      "jp": "せっせと",
+      "vi": "chăm chỉ, siêng năng"
+    },
+    {
+      "jp": "絶対(ぜったい)",
+      "vi": "nhất định, tuyệt đối phải..."
+    },
+    {
+      "jp": "絶対...ない",
+      "vi": "tuyệt đối không..., nhất định không.."
+    },
+    {
+      "jp": "ぜいひとも",
+      "vi": "nhất định sẽ, dù thế nào đi nữa cũng sẽ.."
+    },
+    {
+      "jp": "相当(そうとう)",
+      "vi": "tương đối là.., khá là"
+    },
+    {
+      "jp": "そのまま",
+      "vi": "cứ...mãi, giữ nguyên trạng thái không thay đổi"
+    },
+    {
+      "jp": "それほど",
+      "vi": "đến mức độ đó"
+    },
+    {
+      "jp": "たいして",
+      "vi": "đáng kể, đáng nói"
+    },
+    {
+      "jp": "大層(たいそう)",
+      "vi": "rất, lắm, cực kì"
+    },
+    {
+      "jp": "大抵(たいてい)",
+      "vi": "thông thường, bình thường thì...ai cũng làm"
+    },
+    {
+      "jp": "たちまち",
+      "vi": "ngay lập tức, ngay tức khắc_thình lình, đột ngột"
+    },
+    {
+      "jp": "単なる(たんなる)",
+      "vi": "một cách đơn giản"
+    },
+    {
+      "jp": "ちっとも",
+      "vi": "một chút, một ít"
+    },
+    {
+      "jp": "ちっとも...ない",
+      "vi": "một chút cũng không..., hoàn toàn không..."
+    },
+    {
+      "jp": "ちゃんと",
+      "vi": "làm đến nơi đến chốn, làm cẩn thận_đứng đắn, đàng hoàng"
+    },
+    {
+      "jp": "ちょっと",
+      "vi": "một chút, một ít, không đáng kể_hơi, khá là, tương đối..."
+    },
+    {
+      "jp": "ちょうど",
+      "vi": "đúng mức, vừa hợp"
+    },
+    {
+      "jp": "できれば",
+      "vi": "nếu có thể"
+    },
+    {
+      "jp": "どうして...ですか",
+      "vi": "tại sao mạnh hơn"
+    },
+    {
+      "jp": "なぜ...ですか",
+      "vi": "tại sao"
+    },
+    {
+      "jp": "どうしても...ない",
+      "vi": "nhất định không chịu.., làm thế nào cũng không.."
+    },
+    {
+      "jp": "突然(とつぜん)",
+      "vi": "đột nhiên, bất thình lình"
+    },
+    {
+      "jp": "とにかく",
+      "vi": "cái này cái nọ_ngoài ra, trừ khi_dù sao đi nữa thì cũng"
+    },
+    {
+      "jp": "ともかく",
+      "vi": "A thì không nói làm gì.._trước hết thì cứ làm...đi đã"
+    },
+    {
+      "jp": "なにしろ",
+      "vi": "không tài nào mà làm...được_dù sao thì cũng..."
+    },
+    {
+      "jp": "なにぶん",
+      "vi": "một chút cũng được..., dù sao thì cũng hãy..._dùng để nhờ vả một cách thành khẩn"
+    },
+    {
+      "jp": "のこらず",
+      "vi": "toàn thể, hết thảy"
+    },
+    {
+      "jp": "果たして(はたして)",
+      "vi": "cuối cùng thì.., thể nào mà chẳng..như mình dự đoán"
+    },
+    {
+      "jp": "ひとまず",
+      "vi": "tạm ngừng, ngắt quãng_xuống dòng"
+    },
+    {
+      "jp": "本来(ほんらい)",
+      "vi": "vốn dĩ là, ban đầu là_đương nhiên là.."
+    },
+    {
+      "jp": "全く(まったく)",
+      "vi": "hoàn toàn"
+    },
+    {
+      "jp": "まもなく",
+      "vi": "chẳng mấy chốc_liên tục, không ngừng nghỉ"
+    },
+    {
+      "jp": "最も(もっとも)",
+      "vi": "...nhất, hơn tất cả"
+    },
+    {
+      "jp": "尤も(もっとも)",
+      "vi": "song, tuy nhiên_đương nhiên, hợp lẽ, phải lẽ"
+    },
+    {
+      "jp": "ようやく",
+      "vi": "dần dần sẽ_suýt nữa thì, chút xíu nữa thì, một chút nữa"
+    },
+    {
+      "jp": "何もない",
+      "vi": "không có gì"
+    },
+    {
+      "jp": "何でも",
+      "vi": "caí gì cũng"
+    },
+    {
+      "jp": "何とか",
+      "vi": "một cái gì đó không rõ ràng / làm nên một cái gì đó / cuối cùng thì, rốt cuộc thì"
+    },
+    {
+      "jp": "何となく",
+      "vi": "chẳng hiểu tại sao, không hiểu sao"
+    },
+    {
+      "jp": "なんとも",
+      "vi": "dùng để xin lỗi thành khẩn / cực kì, vô cùng, rất / Không có gì cả, không vấn đề gì"
+    },
+    {
+      "jp": "結局(けっきょく)",
+      "vi": "rốt cục, kết cục"
+    },
+    {
+      "jp": "そう言えば",
+      "vi": "nếu nói vậy thì.., nói thế thì.."
+    },
+    {
+      "jp": "そう言っても",
+      "vi": "nói vậy thì cũng.., nói thế nhưng mà..."
+    },
+    {
+      "jp": "できるだけ",
+      "vi": "cố gắng hết sức, bằng mọi cách"
+    },
+    {
+      "jp": "できるかぎり",
+      "vi": "cố gắng đến mức có thể"
+    },
+    {
+      "jp": "もしかしたら...かもしれない",
+      "vi": "chưa biết chừng sẽ.., có khi lại là.."
+    },
+    {
+      "jp": "もしかすると...かもしれない",
+      "vi": "chưa biết chừng sẽ.., có khi lại là.."
+    },
+    {
+      "jp": "いくら...ても...",
+      "vi": "..bao nhiêu đi nữa thì cũng.."
+    },
+    {
+      "jp": "比較的(ひかくてき)",
+      "vi": "một cách tương đối, khá là, tương đối lớn"
+    },
+    {
+      "jp": "久しぶり",
+      "vi": "lâu lâu, thời gian dài"
+    },
+    {
+      "jp": "即ち(すなわち)",
+      "vi": "nói chung là, hay nói cách khác là(đưa ra một từ để tóm tắt những cái nhỏ đã nêu)"
+    },
+    {
+      "jp": "すると",
+      "vi": "nếu vậy, vậy thì_và rồi, thế rồi"
+    },
+    {
+      "jp": "及び(および)",
+      "vi": "A hoặc B (lịch sự)"
+    },
+    {
+      "jp": "ところが",
+      "vi": "nhưng, song (dùng để đưa ra nội dung đối lập) / ところで còn về vấn đề, còn về(dùng để chuyển đọan văn)"
+    },
+    {
+      "jp": "さて",
+      "vi": "vậy, nay, thôi, vậy nay (dùng để chuyển sang vấn đề chính mình định nói)"
+    },
+    {
+      "jp": "又(また)",
+      "vi": "hoặc, thêm nữa"
+    },
+    {
+      "jp": "又は(または)",
+      "vi": "A hoặc B"
+    },
+    {
+      "jp": "しかも",
+      "vi": "hơn nữa, ngoài ra_vả lại, song, tuy nhiên (dùng để bổ sung)"
+    },
+    {
+      "jp": "その上",
+      "vi": "hơn nữa, thêm vào đó"
+    },
+    {
+      "jp": "そのように",
+      "vi": "theo đó, do đó"
+    },
+    {
+      "jp": "そのため",
+      "vi": "do đó, vì vậy, vì lẽ đó(văn viết)"
+    },
+    {
+      "jp": "あたかも...ようだ",
+      "vi": "cứ y như là, hoàn toàn như (so sánh, ví von)"
+    },
+    {
+      "jp": "絶えず(たえず)",
+      "vi": "không ngừng, liên tiếp"
+    },
+    {
+      "jp": "いつの間にか(いつのまにか)",
+      "vi": "một lúc nào đó, lúc nào đó không hay"
+    },
+    {
+      "jp": "ちなみに",
+      "vi": "nhân đây, tiện đây xin nói thêm (dùng bổ sung)"
+    },
+    {
+      "jp": "それとも",
+      "vi": "A hay là B, (chọn lấy 1cách)"
+    },
+    {
+      "jp": "大方(おおかた)",
+      "vi": "đại khái, đại để_đa số, phần lớn"
+    },
+    {
+      "jp": "いっこうに...ない",
+      "vi": "hoàn toàn không thay đổi, hầu như không chuyển"
+    },
+    {
+      "jp": "大まかに",
+      "vi": "sơ lược, qua loa_đại khái, đại để"
+    },
+    {
+      "jp": "おおっざぱ",
+      "vi": "sơ lược, tóm lược_đại khái, sơ qua"
+    },
+    {
+      "jp": "かりに...ても...",
+      "vi": "tạm thời có..đi nữa,"
+    },
+    {
+      "jp": "よもや...(する)まい",
+      "vi": "nhất định sẽ không...nữa"
+    },
+    {
+      "jp": "それどころか",
+      "vi": "không những không mà còn_ngược lại"
+    },
+    {
+      "jp": "なるほど",
+      "vi": "ra vậy, ra thế (dùng khi hiểu ra cái gì đó)"
+    },
+    {
+      "jp": "後ほど(のちほど)",
+      "vi": "lần tới, lần sau, hẹn gặp lại (lịch sự)"
+    }
+  ],
+  "naAdjectives": [
+    {
+      "kana": "すき",
+      "kanji": "好き",
+      "vi": "Thích,"
+    },
+    {
+      "kana": "yêu",
+      "kanji": "ゆうめい",
+      "vi": "有名"
+    },
+    {
+      "kana": "Nổi",
+      "kanji": "tiếng",
+      "vi": "きれい"
+    },
+    {
+      "kana": "Đẹp,",
+      "kanji": "xinh",
+      "vi": "ていねい"
+    },
+    {
+      "kana": "丁寧",
+      "kanji": "Lịch",
+      "vi": "sự"
+    },
+    {
+      "kana": "きらい",
+      "kanji": "嫌い",
+      "vi": "Ghét"
+    },
+    {
+      "kana": "しずか",
+      "kanji": "静か",
+      "vi": "Yên"
+    },
+    {
+      "kana": "tĩnh",
+      "kanji": "ひま",
+      "vi": "暇"
+    },
+    {
+      "kana": "Rảnh",
+      "kanji": "rỗi",
+      "vi": "にぎやか"
+    },
+    {
+      "kana": "賑やか",
+      "kanji": "Náo",
+      "vi": "nhiệt"
+    },
+    {
+      "kana": "べんり",
+      "kanji": "便利",
+      "vi": "Tiện"
+    },
+    {
+      "kana": "lợi",
+      "kanji": "げんき",
+      "vi": "元気"
+    },
+    {
+      "kana": "Khỏe",
+      "kanji": "mạnh",
+      "vi": "いろいろ"
+    },
+    {
+      "kana": "色々",
+      "kanji": "Nhiều",
+      "vi": "~"
+    },
+    {
+      "kana": "だいじょうぶ",
+      "kanji": "大丈夫",
+      "vi": "Không"
+    },
+    {
+      "kana": "sao",
+      "kanji": "じょうぶ",
+      "vi": "丈夫"
+    },
+    {
+      "kana": "Khỏe,",
+      "kanji": "chắc",
+      "vi": "chắn"
+    },
+    {
+      "kana": "たいへん",
+      "kanji": "大変",
+      "vi": "Vất"
+    },
+    {
+      "kana": "vả",
+      "kanji": "らく",
+      "vi": "楽"
+    },
+    {
+      "kana": "Dễ",
+      "kanji": "dàng,",
+      "vi": "thoái"
+    },
+    {
+      "kana": "mái",
+      "kanji": "いや",
+      "vi": "嫌"
+    },
+    {
+      "kana": "Không",
+      "kanji": "hài",
+      "vi": "lòng"
+    },
+    {
+      "kana": "たいせつ",
+      "kanji": "大切",
+      "vi": "Quan"
+    },
+    {
+      "kana": "trọng",
+      "kanji": "じょうず",
+      "vi": "上手"
+    },
+    {
+      "kana": "Giỏi",
+      "kanji": "へた",
+      "vi": "下手"
+    },
+    {
+      "kana": "Kém",
+      "kanji": "いっしょうけんめい",
+      "vi": "一生懸命"
+    },
+    {
+      "kana": "Cố",
+      "kanji": "gắng,",
+      "vi": "hết"
+    },
+    {
+      "kana": "mình",
+      "kanji": "きけん",
+      "vi": "危険"
+    },
+    {
+      "kana": "Nguy",
+      "kanji": "hiểm",
+      "vi": "ざんねん"
+    },
+    {
+      "kana": "残念",
+      "kanji": "Tiếc,",
+      "vi": "đáng"
+    },
+    {
+      "kana": "tiếc",
+      "kanji": "しんぱい",
+      "vi": "心配"
+    },
+    {
+      "kana": "Lo",
+      "kanji": "lắng",
+      "vi": "じゆう"
+    },
+    {
+      "kana": "自由",
+      "kanji": "Tự",
+      "vi": "do"
+    },
+    {
+      "kana": "じゅうぶん",
+      "kanji": "十分",
+      "vi": "Đầy"
+    },
+    {
+      "kana": "đủ",
+      "kanji": "だいすき",
+      "vi": "大好き"
+    },
+    {
+      "kana": "Rất",
+      "kanji": "thích",
+      "vi": "てきとう"
+    },
+    {
+      "kana": "適当",
+      "kanji": "Phù",
+      "vi": "hợp,"
+    },
+    {
+      "kana": "hợp",
+      "kanji": "lý",
+      "vi": "とくべつ"
+    },
+    {
+      "kana": "特別",
+      "kanji": "Đặc",
+      "vi": "biệt"
+    },
+    {
+      "kana": "ねっしん",
+      "kanji": "熱心",
+      "vi": "Nhiệt"
+    },
+    {
+      "kana": "tình",
+      "kanji": "ひつよう",
+      "vi": "必要"
+    },
+    {
+      "kana": "まじめ",
+      "kanji": "Chăm",
+      "vi": "chỉ,"
+    },
+    {
+      "kana": "nghiêm",
+      "kanji": "túc",
+      "vi": "まっすぐ"
+    },
+    {
+      "kana": "真直ぐ",
+      "kanji": "Thẳng",
+      "vi": "tắp"
+    },
+    {
+      "kana": "むり",
+      "kanji": "無理",
+      "vi": "Không"
+    },
+    {
+      "kana": "thể,",
+      "kanji": "không",
+      "vi": "thích"
+    },
+    {
+      "kana": "hợp",
+      "kanji": "りっぱ",
+      "vi": "立派"
+    },
+    {
+      "kana": "ưu",
+      "kanji": "tú,",
+      "vi": "đẹp,"
+    },
+    {
+      "kana": "nguy",
+      "kanji": "nga",
+      "vi": "おだやかな"
+    },
+    {
+      "kana": "穏やかな",
+      "kanji": "1êm",
+      "vi": "ả"
+    },
+    {
+      "kana": ",êm",
+      "kanji": "đềm",
+      "vi": "(khung"
+    },
+    {
+      "kana": "2xuôi",
+      "kanji": "tai,",
+      "vi": "dễ"
+    },
+    {
+      "kana": "nghe",
+      "kanji": "(nói",
+      "vi": ")"
+    },
+    {
+      "kana": "3trầm",
+      "kanji": "lắng",
+      "vi": "(tính"
+    },
+    {
+      "kana": "cách)",
+      "kanji": "ほがらか",
+      "vi": "朗らか"
+    },
+    {
+      "kana": "1tươi",
+      "kanji": "tắn",
+      "vi": ",vui"
+    },
+    {
+      "kana": "vẻ",
+      "kanji": ",khỏe",
+      "vi": "khoắn"
+    },
+    {
+      "kana": "2tươi",
+      "kanji": "mát",
+      "vi": ",trong"
+    },
+    {
+      "kana": "sáng",
+      "kanji": "(cảm",
+      "vi": "giác"
+    },
+    {
+      "kana": ")",
+      "kanji": "なだらか",
+      "vi": "1thoai"
+    },
+    {
+      "kana": "thoải",
+      "kanji": "(dốc",
+      "vi": ",đường"
+    },
+    {
+      "kana": "2lưu",
+      "kanji": "loát",
+      "vi": ",trôi"
+    },
+    {
+      "kana": "chảy",
+      "kanji": "(nói)",
+      "vi": "さわやか"
+    },
+    {
+      "kana": "爽やか",
+      "kanji": "1tỉnh",
+      "vi": "táo"
+    },
+    {
+      "kana": ",mát",
+      "kanji": "mẻ",
+      "vi": ",sảng"
+    },
+    {
+      "kana": "khoái",
+      "kanji": "(cảm",
+      "vi": "giác"
+    },
+    {
+      "kana": "2sảng",
+      "kanji": "khoái,",
+      "vi": "thoải"
+    },
+    {
+      "kana": "mái",
+      "kanji": "(nói)",
+      "vi": "やっかい"
+    },
+    {
+      "kana": "厄介",
+      "kanji": "phiền",
+      "vi": "muộn"
+    },
+    {
+      "kana": "みじめ",
+      "kanji": "惨め",
+      "vi": "thảm"
+    },
+    {
+      "kana": "thiết",
+      "kanji": ",thê",
+      "vi": "thảm"
+    },
+    {
+      "kana": "あわれ",
+      "kanji": "哀れ",
+      "vi": "đáng"
+    },
+    {
+      "kana": "thương",
+      "kanji": "わがまま",
+      "vi": "我がまま"
+    },
+    {
+      "kana": "bướng",
+      "kanji": "bỉnh",
+      "vi": ",ngoan"
+    }
+  ],
+  "shiiAdjectives": [
+    {
+      "kanji": "Tính từ đuôi ~しい 疑わしい",
+      "kana": "うたがしい",
+      "vi": "Đáng nghi, hồ nghi"
+    },
+    {
+      "kanji": "煩わしい",
+      "kana": "わずらわしい",
+      "vi": "Phiền muộn, buồn phiền, lo lắng"
+    },
+    {
+      "kanji": "紛) らわしい",
+      "kana": "まぎらわしい",
+      "vi": "(Màu sắc) nhang nhác ,( từ ngữ) trông giống nhau khó phân biệt ,Chói chang, chói mắt ( まぶしい)"
+    },
+    {
+      "kanji": "悔しい",
+      "kana": "くやしい",
+      "vi": "Hậm hực, tức"
+    },
+    {
+      "kanji": "恨めしい",
+      "kana": "うらめしい",
+      "vi": "Căm hờn, thù hằn, căm ghét"
+    },
+    {
+      "kanji": "懐かしい",
+      "kana": "なつかしい",
+      "vi": "Tiếc nhớ, nhớ"
+    },
+    {
+      "kanji": "嘆かわしい",
+      "kana": "なげかわしい",
+      "vi": "Đau buồn, thương tiếc, đau xót"
+    },
+    {
+      "kanji": "狂おしい",
+      "kana": "くるおしい",
+      "vi": "Điên cuồng"
+    },
+    {
+      "kanji": "貧しい",
+      "kana": "まずしい",
+      "vi": "Nghèo nàn, bần cùng"
+    },
+    {
+      "kanji": "乏しい",
+      "kana": "とぼしい",
+      "vi": "Thiếu thốn, ít, thiếu hụt"
+    },
+    {
+      "kanji": "甚だしい",
+      "kana": "はなはだしい",
+      "vi": "To, lớn, ghê gớm"
+    },
+    {
+      "kanji": "悩ましい",
+      "kana": "なやましい",
+      "vi": "Lo lắng, dằn vặt, bồn chồn"
+    },
+    {
+      "kanji": "卑しい",
+      "kana": "いやしい",
+      "vi": "Đê tiện, hạ cấp"
+    },
+    {
+      "kanji": "慎ましい",
+      "kana": "つつましい",
+      "vi": "Thận trọng, cẩn thận ,Nhún ngường, nhũn nhặn"
+    },
+    {
+      "kanji": "久しい",
+      "kana": "ひさしい",
+      "vi": "Lâu, hồi lâu"
+    },
+    {
+      "kanji": "虚しい",
+      "kana": "むなしい",
+      "vi": "、空しい( むなしい ) Không hiệu quả, vô tác dụng, không có nội dung."
+    },
+    {
+      "kanji": "見苦しい",
+      "kana": "みぐるしい",
+      "vi": "Hèn, dơ, xấu xí, đáng hổ thẹn"
+    },
+    {
+      "kanji": "相応しい",
+      "kana": "ふさわしい",
+      "vi": "Phù hợp, thích hợp"
+    },
+    {
+      "kanji": "逞しい",
+      "kana": "たくましい",
+      "vi": "Tráng kiện, cường tráng"
+    },
+    {
+      "kanji": "芳しい",
+      "kana": "かんばしい",
+      "vi": "Thơm nức, thơm ngào ngạt ,Thơm tho, tốt đẹp ( nghĩa bóng )"
+    },
+    {
+      "kanji": "麗しい",
+      "kana": "うるわしい",
+      "vi": "Lộng lẫy, diễm lệ, rực rỡ (華麗な) ,Hùng vĩ, hoành tráng ,Chỉn chu, gọn gàng ,"
+    },
+    {
+      "kanji": "正しい",
+      "kana": "ただしい",
+      "vi": "Đúng đắn, chính xác"
+    },
+    {
+      "kanji": "恭しい",
+      "kana": "うやうやしい",
+      "vi": "Kính cẩn, lễ phép"
+    },
+    {
+      "kanji": "浅ましい",
+      "kana": "あ さましい",
+      "vi": "Thê thảm, tồi tệ, thảm hại"
+    },
+    {
+      "kanji": "夥しい",
+      "kana": "おびただしい",
+      "vi": "Rất nhiều, cực nhiều, số lượng và mức độ lớn"
+    },
+    {
+      "kanji": "(嘆かわしい)",
+      "kana": "",
+      "vi": ",đáng xấu hổ, đáng ngượng, đáng hổ thẹn ,Cực kì, rất, ghê gớm (甚だしい) ,hèn hạ, bủn xỉn, hà tiện"
+    },
+    {
+      "kanji": "惜しい",
+      "kana": "おしい",
+      "vi": "không nỡ,không đành,tiếc."
+    },
+    {
+      "kanji": "怪しい",
+      "kana": "あやしい",
+      "vi": "kì lạ, khả nghi, đáng nghi"
+    },
+    {
+      "kanji": "嬉しい",
+      "kana": "うれしい",
+      "vi": "vui mừng (bản thân thấy vui mừng)"
+    },
+    {
+      "kanji": "可笑しい",
+      "kana": "おかしい",
+      "vi": "lạ lùng ,không bình thường"
+    },
+    {
+      "kanji": "悲しい",
+      "kana": "かなしい",
+      "vi": "buồn rầu (bản thân thấy buồn)"
+    },
+    {
+      "kanji": "厳しい",
+      "kana": "きびしい",
+      "vi": "nghiêm khắc"
+    },
+    {
+      "kanji": "悔しい",
+      "kana": "くやしい",
+      "vi": "tức ,hận"
+    },
+    {
+      "kanji": "苦しい",
+      "kana": "くるしい",
+      "vi": "đau khổ ,khổ sở"
+    },
+    {
+      "kanji": "詳しい",
+      "kana": "くわしい",
+      "vi": "chi tiết"
+    },
+    {
+      "kanji": "険しい",
+      "kana": "けわしい",
+      "vi": "nguy hiểm"
+    },
+    {
+      "kanji": "恋しい",
+      "kana": "こいしい",
+      "vi": "yêu thương"
+    },
+    {
+      "kanji": "寂しい",
+      "kana": "さびしい",
+      "vi": "buồn bã (khung cảnh buồn bã)"
+    },
+    {
+      "kanji": "親しい",
+      "kana": "したしい",
+      "vi": "thân thiện"
+    },
+    {
+      "kanji": "涼しい",
+      "kana": "すずしい",
+      "vi": "mát mẻ (khí hậu)"
+    },
+    {
+      "kanji": "正しい",
+      "kana": "ただしい",
+      "vi": "phải ,đúng"
+    },
+    {
+      "kanji": "楽しい",
+      "kana": "たのしい",
+      "vi": "vui vẻ,vui nhộn (khung cảnh vui nhộn)"
+    },
+    {
+      "kanji": "激しい",
+      "kana": "はげしい",
+      "vi": "mạnh bạo ,dữ dội"
+    },
+    {
+      "kanji": "等しい",
+      "kana": "ひとしい",
+      "vi": "công bằng ,bằng nhau"
+    },
+    {
+      "kanji": "貧しい",
+      "kana": "まずしい",
+      "vi": "nghèo đói ,khó khăn"
+    },
+    {
+      "kanji": "眩しい",
+      "kana": "まぶしい",
+      "vi": "chói mắt (ánh sáng)"
+    },
+    {
+      "kanji": "優しい",
+      "kana": "やさしい",
+      "vi": "hiền từ (tính cách)"
+    },
+    {
+      "kanji": "易しい",
+      "kana": "やさしい",
+      "vi": "dễ dàng"
+    },
+    {
+      "kanji": "新しい",
+      "kana": "あたらしい",
+      "vi": "mới (đồ mới )"
+    },
+    {
+      "kanji": "勇ましい",
+      "kana": "いさましい",
+      "vi": "dũng mãnh,dũng cảm"
+    },
+    {
+      "kanji": "忙しい",
+      "kana": "いそがしい",
+      "vi": "bận rộn"
+    },
+    {
+      "kanji": "恐ろしい",
+      "kana": "おそろしい",
+      "vi": "đáng sợ,khiếp sợ"
+    },
+    {
+      "kanji": "大人しい",
+      "kana": "おとなしい",
+      "vi": "chăm chỉ ,đàng hoàng (như người lớn)"
+    },
+    {
+      "kanji": "騒がしい",
+      "kana": "さわがしい",
+      "vi": "làm ầm ĩ,gây ồn ào"
+    },
+    {
+      "kanji": "頼もしい",
+      "kana": "たのもしい",
+      "vi": "đáng tin cậy"
+    },
+    {
+      "kanji": "懐かしい",
+      "kana": "なつかしい",
+      "vi": "tiếc nhớ,nuối tiếc"
+    },
+    {
+      "kanji": "恥ずかしい",
+      "kana": "はずかしい",
+      "vi": "xấu hổ"
+    },
+    {
+      "kanji": "難しい",
+      "kana": "むずかしい",
+      "vi": "khó"
+    },
+    {
+      "kanji": "珍しい",
+      "kana": "めずらしい",
+      "vi": "kì lạ,hiếm có"
+    },
+    {
+      "kanji": "喧しい",
+      "kana": "やかましい",
+      "vi": "náo động,gây mất trật tự"
+    },
+    {
+      "kanji": "厚かましい",
+      "kana": "あつかましい",
+      "vi": "trơ trẽn (mặt dày)"
+    },
+    {
+      "kanji": "慌しい",
+      "kana": "あわただしい",
+      "vi": "vội vàng,hấp tấp"
+    },
+    {
+      "kanji": "羨ましい",
+      "kana": "うらやましい",
+      "vi": "ghen tị,thèm muốn được như thế"
+    },
+    {
+      "kanji": "かわいらしい",
+      "kana": "",
+      "vi": "đáng yêu, dễ thương"
+    },
+    {
+      "kanji": "憎らしい",
+      "kana": "にくらしい",
+      "vi": "dễ ghét, đáng ghét"
+    },
+    {
+      "kanji": "図々しい",
+      "kana": "ずうずうしい",
+      "vi": "làm ngơ, thản nhiên, coi như không có chuyện gì"
+    },
+    {
+      "kanji": "騒々しい",
+      "kana": "そうぞうしい",
+      "vi": "ầm ĩ,huyên náo"
+    },
+    {
+      "kanji": "そそっかしい",
+      "kana": "",
+      "vi": "bất cẩn ,cẩu thả ,sơ ý"
+    },
+    {
+      "kanji": "馬鹿らしい",
+      "kana": "ばからしい",
+      "vi": "dại dột ,ngốc nghếch ,vô ích, vô tác dụng"
+    },
+    {
+      "kanji": "甚だしい",
+      "kana": "はなはだしい",
+      "vi": "vô cùng ,rất, lắm (dùng như một phó từ)"
+    },
+    {
+      "kanji": "若々しい",
+      "kana": "わかわかしい",
+      "vi": "trẻ trung"
+    }
+  ],
+  "iAdjectives": [
+    {
+      "kanji": "Tính từ ngắn đuôi ~い 濃い",
+      "kana": "こい",
+      "vi": "đặc (chất lỏng) ,đậm ,thẫm (màu sắc) , nồng (vị )"
+    },
+    {
+      "kanji": "薄い",
+      "kana": "うすい",
+      "vi": "mỏng ,loãng (chất lỏng)"
+    },
+    {
+      "kanji": "厚い",
+      "kana": "あつい",
+      "vi": "dày"
+    },
+    {
+      "kanji": "浅い",
+      "kana": "あさい",
+      "vi": "nông ,cạn"
+    },
+    {
+      "kanji": "深い",
+      "kana": "ふかい",
+      "vi": "sâu"
+    },
+    {
+      "kanji": "暑い",
+      "kana": "あつい",
+      "vi": "nóng (khí hậu)"
+    },
+    {
+      "kanji": "寒い",
+      "kana": "さむい",
+      "vi": "Lạnh (khí hậu)"
+    },
+    {
+      "kanji": "熱い",
+      "kana": "あつい",
+      "vi": "nóng (nhiệt độ)"
+    },
+    {
+      "kanji": "緩い",
+      "kana": "ゆるい",
+      "vi": "lỏng lẻo"
+    },
+    {
+      "kanji": "荒い",
+      "kana": "あらい",
+      "vi": "hung bạo ,hung tợn (tính tình) ,dữ dội (con sóng )"
+    },
+    {
+      "kanji": "美味い",
+      "kana": "うまい/*おいしい*",
+      "vi": "tốt đẹp ,giỏi"
+    },
+    {
+      "kanji": "偉い",
+      "kana": "えらい",
+      "vi": "tự hào ,kiêu hãnh"
+    },
+    {
+      "kanji": "遅い",
+      "kana": "おそい",
+      "vi": "chậm ,trễ ,muộn"
+    },
+    {
+      "kanji": "早い",
+      "kana": "はやい",
+      "vi": "sớm"
+    },
+    {
+      "kanji": "速い",
+      "kana": "はやい",
+      "vi": "nhanh"
+    },
+    {
+      "kanji": "長い",
+      "kana": "ながい",
+      "vi": "dài (kích thước) ,lâu(thời gian)"
+    },
+    {
+      "kanji": "短い",
+      "kana": "みじかい",
+      "vi": "ngắn(kích thước)"
+    },
+    {
+      "kanji": "重い",
+      "kana": "おもい",
+      "vi": "nặng"
+    },
+    {
+      "kanji": "軽い",
+      "kana": "かるい",
+      "vi": "nhẹ"
+    },
+    {
+      "kanji": "硬い、堅い、固い",
+      "kana": "かたい",
+      "vi": "cứng ,rắn"
+    },
+    {
+      "kanji": "痒い",
+      "kana": "かゆい",
+      "vi": "ngứa ngáy"
+    },
+    {
+      "kanji": "辛い",
+      "kana": "からい",
+      "vi": "cay (vị)"
+    },
+    {
+      "kanji": "塩辛い",
+      "kana": "しおからい",
+      "vi": "mặn (vị)"
+    },
+    {
+      "kanji": "苦い",
+      "kana": "にがい",
+      "vi": "đắng (vị)"
+    },
+    {
+      "kanji": "甘い",
+      "kana": "あまい",
+      "vi": "ngọt"
+    },
+    {
+      "kanji": "酸っぱい",
+      "kana": "すっぱい",
+      "vi": "chua (vị)"
+    },
+    {
+      "kanji": "渋い",
+      "kana": "しぶい",
+      "vi": "chát (vi)̣,sưng sỉa, cau có (thái độ) ,(dao) cùn"
+    },
+    {
+      "kanji": "鋭い",
+      "kana": "するどい",
+      "vi": "mạnh ,sắc ,nhọn (dao kiếm)"
+    },
+    {
+      "kanji": "きつい chật hẹp, chật",
+      "kana": "quần áo",
+      "vi": ",chật vật, eo hẹp"
+    },
+    {
+      "kanji": "温い",
+      "kana": "ぬるい",
+      "vi": "nguội"
+    },
+    {
+      "kanji": "清い",
+      "kana": "きよい",
+      "vi": "trong trẻo ,tinh khiết"
+    },
+    {
+      "kanji": "臭い",
+      "kana": "くさい",
+      "vi": "hôi thối"
+    },
+    {
+      "kanji": "暗い",
+      "kana": "くらい",
+      "vi": "tối ,âm u"
+    },
+    {
+      "kanji": "煙い",
+      "kana": "けむい",
+      "vi": "khó thở (do khói )"
+    },
+    {
+      "kanji": "凄い",
+      "kana": "すごい",
+      "vi": "tuyệt vời , khủng, ghê gớm (khen ngợi)"
+    },
+    {
+      "kanji": "狭い",
+      "kana": "せまい",
+      "vi": "chật ,hẹp (diện tích)"
+    },
+    {
+      "kanji": "広い",
+      "kana": "ひろい",
+      "vi": "rộng, rộng rãi (diện tích)"
+    },
+    {
+      "kanji": "低い",
+      "kana": "ひくい",
+      "vi": "thấp (mức độ )"
+    },
+    {
+      "kanji": "安い",
+      "kana": "やすい",
+      "vi": "rẻ (giá cả)"
+    },
+    {
+      "kanji": "高い",
+      "kana": "たかい",
+      "vi": "cao (mức độ ) ,đắt (giá cả)"
+    },
+    {
+      "kanji": "近い",
+      "kana": "ちかい",
+      "vi": "gần"
+    },
+    {
+      "kanji": "遠い",
+      "kana": "とおい",
+      "vi": "xa, xa xôi"
+    },
+    {
+      "kanji": "強い",
+      "kana": "つよい",
+      "vi": "mạnh , khỏe"
+    },
+    {
+      "kanji": "弱い",
+      "kana": "よわい",
+      "vi": "yếu, yếu ớt"
+    },
+    {
+      "kanji": "くどい",
+      "kana": "",
+      "vi": "bướng bỉnh ,hợm hĩnh"
+    },
+    {
+      "kanji": "ずるい",
+      "kana": "",
+      "vi": "xảo trá , gian trá"
+    },
+    {
+      "kanji": "憎い",
+      "kana": "にくい",
+      "vi": "khó gần ,dễ ghét"
+    },
+    {
+      "kanji": "鈍い",
+      "kana": "にぶい",
+      "vi": "đần độn , chậm hiểu"
+    },
+    {
+      "kanji": "醜い",
+      "kana": "みにくい",
+      "vi": "xấu xí ,khó coi"
+    },
+    {
+      "kanji": "辛い",
+      "kana": "つらい",
+      "vi": "chán ,nhàm chán"
+    },
+    {
+      "kanji": "面白い",
+      "kana": "おもしろい",
+      "vi": "thú vị , hài hước (tính cách)"
+    },
+    {
+      "kanji": "鈍い",
+      "kana": "のろい",
+      "vi": "bình chân như vại ,chậm chạp"
+    },
+    {
+      "kanji": "賢い",
+      "kana": "かしこい",
+      "vi": "thông minh ,linh hoạt, lanh lẹ"
+    },
+    {
+      "kanji": "ひどい",
+      "kana": "",
+      "vi": "nghiêm trọng ,trầm trọng"
+    },
+    {
+      "kanji": "太い",
+      "kana": "ふとい",
+      "vi": "béo ,mập"
+    },
+    {
+      "kanji": "細い",
+      "kana": "ほそい",
+      "vi": "thon thả (dáng người) ,thon dài"
+    },
+    {
+      "kanji": "まずい dở , không ngon",
+      "kana": "vị",
+      "vi": ""
+    },
+    {
+      "kanji": "丸い",
+      "kana": "まるい",
+      "vi": "tròn"
+    },
+    {
+      "kanji": "若い",
+      "kana": "わかい",
+      "vi": "trẻ"
+    },
+    {
+      "kanji": "眠い",
+      "kana": "ねむい",
+      "vi": "buồn ngủ"
+    },
+    {
+      "kanji": "危うい",
+      "kana": "あやうい",
+      "vi": "nguy hiểm ,suýt nữa thì...."
+    },
+    {
+      "kanji": "うるさい ồn ào ,náo động",
+      "kana": "âm thanh",
+      "vi": ",lắm chuyện,hay gây sự (tính cách)"
+    },
+    {
+      "kanji": "青白い",
+      "kana": "あおじろい",
+      "vi": "xanh nhạt"
+    },
+    {
+      "kanji": "薄暗い",
+      "kana": "うすぐらい",
+      "vi": "mờ ảo ,tối âm u"
+    },
+    {
+      "kanji": "蒸し暑い",
+      "kana": "むしあつい",
+      "vi": "nóng bức ,nóng ẩm"
+    },
+    {
+      "kanji": "物凄い",
+      "kana": "ものすごい",
+      "vi": "ghê gớm ,khung khiếp (khen ngợi)"
+    },
+    {
+      "kanji": "力強い",
+      "kana": "ちからづよい",
+      "vi": "khỏe ,mạnh"
+    },
+    {
+      "kanji": "面倒くさい",
+      "kana": "めんどうくさい",
+      "vi": "phức tạp, phiền phức, rắc rối"
+    }
+  ],
+  "antonyms": [
+    {
+      "w1": "強い(つよい",
+      "w2": "): mạnh 弱い(よわい ): yếu"
+    },
+    {
+      "w1": "暑い(あつい",
+      "w2": "): nóng 寒い(さむい ):lạnh"
+    },
+    {
+      "w1": "易しい(やさしい",
+      "w2": "): dễ 難しい(むずかしい ): khó"
+    },
+    {
+      "w1": "甘い(あまい",
+      "w2": "): ngọt 辛い(からい ): cay"
+    },
+    {
+      "w1": "嬉しい (うれしい) 悲しい (かなしい)",
+      "w2": ":buồn"
+    },
+    {
+      "raw": "面白い (おもしろい) : thú vị 詰らない (つまらない) : chán"
+    },
+    {
+      "raw": "賑やか (にぎやか) : ồn ào 静か (しずか) : yên tĩnh"
+    },
+    {
+      "w1": "大きい(おおきい",
+      "w2": "): lớn 小さい(ちいさい): nhỏ"
+    },
+    {
+      "w1": "長い(ながい",
+      "w2": "): dài 短い(みじかい ): ngắn"
+    },
+    {
+      "w1": "太い(ふとい",
+      "w2": "): mập 細い(ほそい ): gầy"
+    },
+    {
+      "w1": "重い(おもい",
+      "w2": "): nặng 軽い(かるい ): nhẹ"
+    },
+    {
+      "w1": "深い(ふかい",
+      "w2": "): sâu 浅い(あさい ): cạn"
+    },
+    {
+      "w1": "広い(ひろい",
+      "w2": "): rộng 狭い(せまい ): hẹp"
+    },
+    {
+      "w1": "遠い(とおい",
+      "w2": "): xa 近い(ちかい): gần"
+    },
+    {
+      "w1": "厚い(あつい",
+      "w2": "): dày 薄い(うすい): mỏng"
+    },
+    {
+      "w1": "早い(はやい): nhanh",
+      "w2": "遅い(おそい ): chậm"
+    },
+    {
+      "w1": "明るい(あかるい): sáng",
+      "w2": "暗い(くらい ): tối"
+    },
+    {
+      "w1": "硬い(かたい",
+      "w2": "): cứng 柔らかい(やわらかい ): mềm"
+    },
+    {
+      "w1": "安全",
+      "w2": "(あんぜん): an toàn 危ない (あぶない): nguy hiểm"
+    },
+    {
+      "w1": "多い(おおい",
+      "w2": "): nhiều 少ない(すくない ): ít"
+    },
+    {
+      "w1": "良い",
+      "w2": "(いい): tốt 悪い (わるい): xấu"
+    },
+    {
+      "w1": "奇麗",
+      "w2": "(きれい): sạch 汚い(きたない): dơ"
+    },
+    {
+      "w1": "鋭い",
+      "w2": "(するどい): sắc 鈍い (にぶい): cùn"
+    },
+    {
+      "raw": "TỪ TRÁI NGHĨA せいかくがわるい: xấu bụng 性格が悪い"
+    },
+    {
+      "raw": "かしこい:thông minh 賢い ばかな: ngu 馬鹿"
+    },
+    {
+      "raw": "しんらいできる:đáng tin cậy 信頼できる"
+    },
+    {
+      "raw": "うそつき :hay nói dối, hay nói xạo 嘘つき"
+    },
+    {
+      "raw": "せいじつな:thật thà 誠実 ひきょうな: cáo già, nhát gan"
+    },
+    {
+      "raw": "きまえがいい:hào phóng 気前がいい けち :ki bo, kiệt sỉ"
+    },
+    {
+      "raw": "おとな:người chín chắn 子どもっぽい: tính trẻ con"
+    },
+    {
+      "raw": "きんべん: chăm chỉ 勤勉 なまけもの :lười 怠け者"
+    },
+    {
+      "raw": "きょうようがある có văn hóa きょうようがない không có văn hóa"
+    },
+    {
+      "raw": "おかねもち giàu có, nhiều tiền お金持ち びんぼう nghèo 貧乏"
+    },
+    {
+      "raw": "じょうひん nét na げひん hư hỏng"
+    },
+    {
+      "raw": "おやこうこう có hiếu 親孝行 おやふこう bất hiếu"
+    },
+    {
+      "raw": "れいぎただしい lịch sự 礼儀正しい しつれい mất lịch sự 失礼"
+    },
+    {
+      "raw": "みえっぱり tinh vi, tinh tướng 見栄っ張り けんきょ khiêm tốn 謙虚"
+    },
+    {
+      "raw": "あかるい sáng 明るい くらい tối 暗い"
+    },
+    {
+      "raw": "おおらか hào hiệp 大らか かんがえすぎる cả nghĩ 考えすぎる"
+    },
+    {
+      "raw": "くちがうまい khéo ăn nói くちべた không khéo ăn nói"
+    },
+    {
+      "raw": "くちうるさい ghê gớm くちがわるい hay nói xấu"
+    },
+    {
+      "raw": "よくしゃべる nói nhiều よく喋る くちかずのすくない nói ít"
+    },
+    {
+      "raw": "きれいな đẹp gái, sạch みにくい xấu xí 醜い"
+    },
+    {
+      "raw": "ハンサムな đẹp trai みにくい xấu xí"
+    },
+    {
+      "raw": "あたらしい mới 新しい ふるい cũ 古い"
+    },
+    {
+      "raw": "いい tốt 良い わるい xấu 悪い"
+    },
+    {
+      "raw": "ながい dài 長い みじかい ngắn 短い"
+    },
+    {
+      "raw": "すきな thích 好き きらいな ghét 嫌い"
+    },
+    {
+      "raw": "おいしい ngon 美味しい まずい dở, chán 不味い"
+    },
+    {
+      "raw": "じょうずな giỏi 上手 へたな dở, yếu 下手"
+    },
+    {
+      "raw": "つよい mạnh 強い よわい yếu 弱い"
+    },
+    {
+      "raw": "たのしい vui vẻ 楽しい さびしい buồn 寂しい"
+    },
+    {
+      "raw": "うれしい Vui sướng( cảm xúc) 嬉しい かなしい Buồn (nỗi buồn)"
+    },
+    {
+      "raw": "あまい ngọt 甘い からい cay 辛い"
+    },
+    {
+      "raw": "おおきい lớn, to 大きい ちいさい nhỏ, bé 小さい"
+    },
+    {
+      "raw": "げんき khỏe 元気 びょうき bị bệnh 病気"
+    },
+    {
+      "raw": "べんり tiện lợi 便利 ふべん bất tiện 不便"
+    },
+    {
+      "raw": "あつい nóng 暑い すずしい mát mẻ 涼しい"
+    },
+    {
+      "raw": "やさしい dễ 易しい むずかしい khó 難しい"
+    },
+    {
+      "raw": "たかい cao, đắt 高い やすい rẻ 安い"
+    },
+    {
+      "raw": "いそがしい bận rộn 忙しい ひまな rảnh ,rỗi 暇な"
+    },
+    {
+      "raw": "しろい trắng 白い くろい đen 黒い"
+    },
+    {
+      "raw": "あかい đỏ 赤い あおい xanh 青い"
+    },
+    {
+      "raw": "せまい hẹp, chật 狭い ひろい rộng 広い"
+    },
+    {
+      "raw": "おおい nhiều 多い すくない ít 少ない"
+    },
+    {
+      "raw": "にぎやかな ồn ào, náo nhiệt 賑やかな しずかな yên tĩnh 静かな"
+    },
+    {
+      "raw": "おもい nặng 重い かるい nhẹ 軽い"
+    },
+    {
+      "raw": "かおり thơm, hương thơm香り くさい hôi, hôi tanh, thối 臭い"
+    },
+    {
+      "raw": "こい đặc 請い うすい loãng, nhạt"
+    },
+    {
+      "raw": "あつい dày (quấn sách, vở) うすい mỏng"
+    },
+    {
+      "raw": "あさい cạn, nông ふかい sâu"
+    },
+    {
+      "raw": "はやい nhanh, sớm おそい chậm, trễ, muộn"
+    },
+    {
+      "raw": "かたい cứng やわらかい mềm, dẻo"
+    },
+    {
+      "raw": "すっぱい chua しぶい chát"
+    },
+    {
+      "raw": "ゆるい lỏng lẻo, rộng きつい chật, hẹp"
+    },
+    {
+      "raw": "きよい tinh khiết, trong trẻo きたない dơ , bẩn"
+    },
+    {
+      "raw": "とおい xa ちかい gần"
+    },
+    {
+      "raw": "わかい trẻ ろうじん người già"
+    },
+    {
+      "raw": "うえ trên した dưới"
+    },
+    {
+      "raw": "まえ trước うしろ sau"
+    },
+    {
+      "raw": "みぎ phải ひだり trái"
+    },
+    {
+      "raw": "うせつ quẹo phải, rẽ phải させつ quẹo trai, rẽ trái"
+    },
+    {
+      "raw": "なか trong そと ngoài"
+    },
+    {
+      "raw": "となり bên cạnh むかい đối diện"
+    },
+    {
+      "raw": "あさ sáng ばん(よる)tối"
+    },
+    {
+      "raw": "ちょうしがいい trình trạng tốt ちょうしがわるい tình trạng xấu"
+    },
+    {
+      "raw": "からだにいい tốt cho cơ thể からだにわるい có hại cho cơ thể"
+    },
+    {
+      "raw": "きぶんがいい Thoải mái, thuận lợi きぶんがわるい Không thoải mái,"
+    },
+    {
+      "raw": "không thuận lợi"
+    },
+    {
+      "raw": "あんぜん an toàn あぶない nguy hiểm"
+    },
+    {
+      "raw": "しつもん câu hỏi こたえ câu trả lời"
+    },
+    {
+      "raw": "て tay あし chân"
+    },
+    {
+      "raw": "てんじょう trần nhà ゆか sàn nhà"
+    },
+    {
+      "raw": "きげき hỷ kịch ひげき bi kịch"
+    },
+    {
+      "raw": "とても rất あまり không lắm"
+    },
+    {
+      "raw": "れいぎ lễ phép しつれい thất lễ"
+    },
+    {
+      "raw": "あんてい ổn định ふあん bất an"
+    },
+    {
+      "raw": "だいじょうぶ không sao ひどい nghiêm trọng"
+    },
+    {
+      "raw": "おぼえる nhớ わすれる quên"
+    },
+    {
+      "raw": "たつ đứng すわる ngồi"
+    },
+    {
+      "raw": "かつ thắng まける thua"
+    },
+    {
+      "raw": "なく khóc わらう cười"
+    },
+    {
+      "raw": "ほめる khen しかる la, mắng"
+    },
+    {
+      "raw": "はじめる bắt đầu おわる kết thúc"
+    },
+    {
+      "raw": "かす cho người khác mượn かりる mượn người khác"
+    },
+    {
+      "raw": "まんぞく thỏa mãn , đủ ふまん không đủ, bất mãn"
+    },
+    {
+      "raw": "べんきょうする học あそぶ chơi"
+    },
+    {
+      "raw": "ねる ngủ おきる thức dậy"
+    },
+    {
+      "raw": "なくす làm mất のこる còn lại"
+    },
+    {
+      "raw": "あるく đi bộ はしる chạy"
+    },
+    {
+      "raw": "はいる vào でる ra"
+    },
+    {
+      "raw": "いれる cho vào だす cho ra, đưa ra"
+    },
+    {
+      "raw": "つづける tiếp tục やすむ nghỉ ngơi"
+    },
+    {
+      "raw": "のる lên おりる xuống"
+    },
+    {
+      "raw": "する làm やめる nghỉ làm"
+    },
+    {
+      "raw": "おもしろい thú vị つまらない chán (công việc)"
+    },
+    {
+      "raw": "ひろう nhặt, lượm すてる vứt, bỏ"
+    },
+    {
+      "raw": "かえる trở về とまる trọ lại"
+    },
+    {
+      "raw": "きる mặc ぬぐ cởi"
+    },
+    {
+      "raw": "はなす nói きく nghe"
+    },
+    {
+      "raw": "ならう học おしえる chỉ , dậy"
+    },
+    {
+      "raw": "わたる băng qua とめる dừng lại"
+    },
+    {
+      "raw": "あげる tặng もらう nhận"
+    }
+  ]
+}

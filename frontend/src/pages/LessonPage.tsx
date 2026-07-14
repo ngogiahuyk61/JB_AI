@@ -1,7 +1,10 @@
-import { useState } from 'react';
-import { BookOpen, Volume2, Play, Award } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { BookOpen, Volume2, Play, Award, Video } from 'lucide-react';
 import { speechService } from '../services/speechService';
 import '../styles/LessonPage.css';
+import tailieuData from '../data/tailieu.json';
+import UniversalQuizPage, { type QuizItem } from './UniversalQuizPage';
+import JLPTExamView from './JLPTExamView';
 
 interface VerbConjugation {
   kanji: string;
@@ -35,8 +38,88 @@ interface LessonPageProps {
 }
 
 export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
-  const [activeTab, setActiveTab] = useState<'verbs' | 'particles' | 'synonyms' | 'numbers' | 'time'>('verbs');
+  const [activeTab, setActiveTab] = useState<'verbs' | 'particles' | 'synonyms' | 'numbers' | 'time' | 'adverbs' | 'na_adj' | 'shii_adj' | 'i_adj' | 'antonyms' | 'jlpt_exams'>('verbs');
   const [verbGroup, setVerbGroup] = useState<'I' | 'II' | 'III'>('I');
+  const [activeQuiz, setActiveQuiz] = useState<{ title: string; items: QuizItem[] } | null>(null);
+  const [activeExamLevel, setActiveExamLevel] = useState<number | null>(null);
+
+  const quizItemsMap = useMemo<Record<string, QuizItem[]>>(() => {
+    return {
+      adverbs: tailieuData.adverbs
+        .filter(i => i.jp && i.vi && i.vi !== i.jp && i.jp.length < 20)
+        .map(i => ({ question: i.jp, answer: i.vi })),
+      na_adj: tailieuData.naAdjectives
+        .filter(i => i.vi)
+        .map(i => ({ question: i.kanji || i.kana, answer: i.vi, hint: i.kanji ? i.kana : undefined })),
+      shii_adj: tailieuData.shiiAdjectives
+        .filter(i => i.vi)
+        .map(i => ({ question: i.kanji, answer: i.vi, hint: i.kana || undefined })),
+      i_adj: tailieuData.iAdjectives
+        .filter(i => i.vi)
+        .map(i => ({ question: i.kanji, answer: i.vi, hint: i.kana || undefined })),
+      antonyms: tailieuData.antonyms
+        .filter(i => i.w1 && i.w2)
+        .map(i => ({ question: i.w1, answer: i.w2,
+          explanation: i.w1 + ' va ' + i.w2 + ' la cap tu trai nghia' })),
+      synonyms: [
+        { question: '探す (sa-ga-su)', answer: 'Tim kiem (muon tim)', hint: 'vs 捜す', explanation: '探す: tim vat muon tim (tim viec, tim nha). 捜す: tim nguoi/vat that lac.' },
+        { question: '捜す (sa-ga-su)', answer: 'Tim kiem (vat that lac)', hint: 'vs 探す', explanation: '捜す: tim nguoi hoac vat bi that lac. 探す: tim vat muon co.' },
+        { question: '始める (ha-ji-me-ru)', answer: 'Bat dau (hang ngay)', hint: 'vs 開始する', explanation: '始める: dung hang ngay. 開始する: trang trong, van viet.' },
+        { question: '開始する (kai-shi-su-ru)', answer: 'Bat dau (trang trong)', hint: 'vs 始める', explanation: '開始する: su kien chinh thuc. 始める: doi thuong.' },
+        { question: 'もらう (mo-ra-u)', answer: 'Nhan (qua tang)', hint: 'vs 受け取る', explanation: 'もらう: nhan qua biet on. 受け取る: nhan vat ly (buu pham, bien lai).' },
+        { question: '受け取る (u-ke-to-ru)', answer: 'Nhan (vat ly)', hint: 'vs もらう', explanation: '受け取る: nhan buu pham, bien lai. もらう: nhan qua biet on.' },
+        { question: '言う (i-u)', answer: 'Noi (phat ngon)', hint: 'vs 話す', explanation: '言う: phat ra loi noi. 話す: trao doi qua lai 2 nguoi tro len.' },
+        { question: '話す (ha-na-su)', answer: 'Noi (trao doi)', hint: 'vs 言う', explanation: '話す: thao luan, trao doi. 言う: phat ngon.' },
+      ],
+      numbers: [
+        { question: '一 / いち', answer: '1', explanation: 'Mot (ichi)' },
+        { question: '二 / に', answer: '2', explanation: 'Hai (ni)' },
+        { question: '三 / さん', answer: '3', explanation: 'Ba (san)' },
+        { question: '四 / よん・し', answer: '4', explanation: 'Bon (yon/shi)' },
+        { question: '五 / ご', answer: '5', explanation: 'Nam (go)' },
+        { question: '六 / ろく', answer: '6', explanation: 'Sau (roku)' },
+        { question: '七 / なな・しち', answer: '7', explanation: 'Bay (nana/shichi)' },
+        { question: '八 / はち', answer: '8', explanation: 'Tam (hachi)' },
+        { question: '九 / きゅう・く', answer: '9', explanation: 'Chin (kyu/ku)' },
+        { question: '十 / じゅう', answer: '10', explanation: 'Muoi (juu)' },
+        { question: '百 / ひゃく', answer: '100', explanation: 'Mot tram (hyaku)' },
+        { question: '千 / せん', answer: '1000', explanation: 'Mot nghin (sen)' },
+        { question: '枚 (まい)', answer: 'Dem vat mong (ao, giay, dia)', explanation: '枚 (mai): dem vat mong phang' },
+        { question: '台 (だい)', answer: 'Dem may moc, xe co', explanation: '台 (dai): dem may moc, xe' },
+        { question: '本 (ほん)', answer: 'Dem vat thon dai (but, chai, o)', explanation: '本 (hon/pon/bon): dem vat thon dai' },
+        { question: '冊 (さつ)', answer: 'Dem sach, vo, tap chi', explanation: '冊 (satsu): dem sach vo' },
+        { question: '匹 (ひき)', answer: 'Dem con vat nho (cho, meo, ca)', explanation: '匹 (hiki/piki/biki): dem dong vat nho' },
+        { question: '杯 (はい)', answer: 'Dem chen, ly, bat', explanation: '杯 (hai/pai/bai): dem chen ly bat' },
+        { question: 'ひとつ (一つ)', answer: '1 cai (dem chung)', explanation: 'Dem do vat chung' },
+        { question: 'ふたつ (二つ)', answer: '2 cai (dem chung)', explanation: 'Dem do vat chung' },
+        { question: 'みっつ (三つ)', answer: '3 cai (dem chung)', explanation: 'Dem do vat chung' },
+        { question: 'よっつ (四つ)', answer: '4 cai (dem chung)', explanation: 'Dem do vat chung' },
+        { question: 'いつつ (五つ)', answer: '5 cai (dem chung)', explanation: 'Dem do vat chung' },
+      ],
+      time: [
+        { question: '月曜日 (げつようび)', answer: 'Thu 2', explanation: 'Getsu-yo-bi = Thu Hai' },
+        { question: '火曜日 (かようび)', answer: 'Thu 3', explanation: 'Ka-yo-bi = Thu Ba' },
+        { question: '水曜日 (すいようび)', answer: 'Thu 4', explanation: 'Sui-yo-bi = Thu Tu' },
+        { question: '木曜日 (もくようび)', answer: 'Thu 5', explanation: 'Moku-yo-bi = Thu Nam' },
+        { question: '金曜日 (きんようび)', answer: 'Thu 6', explanation: 'Kin-yo-bi = Thu Sau' },
+        { question: '土曜日 (どようび)', answer: 'Thu 7', explanation: 'Do-yo-bi = Thu Bay' },
+        { question: '日曜日 (にちようび)', answer: 'Chu nhat', explanation: 'Nichi-yo-bi = Chu Nhat' },
+        { question: 'ついたち (一日)', answer: 'Ngay 1 trong thang', explanation: 'Tsuitachi - bat quy tac' },
+        { question: 'ふつか (二日)', answer: 'Ngay 2 trong thang', explanation: 'Futsuka - bat quy tac' },
+        { question: 'みっか (三日)', answer: 'Ngay 3 trong thang', explanation: 'Mikka - bat quy tac' },
+        { question: 'よっか (四日)', answer: 'Ngay 4 trong thang', explanation: 'Yokka - bat quy tac' },
+        { question: 'いつか (五日)', answer: 'Ngay 5 trong thang', explanation: 'Itsuka - bat quy tac' },
+        { question: 'はつか (二十日)', answer: 'Ngay 20 trong thang', explanation: 'Hatsuka - bat quy tac' },
+        { question: '〜時間 (じかん)', answer: 'Tieng dong ho (khoang thoi gian)', explanation: 'jikan: khoang thoi gian tinh bang gio' },
+        { question: '〜週間 (しゅうかん)', answer: 'Tuan le (khoang thoi gian)', explanation: 'shu-kan: khoang thoi gian tinh bang tuan' },
+        { question: '〜か月 (かげつ)', answer: 'Thang (khoang thoi gian)', explanation: 'ka-getsu: khoang thoi gian tinh bang thang' },
+        { question: '何時 (なんじ)', answer: 'May gio?', explanation: 'Nan-ji: hoi ve gio' },
+        { question: '何分 (なんぷん)', answer: 'May phut?', explanation: 'Nan-pun: hoi ve phut' },
+        { question: '何曜日 (なんようび)', answer: 'Thu may?', explanation: 'Nan-yo-bi: hoi ve thu trong tuan' },
+      ],
+    };
+  }, []);
+
   const speak = async (text: string) => {
     try {
       await speechService.speakJapanese(text);
@@ -140,22 +223,65 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
 
   const currentVerbs = verbGroup === 'I' ? groupIVerbs : verbGroup === 'II' ? groupIIVerbs : groupIIIVerbs;
 
+  if (activeExamLevel !== null) {
+    return (
+      <JLPTExamView
+        level={activeExamLevel}
+        onBack={() => setActiveExamLevel(null)}
+      />
+    );
+  }
+
+  if (activeQuiz) {
+    return (
+      <UniversalQuizPage
+        title={activeQuiz.title}
+        items={activeQuiz.items}
+        onBack={() => setActiveQuiz(null)}
+      />
+    );
+  }
+
   return (
     <div style={{ padding: '24px 30px', background: '#f8fafc', minHeight: '100vh' }}>
       
       {/* Title Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-        <div style={{ width: 44, height: 44, borderRadius: 12, background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
-          <BookOpen size={20} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+            <BookOpen size={20} />
+          </div>
+          <div>
+            <h1 style={{ fontSize: 24, fontWeight: 900, color: '#0f172a', margin: 0 }}>Học Liệu Bài Học</h1>
+            <p style={{ fontSize: 13, color: '#64748b', margin: '2px 0 0 0' }}>Học ngữ pháp, trợ từ và cách chia động từ trực quan tương tác</p>
+          </div>
         </div>
-        <div>
-          <h1 style={{ fontSize: 24, fontWeight: 900, color: '#0f172a', margin: 0 }}>Học Liệu Bài Học</h1>
-          <p style={{ fontSize: 13, color: '#64748b', margin: '2px 0 0 0' }}>Học ngữ pháp, trợ từ và cách chia động từ trực quan tương tác</p>
-        </div>
+        
+        <button
+          onClick={() => window.open('https://drive.google.com/drive/folders/1b-xqLdbkbVOEFcM-Y4KLBNYIxN4oRUBX', '_blank')}
+          style={{
+            marginLeft: 'auto',
+            padding: '10px 20px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+            background: 'linear-gradient(to right, #ef4444, #f97316)',
+            color: 'white',
+            boxShadow: '0 4px 12px rgba(239, 68, 68, 0.3)',
+            transition: 'all 200ms ease',
+            display: 'flex', alignItems: 'center', gap: 8
+          }}
+        >
+          <Video size={18} />
+          Học Video
+        </button>
       </div>
 
       {/* Tabs Control */}
-      <div style={{ display: 'flex', gap: 8, background: '#e2e8f0', padding: 4, borderRadius: 12, width: 'fit-content', marginBottom: 24 }}>
+      <div style={{ 
+        display: 'flex', gap: 8, background: '#e2e8f0', padding: 4, borderRadius: 12, width: '100%', marginBottom: 24,
+        overflowX: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none'
+      }}>
+        <style>{`
+          div::-webkit-scrollbar { display: none; }
+        `}</style>
         <button
           onClick={() => setActiveTab('verbs')}
           style={{
@@ -163,7 +289,7 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
             background: activeTab === 'verbs' ? 'white' : 'transparent',
             color: activeTab === 'verbs' ? '#4f46e5' : '#475569',
             boxShadow: activeTab === 'verbs' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
-            transition: 'all 150ms ease'
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
           }}
         >
           Động từ & Chia thể
@@ -175,7 +301,7 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
             background: activeTab === 'particles' ? 'white' : 'transparent',
             color: activeTab === 'particles' ? '#4f46e5' : '#475569',
             boxShadow: activeTab === 'particles' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
-            transition: 'all 150ms ease'
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
           }}
         >
           Học Trợ Từ
@@ -187,7 +313,7 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
             background: activeTab === 'synonyms' ? 'white' : 'transparent',
             color: activeTab === 'synonyms' ? '#4f46e5' : '#475569',
             boxShadow: activeTab === 'synonyms' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
-            transition: 'all 150ms ease'
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
           }}
         >
           Từ Đồng Nghĩa
@@ -199,7 +325,7 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
             background: activeTab === 'numbers' ? 'white' : 'transparent',
             color: activeTab === 'numbers' ? '#4f46e5' : '#475569',
             boxShadow: activeTab === 'numbers' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
-            transition: 'all 150ms ease'
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
           }}
         >
           Số Đếm & Từ Đếm
@@ -211,10 +337,82 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
             background: activeTab === 'time' ? 'white' : 'transparent',
             color: activeTab === 'time' ? '#4f46e5' : '#475569',
             boxShadow: activeTab === 'time' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
-            transition: 'all 150ms ease'
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
           }}
         >
           Thời Gian
+        </button>
+        <button
+          onClick={() => setActiveTab('adverbs')}
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: activeTab === 'adverbs' ? 'white' : 'transparent',
+            color: activeTab === 'adverbs' ? '#4f46e5' : '#475569',
+            boxShadow: activeTab === 'adverbs' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
+          }}
+        >
+          Phó Từ
+        </button>
+        <button
+          onClick={() => setActiveTab('na_adj')}
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: activeTab === 'na_adj' ? 'white' : 'transparent',
+            color: activeTab === 'na_adj' ? '#4f46e5' : '#475569',
+            boxShadow: activeTab === 'na_adj' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
+          }}
+        >
+          Tính Từ な
+        </button>
+        <button
+          onClick={() => setActiveTab('shii_adj')}
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: activeTab === 'shii_adj' ? 'white' : 'transparent',
+            color: activeTab === 'shii_adj' ? '#4f46e5' : '#475569',
+            boxShadow: activeTab === 'shii_adj' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
+          }}
+        >
+          Tính Từ ~しい
+        </button>
+        <button
+          onClick={() => setActiveTab('i_adj')}
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: activeTab === 'i_adj' ? 'white' : 'transparent',
+            color: activeTab === 'i_adj' ? '#4f46e5' : '#475569',
+            boxShadow: activeTab === 'i_adj' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
+          }}
+        >
+          Tính Từ ~い
+        </button>
+        <button
+          onClick={() => setActiveTab('antonyms')}
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: activeTab === 'antonyms' ? 'white' : 'transparent',
+            color: activeTab === 'antonyms' ? '#4f46e5' : '#475569',
+            boxShadow: activeTab === 'antonyms' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
+          }}
+        >
+          Từ Trái Nghĩa
+        </button>
+        <button
+          onClick={() => setActiveTab('jlpt_exams')}
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: activeTab === 'jlpt_exams' ? 'white' : 'transparent',
+            color: activeTab === 'jlpt_exams' ? '#4f46e5' : '#475569',
+            boxShadow: activeTab === 'jlpt_exams' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
+          }}
+        >
+          🎓 Đề Thi JLPT
         </button>
         <button
           onClick={() => {
@@ -388,6 +586,20 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
       {/* Tab: SYNONYMS */}
       {activeTab === 'synonyms' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <button
+              onClick={() => setActiveQuiz({ title: 'Test Từ Đồng Nghĩa', items: quizItemsMap.synonyms })}
+              style={{
+                padding: '10px 24px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+                background: 'linear-gradient(to right, #f59e0b, #ef4444)',
+                color: 'white', boxShadow: '0 4px 12px rgba(245,158,11,0.3)',
+                display: 'flex', alignItems: 'center', gap: 8
+              }}
+            >
+              <Award size={18} />
+              Bắt Đầu Test
+            </button>
+          </div>
           {synonyms.map((s, idx) => (
             <div key={idx} style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 20, boxShadow: '0 4px 12px rgba(0,0,0,0.01)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14, flexWrap: 'wrap' }}>
@@ -433,7 +645,21 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
       {/* Tab: NUMBERS & COUNTERS */}
       {activeTab === 'numbers' && (
         <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
-          <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 16 }}>Số đếm & Từ đếm (Counters)</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: 0 }}>Số Đếm & Từ Đếm (Counters)</h2>
+            <button
+              onClick={() => setActiveQuiz({ title: 'Test Số Đếm & Từ Đếm', items: quizItemsMap.numbers })}
+              style={{
+                padding: '10px 24px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+                background: 'linear-gradient(to right, #8b5cf6, #6366f1)',
+                color: 'white', boxShadow: '0 4px 12px rgba(139,92,246,0.3)',
+                display: 'flex', alignItems: 'center', gap: 8
+              }}
+            >
+              <Award size={18} />
+              Bắt Đầu Test
+            </button>
+          </div>
           <p style={{ fontSize: 13, color: '#64748b', marginBottom: 24 }}>Nhấn vào chữ tiếng Nhật để nghe phát âm</p>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
@@ -517,7 +743,21 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
       {/* Tab: TIME & DATES */}
       {activeTab === 'time' && (
         <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
-          <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 16 }}>Thời Gian (Giờ, Thứ, Ngày, Tháng)</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: 0 }}>Thời Gian (Giờ, Thứ, Ngày, Tháng)</h2>
+            <button
+              onClick={() => setActiveQuiz({ title: 'Test Thời Gian & Ngày Tháng', items: quizItemsMap.time })}
+              style={{
+                padding: '10px 24px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+                background: 'linear-gradient(to right, #f97316, #eab308)',
+                color: 'white', boxShadow: '0 4px 12px rgba(249,115,22,0.3)',
+                display: 'flex', alignItems: 'center', gap: 8
+              }}
+            >
+              <Award size={18} />
+              Bắt Đầu Test
+            </button>
+          </div>
           <p style={{ fontSize: 13, color: '#64748b', marginBottom: 24 }}>Lưu ý các trường hợp bất quy tắc có màu đỏ</p>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
@@ -618,6 +858,228 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
               </div>
             </div>
 
+          </div>
+        </div>
+      )}
+
+      {/* Tab: ADVERBS */}
+      {activeTab === 'adverbs' && (
+        <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: 0 }}>Phó Từ (副詞)</h2>
+              <p style={{ fontSize: 13, color: '#64748b', margin: '4px 0 0 0' }}>Bấm vào từ tiếng Nhật để nghe phát âm</p>
+            </div>
+            <button
+              onClick={() => setActiveQuiz({ title: 'Test Phó Từ', items: quizItemsMap.adverbs })}
+              style={{
+                padding: '10px 24px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+                background: 'linear-gradient(to right, #4f46e5, #7c3aed)',
+                color: 'white', boxShadow: '0 4px 12px rgba(79,70,229,0.3)',
+                display: 'flex', alignItems: 'center', gap: 8
+              }}
+            >
+              <Award size={18} />
+              Bắt Đầu Test
+            </button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 16 }}>
+            {tailieuData.adverbs.map((item, idx) => (
+              <div key={idx} style={{ padding: 16, background: '#f8fafc', borderRadius: 12, border: '1px solid #e2e8f0' }}>
+                <div style={{ fontSize: 16, fontWeight: 700, color: '#4f46e5', marginBottom: 8, cursor: 'pointer' }} onClick={() => speak(item.jp)}>
+                  {item.jp}
+                </div>
+                <div style={{ fontSize: 13, color: '#334155' }}>{item.vi}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Tab: NA ADJECTIVES */}
+      {activeTab === 'na_adj' && (
+        <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: 0 }}>Tính Từ Đuôi な</h2>
+              <p style={{ fontSize: 13, color: '#64748b', margin: '4px 0 0 0' }}>Bấm vào từ tiếng Nhật để nghe phát âm</p>
+            </div>
+            <button
+              onClick={() => setActiveQuiz({ title: 'Test Tính Từ な', items: quizItemsMap.na_adj })}
+              style={{
+                padding: '10px 24px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+                background: 'linear-gradient(to right, #10b981, #0d9488)',
+                color: 'white', boxShadow: '0 4px 12px rgba(16,185,129,0.3)',
+                display: 'flex', alignItems: 'center', gap: 8
+              }}
+            >
+              <Award size={18} />
+              Bắt Đầu Test
+            </button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
+            {tailieuData.naAdjectives.map((item, idx) => (
+              <div key={idx} style={{ padding: 16, background: '#f8fafc', borderRadius: 12, border: '1px solid #e2e8f0', textAlign: 'center' }}>
+                <div style={{ fontSize: 18, fontWeight: 700, color: '#0f172a', cursor: 'pointer', marginBottom: 4 }} onClick={() => speak(item.kana || item.kanji)}>
+                  {item.kanji || item.kana}
+                </div>
+                {item.kanji && <div style={{ fontSize: 12, color: '#64748b', marginBottom: 8 }}>{item.kana}</div>}
+                <div style={{ fontSize: 14, color: '#10b981', fontWeight: 600 }}>{item.vi}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Tab: SHII ADJECTIVES */}
+      {activeTab === 'shii_adj' && (
+        <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: 0 }}>Tính Từ Đuôi ~しい</h2>
+              <p style={{ fontSize: 13, color: '#64748b', margin: '4px 0 0 0' }}>Bấm vào từ tiếng Nhật để nghe phát âm</p>
+            </div>
+            <button
+              onClick={() => setActiveQuiz({ title: 'Test Tính Từ ~しい', items: quizItemsMap.shii_adj })}
+              style={{
+                padding: '10px 24px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+                background: 'linear-gradient(to right, #e11d48, #9f1239)',
+                color: 'white', boxShadow: '0 4px 12px rgba(225,29,72,0.3)',
+                display: 'flex', alignItems: 'center', gap: 8
+              }}
+            >
+              <Award size={18} />
+              Bắt Đầu Test
+            </button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
+            {tailieuData.shiiAdjectives.map((item, idx) => (
+              <div key={idx} style={{ padding: 16, background: '#fff1f2', borderRadius: 12, border: '1px solid #ffe4e6', textAlign: 'center' }}>
+                <div style={{ fontSize: 18, fontWeight: 700, color: '#e11d48', cursor: 'pointer', marginBottom: 4 }} onClick={() => speak(item.kana || item.kanji)}>
+                  {item.kanji}
+                </div>
+                {item.kana && <div style={{ fontSize: 12, color: '#fb7185', marginBottom: 8 }}>{item.kana}</div>}
+                <div style={{ fontSize: 14, color: '#4c0519', fontWeight: 600 }}>{item.vi}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Tab: I ADJECTIVES */}
+      {activeTab === 'i_adj' && (
+        <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: 0 }}>Tính Từ Ngắn Đuôi ~い</h2>
+              <p style={{ fontSize: 13, color: '#64748b', margin: '4px 0 0 0' }}>Bấm vào từ tiếng Nhật để nghe phát âm</p>
+            </div>
+            <button
+              onClick={() => setActiveQuiz({ title: 'Test Tính Từ ~い', items: quizItemsMap.i_adj })}
+              style={{
+                padding: '10px 24px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+                background: 'linear-gradient(to right, #0d9488, #0891b2)',
+                color: 'white', boxShadow: '0 4px 12px rgba(13,148,136,0.3)',
+                display: 'flex', alignItems: 'center', gap: 8
+              }}
+            >
+              <Award size={18} />
+              Bắt Đầu Test
+            </button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
+            {tailieuData.iAdjectives.map((item, idx) => (
+              <div key={idx} style={{ padding: 16, background: '#f0fdfa', borderRadius: 12, border: '1px solid #ccfbf1', textAlign: 'center' }}>
+                <div style={{ fontSize: 18, fontWeight: 700, color: '#0d9488', cursor: 'pointer', marginBottom: 4 }} onClick={() => speak(item.kana || item.kanji)}>
+                  {item.kanji}
+                </div>
+                {item.kana && <div style={{ fontSize: 12, color: '#5eead4', marginBottom: 8 }}>{item.kana}</div>}
+                <div style={{ fontSize: 14, color: '#134e4a', fontWeight: 600 }}>{item.vi}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Tab: ANTONYMS */}
+      {activeTab === 'antonyms' && (
+        <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: 0 }}>Các Cặp Từ Trái Nghĩa</h2>
+              <p style={{ fontSize: 13, color: '#64748b', margin: '4px 0 0 0' }}>Bấm vào từ tiếng Nhật để nghe phát âm</p>
+            </div>
+            <button
+              onClick={() => setActiveQuiz({ title: 'Test Từ Trái Nghĩa', items: quizItemsMap.antonyms })}
+              style={{
+                padding: '10px 24px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+                background: 'linear-gradient(to right, #be185d, #7c3aed)',
+                color: 'white', boxShadow: '0 4px 12px rgba(190,24,93,0.3)',
+                display: 'flex', alignItems: 'center', gap: 8
+              }}
+            >
+              <Award size={18} />
+              Bắt Đầu Test
+            </button>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {tailieuData.antonyms.map((item, idx) => {
+              if (item.raw) {
+                return (
+                  <div key={idx} style={{ padding: '8px 16px', background: '#f8fafc', borderRadius: 8, fontWeight: 700, color: '#334155' }}>
+                    {item.raw}
+                  </div>
+                );
+              }
+              return (
+                <div key={idx} style={{ display: 'flex', alignItems: 'center', background: '#fff', border: '1px solid #e2e8f0', borderRadius: 12, overflow: 'hidden' }}>
+                  <div style={{ flex: 1, padding: 16, background: '#eff6ff', borderRight: '1px solid #e2e8f0', cursor: 'pointer' }} onClick={() => speak(item.w1.split(/[ :\(]/)[0])}>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: '#1d4ed8' }}>{item.w1}</span>
+                  </div>
+                  <div style={{ padding: '0 16px', color: '#94a3b8', fontWeight: 800 }}>↔</div>
+                  <div style={{ flex: 1, padding: 16, background: '#fdf2f8', cursor: 'pointer' }} onClick={() => speak(item.w2.split(/[ :\(]/)[0])}>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: '#be185d' }}>{item.w2}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Tab: JLPT EXAMS */}
+      {activeTab === 'jlpt_exams' && (
+        <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>Đề Thi Thử Từ Vựng JLPT N5 - N1</h2>
+          <p style={{ fontSize: 13, color: '#64748b', marginBottom: 24 }}>Đề thi được thiết kế khoa học dạng trắc nghiệm Hán tự & Cách đọc chuẩn format JLPT</p>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
+            {[
+              { level: 5, label: 'Đề Thi Thử JLPT N5', desc: 'Cấp độ Sơ cấp 1 (Khoảng 600 từ vựng cơ bản)', color: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' },
+              { level: 4, label: 'Đề Thi Thử JLPT N4', desc: 'Cấp độ Sơ cấp 2 (Khoảng 1500 từ vựng đời sống)', color: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)' },
+              { level: 3, label: 'Đề Thi Thử JLPT N3', desc: 'Cấp độ Trung cấp (Khoảng 3700 từ vựng nâng cao)', color: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' },
+              { level: 2, label: 'Đề Thi Thử JLPT N2', desc: 'Cấp độ Thượng trung cấp (Khoảng 6000 từ vựng học thuật)', color: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)' },
+              { level: 1, label: 'Đề Thi Thử JLPT N1', desc: 'Cấp độ Cao cấp (Khoảng 10000 từ vựng chuyên sâu)', color: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)' },
+            ].map(exam => (
+              <div 
+                key={exam.level}
+                onClick={() => setActiveExamLevel(exam.level)}
+                style={{ 
+                  borderRadius: 16, 
+                  background: exam.color, 
+                  color: 'white', 
+                  padding: 24, 
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(0,0,0,0.06)',
+                  transition: 'all 200ms ease',
+                }}
+                className="hover-card"
+              >
+                <div style={{ fontSize: 24, fontWeight: 900, marginBottom: 8 }}>N{exam.level}</div>
+                <div style={{ fontSize: 16, fontWeight: 800, marginBottom: 6 }}>{exam.label}</div>
+                <div style={{ fontSize: 13, opacity: 0.9 }}>{exam.desc}</div>
+              </div>
+            ))}
           </div>
         </div>
       )}

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef, type ChangeEvent } from 'reac
 import {
   UploadCloud, FileSpreadsheet, Shuffle, ListOrdered,
   Trash2, ChevronLeft, ChevronRight, Play, BrainCircuit,
-  Loader2, X, CheckCircle, AlertCircle, BookMarked, Database
+  Loader2, X, CheckCircle, AlertCircle, BookMarked, Database, Award
 } from 'lucide-react';
 import type { FlashCard, ExcelSheetData } from '../types';
 import { excelService } from '../services/excelService';
@@ -12,6 +12,7 @@ import { analyzeWord } from '../constants/kanjiDB';
 import { ALL_VOCAB, POS_LABELS, type VocabEntry } from '../constants/jlptData';
 import { SPECIAL_CATEGORIES, type SpecialCategory } from '../constants/specialCategories';
 import { apiService } from '../services/apiService';
+import UniversalQuizPage, { type QuizItem } from './UniversalQuizPage';
 
 type KanjiPanelData = {
   fullHanViet: string;
@@ -58,6 +59,7 @@ export default function FlashcardPage() {
   const [exampleLoading, setExampleLoading] = useState(false);
   const [knownCount, setKnownCount] = useState(0);
   const [hardCount, setHardCount] = useState(0);
+  const [activeQuiz, setActiveQuiz] = useState<{ title: string; items: QuizItem[] } | null>(null);
 
   // Load saved data
   useEffect(() => {
@@ -583,6 +585,19 @@ export default function FlashcardPage() {
 
   // ── Study Phase ──
   if (!card) return null;
+
+  if (activeQuiz) {
+    return (
+      <div style={{ padding: 20 }}>
+        <UniversalQuizPage
+          title={activeQuiz.title}
+          items={activeQuiz.items}
+          onBack={() => setActiveQuiz(null)}
+        />
+      </div>
+    );
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 160px)', maxWidth: 1100, margin: '0 auto' }}>
       {/* Controls row */}
@@ -616,6 +631,28 @@ export default function FlashcardPage() {
             <Play size={14} style={{ fill: autoPlayState === 'playing' ? 'currentColor' : 'none' }} />
             {autoPlayState === 'playing' ? 'Đang Auto-play' : 'Auto-play'}
           </button>
+          
+          <button
+            onClick={() => {
+              setAutoPlayState('idle');
+              const items: QuizItem[] = cards.map(c => ({
+                question: c.kanji || c.kana,
+                answer: c.vietnamese,
+                hint: c.hanViet || c.kana || undefined
+              }));
+              setActiveQuiz({ title: 'Test Từ Vựng Đang Học', items });
+            }}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer',
+              background: 'linear-gradient(to right, #4f46e5, #7c3aed)',
+              color: 'white', padding: '6px 16px', borderRadius: 99, border: 'none',
+              fontWeight: 700, boxShadow: '0 2px 8px rgba(79, 70, 229, 0.3)'
+            }}
+          >
+            <Award size={14} />
+            Làm Bài Test
+          </button>
+
           <span style={{ color: 'var(--success)', fontWeight: 700 }}>✅ {knownCount}</span>
           <span style={{ color: 'var(--danger)', fontWeight: 700 }}>❌ {hardCount}</span>
           <button className="btn btn-outline btn-sm" onClick={() => {
