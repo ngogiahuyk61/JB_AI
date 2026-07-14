@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Play, Timer, Award, RefreshCw, CheckCircle2, XCircle } from 'lucide-react';
+import { API_ORIGIN } from '../config/api';
 import '../styles/VerbQuiz.css';
 
 interface VerbQuizPageProps {
@@ -27,7 +28,7 @@ export default function VerbQuizPage({ onNavigate }: VerbQuizPageProps) {
   const startGame = async () => {
     try {
       // In a real app, use the API URL from environment variables
-      const apiUrl = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
+      const apiUrl = API_ORIGIN;
       const response = await fetch(`${apiUrl}/api/VerbQuiz/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
