@@ -507,6 +507,7 @@ export default function KaiwaPage() {
         }}>
           <div style={{ maxWidth: 800, margin: '0 auto', display: 'flex', gap: 12 }}>
             <button
+              type="button"
               onClick={isRecording ? stopRecording : startRecording}
               style={{
                 flexShrink: 0, width: 50, height: 50, borderRadius: 25, border: 'none', cursor: 'pointer',
