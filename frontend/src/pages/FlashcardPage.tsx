@@ -645,12 +645,13 @@ export default function FlashcardPage() {
             style={{
               display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer',
               background: 'linear-gradient(to right, #4f46e5, #7c3aed)',
-              color: 'white', padding: '6px 16px', borderRadius: 99, border: 'none',
-              fontWeight: 700, boxShadow: '0 2px 8px rgba(79, 70, 229, 0.3)'
+              color: 'white', padding: '8px 16px', borderRadius: 999, border: 'none',
+              fontWeight: 800, boxShadow: '0 3px 10px rgba(79, 70, 229, 0.3)',
+              minWidth: 140, justifyContent: 'center'
             }}
           >
             <Award size={14} />
-            Làm Bài Test
+            Test từ vựng
           </button>
 
           <span style={{ color: 'var(--success)', fontWeight: 700 }}>✅ {knownCount}</span>
@@ -660,6 +661,29 @@ export default function FlashcardPage() {
             setPhase('select');
           }}>← Quay lại</button>
         </div>
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8, marginBottom: 8 }}>
+        <button
+          onClick={() => {
+            setAutoPlayState('idle');
+            const items: QuizItem[] = cards.map(c => ({
+              question: c.kanji || c.kana,
+              answer: c.vietnamese,
+              hint: c.hanViet || c.kana || undefined
+            }));
+            setActiveQuiz({ title: 'Test Từ Vựng Đang Học', items });
+          }}
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6, cursor: 'pointer',
+            background: 'linear-gradient(135deg, #4f46e5, #7c3aed)',
+            color: 'white', padding: '10px 16px', borderRadius: 999, border: 'none',
+            fontWeight: 800, boxShadow: '0 3px 12px rgba(79, 70, 229, 0.25)'
+          }}
+        >
+          <Award size={14} />
+          Bắt đầu test từ vựng
+        </button>
       </div>
 
       {/* Card area */}
