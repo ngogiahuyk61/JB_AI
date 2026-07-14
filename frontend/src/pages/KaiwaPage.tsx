@@ -5,6 +5,7 @@ import {
   XCircle, Send, Languages
 } from 'lucide-react';
 import { kaiwaService, type KaiwaMode, type KaiwaQuestion, type EvaluationResult } from '../services/kaiwaService';
+import { speechService } from '../services/speechService';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 type ChatMessage = {
@@ -19,17 +20,7 @@ type ChatMessage = {
 type AppState = 'setup' | 'chat';
 
 // ── TTS helper ────────────────────────────────────────────────────────────────
-function speakJapanese(text: string) {
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'ja-JP';
-  utterance.rate = 0.9;
-  utterance.pitch = 1.0;
-  const voices = window.speechSynthesis.getVoices();
-  const jpVoice = voices.find(v => v.lang.startsWith('ja'));
-  if (jpVoice) utterance.voice = jpVoice;
-  window.speechSynthesis.speak(utterance);
-}
+// Now using speechService.speakJapanese from global service
 
 // ── Main Component ────────────────────────────────────────────────────────────
 export default function KaiwaPage() {
@@ -81,7 +72,7 @@ export default function KaiwaPage() {
       setCurrentQuestion(q);
       
       // Auto speak
-      setTimeout(() => speakJapanese(q.japaneseText), 600);
+      setTimeout(() => speechService.speakJapanese(q.japaneseText), 600);
       
       addMessage({
         type: 'bot_question',
@@ -192,7 +183,7 @@ export default function KaiwaPage() {
       // 2. Fetch expected answer instantly
       const ref = await kaiwaService.getReferenceAnswer(currentQuestion.id);
       addMessage({ type: 'reference_answer', text: ref.expectedAnswer });
-      speakJapanese(ref.expectedAnswer);
+      speechService.speakJapanese(ref.expectedAnswer);
 
       // 3. Show Loading
       const loadingId = Math.random().toString(36).substring(7);
@@ -347,7 +338,7 @@ export default function KaiwaPage() {
                     </div>
                     <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                       <button
-                        onClick={() => speakJapanese(msg.text.replace(/[「」]/g, ''))}
+                        onClick={() => speechService.speakJapanese(msg.text.replace(/[「」]/g, ''))}
                         style={{
                           background: 'rgba(102,126,234,0.2)', border: 'none',
                           borderRadius: 8, padding: '6px 12px', cursor: 'pointer', color: '#c4b5fd',
@@ -400,7 +391,7 @@ export default function KaiwaPage() {
                     </div>
                     <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                       <button
-                        onClick={() => speakJapanese(msg.text.replace(/[「」]/g, ''))}
+                        onClick={() => speechService.speakJapanese(msg.text.replace(/[「」]/g, ''))}
                         style={{
                           background: 'rgba(52,211,153,0.2)', border: 'none',
                           borderRadius: 8, padding: '6px 12px', cursor: 'pointer', color: '#a7f3d0',

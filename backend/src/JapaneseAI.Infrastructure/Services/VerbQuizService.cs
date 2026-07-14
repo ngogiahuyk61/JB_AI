@@ -43,15 +43,16 @@ public class VerbQuizService : IVerbQuizService
         for (int i = 0; i < count; i++)
         {
             var targetVerb = verbs[_random.Next(verbs.Count)];
-            var type = _random.Next(1, 6); // Just supporting 5 types for now to keep it simple
+            var type = _random.Next(1, 7); // 6 question types
 
             object question = type switch
             {
-                1 => GenerateType1(targetVerb, verbs),
-                2 => GenerateType2(targetVerb, verbs),
-                3 => GenerateType3(targetVerb, verbs),
-                4 => GenerateType4(targetVerb, verbs),
-                _ => GenerateType5(targetVerb, verbs)
+                1 => GenerateIdentifyGroup(targetVerb),
+                2 => GenerateIdentifyForm(targetVerb),
+                3 => GenerateDictionaryToTe(targetVerb, verbs),
+                4 => GenerateDictionaryToMasu(targetVerb, verbs),
+                5 => GenerateDictionaryToNai(targetVerb, verbs),
+                _ => GenerateMeaning(targetVerb, verbs)
             };
 
             questions.Add(question);
@@ -60,58 +61,32 @@ public class VerbQuizService : IVerbQuizService
         return questions;
     }
 
-    // Type 1: Dictionary -> Te
-    private object GenerateType1(Verb target, List<Verb> allVerbs)
+    // Type 1: Identify Group (3 choices)
+    private object GenerateIdentifyGroup(Verb target)
     {
-        var choices = new List<string> { target.TeForm };
-        int attempts = 0;
-        while (choices.Count < 4 && attempts < 50)
-        {
-            attempts++;
-            var randomVerb = allVerbs[_random.Next(allVerbs.Count)];
-            if (!choices.Contains(randomVerb.TeForm) && !string.IsNullOrEmpty(randomVerb.TeForm))
-                choices.Add(randomVerb.TeForm);
-        }
-        choices = choices.OrderBy(c => _random.Next()).ToList();
+        var choices = new List<string> { "Nhóm I", "Nhóm II", "Nhóm III" };
+        var correct = $"Nhóm {target.VerbGroup}";
+        
+        string rule = target.VerbGroup switch {
+            "I" => "Động từ Nhóm I có âm cuối trước ます thuộc cột い (như い, き, ぎ, し, ち, に, ひ, み, り).",
+            "II" => "Động từ Nhóm II thường có âm cuối trước ます thuộc cột え (hoặc một số động từ đặc biệt cột い như 見る, 起きる).",
+            "III" => "Động từ Nhóm III là các động từ bất quy tắc (する, くる) và các danh động từ đi với する.",
+            _ => ""
+        };
 
         return new
         {
             id = Guid.NewGuid(),
-            questionType = "dictionary_to_te",
-            question = $"Thể て của 【{target.DictionaryForm}】 là gì?",
+            questionType = "identify_group",
+            question = $"Động từ 【{target.DictionaryForm}】 ({target.Meaning}) thuộc nhóm mấy?",
             choices = choices,
-            correctIndex = choices.IndexOf(target.TeForm),
-            explanation = $"{target.DictionaryForm} thuộc Nhóm {target.VerbGroup}, thể て là {target.TeForm}."
+            correctIndex = choices.IndexOf(correct),
+            explanation = $"【{target.DictionaryForm}】 thuộc {correct}. {rule}"
         };
     }
 
-    // Type 2: Reverse (Te -> Dictionary)
-    private object GenerateType2(Verb target, List<Verb> allVerbs)
-    {
-        var choices = new List<string> { target.DictionaryForm };
-        int attempts = 0;
-        while (choices.Count < 4 && attempts < 50)
-        {
-            attempts++;
-            var randomVerb = allVerbs[_random.Next(allVerbs.Count)];
-            if (!choices.Contains(randomVerb.DictionaryForm))
-                choices.Add(randomVerb.DictionaryForm);
-        }
-        choices = choices.OrderBy(c => _random.Next()).ToList();
-
-        return new
-        {
-            id = Guid.NewGuid(),
-            questionType = "te_to_dictionary",
-            question = $"Đây là thể từ điển của động từ nào: 【{target.TeForm}】?",
-            choices = choices,
-            correctIndex = choices.IndexOf(target.DictionaryForm),
-            explanation = $"Thể từ điển của {target.TeForm} là {target.DictionaryForm}."
-        };
-    }
-
-    // Type 3: Identify form
-    private object GenerateType3(Verb target, List<Verb> allVerbs)
+    // Type 2: Identify Form
+    private object GenerateIdentifyForm(Verb target)
     {
         var forms = new List<(string formValue, string formName)>
         {
@@ -140,12 +115,87 @@ public class VerbQuizService : IVerbQuizService
             question = $"Từ 【{selectedForm.formValue}】 thuộc thể gì?",
             choices = choices,
             correctIndex = choices.IndexOf(selectedForm.formName),
-            explanation = $"{selectedForm.formValue} là {selectedForm.formName} của {target.DictionaryForm}."
+            explanation = $"【{selectedForm.formValue}】 là {selectedForm.formName} của động từ {target.DictionaryForm} ({target.Meaning})."
         };
     }
 
-    // Type 4: Meaning
-    private object GenerateType4(Verb target, List<Verb> allVerbs)
+    // Type 3: Dictionary -> Te
+    private object GenerateDictionaryToTe(Verb target, List<Verb> allVerbs)
+    {
+        var choices = new List<string> { target.TeForm };
+        int attempts = 0;
+        while (choices.Count < 4 && attempts < 50)
+        {
+            attempts++;
+            var randomVerb = allVerbs[_random.Next(allVerbs.Count)];
+            if (!choices.Contains(randomVerb.TeForm) && !string.IsNullOrEmpty(randomVerb.TeForm))
+                choices.Add(randomVerb.TeForm);
+        }
+        choices = choices.OrderBy(c => _random.Next()).ToList();
+
+        return new
+        {
+            id = Guid.NewGuid(),
+            questionType = "dictionary_to_te",
+            question = $"Thể て của 【{target.DictionaryForm}】 là gì?",
+            choices = choices,
+            correctIndex = choices.IndexOf(target.TeForm),
+            explanation = $"【{target.DictionaryForm}】 thuộc Nhóm {target.VerbGroup}, chia sang Thể て là 【{target.TeForm}】."
+        };
+    }
+
+    // Type 4: Dictionary -> Masu
+    private object GenerateDictionaryToMasu(Verb target, List<Verb> allVerbs)
+    {
+        var choices = new List<string> { target.MasuForm };
+        int attempts = 0;
+        while (choices.Count < 4 && attempts < 50)
+        {
+            attempts++;
+            var randomVerb = allVerbs[_random.Next(allVerbs.Count)];
+            if (!choices.Contains(randomVerb.MasuForm) && !string.IsNullOrEmpty(randomVerb.MasuForm))
+                choices.Add(randomVerb.MasuForm);
+        }
+        choices = choices.OrderBy(c => _random.Next()).ToList();
+
+        return new
+        {
+            id = Guid.NewGuid(),
+            questionType = "dictionary_to_masu",
+            question = $"Thể ます của 【{target.DictionaryForm}】 là gì?",
+            choices = choices,
+            correctIndex = choices.IndexOf(target.MasuForm),
+            explanation = $"【{target.DictionaryForm}】 thuộc Nhóm {target.VerbGroup}, chia sang Thể ます là 【{target.MasuForm}】."
+        };
+    }
+
+    // Type 5: Dictionary -> Nai
+    private object GenerateDictionaryToNai(Verb target, List<Verb> allVerbs)
+    {
+        var choices = new List<string> { target.NaiForm };
+        int attempts = 0;
+        while (choices.Count < 4 && attempts < 50)
+        {
+            attempts++;
+            var randomVerb = allVerbs[_random.Next(allVerbs.Count)];
+            if (!choices.Contains(randomVerb.NaiForm) && !string.IsNullOrEmpty(randomVerb.NaiForm))
+                choices.Add(randomVerb.NaiForm);
+        }
+        choices = choices.OrderBy(c => _random.Next()).ToList();
+
+        return new
+        {
+            id = Guid.NewGuid(),
+            questionType = "dictionary_to_nai",
+            question = $"Thể ない của 【{target.DictionaryForm}】 là gì?",
+            choices = choices,
+            correctIndex = choices.IndexOf(target.NaiForm),
+            explanation = $"【{target.DictionaryForm}】 thuộc Nhóm {target.VerbGroup}, chia sang Thể ない là 【{target.NaiForm}】."
+        };
+    }
+
+    // Type 6: Meaning
+    private object GenerateMeaning(Verb target, List<Verb> allVerbs)
     {
         var choices = new List<string> { target.Meaning };
         int attempts = 0;
@@ -165,24 +215,7 @@ public class VerbQuizService : IVerbQuizService
             question = $"Ý nghĩa của 【{target.DictionaryForm}】 là gì?",
             choices = choices,
             correctIndex = choices.IndexOf(target.Meaning),
-            explanation = $"{target.DictionaryForm} có nghĩa là {target.Meaning}."
-        };
-    }
-
-    // Type 5: Verb Group
-    private object GenerateType5(Verb target, List<Verb> allVerbs)
-    {
-        var choices = new List<string> { "Nhóm I", "Nhóm II", "Nhóm III", "Không xác định" };
-        var correct = $"Nhóm {target.VerbGroup}";
-        
-        return new
-        {
-            id = Guid.NewGuid(),
-            questionType = "identify_group",
-            question = $"Động từ 【{target.DictionaryForm}】 thuộc nhóm mấy?",
-            choices = choices,
-            correctIndex = choices.IndexOf(correct),
-            explanation = $"{target.DictionaryForm} thuộc Nhóm {target.VerbGroup}."
+            explanation = $"【{target.DictionaryForm}】 có nghĩa là \"{target.Meaning}\"."
         };
     }
 }

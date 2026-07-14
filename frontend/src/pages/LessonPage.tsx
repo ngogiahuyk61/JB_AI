@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BookOpen, Volume2, Play } from 'lucide-react';
+import { BookOpen, Volume2, Play, Award } from 'lucide-react';
 import { speechService } from '../services/speechService';
 import '../styles/LessonPage.css';
 
@@ -35,7 +35,7 @@ interface LessonPageProps {
 }
 
 export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
-  const [activeTab, setActiveTab] = useState<'verbs' | 'particles' | 'synonyms'>('verbs');
+  const [activeTab, setActiveTab] = useState<'verbs' | 'particles' | 'synonyms' | 'numbers' | 'time'>('verbs');
   const [verbGroup, setVerbGroup] = useState<'I' | 'II' | 'III'>('I');
   const speak = async (text: string) => {
     try {
@@ -193,6 +193,30 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
           Từ Đồng Nghĩa
         </button>
         <button
+          onClick={() => setActiveTab('numbers')}
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: activeTab === 'numbers' ? 'white' : 'transparent',
+            color: activeTab === 'numbers' ? '#4f46e5' : '#475569',
+            boxShadow: activeTab === 'numbers' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 150ms ease'
+          }}
+        >
+          Số Đếm & Từ Đếm
+        </button>
+        <button
+          onClick={() => setActiveTab('time')}
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: activeTab === 'time' ? 'white' : 'transparent',
+            color: activeTab === 'time' ? '#4f46e5' : '#475569',
+            boxShadow: activeTab === 'time' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 150ms ease'
+          }}
+        >
+          Thời Gian
+        </button>
+        <button
           onClick={() => {
             if (onNavigate) {
               onNavigate('verbquiz');
@@ -315,7 +339,26 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
 
       {/* Tab: PARTICLES */}
       {activeTab === 'particles' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <button
+              onClick={() => {
+                if (onNavigate) onNavigate('particlequiz');
+              }}
+              style={{
+                padding: '10px 24px', borderRadius: 12, border: 'none', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+                background: 'linear-gradient(to right, #10b981, #059669)',
+                color: 'white',
+                boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+                transition: 'all 200ms ease',
+                display: 'flex', alignItems: 'center', gap: 8
+              }}
+            >
+              <Award size={18} />
+              Test Trợ Từ (JLPT N5)
+            </button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
           {particles.map((p, idx) => (
             <div key={idx} style={{ background: 'white', borderRadius: 16, border: '1.5px solid #e2e8f0', padding: 18, transition: 'transform 200ms ease', boxShadow: '0 4px 12px rgba(0,0,0,0.01)' }} className="hover-card">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
@@ -338,6 +381,7 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
               </div>
             </div>
           ))}
+          </div>
         </div>
       )}
 
@@ -386,6 +430,197 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
         }
       `}</style>
 
+      {/* Tab: NUMBERS & COUNTERS */}
+      {activeTab === 'numbers' && (
+        <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 16 }}>Số đếm & Từ đếm (Counters)</h2>
+          <p style={{ fontSize: 13, color: '#64748b', marginBottom: 24 }}>Nhấn vào chữ tiếng Nhật để nghe phát âm</p>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
+            {/* Cột 1: Số đếm cơ bản */}
+            <div>
+              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#334155', borderBottom: '2px solid #e2e8f0', paddingBottom: 8, marginBottom: 12 }}>Số đếm cơ bản (1-10)</h3>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                <tbody>
+                  {[
+                    { num: 1, ja: 'いち', kanji: '一' }, { num: 2, ja: 'に', kanji: '二' },
+                    { num: 3, ja: 'さん', kanji: '三' }, { num: 4, ja: 'よん/し', kanji: '四' },
+                    { num: 5, ja: 'ご', kanji: '五' }, { num: 6, ja: 'ろく', kanji: '六' },
+                    { num: 7, ja: 'なな/しち', kanji: '七' }, { num: 8, ja: 'はち', kanji: '八' },
+                    { num: 9, ja: 'きゅう/く', kanji: '九' }, { num: 10, ja: 'じゅう', kanji: '十' }
+                  ].map(n => (
+                    <tr key={n.num} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                      <td style={{ padding: '8px 4px', fontWeight: 600, color: '#64748b' }}>{n.num}</td>
+                      <td style={{ padding: '8px 4px', color: '#0f172a' }}>{n.kanji}</td>
+                      <td style={{ padding: '8px 4px' }}>
+                        <span style={{ cursor: 'pointer', color: '#4f46e5', fontWeight: 600 }} onClick={() => speak(n.ja)}>{n.ja}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Cột 2: Đếm đồ vật chung */}
+            <div>
+              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#334155', borderBottom: '2px solid #e2e8f0', paddingBottom: 8, marginBottom: 12 }}>Đếm đồ vật chung (ひとつ)</h3>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                <tbody>
+                  {[
+                    { num: 1, ja: 'ひとつ', kanji: '一つ' }, { num: 2, ja: 'ふたつ', kanji: '二つ' },
+                    { num: 3, ja: 'みっつ', kanji: '三つ' }, { num: 4, ja: 'よっつ', kanji: '四つ' },
+                    { num: 5, ja: 'いつつ', kanji: '五つ' }, { num: 6, ja: 'むっつ', kanji: '六つ' },
+                    { num: 7, ja: 'ななつ', kanji: '七つ' }, { num: 8, ja: 'やっつ', kanji: '八つ' },
+                    { num: 9, ja: 'ここのつ', kanji: '九つ' }, { num: 10, ja: 'とお', kanji: '十' },
+                    { num: '?', ja: 'いくつ', kanji: 'Mấy cái?' }
+                  ].map(n => (
+                    <tr key={n.num} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                      <td style={{ padding: '8px 4px', fontWeight: 600, color: '#64748b' }}>{n.num}</td>
+                      <td style={{ padding: '8px 4px', color: '#0f172a' }}>{n.kanji}</td>
+                      <td style={{ padding: '8px 4px' }}>
+                        <span style={{ cursor: 'pointer', color: '#10b981', fontWeight: 600 }} onClick={() => speak(n.ja)}>{n.ja}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Cột 3: Trợ từ đếm */}
+            <div>
+              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#334155', borderBottom: '2px solid #e2e8f0', paddingBottom: 8, marginBottom: 12 }}>Trợ từ đếm phổ biến</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {[
+                  { counter: '枚 (まい)', use: 'Vật mỏng (áo, giấy, đĩa)', ex: 'シャツ２枚 (2 cái áo)' },
+                  { counter: '台 (だい)', use: 'Máy móc, xe cộ', ex: '車１台 (1 chiếc xe)' },
+                  { counter: '本 (ほん/ぽん/ぼん)', use: 'Vật thon dài (bút, chai, ô)', ex: 'ペン３本 (3 cái bút)' },
+                  { counter: '匹 (ひき/ぴき/びき)', use: 'Con vật nhỏ (chó, mèo, cá)', ex: '犬１匹 (1 con chó)' },
+                  { counter: '冊 (さつ)', use: 'Sách, vở, tạp chí', ex: '本４冊 (4 cuốn sách)' },
+                  { counter: '杯 (はい/ぱい/ばい)', use: 'Chén, ly, bát', ex: '水１杯 (1 ly nước)' },
+                  { counter: '人 (にん)', use: 'Người (1 người: ひとり, 2 người: ふたり)', ex: '学生３人 (3 học sinh)' }
+                ].map((c, i) => (
+                  <div key={i} style={{ padding: 12, background: '#f8fafc', borderRadius: 8, borderLeft: '3px solid #8b5cf6' }}>
+                    <div style={{ fontWeight: 700, color: '#8b5cf6', marginBottom: 4 }}>{c.counter}</div>
+                    <div style={{ fontSize: 13, color: '#475569', marginBottom: 4 }}>{c.use}</div>
+                    <div style={{ fontSize: 13, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <span>VD:</span>
+                      <span style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => speak(c.ex.split(' ')[0])}>{c.ex}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Tab: TIME & DATES */}
+      {activeTab === 'time' && (
+        <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 16 }}>Thời Gian (Giờ, Thứ, Ngày, Tháng)</h2>
+          <p style={{ fontSize: 13, color: '#64748b', marginBottom: 24 }}>Lưu ý các trường hợp bất quy tắc có màu đỏ</p>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
+            
+            {/* Cột: Giờ và Phút */}
+            <div>
+              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#334155', borderBottom: '2px solid #e2e8f0', paddingBottom: 8, marginBottom: 12 }}>Giờ (〜時) & Phút (〜分)</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
+                <div style={{ padding: 8, background: '#f8fafc', borderRadius: 6 }}>
+                  <div style={{ fontWeight: 600, color: '#6366f1', marginBottom: 4 }}>Đếm Giờ (時 - じ)</div>
+                  <div>1時 (いちじ), 2時 (にじ), <span style={{color: '#ef4444', fontWeight: 'bold'}}>4時 (よじ)</span>, 5時 (ごじ), 6時 (ろくじ), <span style={{color: '#ef4444', fontWeight: 'bold'}}>7時 (しちじ)</span>, 8時 (はちじ), <span style={{color: '#ef4444', fontWeight: 'bold'}}>9時 (くじ)</span>...</div>
+                  <div style={{ marginTop: 4, fontStyle: 'italic', color: '#64748b' }}>Hỏi: 何時 (なんじ) - Mấy giờ?</div>
+                </div>
+                <div style={{ padding: 8, background: '#f8fafc', borderRadius: 6 }}>
+                  <div style={{ fontWeight: 600, color: '#10b981', marginBottom: 4 }}>Đếm Phút (分 - ふん/ぷん)</div>
+                  <div>1分 (いっぷん), 2分 (にふん), 3分 (さんぷん), 4分 (よんぷん), 5分 (ごふん), 6分 (ろっぷん), 7分 (ななふん), 8分 (はっぷん), 9分 (きゅうふん), 10分 (じゅっぷん)</div>
+                  <div style={{ marginTop: 4, fontStyle: 'italic', color: '#64748b' }}>Hỏi: 何分 (なんぷん) - Mấy phút?</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Cột: Thứ trong tuần */}
+            <div>
+              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#334155', borderBottom: '2px solid #e2e8f0', paddingBottom: 8, marginBottom: 12 }}>Thứ (曜日)</h3>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                <tbody>
+                  {[
+                    { vi: 'Thứ 2', ja: '月曜日', kana: 'げつようび' },
+                    { vi: 'Thứ 3', ja: '火曜日', kana: 'かようび' },
+                    { vi: 'Thứ 4', ja: '水曜日', kana: 'すいようび' },
+                    { vi: 'Thứ 5', ja: '木曜日', kana: 'もくようび' },
+                    { vi: 'Thứ 6', ja: '金曜日', kana: 'きんようび' },
+                    { vi: 'Thứ 7', ja: '土曜日', kana: 'どようび' },
+                    { vi: 'Chủ nhật', ja: '日曜日', kana: 'にちようび' },
+                    { vi: 'Thứ mấy?', ja: '何曜日', kana: 'なんようび' }
+                  ].map((d, i) => (
+                    <tr key={i} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                      <td style={{ padding: '6px 4px', color: '#64748b' }}>{d.vi}</td>
+                      <td style={{ padding: '6px 4px', fontWeight: 600 }}>{d.ja}</td>
+                      <td style={{ padding: '6px 4px' }}><span style={{ cursor: 'pointer', color: '#f59e0b' }} onClick={() => speak(d.kana)}>{d.kana}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Cột: Ngày trong tháng */}
+            <div>
+              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#334155', borderBottom: '2px solid #e2e8f0', paddingBottom: 8, marginBottom: 12 }}>Ngày trong tháng (〜日)</h3>
+              <div style={{ fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
+                <p style={{ margin: '0 0 8px 0' }}>Từ ngày 1 đến 10 là bất quy tắc:</p>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, marginBottom: 12 }}>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('ついたち')}>1: ついたち</div>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('ふつか')}>2: ふつか</div>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('みっか')}>3: みっか</div>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('よっか')}>4: よっか</div>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('いつか')}>5: いつか</div>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('むいか')}>6: むいか</div>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('なのか')}>7: なのか</div>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('ようか')}>8: ようか</div>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('ここのか')}>9: ここのか</div>
+                  <div style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('とおか')}>10: とおか</div>
+                </div>
+                <p style={{ margin: '0 0 4px 0' }}>Các ngày bất quy tắc khác:</p>
+                <ul style={{ margin: 0, paddingLeft: 20 }}>
+                  <li style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('じゅうよっか')}>14: じゅうよっか</li>
+                  <li style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('はつか')}>20: はつか</li>
+                  <li style={{ color: '#ef4444', fontWeight: 600 }} onClick={() => speak('にじゅうよっか')}>24: にじゅうよっか</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Cột: Khoảng thời gian */}
+            <div>
+              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#334155', borderBottom: '2px solid #e2e8f0', paddingBottom: 8, marginBottom: 12 }}>Khoảng thời gian (〜間)</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
+                <div style={{ padding: 8, background: '#f8fafc', borderRadius: 6, display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ fontWeight: 600 }}>〜時間 (Tiếng)</span>
+                  <span style={{ color: '#3b82f6', cursor: 'pointer' }} onClick={() => speak('いちじかん')}>1時間</span>
+                </div>
+                <div style={{ padding: 8, background: '#f8fafc', borderRadius: 6, display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ fontWeight: 600 }}>〜日間 (Ngày)</span>
+                  <span style={{ color: '#3b82f6', cursor: 'pointer' }} onClick={() => speak('ふつかかん')}>2日間</span>
+                </div>
+                <div style={{ padding: 8, background: '#f8fafc', borderRadius: 6, display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ fontWeight: 600 }}>〜週間 (Tuần)</span>
+                  <span style={{ color: '#3b82f6', cursor: 'pointer' }} onClick={() => speak('さんしゅうかん')}>3週間</span>
+                </div>
+                <div style={{ padding: 8, background: '#f8fafc', borderRadius: 6, display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ fontWeight: 600 }}>〜か月 (Tháng)</span>
+                  <span style={{ color: '#3b82f6', cursor: 'pointer' }} onClick={() => speak('よんかげつ')}>4か月</span>
+                </div>
+                <div style={{ padding: 8, background: '#f8fafc', borderRadius: 6, display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ fontWeight: 600 }}>〜年間 (Năm)</span>
+                  <span style={{ color: '#3b82f6', cursor: 'pointer' }} onClick={() => speak('ごねんかん')}>5年間</span>
+                </div>
+                <div style={{ marginTop: 4, fontStyle: 'italic', color: '#64748b' }}>Hỏi: どのくらい - Khoảng bao lâu?</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 }
