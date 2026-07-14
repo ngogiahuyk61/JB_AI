@@ -519,6 +519,18 @@ export default function FloatingChat({ isOpen, onClose }: FloatingChatProps) {
   };
 
   const startMediaRecording = async () => {
+    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+      setVoiceError('Mic chỉ hoạt động khi trang mở bằng HTTPS hoặc localhost. Hãy mở bằng URL bảo mật trên điện thoại.');
+      setIsListening(false);
+      return;
+    }
+
+    if (typeof MediaRecorder === 'undefined') {
+      setVoiceError('Thiết bị này không hỗ trợ thu âm trực tiếp. Hãy thử Chrome/Edge mới hơn.');
+      setIsListening(false);
+      return;
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const mimeType = getSupportedAudioMimeType();

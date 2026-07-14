@@ -139,6 +139,17 @@ export default function KaiwaPage() {
   const startRecording = async () => {
     console.log('[Kaiwa] startRecording invoked', { hasMediaDevices: !!navigator.mediaDevices, hasGetUserMedia: !!navigator.mediaDevices?.getUserMedia, isSecureContext: window.isSecureContext });
     window.speechSynthesis.cancel();
+
+    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+      setError('Mic chỉ hoạt động khi trang mở bằng HTTPS hoặc localhost. Hãy mở bằng URL bảo mật trên điện thoại.');
+      return;
+    }
+
+    if (typeof MediaRecorder === 'undefined') {
+      setError('Thiết bị này không hỗ trợ thu âm trực tiếp. Hãy thử Chrome/Edge mới hơn.');
+      return;
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       console.log('[Kaiwa] microphone granted', stream.getAudioTracks().length);
