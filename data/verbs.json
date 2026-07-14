@@ -1,0 +1,202 @@
+[
+  {
+    "Meaning": "Chờ, đợi",
+    "DictionaryForm": "待つ",
+    "MasuForm": "待ちます",
+    "TeForm": "待って",
+    "TaForm": "待った",
+    "NaiForm": "待たない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Viết",
+    "DictionaryForm": "書く",
+    "MasuForm": "書きます",
+    "TeForm": "書いて",
+    "TaForm": "書いた",
+    "NaiForm": "書かない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Đọc",
+    "DictionaryForm": "読む",
+    "MasuForm": "読みます",
+    "TeForm": "読んで",
+    "TaForm": "読んだ",
+    "NaiForm": "読まない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Ăn",
+    "DictionaryForm": "食べる",
+    "MasuForm": "食べます",
+    "TeForm": "食べて",
+    "TaForm": "食べた",
+    "NaiForm": "食べない",
+    "VerbGroup": "II",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Ngủ",
+    "DictionaryForm": "寝る",
+    "MasuForm": "寝ます",
+    "TeForm": "寝て",
+    "TaForm": "寝た",
+    "NaiForm": "寝ない",
+    "VerbGroup": "II",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Đến",
+    "DictionaryForm": "来る",
+    "MasuForm": "来ます",
+    "TeForm": "来て",
+    "TaForm": "来た",
+    "NaiForm": "来ない",
+    "VerbGroup": "III",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Làm",
+    "DictionaryForm": "する",
+    "MasuForm": "します",
+    "TeForm": "して",
+    "TaForm": "した",
+    "NaiForm": "しない",
+    "VerbGroup": "III",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Uống",
+    "DictionaryForm": "飲む",
+    "MasuForm": "飲みます",
+    "TeForm": "飲んで",
+    "TaForm": "飲んだ",
+    "NaiForm": "飲まない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Nghe",
+    "DictionaryForm": "聞く",
+    "MasuForm": "聞きます",
+    "TeForm": "聞いて",
+    "TaForm": "聞いた",
+    "NaiForm": "聞かない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Nói",
+    "DictionaryForm": "話す",
+    "MasuForm": "話します",
+    "TeForm": "話して",
+    "TaForm": "話した",
+    "NaiForm": "話さない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Gặp",
+    "DictionaryForm": "会う",
+    "MasuForm": "会います",
+    "TeForm": "会って",
+    "TaForm": "会った",
+    "NaiForm": "会わない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Mua",
+    "DictionaryForm": "買う",
+    "MasuForm": "買います",
+    "TeForm": "買って",
+    "TaForm": "買った",
+    "NaiForm": "買わない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Thức dậy",
+    "DictionaryForm": "起きる",
+    "MasuForm": "起きます",
+    "TeForm": "起きて",
+    "TaForm": "起きた",
+    "NaiForm": "起きない",
+    "VerbGroup": "II",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Nhìn, xem",
+    "DictionaryForm": "見る",
+    "MasuForm": "見ます",
+    "TeForm": "見て",
+    "TaForm": "見た",
+    "NaiForm": "見ない",
+    "VerbGroup": "II",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Học",
+    "DictionaryForm": "勉強する",
+    "MasuForm": "勉強します",
+    "TeForm": "勉強して",
+    "TaForm": "勉強した",
+    "NaiForm": "勉強しない",
+    "VerbGroup": "III",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Đi",
+    "DictionaryForm": "行く",
+    "MasuForm": "行きます",
+    "TeForm": "行って",
+    "TaForm": "行った",
+    "NaiForm": "行かない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Trở về",
+    "DictionaryForm": "帰る",
+    "MasuForm": "帰ります",
+    "TeForm": "帰って",
+    "TaForm": "帰った",
+    "NaiForm": "帰らない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Bơi",
+    "DictionaryForm": "泳ぐ",
+    "MasuForm": "泳ぎます",
+    "TeForm": "泳いで",
+    "TaForm": "泳いだ",
+    "NaiForm": "泳がない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Chơi",
+    "DictionaryForm": "遊ぶ",
+    "MasuForm": "遊びます",
+    "TeForm": "遊んで",
+    "TaForm": "遊んだ",
+    "NaiForm": "遊ばない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  },
+  {
+    "Meaning": "Gọi",
+    "DictionaryForm": "呼ぶ",
+    "MasuForm": "呼びます",
+    "TeForm": "呼んで",
+    "TaForm": "呼んだ",
+    "NaiForm": "呼ばない",
+    "VerbGroup": "I",
+    "JlptLevel": "N5"
+  }
+]

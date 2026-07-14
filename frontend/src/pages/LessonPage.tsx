@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { BookOpen, Volume2 } from 'lucide-react';
+import { BookOpen, Volume2, Play } from 'lucide-react';
 import { speechService } from '../services/speechService';
+import '../styles/LessonPage.css';
 
 interface VerbConjugation {
   kanji: string;
@@ -29,17 +30,18 @@ interface SynonymItem {
   difference: string;
 }
 
-export default function LessonPage() {
+interface LessonPageProps {
+  onNavigate?: (tab: string) => void;
+}
+
+export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
   const [activeTab, setActiveTab] = useState<'verbs' | 'particles' | 'synonyms'>('verbs');
   const [verbGroup, setVerbGroup] = useState<'I' | 'II' | 'III'>('I');
-  const [speakingText, setSpeakingText] = useState<string | null>(null);
-
   const speak = async (text: string) => {
-    setSpeakingText(text);
     try {
       await speechService.speakJapanese(text);
     } finally {
-      setSpeakingText(null);
+      // Done
     }
   };
 
@@ -190,6 +192,24 @@ export default function LessonPage() {
         >
           Từ Đồng Nghĩa
         </button>
+        <button
+          onClick={() => {
+            if (onNavigate) {
+              onNavigate('verbquiz');
+            }
+          }}
+          className="verb-quiz-nav-btn"
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: 'linear-gradient(to right, #4f46e5, #7c3aed)',
+            color: 'white',
+            boxShadow: '0 2px 8px rgba(79, 70, 229, 0.3)',
+            transition: 'all 150ms ease',
+            marginLeft: 'auto'
+          }}
+        >
+          Học Chia Động Từ (Test)
+        </button>
       </div>
 
       {/* Tab: VERB CONJUGATION */}
@@ -219,62 +239,76 @@ export default function LessonPage() {
             </div>
           </div>
 
-          {/* Verb Table Container */}
-          <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #e2e8f0' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
-              <thead>
-                <tr style={{ background: '#f8fafc', borderBottom: '1.5px solid #e2e8f0' }}>
-                  <th style={{ padding: '14px 16px', fontWeight: 800, color: '#475569' }}>Ý nghĩa</th>
-                  <th style={{ padding: '14px 16px', fontWeight: 800, color: '#475569' }}>Thể từ điển (辞書形)</th>
-                  <th style={{ padding: '14px 16px', fontWeight: 800, color: '#475569' }}>Thể ます (V-masu)</th>
-                  <th style={{ padding: '14px 16px', fontWeight: 800, color: '#475569' }}>Thể て (V-te)</th>
-                  <th style={{ padding: '14px 16px', fontWeight: 800, color: '#475569' }}>Thể た (V-ta)</th>
-                  <th style={{ padding: '14px 16px', fontWeight: 800, color: '#475569' }}>Thể ない (V-nai)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentVerbs.map((v, idx) => (
-                  <tr key={idx} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 150ms ease' }} className="hover-row">
-                    <td style={{ padding: '14px 16px', fontWeight: 700, color: '#0f172a' }}>{v.meaning}</td>
-                    
-                    <td style={{ padding: '14px 16px' }}>
-                      <button onClick={() => speak(v.kanji)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, width: '100%', textAlign: 'left' }}>
-                        <span className="text-ja" style={{ fontSize: 15, fontWeight: 700, color: '#4f46e5' }}>{v.kanji}</span>
-                        <Volume2 size={12} style={{ opacity: speakingText === v.kanji ? 1 : 0.4, color: '#4f46e5' }} />
-                      </button>
-                    </td>
+          {/* Verb Card Container */}
+          <div className="verb-accordion-list">
+            {currentVerbs.map((v, idx) => {
+              return (
+                <div key={idx} className="verb-accordion-item expanded">
+                  {/* Header */}
+                  <div className="verb-accordion-header" style={{ cursor: 'default' }}>
+                    <div className="verb-accordion-header-left">
+                      <div className="verb-accordion-kanji">
+                        <span className="text-ja">{v.kanji}</span>
+                      </div>
+                      <div className="verb-accordion-meaning">{v.meaning}</div>
+                    </div>
+                  </div>
 
-                    <td style={{ padding: '14px 16px' }}>
-                      <button onClick={() => speak(v.masu)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span className="text-ja" style={{ fontSize: 14, fontWeight: 700, color: '#10b981' }}>{v.masu}</span>
-                        <Volume2 size={12} style={{ opacity: speakingText === v.masu ? 1 : 0.4, color: '#10b981' }} />
-                      </button>
-                    </td>
+                  {/* Content (Always Visible) */}
+                  <div className="verb-accordion-content" style={{ paddingTop: 10 }}>
+                      <div className="verb-form-box">
+                        <div className="verb-form-info">
+                          <span className="verb-form-label" style={{ color: '#64748b' }}>Từ điển</span>
+                          <span className="verb-form-value text-ja form-jisho">{v.kanji}</span>
+                        </div>
+                        <button onClick={(e) => { e.stopPropagation(); speak(v.kanji); }} className="verb-play-btn btn-jisho">
+                          <Play size={18} fill="currentColor" />
+                        </button>
+                      </div>
 
-                    <td style={{ padding: '14px 16px' }}>
-                      <button onClick={() => speak(v.te)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span className="text-ja" style={{ fontSize: 14, fontWeight: 700, color: '#ea580c' }}>{v.te}</span>
-                        <Volume2 size={12} style={{ opacity: speakingText === v.te ? 1 : 0.4, color: '#ea580c' }} />
-                      </button>
-                    </td>
+                      <div className="verb-form-box">
+                        <div className="verb-form-info">
+                          <span className="verb-form-label" style={{ color: '#64748b' }}>Thể ます</span>
+                          <span className="verb-form-value text-ja form-masu">{v.masu}</span>
+                        </div>
+                        <button onClick={(e) => { e.stopPropagation(); speak(v.masu); }} className="verb-play-btn btn-masu">
+                          <Play size={18} fill="currentColor" />
+                        </button>
+                      </div>
 
-                    <td style={{ padding: '14px 16px' }}>
-                      <button onClick={() => speak(v.ta)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span className="text-ja" style={{ fontSize: 14, fontWeight: 700, color: '#8b5cf6' }}>{v.ta}</span>
-                        <Volume2 size={12} style={{ opacity: speakingText === v.ta ? 1 : 0.4, color: '#8b5cf6' }} />
-                      </button>
-                    </td>
+                      <div className="verb-form-box">
+                        <div className="verb-form-info">
+                          <span className="verb-form-label" style={{ color: '#64748b' }}>Thể て</span>
+                          <span className="verb-form-value text-ja form-te">{v.te}</span>
+                        </div>
+                        <button onClick={(e) => { e.stopPropagation(); speak(v.te); }} className="verb-play-btn btn-te">
+                          <Play size={18} fill="currentColor" />
+                        </button>
+                      </div>
 
-                    <td style={{ padding: '14px 16px' }}>
-                      <button onClick={() => speak(v.nai)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span className="text-ja" style={{ fontSize: 14, fontWeight: 700, color: '#ef4444' }}>{v.nai}</span>
-                        <Volume2 size={12} style={{ opacity: speakingText === v.nai ? 1 : 0.4, color: '#ef4444' }} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      <div className="verb-form-box">
+                        <div className="verb-form-info">
+                          <span className="verb-form-label" style={{ color: '#64748b' }}>Thể た</span>
+                          <span className="verb-form-value text-ja form-ta">{v.ta}</span>
+                        </div>
+                        <button onClick={(e) => { e.stopPropagation(); speak(v.ta); }} className="verb-play-btn btn-ta">
+                          <Play size={18} fill="currentColor" />
+                        </button>
+                      </div>
+
+                      <div className="verb-form-box">
+                        <div className="verb-form-info">
+                          <span className="verb-form-label" style={{ color: '#64748b' }}>Thể ない</span>
+                          <span className="verb-form-value text-ja form-nai">{v.nai}</span>
+                        </div>
+                        <button onClick={(e) => { e.stopPropagation(); speak(v.nai); }} className="verb-play-btn btn-nai">
+                          <Play size={18} fill="currentColor" />
+                        </button>
+                      </div>
+                    </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

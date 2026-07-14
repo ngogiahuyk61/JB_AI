@@ -8,6 +8,7 @@ import ExamPage from './pages/ExamPage';
 import VocabularyPage from './pages/VocabularyPage';
 import LessonPage from './pages/LessonPage';
 import KaiwaPage from './pages/KaiwaPage';
+import VerbQuizPage from './pages/VerbQuizPage';
 import FloatingChat from './components/chat/FloatingChat';
 import { MessageCircle } from 'lucide-react';
 import { useAppLayout } from './hooks/useAppLayout';
@@ -26,9 +27,10 @@ export default function App() {
       case 'flashcard': return <FlashcardPage />;
       case 'exam': return <ExamPage />;
       case 'vocabulary': return <VocabularyPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
-      case 'lesson': return <LessonPage />;
+      case 'lesson': return <LessonPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
       case 'kaiwa': return <KaiwaPage />;
       case 'settings': return <SettingsPage />;
+      case 'verbquiz': return <VerbQuizPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
       default: return <DashboardPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
     }
   };

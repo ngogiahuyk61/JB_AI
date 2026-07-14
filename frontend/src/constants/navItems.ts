@@ -1,7 +1,7 @@
 import { Home, BookMarked, Layers, GraduationCap, Settings, MessageSquareMore } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-export type AppTab = 'dashboard' | 'flashcard' | 'exam' | 'vocabulary' | 'lesson' | 'settings' | 'kaiwa';
+export type AppTab = 'dashboard' | 'flashcard' | 'exam' | 'vocabulary' | 'lesson' | 'settings' | 'kaiwa' | 'verbquiz';
 
 export interface NavItem {
   id: AppTab;

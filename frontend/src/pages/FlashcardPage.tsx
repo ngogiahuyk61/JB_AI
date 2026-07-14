@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, type ChangeEvent } from 'react';
+import { useState, useEffect, useCallback, useRef, type ChangeEvent } from 'react';
 import {
   UploadCloud, FileSpreadsheet, Shuffle, ListOrdered,
   Trash2, ChevronLeft, ChevronRight, Play, BrainCircuit,
@@ -40,7 +40,8 @@ export default function FlashcardPage() {
   const [jlptPos, setJlptPos] = useState('');
   const [specialStats, setSpecialStats] = useState({ n2_bs: 0, tu_lay: 0, luong_tu: 0 });
   const [jlptCount, setJlptCount] = useState<number | 'all'>('all');
-  const [autoSpeak, setAutoSpeak] = useState(true);
+  const [autoPlayState, setAutoPlayState] = useState<'idle' | 'playing'>('idle');
+  const autoPlayRef = useRef(false);
 
 
   const [sheets, setSheets] = useState<ExcelSheetData>({});
@@ -178,16 +179,65 @@ export default function FlashcardPage() {
 
   const card = cards[idx];
 
-  // Auto-speak card when switching cards or entering study phase
+  // Slideshow Logic
   useEffect(() => {
-    if (phase === 'study' && card && autoSpeak) {
-      // Small timeout to prevent clipping
-      const timer = setTimeout(() => {
-        speechService.speakFlashcard(card.kana, card.vietnamese, card.hanViet);
-      }, 300);
-      return () => clearTimeout(timer);
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const playNext = async () => {
+      if (!autoPlayRef.current || phase !== 'study' || !card) return;
+
+      // Đảm bảo bắt đầu ở mặt trước (nếu vừa mới chuyển thẻ)
+      if (flipped) {
+        setFlipped(false);
+        await new Promise(r => { timeoutId = setTimeout(r, 400); });
+        if (!autoPlayRef.current) return;
+      }
+      
+      // Thời gian nhìn mặt trước (Kanji)
+      await new Promise(r => { timeoutId = setTimeout(r, 1200); });
+      if (!autoPlayRef.current) return;
+
+      // Lật thẻ
+      setFlipped(true);
+      
+      // Chờ lật xong
+      await new Promise(r => { timeoutId = setTimeout(r, 400); });
+      if (!autoPlayRef.current) return;
+
+      // Phát âm
+      await speechService.speakFlashcard(card.kana, card.vietnamese, card.hanViet);
+      if (!autoPlayRef.current) return;
+
+      // Chờ một chút trước khi sang thẻ mới
+      await new Promise(r => { timeoutId = setTimeout(r, 1500); });
+      if (!autoPlayRef.current) return;
+
+      // Chuyển thẻ
+      if (idx < cards.length - 1) {
+        setIdx(prev => prev + 1);
+        setFlipped(false);
+      } else {
+        autoPlayRef.current = false;
+        setAutoPlayState('idle');
+      }
+    };
+
+    if (autoPlayState === 'playing') {
+      autoPlayRef.current = true;
+      playNext();
+    } else {
+      autoPlayRef.current = false;
+      speechService.cancel();
     }
-  }, [idx, phase, card, autoSpeak]);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [autoPlayState, idx, phase, card]);
+
+  const toggleAutoPlay = () => {
+    setAutoPlayState(prev => prev === 'idle' ? 'playing' : 'idle');
+  };
 
   const handleFlip = useCallback(() => {
     setFlipped(f => !f);
@@ -398,7 +448,7 @@ export default function FlashcardPage() {
             {/* Count */}
             <div style={{ background: 'white', borderRadius: 16, padding: 20, border: '1px solid var(--border)' }}>
               <h4 style={{ fontWeight: 800, marginBottom: 14, fontSize: 14 }}>🎯 Số lượng thẻ</h4>
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 16 }}>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 {([30, 50, 100, 'all'] as const).map(n => (
                   <button key={String(n)} onClick={() => setJlptCount(n)}
                     style={{
@@ -409,11 +459,6 @@ export default function FlashcardPage() {
                     }}>{n === 'all' ? `Tất cả (${jlptStats.toLocaleString()})` : n + ' thẻ'}</button>
                 ))}
               </div>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 13, fontWeight: 600, color: 'var(--text-secondary)' }}>
-                <input type="checkbox" checked={autoSpeak} onChange={e => setAutoSpeak(e.target.checked)}
-                  style={{ width: 16, height: 16, accentColor: 'var(--primary)' }} />
-                🔊 Tự động phát âm khi chuyển thẻ
-              </label>
             </div>
 
 
@@ -556,10 +601,27 @@ export default function FlashcardPage() {
             </button>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 12, fontSize: 13 }}>
+        <div style={{ display: 'flex', gap: 12, fontSize: 13, alignItems: 'center' }}>
+          <button 
+            onClick={toggleAutoPlay}
+            style={{ 
+              display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', 
+              background: autoPlayState === 'playing' ? '#fefce8' : 'white', 
+              padding: '6px 16px', borderRadius: 99, 
+              border: `1px solid ${autoPlayState === 'playing' ? '#eab308' : 'var(--border)'}`, 
+              fontWeight: 700, 
+              color: autoPlayState === 'playing' ? '#ca8a04' : 'var(--text-secondary)',
+              transition: 'all 0.2s ease'
+            }}>
+            <Play size={14} style={{ fill: autoPlayState === 'playing' ? 'currentColor' : 'none' }} />
+            {autoPlayState === 'playing' ? 'Đang Auto-play' : 'Auto-play'}
+          </button>
           <span style={{ color: 'var(--success)', fontWeight: 700 }}>✅ {knownCount}</span>
           <span style={{ color: 'var(--danger)', fontWeight: 700 }}>❌ {hardCount}</span>
-          <button className="btn btn-outline btn-sm" onClick={() => setPhase('select')}>← Quay lại</button>
+          <button className="btn btn-outline btn-sm" onClick={() => {
+            setAutoPlayState('idle');
+            setPhase('select');
+          }}>← Quay lại</button>
         </div>
       </div>
 

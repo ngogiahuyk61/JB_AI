@@ -49,6 +49,7 @@ builder.Services.AddScoped<KaiwaService>();
 builder.Services.AddHttpClient<TranscriptionService>();
 builder.Services.AddHttpClient<TranslationService>();
 builder.Services.AddHttpClient<EvaluationService>();
+builder.Services.AddScoped<JapaneseAI.Core.Interfaces.IVerbQuizService, JapaneseAI.Infrastructure.Services.VerbQuizService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");

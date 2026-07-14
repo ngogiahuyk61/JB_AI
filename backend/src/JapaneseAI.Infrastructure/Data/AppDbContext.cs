@@ -22,6 +22,9 @@ namespace JapaneseAI.Infrastructure.Data
         public DbSet<KaiwaExpectedAnswer> KaiwaExpectedAnswers { get; set; } = null!;
         public DbSet<KaiwaAnswerHistory> KaiwaAnswerHistories { get; set; } = null!;
 
+        // Verbs Table
+        public DbSet<Verb> Verbs { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

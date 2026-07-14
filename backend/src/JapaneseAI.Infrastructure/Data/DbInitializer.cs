@@ -35,6 +35,18 @@ namespace JapaneseAI.Infrastructure.Data
                     logger.LogInformation("[KaiwaImporter] kaiwa_data.json not found, skipping. Expected path: {path}", kaiwaJsonPath);
                 }
 
+                // Import Verbs
+                var verbJsonPath = DataPathResolver.ResolveFile("", "verbs.json");
+                if (verbJsonPath != null && File.Exists(verbJsonPath))
+                {
+                    var verbImporter = new VerbImporter(context, Microsoft.Extensions.Logging.Abstractions.NullLogger<VerbImporter>.Instance);
+                    await verbImporter.ImportFromJsonAsync(verbJsonPath);
+                }
+                else
+                {
+                    logger.LogInformation("[VerbImporter] verbs.json not found, skipping.");
+                }
+
                 // ── Import KANJIDIC2 nếu có file, hoặc seed mẫu ──
                 var kanjidic2Path = DataPathResolver.ResolveFile("kanjidic2", "kanjidic2.xml")
                     ?? DataPathResolver.ResolveFile("kanjidic2", "sample_kanjidic2.xml");

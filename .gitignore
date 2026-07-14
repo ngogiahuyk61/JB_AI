@@ -26,3 +26,5 @@ Thumbs.db
 # Secrets — never commit
 *.pem
 credentials.json
+
+backend/src/JapaneseAI.Api/ggml-base.bin

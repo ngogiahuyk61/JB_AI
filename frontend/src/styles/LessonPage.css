@@ -1,0 +1,186 @@
+/* LessonPage.css */
+.lesson-page-container {
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .lesson-page-container {
+    padding-bottom: 2rem;
+  }
+}
+
+/* Accordion Container */
+.verb-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Accordion Item */
+.verb-accordion-item {
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid #e2e8f0;
+  overflow: hidden;
+  transition: all 250ms ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.verb-accordion-item:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+.verb-accordion-item.expanded {
+  border-color: #4f46e5;
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.12);
+}
+
+/* Header */
+.verb-accordion-header {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: white;
+  user-select: none;
+}
+
+.verb-accordion-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.verb-accordion-kanji {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.verb-accordion-meaning {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.verb-accordion-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.verb-accordion-item.expanded .verb-accordion-icon {
+  transform: rotate(180deg);
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+/* Content (Expanded) */
+.verb-accordion-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 0 20px 20px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+@media (min-width: 768px) {
+  .verb-accordion-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .verb-accordion-content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.verb-form-box {
+  background: white;
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.verb-form-box:active {
+  transform: scale(0.98);
+}
+
+.verb-form-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.verb-form-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.verb-form-value {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.verb-play-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 200ms ease;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.verb-play-btn:hover {
+  transform: scale(1.1);
+}
+
+.verb-play-btn:active {
+  transform: scale(0.95);
+}
+
+/* Colors for specific forms */
+.form-masu { color: #10b981; }
+.btn-masu { background: linear-gradient(135deg, #34d399, #10b981); }
+.btn-masu:hover { box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+
+.form-te { color: #f59e0b; }
+.btn-te { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+.btn-te:hover { box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
+
+.form-ta { color: #8b5cf6; }
+.btn-ta { background: linear-gradient(135deg, #a78bfa, #8b5cf6); }
+.btn-ta:hover { box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
+
+.form-nai { color: #ef4444; }
+.btn-nai { background: linear-gradient(135deg, #f87171, #ef4444); }
+.btn-nai:hover { box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+
+.form-jisho { color: #4f46e5; }
+.btn-jisho { background: linear-gradient(135deg, #818cf8, #4f46e5); }
+.btn-jisho:hover { box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
