@@ -54,6 +54,8 @@ builder.Services.AddScoped<JapaneseAI.Core.Interfaces.IVerbQuizService, Japanese
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
+connectionString = JapaneseAI.Infrastructure.Data.DatabaseProviderHelper.FormatConnectionString(connectionString);
+
 var dbProvider = DatabaseProviderHelper.Resolve(
     builder.Configuration["Database:Provider"],
     connectionString);
