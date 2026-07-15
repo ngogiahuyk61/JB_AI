@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import BottomNav from './components/layout/BottomNav';
 import SidebarNav from './components/layout/SidebarNav';
 import Topbar from './components/layout/Topbar';
@@ -22,25 +22,46 @@ export default function App() {
   const layout = useAppLayout();
   const isDesktop = layout === 'desktop';
 
+  // Handle browser back button and URL hash navigation
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '') as AppTab;
+    if (hash) setActiveTab(hash);
+
+    const handlePopState = () => {
+      const currentHash = window.location.hash.replace('#', '') as AppTab;
+      setActiveTab(currentHash || 'dashboard');
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const handleTabChange = useCallback((tab: AppTab) => {
+    if (activeTab !== tab) {
+      window.history.pushState(null, '', `#${tab}`);
+      setActiveTab(tab);
+    }
+  }, [activeTab]);
+
   const renderPage = () => {
     switch (activeTab) {
-      case 'dashboard': return <DashboardPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
+      case 'dashboard': return <DashboardPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
       case 'flashcard': return <FlashcardPage />;
       case 'exam': return <ExamPage />;
-      case 'vocabulary': return <VocabularyPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
-      case 'lesson': return <LessonPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
+      case 'vocabulary': return <VocabularyPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
+      case 'lesson': return <LessonPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
       case 'kaiwa': return <KaiwaPage />;
       case 'settings': return <SettingsPage />;
-      case 'verbquiz': return <VerbQuizPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
-      case 'particlequiz': return <ParticleQuizPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
-      default: return <DashboardPage onNavigate={(tab) => setActiveTab(tab as AppTab)} />;
+      case 'verbquiz': return <VerbQuizPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
+      case 'particlequiz': return <ParticleQuizPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
+      default: return <DashboardPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
     }
   };
 
   return (
     <div className={`app-layout ${isDesktop ? 'app-layout--desktop' : 'app-layout--mobile'}`}>
       {isDesktop && (
-        <SidebarNav activeTab={activeTab} onTabChange={setActiveTab} />
+        <SidebarNav activeTab={activeTab} onTabChange={handleTabChange} />
       )}
 
       <div className="main-content">
@@ -51,7 +72,7 @@ export default function App() {
       </div>
 
       {!isDesktop && (
-        <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+        <BottomNav activeTab={activeTab} onTabChange={handleTabChange} />
       )}
 
       <FloatingChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
@@ -68,15 +89,17 @@ export default function App() {
 // ── Settings Page (inline, nhỏ) ─────────────────────────────
 function SettingsPage() {
   const [apiKey, setApiKey] = useState(() => localStorage.getItem('gemini_api_key') || '');
+  const [groqApiKey, setGroqApiKey] = useState(() => localStorage.getItem('groq_api_key') || '');
   const [saved, setSaved] = useState(false);
 
   const save = () => {
     localStorage.setItem('gemini_api_key', apiKey);
+    localStorage.setItem('groq_api_key', groqApiKey);
     // Note: env vars can't be set at runtime, but we'll handle via localStorage in services
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
     // Reload to apply
-    if (apiKey) setTimeout(() => window.location.reload(), 500);
+    if (apiKey || groqApiKey) setTimeout(() => window.location.reload(), 500);
   };
 
   return (
@@ -96,12 +119,28 @@ function SettingsPage() {
               <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8 }}>
                 Lấy tại: <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)' }}>aistudio.google.com</a> → Hoàn toàn miễn phí!
               </p>
+              <input
+                type="password"
+                value={apiKey}
+                onChange={e => setApiKey(e.target.value)}
+                placeholder="AIza..."
+                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid var(--border)', borderRadius: 12, fontSize: 14, outline: 'none', fontFamily: 'monospace' }}
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontWeight: 700, fontSize: 14, marginBottom: 6 }}>
+                ⚡ Groq API Key (Cho phần Kaiwa - Whisper/Qwen3)
+              </label>
+              <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8 }}>
+                Lấy tại: <a href="https://console.groq.com/keys" target="_blank" rel="noreferrer" style={{ color: 'var(--primary)' }}>console.groq.com</a> → Cần thiết để chấm điểm giao tiếp và nhận diện giọng nói.
+              </p>
               <div style={{ display: 'flex', gap: 8 }}>
                 <input
                   type="password"
-                  value={apiKey}
-                  onChange={e => setApiKey(e.target.value)}
-                  placeholder="AIza..."
+                  value={groqApiKey}
+                  onChange={e => setGroqApiKey(e.target.value)}
+                  placeholder="gsk_..."
                   style={{ flex: 1, padding: '10px 14px', border: '1.5px solid var(--border)', borderRadius: 12, fontSize: 14, outline: 'none', fontFamily: 'monospace' }}
                 />
                 <button className="btn btn-primary" onClick={save}>

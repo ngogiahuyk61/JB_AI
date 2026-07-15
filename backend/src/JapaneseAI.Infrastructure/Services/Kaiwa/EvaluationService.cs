@@ -36,13 +36,15 @@ public class EvaluationService
     public async Task<EvaluationResult> EvaluateAsync(
         string questionText,
         string expectedAnswer,
-        string userAnswer)
+        string userAnswer,
+        string? clientApiKey = null)
     {
         var prompt = BuildPrompt(questionText, expectedAnswer, userAnswer);
+        var keyToUse = clientApiKey ?? _apiKey;
 
         try
         {
-            if (string.IsNullOrEmpty(_apiKey))
+            if (string.IsNullOrEmpty(keyToUse))
             {
                 throw new InvalidOperationException("GROQ_API_KEY is not configured.");
             }
@@ -62,7 +64,7 @@ public class EvaluationService
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             using var request = new HttpRequestMessage(HttpMethod.Post, "https://api.groq.com/openai/v1/chat/completions");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", keyToUse);
             request.Content = content;
 
             var response = await _httpClient.SendAsync(request);

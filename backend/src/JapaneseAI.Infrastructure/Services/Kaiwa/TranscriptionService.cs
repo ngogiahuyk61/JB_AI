@@ -15,15 +15,16 @@ namespace JapaneseAI.Infrastructure.Services.Kaiwa
             _apiKey = configuration["GROQ_API_KEY"] ?? Environment.GetEnvironmentVariable("GROQ_API_KEY");
         }
 
-        public async Task<string> TranscribeAudioAsync(Stream audioStream, string fileName, string contentType)
+        public async Task<string> TranscribeAudioAsync(Stream audioStream, string fileName, string contentType, string? clientApiKey = null)
         {
-            if (string.IsNullOrEmpty(_apiKey))
+            var keyToUse = clientApiKey ?? _apiKey;
+            if (string.IsNullOrEmpty(keyToUse))
             {
                 throw new InvalidOperationException("GROQ_API_KEY is not configured.");
             }
 
             using var request = new HttpRequestMessage(HttpMethod.Post, "https://api.groq.com/openai/v1/audio/transcriptions");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", keyToUse);
 
             using var content = new MultipartFormDataContent();
             

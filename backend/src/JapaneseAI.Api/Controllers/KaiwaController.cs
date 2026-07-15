@@ -123,11 +123,14 @@ public class KaiwaController : ControllerBase
         if (questionWithAnswer == null)
             return NotFound(new { message = $"Question {request.QuestionId} not found." });
 
+        var clientApiKey = Request.Headers["X-Groq-Api-Key"].FirstOrDefault();
+
         // Gọi Qwen3 đánh giá
         var evalResult = await _evaluationService.EvaluateAsync(
             questionWithAnswer.JapaneseText,
             questionWithAnswer.ExpectedAnswer,
-            request.UserAnswer
+            request.UserAnswer,
+            clientApiKey
         );
 
         // Lưu lịch sử
@@ -180,8 +183,9 @@ public class KaiwaController : ControllerBase
 
         try
         {
+            var clientApiKey = Request.Headers["X-Groq-Api-Key"].FirstOrDefault();
             using var stream = audio.OpenReadStream();
-            var transcript = await _transcriptionService.TranscribeAudioAsync(stream, audio.FileName, audio.ContentType);
+            var transcript = await _transcriptionService.TranscribeAudioAsync(stream, audio.FileName, audio.ContentType, clientApiKey);
             return Ok(new { transcript });
         }
         catch (InvalidOperationException ex)

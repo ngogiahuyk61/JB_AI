@@ -81,8 +81,13 @@ export const kaiwaService = {
   },
 
   async evaluate(questionId: number, userAnswer: string): Promise<EvaluationResult> {
+    const groqKey = localStorage.getItem('groq_api_key');
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (groqKey) headers['X-Groq-Api-Key'] = groqKey;
+
     return fetchJson<EvaluationResult>(`${API_BASE}/evaluate`, {
       method: 'POST',
+      headers,
       body: JSON.stringify({ questionId, userAnswer }),
     });
   },
@@ -91,8 +96,13 @@ export const kaiwaService = {
     const formData = new FormData();
     formData.append('audio', audioBlob, 'recording.webm');
     
+    const groqKey = localStorage.getItem('groq_api_key');
+    const headers: Record<string, string> = {};
+    if (groqKey) headers['X-Groq-Api-Key'] = groqKey;
+
     const res = await fetch(`${API_BASE}/transcribe`, {
       method: 'POST',
+      headers,
       body: formData,
     });
     
