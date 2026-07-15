@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ArrowLeft, Play, Award, RefreshCw, CheckCircle2, XCircle, Timer } from "lucide-react";
 import "../styles/VerbQuiz.css";
 
@@ -6,6 +6,8 @@ export interface QuizItem {
   question: string;
   answer: string;
   hint?: string;
+  kana?: string;
+  hanViet?: string;
   explanation?: string;
 }
 
@@ -23,6 +25,8 @@ function shuffleArr<T>(arr: T[]): T[] {
 interface GenQuestion {
   questionText: string;
   hint?: string;
+  hintKana?: string;
+  hintHanViet?: string;
   choices: string[];
   correctIndex: number;
   explanation: string;
@@ -35,7 +39,12 @@ function buildQuestions(items: QuizItem[], count: number, mode: "word_to_meaning
   return pool.map(item => {
     const correct = mode === "word_to_meaning" ? item.answer : item.question;
     const questionText = mode === "word_to_meaning" ? item.question : item.answer;
-    const hint = mode === "word_to_meaning" ? item.hint : undefined;
+    
+    // In word_to_meaning mode, we hide kana and hanViet behind buttons
+    const hintKana = mode === "word_to_meaning" ? item.kana : undefined;
+    const hintHanViet = mode === "word_to_meaning" ? item.hanViet : undefined;
+    // Keep standard hint logic for meaning_to_word mode or fallback
+    const hint = mode === "meaning_to_word" ? item.hint : undefined;
 
     const wrongPool = allAnswers.filter(a => a !== correct);
     const wrongs = shuffleArr(wrongPool).slice(0, 3);
@@ -45,11 +54,35 @@ function buildQuestions(items: QuizItem[], count: number, mode: "word_to_meaning
     return {
       questionText,
       hint,
+      hintKana,
+      hintHanViet,
       choices,
       correctIndex,
       explanation: item.explanation || ("Dap an dung: " + correct),
     };
   });
+}
+
+function HiddenHint({ label, content }: { label: string, content: string }) {
+  const [show, setShow] = useState(false);
+  return (
+    <button 
+      onClick={() => setShow(true)}
+      style={{
+        background: show ? 'transparent' : '#f1f5f9',
+        border: show ? 'none' : '1px solid #cbd5e1',
+        padding: '4px 12px',
+        borderRadius: '999px',
+        fontSize: '13px',
+        color: show ? '#dc2626' : '#64748b',
+        cursor: show ? 'default' : 'pointer',
+        fontWeight: 600,
+        transition: 'all 0.2s ease',
+      }}
+    >
+      {show ? content : `👁️ Xem ${label}`}
+    </button>
+  );
 }
 
 export default function UniversalQuizPage({ title, items, mode = "word_to_meaning", onBack }: UniversalQuizProps) {
@@ -173,8 +206,17 @@ export default function UniversalQuizPage({ title, items, mode = "word_to_meanin
               <div className="verb-quiz-progress-fill" style={{ width: (((currentIndex + 1) / questions.length) * 100) + "%" }} />
             </div>
             <div className="verb-quiz-question-card">
-              <h3 className="verb-quiz-question-text">{currentQ.questionText}</h3>
+              <h3 className="verb-quiz-question-text" style={{ marginBottom: (currentQ.hintKana || currentQ.hintHanViet) ? '12px' : '32px' }}>{currentQ.questionText}</h3>
               {currentQ.hint && <p style={{ textAlign: "center", color: "#64748b", fontSize: 14, marginTop: -8, marginBottom: 16 }}>({currentQ.hint})</p>}
+              
+              {/* Hidden Hints for Kana and Han Viet */}
+              {(currentQ.hintKana || currentQ.hintHanViet) && (
+                <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '24px', flexWrap: 'wrap' }}>
+                  {currentQ.hintKana && <HiddenHint label="Hiragana/Katakana" content={currentQ.hintKana} />}
+                  {currentQ.hintHanViet && <HiddenHint label="Âm Hán Việt" content={currentQ.hintHanViet} />}
+                </div>
+              )}
+
               <div className="verb-quiz-choices-grid">
                 {currentQ.choices.map((choice, idx) => {
                   let btnClass = "verb-quiz-choice-btn";

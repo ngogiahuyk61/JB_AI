@@ -638,7 +638,9 @@ export default function FlashcardPage() {
               const items: QuizItem[] = cards.map(c => ({
                 question: c.kanji || c.kana,
                 answer: c.vietnamese,
-                hint: c.hanViet || c.kana || undefined
+                hint: c.hanViet || c.kana || undefined,
+                kana: c.kanji ? c.kana : undefined,
+                hanViet: c.hanViet || undefined
               }));
               setActiveQuiz({ title: 'Test Từ Vựng Đang Học', items });
             }}
@@ -670,7 +672,9 @@ export default function FlashcardPage() {
             const items: QuizItem[] = cards.map(c => ({
               question: c.kanji || c.kana,
               answer: c.vietnamese,
-              hint: c.hanViet || c.kana || undefined
+              hint: c.hanViet || c.kana || undefined,
+              kana: c.kanji ? c.kana : undefined,
+              hanViet: c.hanViet || undefined
             }));
             setActiveQuiz({ title: 'Test Từ Vựng Đang Học', items });
           }}

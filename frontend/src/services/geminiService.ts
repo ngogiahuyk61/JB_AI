@@ -246,11 +246,97 @@ export function getMockQuizQuestions() {
   ];
 }
 
+export async function generateJLPTGrammarQuestions(level: number, count: number = 10) {
+  const prompt = `Bạn là một chuyên gia ra đề thi JLPT N${level}.
+Hãy tạo ${count} câu hỏi trắc nghiệm NGỮ PHÁP (Grammar) tiếng Nhật trình độ N${level}.
+Trả về đúng định dạng JSON array sau, không thêm gì khác:
+[
+  {
+    "questionText": "Câu hỏi với chỗ trống (　　)",
+    "correctAnswer": "đáp án đúng",
+    "choices": ["đáp án 1", "đáp án 2", "đáp án 3", "đáp án 4"],
+    "explanation": "Giải thích ngắn gọn bằng tiếng Việt vì sao chọn đáp án này"
+  }
+]`;
+
+  try {
+    const text = await callGemini({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.7, maxOutputTokens: 2000 },
+    });
+    const jsonMatch = text.match(/\[[\s\S]*\]/);
+    if (!jsonMatch) throw new Error('No JSON');
+    return JSON.parse(jsonMatch[0]);
+  } catch {
+    throw new Error("Lỗi khi sinh câu hỏi ngữ pháp");
+  }
+}
+
+export async function generateJLPTReadingQuestions(level: number) {
+  const prompt = `Bạn là một chuyên gia ra đề thi JLPT N${level}.
+Hãy tạo MỘT bài ĐỌC HIỂU (Reading) tiếng Nhật trình độ N${level} kèm theo 3 câu hỏi trắc nghiệm.
+Trả về đúng định dạng JSON object sau, không thêm gì khác:
+{
+  "passage": "Đoạn văn tiếng Nhật (khoảng 50-150 từ tùy trình độ N${level})",
+  "translation": "Bản dịch tiếng Việt của đoạn văn (để hiển thị khi user xem đáp án)",
+  "questions": [
+    {
+      "questionText": "Câu hỏi trắc nghiệm về đoạn văn",
+      "correctAnswer": "đáp án đúng",
+      "choices": ["đáp án 1", "đáp án 2", "đáp án 3", "đáp án 4"],
+      "explanation": "Giải thích vì sao chọn đáp án này (dựa vào câu nào trong bài)"
+    }
+  ]
+}`;
+
+  try {
+    const text = await callGemini({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.7, maxOutputTokens: 2000 },
+    });
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('No JSON');
+    return JSON.parse(jsonMatch[0]);
+  } catch {
+    throw new Error("Lỗi khi sinh câu hỏi đọc hiểu");
+  }
+}
+
+export async function generateJLPTListeningQuestions(level: number) {
+  const prompt = `Bạn là một chuyên gia ra đề thi JLPT N${level}.
+Hãy tạo MỘT bài NGHE HIỂU (Listening) tiếng Nhật trình độ N${level}.
+Hãy viết một đoạn hội thoại ngắn giữa 2 người (ví dụ: Nam và Nữ), sau đó là 1 câu hỏi trắc nghiệm.
+Trả về đúng định dạng JSON object sau, không thêm gì khác:
+{
+  "audioTranscript": "Nội dung đoạn hội thoại tiếng Nhật (để hệ thống Text-to-speech đọc). Ví dụ: 男：あした、どこへ行きますか。女：スーパーへ行きます。",
+  "translation": "Bản dịch tiếng Việt của đoạn hội thoại",
+  "questionText": "Câu hỏi trắc nghiệm liên quan đến đoạn hội thoại (Ví dụ: 女の人はあしたどこへ行きますか。)",
+  "correctAnswer": "đáp án đúng",
+  "choices": ["đáp án 1", "đáp án 2", "đáp án 3", "đáp án 4"],
+  "explanation": "Giải thích đáp án"
+}`;
+
+  try {
+    const text = await callGemini({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.7, maxOutputTokens: 2000 },
+    });
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('No JSON');
+    return JSON.parse(jsonMatch[0]);
+  } catch {
+    throw new Error("Lỗi khi sinh câu hỏi nghe hiểu");
+  }
+}
+
 export const geminiService = {
   sendChatMessage,
   generateExample,
   generateQuizFromVocab,
   analyzeSpeech,
   getMockQuizQuestions,
+  generateJLPTGrammarQuestions,
+  generateJLPTReadingQuestions,
+  generateJLPTListeningQuestions,
   isAvailable: () => !!GEMINI_API_KEY,
 };
