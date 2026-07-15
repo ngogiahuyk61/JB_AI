@@ -94,7 +94,10 @@ export const kaiwaService = {
 
   async transcribeAudio(audioBlob: Blob): Promise<string> {
     const formData = new FormData();
-    formData.append('audio', audioBlob, 'recording.webm');
+    const extension = audioBlob.type.includes('mp4') ? 'mp4' : 
+                      audioBlob.type.includes('wav') ? 'wav' : 
+                      audioBlob.type.includes('ogg') ? 'ogg' : 'webm';
+    formData.append('audio', audioBlob, `recording.${extension}`);
     
     const groqKey = localStorage.getItem('groq_api_key');
     const headers: Record<string, string> = {};
