@@ -129,86 +129,64 @@ export default function KaiwaPage() {
     }
   };
 
-  // ── Speech Recognition (Whisper API) ──────────────────────────────────────
-  const getSupportedAudioMimeType = () => {
-    if (typeof MediaRecorder === 'undefined') return '';
-    const preferredTypes = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus', 'audio/wav'];
-    return preferredTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
-  };
+  // ── Speech Recognition (Native Browser API) ─────────────────────────────
+  const recognitionRef = useRef<any>(null);
+
+  useEffect(() => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'ja-JP';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          // Temporarily put it in a variable so it can be submitted
+          setTextInput(transcript);
+          // Wait a tick then submit
+          setTimeout(() => submitAnswer(transcript), 100);
+        }
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error('Speech recognition error', event.error);
+        if (event.error !== 'aborted') {
+          setError('Không nhận diện được giọng nói (Web Speech API). Vui lòng thử lại.');
+        }
+        setIsRecording(false);
+      };
+
+      recognition.onend = () => {
+        setIsRecording(false);
+      };
+
+      recognitionRef.current = recognition;
+    }
+  }, [currentQuestion]);
 
   const startRecording = async () => {
-    console.log('[Kaiwa] startRecording invoked', { hasMediaDevices: !!navigator.mediaDevices, hasGetUserMedia: !!navigator.mediaDevices?.getUserMedia, isSecureContext: window.isSecureContext });
     window.speechSynthesis.cancel();
-
-    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
-      setError('Mic chỉ hoạt động khi trang mở bằng HTTPS hoặc localhost. Hãy mở bằng URL bảo mật trên điện thoại.');
+    if (!recognitionRef.current) {
+      setError('Trình duyệt của bạn không hỗ trợ nhận diện giọng nói (Web Speech API). Vui lòng dùng Chrome, Edge, hoặc Safari mới.');
       return;
     }
-
-    if (typeof MediaRecorder === 'undefined') {
-      setError('Thiết bị này không hỗ trợ thu âm trực tiếp. Hãy thử Chrome/Edge mới hơn.');
-      return;
-    }
-
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      console.log('[Kaiwa] microphone granted', stream.getAudioTracks().length);
-      const mimeType = getSupportedAudioMimeType();
-      const mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
-      mediaRecorderRef.current = mediaRecorder;
-      audioChunksRef.current = [];
-
-      mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          audioChunksRef.current.push(event.data);
-        }
-      };
-
-      mediaRecorder.onerror = () => {
-        setError('Ghi âm bị lỗi. Hãy thử lại sau.');
-        setIsRecording(false);
-        stream.getTracks().forEach(track => track.stop());
-      };
-
-      mediaRecorder.onstop = async () => {
-        const blobType = mediaRecorder.mimeType || mimeType || 'audio/webm';
-        const audioBlob = new Blob(audioChunksRef.current, { type: blobType });
-
-        stream.getTracks().forEach(track => track.stop());
-        setIsRecording(false);
-
-        const loadingId = Math.random().toString(36).substring(7);
-        setMessages(prev => [...prev, { id: loadingId, type: 'loading', text: 'Đang nhận diện giọng nói (Groq) ⚡...' }]);
-
-        try {
-          const transcript = await kaiwaService.transcribeAudio(audioBlob);
-          setMessages(prev => prev.filter(m => m.id !== loadingId));
-
-          if (!transcript || transcript.trim() === '') {
-            setError('Không nghe rõ bạn nói gì, vui lòng thử lại.');
-          } else {
-            submitAnswer(transcript);
-          }
-        } catch (err) {
-          setMessages(prev => prev.filter(m => m.id !== loadingId));
-          setError('Lỗi kết nối tới Whisper API (Vui lòng kiểm tra API Key).');
-          console.error(err);
-        }
-      };
-
-      mediaRecorder.start();
+      recognitionRef.current.start();
       setIsRecording(true);
       setError('');
-    } catch (err) {
-      console.error('[Kaiwa] Error accessing microphone:', err);
-      setError('Không thể truy cập Microphone. Vui lòng cấp quyền trong trình duyệt.');
+    } catch (e) {
+      console.error(e);
+      setError('Lỗi khi bật Microphone.');
     }
   };
 
   const stopRecording = () => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
-      mediaRecorderRef.current.stop();
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
     }
+    setIsRecording(false);
   };
 
   const submitAnswer = async (answerText: string) => {
