@@ -33,7 +33,14 @@ namespace JapaneseAI.Infrastructure.Services.Kaiwa
             
             // Add file
             var streamContent = new StreamContent(audioStream);
-            streamContent.Headers.ContentType = new MediaTypeHeaderValue(contentType ?? "audio/webm");
+            if (MediaTypeHeaderValue.TryParse(contentType ?? "audio/webm", out var parsedContentType))
+            {
+                streamContent.Headers.ContentType = parsedContentType;
+            }
+            else
+            {
+                streamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            }
             content.Add(streamContent, "file", fileName ?? "audio.webm");
 
             // Add model
@@ -54,11 +61,17 @@ namespace JapaneseAI.Infrastructure.Services.Kaiwa
             }
 
             var responseString = await response.Content.ReadAsStringAsync();
-            var result = JsonSerializer.Deserialize<JsonElement>(responseString);
-            
-            if (result.TryGetProperty("text", out var textElement))
+            try 
             {
-                return textElement.GetString() ?? "";
+                var result = JsonSerializer.Deserialize<JsonElement>(responseString);
+                if (result.TryGetProperty("text", out var textElement))
+                {
+                    return textElement.GetString() ?? "";
+                }
+            } 
+            catch (JsonException ex)
+            {
+                throw new Exception($"Lỗi JSON từ Groq: {responseString}", ex);
             }
 
             return "";

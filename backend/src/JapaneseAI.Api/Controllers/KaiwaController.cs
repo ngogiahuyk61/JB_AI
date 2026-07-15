@@ -200,7 +200,7 @@ public class KaiwaController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error processing audio");
-            return StatusCode(500, new { message = "Lỗi xử lý file âm thanh." });
+            return StatusCode(500, new { message = $"Lỗi xử lý file âm thanh. Chi tiết: {ex.GetType().Name} - {ex.Message}" });
         }
     }
 
