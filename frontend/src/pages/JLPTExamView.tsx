@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { ArrowLeft, Play, Award, RefreshCw, CheckCircle2, XCircle, Timer, Loader2, BookOpen, Headphones, Edit3, BookMarked } from "lucide-react";
 import "../styles/VerbQuiz.css";
-import { geminiService } from "../services/geminiService";
+import { groqService } from "../services/groqService";
 import { speechService } from "../services/speechService";
 
 interface JLPTWord {
@@ -101,12 +101,12 @@ export default function JLPTExamView({ level, onBack }: JLPTExamViewProps) {
 
         setQuestions(generated);
       } else if (selectedSkill === "grammar") {
-        if (!geminiService.isAvailable()) throw new Error("Cần cấu hình Gemini API để sinh đề Ngữ pháp");
-        const generated = await geminiService.generateJLPTGrammarQuestions(level, 10);
+        if (!groqService.isAvailable()) throw new Error("Cần cấu hình Groq API để sinh đề Ngữ pháp");
+        const generated = await groqService.generateJLPTGrammarQuestions(level, 10);
         setQuestions(generated);
       } else if (selectedSkill === "reading") {
-        if (!geminiService.isAvailable()) throw new Error("Cần cấu hình Gemini API để sinh đề Đọc hiểu");
-        const generated = await geminiService.generateJLPTReadingQuestions(level);
+        if (!groqService.isAvailable()) throw new Error("Cần cấu hình Groq API để sinh đề Đọc hiểu");
+        const generated = await groqService.generateJLPTReadingQuestions(level);
         // The generator returns { passage, translation, questions: [...] }
         const formattedQs = generated.questions.map((q: any) => ({
           ...q,
@@ -115,8 +115,8 @@ export default function JLPTExamView({ level, onBack }: JLPTExamViewProps) {
         }));
         setQuestions(formattedQs);
       } else if (selectedSkill === "listening") {
-        if (!geminiService.isAvailable()) throw new Error("Cần cấu hình Gemini API để sinh đề Nghe hiểu");
-        const generated = await geminiService.generateJLPTListeningQuestions(level);
+        if (!groqService.isAvailable()) throw new Error("Cần cấu hình Groq API để sinh đề Nghe hiểu");
+        const generated = await groqService.generateJLPTListeningQuestions(level);
         // The generator returns { audioTranscript, translation, questionText, correctAnswer, choices, explanation }
         setQuestions([generated]);
       }

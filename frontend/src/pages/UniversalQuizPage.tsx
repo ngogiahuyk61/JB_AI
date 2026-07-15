@@ -206,7 +206,22 @@ export default function UniversalQuizPage({ title, items, mode = "word_to_meanin
               <div className="verb-quiz-progress-fill" style={{ width: (((currentIndex + 1) / questions.length) * 100) + "%" }} />
             </div>
             <div className="verb-quiz-question-card">
-              <h3 className="verb-quiz-question-text" style={{ marginBottom: (currentQ.hintKana || currentQ.hintHanViet) ? '12px' : '32px' }}>{currentQ.questionText}</h3>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: (currentQ.hintKana || currentQ.hintHanViet) ? '12px' : '32px' }}>
+                <h3 className="verb-quiz-question-text" style={{ marginBottom: 0 }}>{currentQ.questionText}</h3>
+                {quizMode === "word_to_meaning" && (
+                  <button 
+                    onClick={() => {
+                      import('../services/speechService').then(({ speechService }) => {
+                        speechService.speakJapanese(currentQ.questionText);
+                      });
+                    }}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', padding: '4px' }}
+                    title="Nghe phát âm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                  </button>
+                )}
+              </div>
               {currentQ.hint && <p style={{ textAlign: "center", color: "#64748b", fontSize: 14, marginTop: -8, marginBottom: 16 }}>({currentQ.hint})</p>}
               
               {/* Hidden Hints for Kana and Han Viet */}
