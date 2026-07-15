@@ -189,9 +189,24 @@ export default function KaiwaPage() {
           } else {
             submitAnswer(transcript);
           }
-        } catch (err) {
+        } catch (err: any) {
           setMessages(prev => prev.filter(m => m.id !== loadingId));
-          setError('Lỗi kết nối tới Whisper API (Vui lòng kiểm tra API Key).');
+          let errorMsg = 'Lỗi kết nối tới Whisper API.';
+          if (err instanceof Error) {
+            try {
+              // Extract the JSON message from the HTTP error string if possible
+              const match = err.message.match(/HTTP \d+: (.*)/);
+              if (match) {
+                const parsed = JSON.parse(match[1]);
+                errorMsg = parsed.message || errorMsg;
+              } else {
+                errorMsg = err.message;
+              }
+            } catch {
+              errorMsg = err.message;
+            }
+          }
+          setError(`Lỗi: ${errorMsg}`);
           console.error(err);
         }
       };

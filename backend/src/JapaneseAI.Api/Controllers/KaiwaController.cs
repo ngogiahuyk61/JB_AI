@@ -194,8 +194,8 @@ public class KaiwaController : ControllerBase
         }
         catch (HttpRequestException ex)
         {
-            _logger.LogError(ex, "Whisper API request failed");
-            return StatusCode(502, new { message = "Lỗi kết nối đến Whisper API. Vui lòng thử lại." });
+            _logger.LogError(ex, "Whisper API connection error");
+            return StatusCode(502, new { message = $"Lỗi kết nối đến Whisper API: {ex.Message}" });
         }
         catch (Exception ex)
         {
