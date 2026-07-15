@@ -13,7 +13,9 @@ namespace JapaneseAI.Infrastructure.Services.Kaiwa
         {
             _httpClient = httpClient;
             var defaultKey = string.Join("", new[] { "gsk", "_", "Fz7DU6ZjNrI", "uVN4fQdZm", "WGdyb3FYN", "OEO13Ziz6V", "T1DbRlshyfuEd" });
-            _apiKey = configuration["GROQ_API_KEY"] ?? Environment.GetEnvironmentVariable("GROQ_API_KEY") ?? defaultKey;
+            var envKey = configuration["GROQ_API_KEY"];
+            if (string.IsNullOrEmpty(envKey)) envKey = Environment.GetEnvironmentVariable("GROQ_API_KEY");
+            _apiKey = string.IsNullOrEmpty(envKey) ? defaultKey : envKey;
         }
 
         public async Task<string> TranscribeAudioAsync(Stream audioStream, string fileName, string contentType, string? clientApiKey = null)
