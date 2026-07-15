@@ -110,6 +110,8 @@ export default function DashboardPage({ onNavigate }: DashboardProps) {
           <QuickAction icon="📝" title="Thi thử" sub="JLPT N5" color="#06b6d4" onClick={() => onNavigate?.('exam')} />
           <QuickAction icon="📚" title="Từ vựng" sub="Học từ mới" color="#7c3aed" onClick={() => onNavigate?.('vocabulary')} />
           <QuickAction icon="🎓" title="Bài học" sub="Ngữ pháp" color="#f59e0b" onClick={() => onNavigate?.('lesson')} />
+          <QuickAction icon="💬" title="Kaiwa" sub="Giao tiếp N5" color="#ec4899" onClick={() => onNavigate?.('kaiwa')} />
+          <QuickAction icon="⚙️" title="Cài đặt" sub="Tùy chỉnh" color="#64748b" onClick={() => onNavigate?.('settings')} />
         </div>
       </div>
 
