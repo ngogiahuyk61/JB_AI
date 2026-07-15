@@ -139,7 +139,14 @@ export default function UniversalQuizPage({ title, items, mode = "word_to_meanin
     } else {
       setWrongAnswers(p => [...p, q]);
     }
-    setTimeout(() => handleNext(), 2000);
+    setTimeout(() => {
+      if (currentIndex < questions.length - 1) {
+        setCurrentIndex(p => p + 1);
+        setSelectedAnswer(null);
+      } else {
+        setGameState("result");
+      }
+    }, 1500);
   };
 
   const currentQ = questions[currentIndex];
@@ -153,8 +160,8 @@ export default function UniversalQuizPage({ title, items, mode = "word_to_meanin
           </button>
           <h1 className="verb-quiz-title">
             {gameState === "config" && title}
-            {gameState === "playing" && ("Cau " + (currentIndex + 1) + "/" + questions.length)}
-            {gameState === "result" && "Ket Qua"}
+            {gameState === "playing" && ("Câu " + (currentIndex + 1) + "/" + questions.length)}
+            {gameState === "result" && "Kết Quả"}
           </h1>
         </div>
         {gameState === "playing" && (
@@ -168,34 +175,34 @@ export default function UniversalQuizPage({ title, items, mode = "word_to_meanin
       <div className="verb-quiz-content">
         {gameState === "config" && (
           <div className="verb-quiz-config-card">
-            <h2 className="verb-quiz-config-title">Tuy Chon Bai Test</h2>
+            <h2 className="verb-quiz-config-title">Tùy Chọn Bài Test</h2>
             <div className="verb-quiz-config-section">
-              <label className="verb-quiz-config-label">So cau (toi da {items.length})</label>
+              <label className="verb-quiz-config-label">Số câu (tối đa {items.length})</label>
               <div className="verb-quiz-btn-group">
                 {[10, 20, 30].filter(n => n <= items.length).concat(items.length > 30 ? [items.length] : []).filter((v, i, a) => a.indexOf(v) === i).map(n => (
                   <button key={n} onClick={() => setCount(n)} className={"verb-quiz-option-btn " + (count === n ? "active" : "")}>
-                    {n === items.length ? "Tat ca (" + items.length + ")" : n + " cau"}
+                    {n === items.length ? "Tất cả (" + items.length + ")" : n + " câu"}
                   </button>
                 ))}
               </div>
             </div>
             <div className="verb-quiz-config-section">
-              <label className="verb-quiz-config-label">Che do</label>
+              <label className="verb-quiz-config-label">Chế độ</label>
               <div className="verb-quiz-btn-group">
                 <button onClick={() => setQuizMode("word_to_meaning")} className={"verb-quiz-option-btn " + (quizMode === "word_to_meaning" ? "active-green" : "")}>
-                  JP to VN
+                  Nhật ➔ Việt
                 </button>
                 <button onClick={() => setQuizMode("meaning_to_word")} className={"verb-quiz-option-btn " + (quizMode === "meaning_to_word" ? "active-green" : "")}>
-                  VN to JP
+                  Việt ➔ Nhật
                 </button>
               </div>
             </div>
             <div style={{ paddingTop: "1.5rem" }}>
-              <button onClick={startGame} className="verb-quiz-start-btn" disabled={items.length < 4}>
+              <button onClick={buildQuestions} className="verb-quiz-start-btn" disabled={items.length < 4}>
                 <Play style={{ width: "1.25rem", height: "1.25rem", fill: "currentColor" }} />
-                Bat Dau Test
+                Bắt Đầu Test
               </button>
-              {items.length < 4 && <p style={{ marginTop: 12, color: "#ef4444", fontSize: 13, textAlign: "center" }}>Can it nhat 4 tu de tao cau hoi.</p>}
+              {items.length < 4 && <p style={{ marginTop: 12, color: "#ef4444", fontSize: 13, textAlign: "center" }}>Cần ít nhất 4 từ để tạo câu hỏi.</p>}
             </div>
           </div>
         )}
@@ -206,25 +213,41 @@ export default function UniversalQuizPage({ title, items, mode = "word_to_meanin
               <div className="verb-quiz-progress-fill" style={{ width: (((currentIndex + 1) / questions.length) * 100) + "%" }} />
             </div>
             <div className="verb-quiz-question-card">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: (currentQ.hintKana || currentQ.hintHanViet) ? '12px' : '32px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: (currentQ.hintKana || currentQ.hintHanViet) ? '12px' : '32px', flexWrap: 'wrap' }}>
                 <h3 className="verb-quiz-question-text" style={{ marginBottom: 0 }}>{currentQ.questionText}</h3>
-                {quizMode === "word_to_meaning" && (
+                
+                <div style={{ display: 'flex', gap: '4px' }}>
+                  {quizMode === "word_to_meaning" && (
+                    <button 
+                      onClick={() => {
+                        import('../services/speechService').then(({ speechService }) => {
+                          speechService.speakJapanese(currentQ.questionText);
+                        });
+                      }}
+                      style={{ background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '8px', cursor: 'pointer', color: '#475569', padding: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                      title="Nghe phát âm"
+                    >
+                      <Volume2 size={20} />
+                    </button>
+                  )}
                   <button 
-                    onClick={() => {
-                      import('../services/speechService').then(({ speechService }) => {
-                        speechService.speakJapanese(currentQ.questionText);
-                      });
-                    }}
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', padding: '4px' }}
-                    title="Nghe phát âm"
+                    onClick={handleTranslate}
+                    style={{ background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '8px', cursor: 'pointer', color: '#475569', padding: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    title="Dịch câu hỏi"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                    <Languages size={20} />
                   </button>
-                )}
+                </div>
               </div>
+
+              {translationText && (
+                <div style={{ textAlign: "center", color: "#4f46e5", fontSize: 15, fontWeight: 600, marginTop: -8, marginBottom: 16, background: '#e0e7ff', padding: '6px 12px', borderRadius: '8px', display: 'inline-block', alignSelf: 'center' }}>
+                  {translationText}
+                </div>
+              )}
+
               {currentQ.hint && <p style={{ textAlign: "center", color: "#64748b", fontSize: 14, marginTop: -8, marginBottom: 16 }}>({currentQ.hint})</p>}
               
-              {/* Hidden Hints for Kana and Han Viet */}
               {(currentQ.hintKana || currentQ.hintHanViet) && (
                 <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '24px', flexWrap: 'wrap' }}>
                   {currentQ.hintKana && <HiddenHint label="Hiragana/Katakana" content={currentQ.hintKana} />}

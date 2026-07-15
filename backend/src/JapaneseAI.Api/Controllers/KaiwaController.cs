@@ -204,7 +204,11 @@ public class KaiwaController : ControllerBase
         }
     }
 
-    public record TranslateRequest(string Text);
+    public class TranslateRequest
+    {
+        [System.Text.Json.Serialization.JsonPropertyName("text")]
+        public string Text { get; set; } = "";
+    }
 
     /// <summary>POST /api/kaiwa/translate — dịch tiếng Nhật sang tiếng Việt</summary>
     [HttpPost("translate")]

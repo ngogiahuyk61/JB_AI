@@ -53,7 +53,16 @@ public class TranslationService
         {
             var errorMsg = await response.Content.ReadAsStringAsync();
             _logger.LogError("Translation error: {code} - {msg}", response.StatusCode, errorMsg);
-            return "(Lỗi dịch thuật)";
+            
+            try {
+                using var errDoc = JsonDocument.Parse(errorMsg);
+                if (errDoc.RootElement.TryGetProperty("error", out var errorObj) && errorObj.TryGetProperty("message", out var msgObj))
+                {
+                    return $"(Lỗi API: {msgObj.GetString()})";
+                }
+            } catch {}
+
+            return $"(Lỗi dịch: {response.StatusCode})";
         }
 
         var responseString = await response.Content.ReadAsStringAsync();
