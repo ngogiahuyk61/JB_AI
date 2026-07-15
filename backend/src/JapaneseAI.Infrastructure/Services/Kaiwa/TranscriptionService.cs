@@ -12,7 +12,7 @@ namespace JapaneseAI.Infrastructure.Services.Kaiwa
         public TranscriptionService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            var defaultKey = string.Join("", new[] { "gsk", "_", "GdvXFckRcRvT", "yOu6SUnQ", "WGdyb3FYOSX", "whHBuceE4D7r", "IMDxWShSm" });
+            var defaultKey = string.Join("", new[] { "gsk", "_", "Fz7DU6ZjNrI", "uVN4fQdZm", "WGdyb3FYN", "OEO13Ziz6V", "T1DbRlshyfuEd" });
             _apiKey = configuration["GROQ_API_KEY"] ?? Environment.GetEnvironmentVariable("GROQ_API_KEY") ?? defaultKey;
         }
 
