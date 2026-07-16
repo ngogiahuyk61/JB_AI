@@ -97,6 +97,23 @@ export default function UniversalQuizPage({ title, items, mode = "word_to_meanin
   const [score, setScore] = useState(0);
   const [wrongAnswers, setWrongAnswers] = useState<GenQuestion[]>([]);
   const [timeLeft, setTimeLeft] = useState(0);
+  const [translationText, setTranslationText] = useState<string>("");
+
+  const handleTranslate = async () => {
+    if (translationText) return;
+    setTranslationText("Đang dịch...");
+    try {
+      const currentQ = questions[currentIndex];
+      const result = await kaiwaService.translate(currentQ.questionText);
+      setTranslationText(result);
+    } catch (e) {
+      setTranslationText("(Lỗi dịch)");
+    }
+  };
+
+  useEffect(() => {
+    setTranslationText("");
+  }, [currentIndex]);
 
   const startGame = useCallback(() => {
     const effectiveCount = Math.min(count, items.length);
@@ -107,6 +124,7 @@ export default function UniversalQuizPage({ title, items, mode = "word_to_meanin
     setScore(0);
     setWrongAnswers([]);
     setTimeLeft(effectiveCount * 15);
+    setTranslationText("");
     setGameState("playing");
   }, [items, count, quizMode]);
 
