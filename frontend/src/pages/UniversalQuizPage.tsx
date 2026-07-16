@@ -198,7 +198,7 @@ export default function UniversalQuizPage({ title, items, mode = "word_to_meanin
               </div>
             </div>
             <div style={{ paddingTop: "1.5rem" }}>
-              <button onClick={buildQuestions} className="verb-quiz-start-btn" disabled={items.length < 4}>
+              <button onClick={startGame} className="verb-quiz-start-btn" disabled={items.length < 4}>
                 <Play style={{ width: "1.25rem", height: "1.25rem", fill: "currentColor" }} />
                 Bắt Đầu Test
               </button>
