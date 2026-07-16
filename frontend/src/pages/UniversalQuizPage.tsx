@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
-import { ArrowLeft, Play, Award, RefreshCw, CheckCircle2, XCircle, Timer } from "lucide-react";
+import { ArrowLeft, Play, Award, RefreshCw, CheckCircle2, XCircle, Timer, Volume2, Languages } from "lucide-react";
 import "../styles/VerbQuiz.css";
+import { kaiwaService } from "../services/kaiwaService";
 
 export interface QuizItem {
   question: string;
