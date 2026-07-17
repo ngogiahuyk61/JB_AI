@@ -4,8 +4,12 @@ import {
   Loader2, Play, MessageSquare, ListOrdered, Shuffle, CheckCircle2,
   XCircle, Send, Languages
 } from 'lucide-react';
-import { kaiwaService, type KaiwaMode, type KaiwaQuestion, type EvaluationResult } from '../services/kaiwaService';
+import { kaiwaService, type KaiwaMode, type KaiwaQuestion } from '../services/kaiwaService';
 import { speechService } from '../services/speechService';
+import { KAIWA_TOPICS } from '../data/kaiwaTopics';
+import type { KaiwaTopic } from '../data/kaiwaTopics';
+import TopicPlayer from '../components/kaiwa/TopicPlayer';
+import { BookOpen } from 'lucide-react';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 type ChatMessage = {
@@ -17,7 +21,8 @@ type ChatMessage = {
   grammarFeedback?: string;
 };
 
-type AppState = 'setup' | 'chat';
+type AppState = 'setup' | 'chat' | 'topic_play';
+type SetupMode = KaiwaMode | 'topic';
 
 // ── TTS helper ────────────────────────────────────────────────────────────────
 // Now using speechService.speakJapanese from global service
@@ -26,9 +31,10 @@ type AppState = 'setup' | 'chat';
 export default function KaiwaPage() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [appState, setAppState] = useState<AppState>('setup');
-  const [mode, setMode] = useState<KaiwaMode>('lesson');
+  const [mode, setMode] = useState<SetupMode>('lesson');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<KaiwaQuestion | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<KaiwaTopic | null>(null);
   
   const [isRecording, setIsRecording] = useState(false);
   const [textInput, setTextInput] = useState('');
@@ -103,17 +109,24 @@ export default function KaiwaPage() {
   }, [sessionExcludeIds]);
 
   const handleStart = async () => {
-    setAppState('chat');
-    setMessages([]);
-    setSessionExcludeIds([]);
-    await loadNextQuestion(mode, []);
+    if (mode === 'topic') {
+      // Show topic selection? Actually, we can show topics right in the setup screen or when pressing start
+      // For simplicity, let's just make 'Start' show the topics if mode === 'topic'
+      // Wait, let's just render the topic list right there or transition.
+      // Let's transition to topic_play and set a default topic, or render a selection screen.
+    } else {
+      setAppState('chat');
+      setMessages([]);
+      setSessionExcludeIds([]);
+      await loadNextQuestion(mode as KaiwaMode, []);
+    }
   };
 
   const handleNext = async () => {
     if (!currentQuestion) return;
     const newExclude = [...sessionExcludeIds, currentQuestion.id];
     setSessionExcludeIds(newExclude);
-    await loadNextQuestion(mode, newExclude);
+    await loadNextQuestion(mode as KaiwaMode, newExclude);
   };
 
   const handleTranslate = async (id: string, text: string) => {
@@ -349,22 +362,64 @@ export default function KaiwaPage() {
                 title="Ngẫu nhiên (500 câu)" 
                 subtitle="Thử thách phản xạ ngẫu nhiên" 
               />
+              <ModeButton 
+                active={mode === 'topic'} 
+                onClick={() => setMode('topic')}
+                icon={<BookOpen size={20} />} 
+                title="Theo Chủ đề (Hội thoại mẫu)" 
+                subtitle="Đóng vai luyện tập N5" 
+              />
             </div>
 
-            <button
-              onClick={handleStart}
-              style={{
-                width: '100%', background: 'linear-gradient(135deg, #43e97b, #38f9d7)',
-                border: 'none', borderRadius: 16, padding: '18px',
-                color: '#064e3b', fontSize: 18, fontWeight: 800, cursor: 'pointer',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                boxShadow: '0 8px 32px rgba(67,233,123,0.3)', transition: 'transform 0.2s'
-              }}
-              onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
-              onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
-            >
-              <Play size={24} fill="currentColor" /> 🔰 Hajimete (Bắt đầu)
-            </button>
+            {mode === 'topic' ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <h3 style={{ color: 'white', marginTop: 16, marginBottom: 8, fontSize: 16 }}>Chọn Chủ Đề:</h3>
+                {KAIWA_TOPICS.map(t => (
+                  <button
+                    key={t.id}
+                    onClick={() => {
+                      setSelectedTopic(t);
+                      setAppState('topic_play');
+                    }}
+                    style={{
+                      background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)',
+                      borderRadius: 16, padding: '16px', display: 'flex', alignItems: 'center', gap: 16,
+                      cursor: 'pointer', textAlign: 'left', transition: 'transform 0.2s'
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
+                    onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
+                  >
+                    <img src={t.image} alt={t.title} style={{ width: 64, height: 64, borderRadius: 8, objectFit: 'cover' }} />
+                    <div>
+                      <div style={{ color: 'white', fontWeight: 700, fontSize: 15, marginBottom: 4 }}>{t.title}</div>
+                      <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{t.context}</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <button
+                onClick={handleStart}
+                style={{
+                  width: '100%', background: 'linear-gradient(135deg, #43e97b, #38f9d7)',
+                  border: 'none', borderRadius: 16, padding: '18px',
+                  color: '#064e3b', fontSize: 18, fontWeight: 800, cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                  boxShadow: '0 8px 32px rgba(67,233,123,0.3)', transition: 'transform 0.2s'
+                }}
+                onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
+                onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
+              >
+                <Play size={24} fill="currentColor" /> 🔰 Hajimete (Bắt đầu)
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* ── TOPIC PLAY SCREEN ───────────────────────────────────────── */}
+        {appState === 'topic_play' && selectedTopic && (
+          <div style={{ position: 'absolute', inset: 0, zIndex: 20 }}>
+            <TopicPlayer topic={selectedTopic} onBack={() => setAppState('setup')} />
           </div>
         )}
 

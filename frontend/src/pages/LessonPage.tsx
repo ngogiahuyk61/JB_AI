@@ -5,6 +5,7 @@ import '../styles/LessonPage.css';
 import tailieuData from '../data/tailieu.json';
 import UniversalQuizPage, { type QuizItem } from './UniversalQuizPage';
 import JLPTExamView from './JLPTExamView';
+import MinnaTestView from '../components/minna/MinnaTestView';
 
 interface VerbConjugation {
   kanji: string;
@@ -38,10 +39,11 @@ interface LessonPageProps {
 }
 
 export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
-  const [activeTab, setActiveTab] = useState<'verbs' | 'particles' | 'synonyms' | 'numbers' | 'time' | 'adverbs' | 'na_adj' | 'shii_adj' | 'i_adj' | 'antonyms' | 'jlpt_exams'>('verbs');
+  const [activeTab, setActiveTab] = useState<'verbs' | 'particles' | 'synonyms' | 'numbers' | 'time' | 'adverbs' | 'na_adj' | 'shii_adj' | 'i_adj' | 'antonyms' | 'jlpt_exams' | 'minna_tests'>('verbs');
   const [verbGroup, setVerbGroup] = useState<'I' | 'II' | 'III'>('I');
   const [activeQuiz, setActiveQuiz] = useState<{ title: string; items: QuizItem[] } | null>(null);
   const [activeExamLevel, setActiveExamLevel] = useState<number | null>(null);
+  const [activeMinnaLesson, setActiveMinnaLesson] = useState<number | null>(null);
 
   const quizItemsMap = useMemo<Record<string, QuizItem[]>>(() => {
     return {
@@ -232,6 +234,15 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
     );
   }
 
+  if (activeMinnaLesson !== null) {
+    return (
+      <MinnaTestView
+        lesson={activeMinnaLesson}
+        onBack={() => setActiveMinnaLesson(null)}
+      />
+    );
+  }
+
   if (activeQuiz) {
     return (
       <UniversalQuizPage
@@ -413,6 +424,18 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
           }}
         >
           🎓 Đề Thi JLPT
+        </button>
+        <button
+          onClick={() => setActiveTab('minna_tests')}
+          style={{
+            padding: '8px 18px', borderRadius: 9, border: 'none', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            background: activeTab === 'minna_tests' ? 'white' : 'transparent',
+            color: activeTab === 'minna_tests' ? '#4f46e5' : '#475569',
+            boxShadow: activeTab === 'minna_tests' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+            transition: 'all 150ms ease', whiteSpace: 'nowrap'
+          }}
+        >
+          🎓 Đề Thi Minna Bài Học
         </button>
         <button
           onClick={() => {
@@ -1079,6 +1102,38 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
                 <div style={{ fontSize: 16, fontWeight: 800, marginBottom: 6 }}>{exam.label}</div>
                 <div style={{ fontSize: 13, opacity: 0.9 }}>{exam.desc}</div>
               </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Tab: MINNA TESTS */}
+      {activeTab === 'minna_tests' && (
+        <div style={{ background: 'white', borderRadius: 20, border: '1.5px solid #e2e8f0', padding: 24, boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <h2 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>Test Tổng Hợp Ngữ Pháp Minna no Nihongo (Bài 1 - 25)</h2>
+          <p style={{ fontSize: 13, color: '#64748b', marginBottom: 24 }}>Đề thi 4 phần cấu trúc nâng cao bám sát ngữ pháp trọng tâm từng bài. Sinh ngẫu nhiên bằng AI.</p>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: 12 }}>
+            {Array.from({ length: 25 }, (_, i) => i + 1).map(lesson => (
+              <button 
+                key={lesson}
+                onClick={() => setActiveMinnaLesson(lesson)}
+                style={{ 
+                  borderRadius: 12, 
+                  background: 'linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)', 
+                  color: 'white', 
+                  padding: "16px 8px", 
+                  cursor: 'pointer',
+                  border: 'none',
+                  boxShadow: '0 4px 14px rgba(0,0,0,0.06)',
+                  transition: 'all 200ms ease',
+                  fontSize: 16,
+                  fontWeight: 800
+                }}
+                className="hover-card"
+              >
+                Bài {lesson}
+              </button>
             ))}
           </div>
         </div>

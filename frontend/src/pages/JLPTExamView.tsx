@@ -20,6 +20,8 @@ interface ExamQuestion {
   passage?: string;
   translation?: string;
   audioTranscript?: string;
+  part?: number;
+  partName?: string;
 }
 
 interface JLPTExamViewProps {
@@ -37,7 +39,6 @@ export default function JLPTExamView({ level, onBack }: JLPTExamViewProps) {
   const [gameState, setGameState] = useState<"select_skill" | "loading" | "ready" | "playing" | "result">("select_skill");
   const [skill, setSkill] = useState<SkillType | null>(null);
   
-  const [words, setWords] = useState<JLPTWord[]>([]);
   const [questions, setQuestions] = useState<ExamQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -61,7 +62,7 @@ export default function JLPTExamView({ level, onBack }: JLPTExamViewProps) {
           throw new Error("Không đủ dữ liệu từ vựng để tạo đề thi");
         }
 
-        setWords(loadedWords);
+        // setWords(loadedWords); // Removed unused state
 
         // Generate 20 random questions
         const shuffled = shuffleArr(loadedWords);
@@ -102,7 +103,7 @@ export default function JLPTExamView({ level, onBack }: JLPTExamViewProps) {
         setQuestions(generated);
       } else if (selectedSkill === "grammar") {
         if (!groqService.isAvailable()) throw new Error("Cần cấu hình Groq API để sinh đề Ngữ pháp");
-        const generated = await groqService.generateJLPTGrammarQuestions(level, 10);
+        const generated = await groqService.generateJLPTGrammarQuestions(level);
         setQuestions(generated);
       } else if (selectedSkill === "reading") {
         if (!groqService.isAvailable()) throw new Error("Cần cấu hình Groq API để sinh đề Đọc hiểu");
@@ -281,6 +282,12 @@ export default function JLPTExamView({ level, onBack }: JLPTExamViewProps) {
                   <Headphones size={20} /> Nghe Audio (Click để phát)
                 </button>
               </div>
+            )}
+
+            {currentQ.partName && (
+              <h3 style={{ fontSize: 18, color: "#4f46e5", fontWeight: 800, marginBottom: 16, textAlign: "center", paddingBottom: 8 }}>
+                {currentQ.partName}
+              </h3>
             )}
 
             <div className="verb-quiz-question-card">
