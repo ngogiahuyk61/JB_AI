@@ -5,7 +5,7 @@ import '../styles/LessonPage.css';
 import tailieuData from '../data/tailieu.json';
 import UniversalQuizPage, { type QuizItem } from './UniversalQuizPage';
 import JLPTExamView from './JLPTExamView';
-import MinnaTestView from '../components/minna/MinnaTestView';
+import MinnaLessonDashboard from '../components/minna/MinnaLessonDashboard';
 
 interface VerbConjugation {
   kanji: string;
@@ -236,7 +236,7 @@ export default function LessonPage({ onNavigate }: LessonPageProps = {}) {
 
   if (activeMinnaLesson !== null) {
     return (
-      <MinnaTestView
+      <MinnaLessonDashboard
         lesson={activeMinnaLesson}
         onBack={() => setActiveMinnaLesson(null)}
       />

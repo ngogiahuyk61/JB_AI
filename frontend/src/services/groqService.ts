@@ -257,10 +257,123 @@ Trả về một JSON object có cấu trúc ĐÚNG như sau:
   }
 }
 
+export async function generateMinnaVocabTest(lesson: number) {
+  const prompt = `Bạn là chuyên gia tiếng Nhật. Tạo đề kiểm tra từ vựng Minna no Nihongo Bài ${lesson}.
+YÊU CẦU:
+- Lấy 10 từ vựng quan trọng nhất của Bài ${lesson}.
+- Tuyệt đối không dùng chuỗi rỗng.
+Trả về định dạng JSON (raw, không markdown):
+{
+  "lesson": ${lesson},
+  "title": "Test Từ Vựng Bài ${lesson}",
+  "words": [
+    { "id": "v1", "vi": "Nghĩa tiếng Việt (ví dụ: Ăn)", "ja": "Hiragana (ví dụ: たべる)", "kanji": "Kanji (ví dụ: 食べる)", "explanation": "Giải thích thêm" }
+  ]
+}`;
+  try {
+    const text = await callGroq([{ role: 'user', content: prompt }], { temperature: 0.7, jsonMode: true });
+    const cleaned = text.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('No JSON');
+    return JSON.parse(jsonMatch[0]);
+  } catch (err) {
+    throw new Error("Lỗi khi sinh từ vựng");
+  }
+}
+
+export async function generateMinnaKanjiTest(lesson: number) {
+  const prompt = `Bạn là chuyên gia tiếng Nhật. Tạo đề kiểm tra Kanji Minna no Nihongo Bài ${lesson}.
+Nếu bài ${lesson} chưa có nhiều Kanji, hãy lấy các Kanji cơ bản đã học đến thời điểm đó.
+Trả về JSON (raw, không markdown) đúng cấu trúc sau, KHÔNG ĐỂ RỖNG:
+{
+  "lesson": ${lesson},
+  "title": "Test Kanji Bài ${lesson}",
+  "part1": {
+    "title": "Phần 1: Chọn Kanji đúng (4 câu)",
+    "questions": [
+      { "id": "k1_1", "questionText": "Cách viết Kanji của [たべる] là gì?", "choices": ["食べる", "飲む", "見る", "寝る"], "correctAnswer": "食べる", "explanation": "..." }
+    ]
+  },
+  "part2": {
+    "title": "Phần 2: Chọn cách đọc Hiragana (4 câu)",
+    "questions": [
+      { "id": "k2_1", "questionText": "Cách đọc của [学校] là gì?", "choices": ["がっこう", "がくせい", "せんせい", "だいがく"], "correctAnswer": "がっこう", "explanation": "..." }
+    ]
+  },
+  "part3": {
+    "title": "Phần 3: Nhập cách đọc Hiragana trong câu (5 câu)",
+    "questions": [
+      { "id": "k3_1", "sentence": "私は[毎日]りんごを食べます。", "kanjiWord": "毎日", "vietnamese": "Hàng ngày", "answer": "まいにち", "explanation": "..." }
+    ]
+  }
+}`;
+  try {
+    const text = await callGroq([{ role: 'user', content: prompt }], { temperature: 0.7, jsonMode: true });
+    const cleaned = text.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('No JSON');
+    return JSON.parse(jsonMatch[0]);
+  } catch (err) {
+    throw new Error("Lỗi khi sinh Kanji");
+  }
+}
+
+export async function generateMinnaReadingTest(lesson: number) {
+  const prompt = `Tạo bài kiểm tra Đọc Hiểu JLPT N5 tập trung vào ngữ pháp và từ vựng Bài ${lesson} Minna no Nihongo.
+Trả về JSON (raw, không markdown):
+{
+  "lesson": ${lesson},
+  "title": "Đọc Hiểu Bài ${lesson}",
+  "passage": "Một đoạn văn dài tiếng Nhật hoàn chỉnh...",
+  "translation": "Bản dịch tiếng Việt",
+  "questions": [
+    { "id": "r1", "questionText": "Câu hỏi trắc nghiệm tiếng Nhật", "choices": ["A", "B", "C", "D"], "correctAnswer": "Đáp án đúng", "explanation": "..." }
+  ]
+}
+YÊU CẦU: Tạo ĐÚNG 4 câu hỏi trắc nghiệm. Tuyệt đối không để trống dữ liệu.`;
+  try {
+    const text = await callGroq([{ role: 'user', content: prompt }], { temperature: 0.7, jsonMode: true });
+    const cleaned = text.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('No JSON');
+    return JSON.parse(jsonMatch[0]);
+  } catch (err) {
+    throw new Error("Lỗi khi sinh Đọc hiểu");
+  }
+}
+
+export async function generateMinnaListeningTest(lesson: number) {
+  const prompt = `Tạo bài kiểm tra Nghe Hiểu Choukai tập trung vào ngữ pháp và từ vựng Bài ${lesson} Minna no Nihongo.
+Trả về JSON (raw, không markdown):
+{
+  "lesson": ${lesson},
+  "title": "Nghe Hiểu Bài ${lesson}",
+  "script": "Kịch bản bài nghe tiếng Nhật (hội thoại hoặc đoạn văn). Không được trống.",
+  "translation": "Bản dịch kịch bản",
+  "questions": [
+    { "id": "l1", "questionText": "Câu hỏi trắc nghiệm tiếng Việt/Nhật", "choices": ["A", "B", "C", "D"], "correctAnswer": "A", "explanation": "..." }
+  ]
+}
+YÊU CẦU: Tạo ĐÚNG 5 câu hỏi trắc nghiệm dựa vào kịch bản nghe.`;
+  try {
+    const text = await callGroq([{ role: 'user', content: prompt }], { temperature: 0.7, jsonMode: true });
+    const cleaned = text.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('No JSON');
+    return JSON.parse(jsonMatch[0]);
+  } catch (err) {
+    throw new Error("Lỗi khi sinh Nghe hiểu");
+  }
+}
+
 export const groqService = {
   generateJLPTGrammarQuestions,
   generateJLPTReadingQuestions,
   generateJLPTListeningQuestions,
   generateMinnaLessonTest,
+  generateMinnaVocabTest,
+  generateMinnaKanjiTest,
+  generateMinnaReadingTest,
+  generateMinnaListeningTest,
   isAvailable: () => true, // Default key is always present
 };

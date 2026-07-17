@@ -62,3 +62,69 @@ export interface MinnaTestResult {
     reading: ReadingQuestion;
   };
 }
+
+// ----------------------------------------
+// VOCAB TEST
+// ----------------------------------------
+export interface MinnaVocabWord {
+  id: string;
+  vi: string; // Vietnamese meaning
+  ja: string; // Correct Hiragana/Katakana
+  kanji: string; // Kanji (if any), could be empty
+  explanation: string;
+}
+
+export interface MinnaVocabTestResult {
+  lesson: number;
+  title: string;
+  words: MinnaVocabWord[];
+}
+
+// ----------------------------------------
+// KANJI TEST
+// ----------------------------------------
+export interface MinnaKanjiTestResult {
+  lesson: number;
+  title: string;
+  part1: {
+    title: string; // e.g. Chọn Kanji đúng cho từ Hiragana
+    questions: MultipleChoiceQuestion[]; // 4 questions
+  };
+  part2: {
+    title: string; // e.g. Chọn Hiragana đúng cho chữ Kanji
+    questions: MultipleChoiceQuestion[]; // 4 questions
+  };
+  part3: {
+    title: string; // e.g. Nhập Hiragana cho chữ Kanji trong câu
+    questions: {
+      id: string;
+      sentence: string; // Câu tiếng Nhật chứa chữ Kanji cần đọc, ví dụ: 私は[学校]へ行きます。
+      kanjiWord: string; // Chữ Kanji cần hỏi, ví dụ: 学校
+      vietnamese: string; // Nghĩa tiếng Việt của câu hoặc từ đó
+      answer: string; // Hiragana đáp án, ví dụ: がっこう
+      explanation: string;
+    }[];
+  };
+}
+
+// ----------------------------------------
+// READING TEST
+// ----------------------------------------
+export interface MinnaReadingTestResult {
+  lesson: number;
+  title: string;
+  passage: string;
+  translation: string;
+  questions: MultipleChoiceQuestion[];
+}
+
+// ----------------------------------------
+// LISTENING TEST
+// ----------------------------------------
+export interface MinnaListeningTestResult {
+  lesson: number;
+  title: string;
+  script: string; // The script that the AI will read out loud (hidden from user initially)
+  translation: string;
+  questions: MultipleChoiceQuestion[];
+}
