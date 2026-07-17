@@ -328,15 +328,15 @@ class SpeechService {
     }
   }
 
-  async speakJapanese(text: string): Promise<void> {
+  speakJapanese(text: string): void {
     this.cancel();
-    await this.unlockAudio();
+    this.unlockAudioSync();
     this.speak(text, { lang: 'ja-JP', rate: 0.85 }).catch(() => {});
   }
 
-  async speakVietnamese(text: string): Promise<void> {
+  speakVietnamese(text: string): void {
     this.cancel();
-    await this.unlockAudio();
+    this.unlockAudioSync();
     this.speak(text, { lang: 'vi-VN', rate: 0.9 }).catch(() => {});
   }
 
@@ -363,19 +363,33 @@ class SpeechService {
   }
 
   /**
-   * PHẢI gọi trong user gesture (onClick) để unlock AudioContext trên Android.
+   * PHẢI gọi trong user gesture (onClick) để unlock AudioContext trên Android/iOS.
    */
   async unlockAudio(): Promise<void> {
-    if (this._audioUnlocked) return;
+    this.unlockAudioSync();
     await resumeAudioContext();
+  }
+
+  /**
+   * Chạy đồng bộ hoàn toàn để không mất "user gesture" context trên iOS Safari
+   */
+  unlockAudioSync(): void {
+    if (this._audioUnlocked) return;
     this._audioUnlocked = true;
+
+    try {
+      const ctx = getAudioContext();
+      if (ctx.state === 'suspended') {
+        ctx.resume().catch(() => {});
+      }
+    } catch {}
 
     if (this.synth) {
       const silent = new SpeechSynthesisUtterance(' ');
       silent.volume = 0;
       this.synth.speak(silent);
     }
-    console.log('[TTS] AudioContext unlocked. State:', getAudioContext().state, '| API_BASE:', API_BASE);
+    console.log('[TTS] Audio unlocked synchronously');
   }
 
   private delay(ms: number): Promise<void> {
