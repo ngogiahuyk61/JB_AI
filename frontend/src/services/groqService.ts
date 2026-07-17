@@ -166,36 +166,37 @@ Trả về ĐÚNG định dạng JSON sau (phải bắt đầu bằng { và kế
 
 export async function generateMinnaLessonTest(lesson: number) {
   const prompt = `Bạn là một chuyên gia ngữ pháp tiếng Nhật và giảng viên Minna no Nihongo.
-Yêu cầu: Hãy tạo một đề thi ngữ pháp Minna no Nihongo N5 dành TỐI ĐA SỰ TẬP TRUNG VÀO BÀI ${lesson}.
-- Xác định điểm ngữ pháp trọng tâm của Bài ${lesson} (ví dụ: bài 14 là Thể Te, bài 19 là Thể Ta, bài 10 là Arimasu/Imasu, v.v.).
+Yêu cầu TỐI QUAN TRỌNG: Hãy tạo một đề thi ngữ pháp Minna no Nihongo N5 dành TỐI ĐA SỰ TẬP TRUNG VÀO BÀI ${lesson}.
+- Xác định điểm ngữ pháp trọng tâm của Bài ${lesson}.
 - TOÀN BỘ CÂU HỎI phải mang tính vận dụng cao, dài, khó và bám sát điểm ngữ pháp của Bài ${lesson}.
 - Tuyệt đối KHÔNG SỬ DỤNG ROMAJI. Chỉ dùng Kanji, Hiragana, Katakana.
+- TUYỆT ĐỐI KHÔNG TRẢ VỀ CHUỖI RỖNG, KHÔNG DÙNG PLACEHOLDER (ví dụ như "Từ gốc", "Câu tiếng Nhật"). TẤT CẢ PHẢI LÀ NỘI DUNG TIẾNG NHẬT THẬT SỰ.
 
 Trả về một JSON object có cấu trúc ĐÚNG như sau:
 {
   "lesson": ${lesson},
-  "grammarFocus": "Giải thích ngắn gọn ngữ pháp trọng tâm của bài ${lesson} bằng tiếng Việt",
+  "grammarFocus": "Ngữ pháp bài ${lesson} tập trung vào Thể Te (Vて) dùng để sai khiến, nhờ vả...",
   "part1": {
-    "title": "Phần 1: Chia thể động từ / tính từ (10 câu) - Dựa theo bài ${lesson}",
+    "title": "Phần 1: Chia thể động từ / tính từ (10 câu)",
     "questions": [
       {
         "id": "p1_1",
-        "word": "Từ gốc (Kanji/Kana)",
-        "reading": "Cách đọc Furigana",
-        "answer": "Dạng đã chia đúng (Hiragana/Kanji)",
-        "explanation": "Giải thích tại sao chia như vậy"
+        "word": "食べる",
+        "reading": "たべる",
+        "answer": "食べて",
+        "explanation": "Động từ nhóm 2, bỏ る thêm て"
       }
     ]
   },
   "part2": {
-    "title": "Phần 2: Điền trợ từ và từ vựng (7 câu) - Dựa theo bài ${lesson}",
+    "title": "Phần 2: Điền trợ từ và từ vựng (7 câu)",
     "questions": [
       {
         "id": "p2_1",
-        "sentence": "Câu tiếng Nhật có chứa ký tự [_] thay cho chỗ trống.",
-        "hintWord": "Từ gợi ý (cần chia thể) hoặc trợ từ cần điền",
-        "answer": "Đáp án đúng điền vào [_]",
-        "explanation": "Giải thích cấu trúc ngữ pháp"
+        "sentence": "昨日、私はデパート[_]買い物をしました。",
+        "hintWord": "trợ từ",
+        "answer": "で",
+        "explanation": "Hành động xảy ra tại một địa điểm nên dùng trợ từ で"
       }
     ]
   },
@@ -204,10 +205,10 @@ Trả về một JSON object có cấu trúc ĐÚNG như sau:
     "questions": [
       {
         "id": "p3_1",
-        "questionText": "Câu hỏi trắc nghiệm",
-        "choices": ["A", "B", "C", "D"],
-        "correctAnswer": "Đáp án đúng",
-        "explanation": "Giải thích phân biệt"
+        "questionText": "私は（　）日本へ行ったことがありません。",
+        "choices": ["いちど", "いちども", "はじめて", "いつも"],
+        "correctAnswer": "いちども",
+        "explanation": "いちども + phủ định: Chưa một lần nào."
       }
     ]
   },
@@ -216,33 +217,33 @@ Trả về một JSON object có cấu trúc ĐÚNG như sau:
     "starQuestions": [
       {
         "id": "p4_s1",
-        "questionText": "Sắp xếp từ, từ nào ở dấu * ? (ví dụ: わたしは ＿＿ ＿＿ ＊ ＿＿ 。)",
-        "choices": ["từ 1", "từ 2", "từ 3", "từ 4"],
-        "correctAnswer": "đáp án đúng",
-        "explanation": "Câu hoàn chỉnh và giải thích"
+        "questionText": "わたしは ＿＿ ＿＿ ＊ ＿＿ 。",
+        "choices": ["カメラ", "を", "が", "ほしいです"],
+        "correctAnswer": "が",
+        "explanation": "わたしは カメラ が ほしいです。"
       }
     ],
     "reading": {
       "id": "p4_r1",
-      "passage": "Một đoạn văn tiếng Nhật dài (2 đoạn, nhiều cấu trúc Bài ${lesson}).",
-      "translation": "Bản dịch tiếng Việt",
+      "passage": "私は毎朝６時に起きます。それから、朝ごはんを食べて、新聞を読みます。...",
+      "translation": "Tôi thức dậy lúc 6 giờ mỗi sáng. Sau đó tôi ăn sáng và đọc báo...",
       "questions": [
         {
-          "questionText": "Câu hỏi về đoạn văn trên",
-          "answer": "Câu trả lời đúng (tự luận ngắn)",
-          "explanation": "Giải thích"
+          "questionText": "この人は毎朝新聞を読みますか。",
+          "answer": "はい、読みます。",
+          "explanation": "Đoạn văn có ghi 朝ごはんを食べて、新聞を読みます。"
         }
       ]
     }
   }
 }
 
-ĐẢM BẢO CHÍNH XÁC:
-- Part 1 phải có ĐÚNG 10 câu.
-- Part 2 phải có ĐÚNG 7 câu.
-- Part 3 phải có ĐÚNG 5 câu.
-- Part 4 starQuestions phải có ĐÚNG 3 câu, reading questions có ĐÚNG 2 câu.
-- Không có bất kỳ lỗi JSON nào. Không dùng Markdown, trả về raw JSON.`;
+ĐẢM BẢO CHÍNH XÁC SỐ LƯỢNG:
+- Part 1: ĐÚNG 10 câu.
+- Part 2: ĐÚNG 7 câu.
+- Part 3: ĐÚNG 5 câu.
+- Part 4: starQuestions ĐÚNG 3 câu, reading questions ĐÚNG 2 câu.
+- BẮT BUỘC PHẢI ĐIỀN ĐẦY ĐỦ TIẾNG NHẬT VÀO TẤT CẢ CÁC TRƯỜNG. Không được để trống bất kỳ trường nào!`;
 
   try {
     const text = await callGroq([{ role: 'user', content: prompt }], { temperature: 0.8, jsonMode: true });

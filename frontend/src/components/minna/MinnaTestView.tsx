@@ -45,15 +45,33 @@ export default function MinnaTestView({ lesson, onBack }: MinnaTestViewProps) {
     loadTest();
   }, [lesson]);
 
-  const loadTest = async () => {
+  const loadTest = async (retryCount = 0) => {
     setGameState("loading");
     setError("");
     try {
       if (!groqService.isAvailable()) throw new Error("Cần cấu hình Groq API để sinh đề");
       const generated = await groqService.generateMinnaLessonTest(lesson);
+      
+      // Validate that AI actually generated content, not just placeholders or empty strings
+      const firstWord = generated.part1?.questions?.[0]?.word || "";
+      const isMissingContent = !firstWord || firstWord.includes("Từ gốc") || firstWord.includes("Kanji");
+                               
+      if (isMissingContent) {
+        if (retryCount < 2) {
+          console.warn("AI generated empty/placeholder content, retrying...", retryCount + 1);
+          return loadTest(retryCount + 1);
+        } else {
+          throw new Error("AI hiện tại đang bị quá tải hoặc trả về dữ liệu rỗng. Vui lòng nhấn Thử lại.");
+        }
+      }
+
       setTestData(generated);
       setGameState("ready");
     } catch (err: any) {
+      if (retryCount < 2) {
+         console.warn("API error, retrying...", retryCount + 1);
+         return loadTest(retryCount + 1);
+      }
       setError(err.message || "Lỗi tải đề thi");
       setGameState("ready");
     }
