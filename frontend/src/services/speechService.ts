@@ -328,13 +328,15 @@ class SpeechService {
     }
   }
 
-  speakJapanese(text: string): void {
+  async speakJapanese(text: string): Promise<void> {
     this.cancel();
+    await this.unlockAudio();
     this.speak(text, { lang: 'ja-JP', rate: 0.85 }).catch(() => {});
   }
 
-  speakVietnamese(text: string): void {
+  async speakVietnamese(text: string): Promise<void> {
     this.cancel();
+    await this.unlockAudio();
     this.speak(text, { lang: 'vi-VN', rate: 0.9 }).catch(() => {});
   }
 
