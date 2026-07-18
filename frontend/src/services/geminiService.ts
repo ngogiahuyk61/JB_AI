@@ -7,8 +7,16 @@ const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
 const GEMINI_MODEL = 'gemini-1.5-flash';
 const GEMINI_BASE_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
+interface GeminiPart {
+  text?: string;
+  inlineData?: {
+    mimeType: string;
+    data: string;
+  };
+}
+
 interface GeminiContent {
-  parts: { text: string }[];
+  parts: GeminiPart[];
   role?: string;
 }
 
@@ -20,23 +28,24 @@ interface GeminiRequest {
     topK?: number;
     topP?: number;
   };
-  systemInstruction?: { parts: { text: string }[] };
+  systemInstruction?: { parts: GeminiPart[] };
 }
 
 interface GeminiResponse {
   candidates: {
-    content: { parts: { text: string }[]; role: string };
+    content: { parts: GeminiPart[]; role: string };
     finishReason: string;
   }[];
 }
 
 // ── Core request function ─────────────────────────────────────
 async function callGemini(request: GeminiRequest): Promise<string> {
-  if (!GEMINI_API_KEY) {
+  const currentKey = GEMINI_API_KEY || localStorage.getItem('gemini_api_key');
+  if (!currentKey) {
     throw new Error('NO_API_KEY');
   }
 
-  const url = `${GEMINI_BASE_URL}?key=${GEMINI_API_KEY}`;
+  const url = `${GEMINI_BASE_URL}?key=${currentKey}`;
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -67,6 +76,7 @@ Nhiệm vụ:
 export interface ChatHistory {
   role: 'user' | 'model';
   text: string;
+  image?: { mimeType: string; data: string };
 }
 
 export interface ChatRequestOptions {
@@ -94,16 +104,23 @@ function buildSessionContextPrompt(options: ChatRequestOptions): string {
 export async function sendChatMessage(
   userMessage: string,
   history: ChatHistory[] = [],
-  options: ChatRequestOptions = {}
+  options: ChatRequestOptions = {},
+  image?: { mimeType: string; data: string }
 ): Promise<string> {
+  const currentParts: GeminiPart[] = [];
+  if (image) currentParts.push({ inlineData: image });
+  if (userMessage) currentParts.push({ text: userMessage });
+
   const contents: GeminiContent[] = [
     // History trước
-    ...history.slice(-(options.maxHistoryTurns ?? 6)).map(h => ({
-      role: h.role,
-      parts: [{ text: h.text }],
-    })),
+    ...history.slice(-(options.maxHistoryTurns ?? 6)).map(h => {
+      const parts: GeminiPart[] = [];
+      if (h.image) parts.push({ inlineData: h.image });
+      if (h.text) parts.push({ text: h.text });
+      return { role: h.role, parts };
+    }),
     // Tin nhắn hiện tại
-    { role: 'user', parts: [{ text: userMessage }] },
+    { role: 'user', parts: currentParts },
   ];
 
   const basePrompt = options.systemPrompt || SENSEI_SYSTEM_PROMPT;

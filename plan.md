@@ -1608,3 +1608,262 @@ flowchart TB
 3. Backend: them filter `tags` + re-tag seed.
 4. Implement **Phase 16** — UI 3 nhom o Tu vung + Flashcard.
 5. Test tren laptop (screenshot user scenario) + Android.
+
+---
+
+## Phase 17 — Chopchep (Nghe Luyện Tiếng Nhật)
+
+### Mục tiêu
+
+Tạo section **Chopchep** nằm ngay **dưới phần Flashcard** trong `FlashcardPage.tsx`, giúp người dùng:
+- Chọn cấp độ JLPT (N5 → N1)
+- Chọn bài trong cấp đó (N5 có 25 bài, ứng với file `chopchep_01_15.txt`, v.v.)
+- Xem toàn bộ nội dung bài (hiển thị raw text file `.txt` từ thư mục `/Chopchep`)
+- **Đọc tự động toàn bộ file** (auto-play, đọc liên tục từng dòng từ đầu đến cuối)
+- **Đọc từng dòng thủ công** (bấm để đọc dòng đang chọn, next dòng)
+
+---
+
+### 17.1 Phân tích file dữ liệu
+
+**Thư mục hiện tại:** `f:\JB_AI\Chopchep\`  
+**File mẫu:** `chopchep_01_15.txt` → Bài 15 Minna No Nihongo
+
+**Cấu trúc file:**
+- Mỗi file là 1 bài học (bài số = số ở cuối tên file, ví dụ `chopchep_01_15.txt` → N5 Bài 15)
+- Format tên file: `chopchep_{level_index:02d}_{lesson:02d}.txt`
+  - `01` = N5, `02` = N4, `03` = N3, `04` = N2, `05` = N1
+  - `15` = bài số 15
+- Nội dung: text thuần (Japanese + Vietnamese), mỗi dòng là 1 câu/nội dung
+
+**Mapping cấp độ → số bài:**
+
+| Cấp | Level Index | Số bài | File pattern |
+|-----|-------------|--------|--------------|
+| N5  | 01          | 25     | `chopchep_01_01.txt` → `chopchep_01_25.txt` |
+| N4  | 02          | 25     | `chopchep_02_01.txt` → `chopchep_02_25.txt` |
+| N3  | 03          | 25     | `chopchep_03_01.txt` → `chopchep_03_25.txt` |
+| N2  | 04          | 25     | `chopchep_04_01.txt` → `chopchep_04_25.txt` |
+| N1  | 05          | 25     | `chopchep_05_01.txt` → `chopchep_05_25.txt` |
+
+> **Lưu ý:** Hiện chỉ có 1 file `chopchep_01_15.txt`. Khi bấm bài chưa có file sẽ hiện thông báo "Bài này chưa có nội dung".
+
+---
+
+### 17.2 Luồng UX / Flow người dùng
+
+```
+[FlashcardPage]
+  └── [Section Chopchep]
+        ├── Step 1: Chọn cấp độ → [N5] [N4] [N3] [N2] [N1]
+        │     └── (Bấm N5) → Hiện grid 25 bài
+        ├── Step 2: Chọn bài → [Bài 1] [Bài 2] ... [Bài 25]
+        │     └── (Bấm Bài 15) → Fetch file chopchep_01_15.txt
+        │                       → Hiện toàn bộ nội dung
+        └── Step 3: Đọc nội dung
+              ├── [▶ Đọc tự động] → đọc liên tục từng dòng, highlight dòng đang đọc
+              ├── [⏸ Dừng]        → dừng đọc
+              └── [📖 Đọc từng dòng] → bấm → đọc dòng hiện tại → tự next dòng
+```
+
+---
+
+### 17.3 Thiết kế UI Component
+
+#### ChopchepSection (component mới)
+
+**Vị trí:** Render ngay sau `</FlashcardSection>` trong `FlashcardPage.tsx`
+
+```
+┌─────────────────────────────────────────────┐
+│  🎧 Chopchep - Nghe Luyện Tiếng Nhật        │
+├─────────────────────────────────────────────┤
+│  Chọn cấp độ:                               │
+│  [N5]  [N4]  [N3]  [N2]  [N1]               │
+├─────────────────────────────────────────────┤
+│  Chọn bài (N5 — 25 bài):                    │
+│  [1][2][3][4][5][6][7][8][9][10]            │
+│  [11][12][13][14][15][16][17][18][19][20]   │
+│  [21][22][23][24][25]                       │
+├─────────────────────────────────────────────┤
+│  📄 Bài 15 — Nội dung:                      │
+│  ┌─────────────────────────────────────┐    │
+│  │ 第15課                               │ ←highlight dòng đang đọc  │
+│  │ 文型                                 │    │
+│  │ 写真を 撮っても いいですか。          │    │
+│  │ ...                                  │    │
+│  └─────────────────────────────────────┘    │
+├─────────────────────────────────────────────┤
+│  [▶ Đọc tự động]  [📖 Đọc từng dòng]        │
+│  [⏸ Dừng]  Dòng: 3/86                       │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+### 17.4 Chi tiết kỹ thuật
+
+#### 17.4.1 Cách load file `.txt`
+
+**Phương án A (Ưu tiên): Static file trong `public/`**
+
+- Copy tất cả file `.txt` từ `f:\JB_AI\Chopchep\` vào `frontend/public/chopchep/`
+- Frontend fetch qua URL: `fetch('/chopchep/chopchep_01_15.txt')`
+- **Ưu điểm:** Không cần backend, hoạt động offline sau khi build
+- **Nhược điểm:** Phải copy file thủ công mỗi khi thêm bài mới
+
+**Phương án B: Backend API `GET /api/chopchep/:level/:lesson`**
+- Backend đọc file từ thư mục `Chopchep/` và trả về text
+- **Ưu điểm:** Dynamic, không cần copy file
+- **Nhược điểm:** Cần backend running
+
+> ✅ **Chọn Phương án A** — copy file vào `public/chopchep/` để đơn giản và không phụ thuộc backend.
+
+#### 17.4.2 TTS Engine tái sử dụng
+
+Dùng lại `speechService.ts` hiện có:
+
+```typescript
+// Đọc 1 dòng tiếng Nhật
+await speechService.speak(line, { lang: 'ja-JP', rate: 0.85 });
+
+// Đọc 1 dòng tiếng Việt  
+await speechService.speak(line, { lang: 'vi-VN', rate: 0.9 });
+
+// Detect ngôn ngữ dòng: nếu có ký tự Japanese → ja-JP, còn lại → vi-VN
+function detectLang(text: string): 'ja-JP' | 'vi-VN' {
+  return /[\u3000-\u9fff\uff00-\uffef]/.test(text) ? 'ja-JP' : 'vi-VN';
+}
+```
+
+#### 17.4.3 State Management trong component
+
+```typescript
+interface ChopchepState {
+  selectedLevel: 'N5' | 'N4' | 'N3' | 'N2' | 'N1' | null;
+  selectedLesson: number | null;       // 1-25
+  lines: string[];                     // mảng các dòng sau khi split '\n'
+  currentLineIndex: number;            // dòng đang highlight/đọc
+  isAutoPlaying: boolean;              // đang đọc tự động
+  isLoadingFile: boolean;              // đang fetch file
+  fileError: string;                   // lỗi "Bài này chưa có nội dung"
+}
+```
+
+#### 17.4.4 Logic đọc tự động
+
+```typescript
+async function autoReadAll() {
+  setIsAutoPlaying(true);
+  for (let i = currentLineIndex; i < lines.length; i++) {
+    if (!isAutoPlayingRef.current) break; // check cancel
+    const line = lines[i].trim();
+    if (!line) continue; // bỏ qua dòng trống
+    setCurrentLineIndex(i);
+    scrollToLine(i); // auto scroll đến dòng đang đọc
+    const lang = detectLang(line);
+    await speechService.speak(line, { lang, rate: 0.9 });
+    await delay(300); // nghỉ giữa các dòng
+  }
+  setIsAutoPlaying(false);
+}
+```
+
+#### 17.4.5 Logic đọc từng dòng
+
+```typescript
+async function readCurrentLine() {
+  if (currentLineIndex >= lines.length) return;
+  const line = lines[currentLineIndex].trim();
+  if (line) {
+    const lang = detectLang(line);
+    await speechService.speak(line, { lang, rate: 0.9 });
+  }
+  // Tự động next dòng (bỏ qua dòng trống)
+  let next = currentLineIndex + 1;
+  while (next < lines.length && !lines[next].trim()) next++;
+  setCurrentLineIndex(Math.min(next, lines.length - 1));
+}
+```
+
+---
+
+### 17.5 Danh sách file cần tạo/sửa
+
+#### [MODIFY] [FlashcardPage.tsx](file:///f:/JB_AI/frontend/src/pages/FlashcardPage.tsx)
+- Thêm `ChopchepSection` component (có thể inline hoặc import)
+- Render `<ChopchepSection />` ngay sau phần Flashcard hiện tại trong JSX
+
+#### [NEW] [ChopchepSection.tsx](file:///f:/JB_AI/frontend/src/components/chopchep/ChopchepSection.tsx)
+- Component độc lập chứa toàn bộ UI và logic Chopchep
+- Props: không cần (fully self-contained)
+- State: level, lesson, lines, currentLineIndex, isAutoPlaying, isLoading, error
+
+#### [NEW] `frontend/public/chopchep/chopchep_01_15.txt`
+- Copy file `f:\JB_AI\Chopchep\chopchep_01_15.txt` vào `frontend/public/chopchep/`
+- Khi thêm bài mới → copy tiếp vào thư mục này
+
+#### [MODIFY] [speechService.ts](file:///f:/JB_AI/frontend/src/services/speechService.ts) *(có thể không cần)*
+- Thêm helper `speakLines(lines, onLineStart, onLineEnd)` nếu muốn tách biệt
+- Hoặc dùng trực tiếp `speak()` hiện có
+
+---
+
+### 17.6 Styling & Design
+
+Theo design system hiện tại của app (dark mode / glassmorphism):
+
+- **Level buttons:** Dùng class `btn btn-primary` / `btn` tuỳ selected
+- **Lesson grid:** Grid 5 cột, mỗi ô là button nhỏ `32x32px`, selected thì highlight primary
+- **Content area:** `font-family: monospace`, `font-size: 14px`, max-height `400px`, overflow-y scroll
+- **Highlighted line:** Background `var(--primary)` với opacity 0.2, border-left `3px solid var(--primary)`
+- **Control buttons:** 
+  - `▶ Đọc tự động` → màu xanh lá (success)
+  - `📖 Đọc từng dòng` → màu primary
+  - `⏸ Dừng` → màu đỏ (danger)
+- **Progress:** Text nhỏ `Dòng X / Y` ở góc phải
+
+---
+
+### 17.7 Test Cases
+
+| # | Hành động | Kết quả mong đợi |
+|---|-----------|-----------------|
+| T1 | Scroll xuống dưới FlashcardPage | Thấy section Chopchep |
+| T2 | Bấm N5 | Hiện grid 25 bài |
+| T3 | Bấm N4 | Hiện grid 25 bài (label N4) |
+| T4 | Bấm N5 → Bài 15 | Fetch `/chopchep/chopchep_01_15.txt`, hiện 86 dòng |
+| T5 | Bấm N5 → Bài 1 | Hiện "Bài này chưa có nội dung" (file chưa tồn tại) |
+| T6 | Bấm `▶ Đọc tự động` | Đọc từng dòng liên tục, highlight dòng đang đọc |
+| T7 | Bấm `⏸ Dừng` trong lúc đọc | Dừng ngay lập tức |
+| T8 | Bấm `📖 Đọc từng dòng` | Đọc dòng hiện tại, sau đó highlight dòng kế tiếp |
+| T9 | Click vào dòng bất kỳ | Set `currentLineIndex` = dòng đó |
+| T10 | Bấm N4 khi đang đọc N5 | Dừng TTS, reset state, load bài N4 |
+| T11 | Mobile: bấm Bài 15 | Layout responsive vẫn ổn, scroll nội dung được |
+| T12 | Đọc đến dòng cuối | TTS tự dừng, `isAutoPlaying = false`, button reset |
+
+---
+
+### 17.8 Rủi ro & Lưu ý
+
+1. **File chưa tồn tại:** Chỉ có `chopchep_01_15.txt`. Các bài khác sẽ báo lỗi 404 → cần graceful fallback.
+2. **TTS Android:** Dòng tiếng Nhật dài (>200 ký tự) sẽ bị cắt bởi `speakViaBackendProxy`. Nên chia dòng dài thành chunk 150 ký tự.
+3. **Scroll tự động:** Khi đọc tự động cần `element.scrollIntoView({ behavior: 'smooth', block: 'center' })` để không mất track.
+4. **Detect ngôn ngữ:** Một số dòng tiếng Việt có chứa ký tự Japanese (ví dụ: câu giải thích). Cần logic detect chính xác hơn nếu cần.
+5. **Memory leak:** `autoPlayRef` (useRef) phải được cleanup khi component unmount để tránh `setState` trên component đã unmounted.
+6. **Rate limit TTS:** Đọc liên tục nhiều dòng ngắn có thể bị Google TTS rate limit → nên delay 300ms giữa mỗi dòng.
+
+---
+
+### 17.9 Thứ tự implement
+
+1. ✅ Copy `chopchep_01_15.txt` → `frontend/public/chopchep/chopchep_01_15.txt`
+2. ✅ Tạo `ChopchepSection.tsx` với UI cơ bản (level picker, lesson grid)
+3. ✅ Implement fetch + hiển thị nội dung file
+4. ✅ Implement auto-play với highlight dòng
+5. ✅ Implement đọc từng dòng
+6. ✅ Integrate vào `FlashcardPage.tsx` (render bên dưới)
+7. ✅ Test responsive mobile + desktop
+8. ✅ Cập nhật task.md khi thực hiện
+
+---

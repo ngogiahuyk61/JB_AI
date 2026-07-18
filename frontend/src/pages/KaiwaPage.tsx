@@ -77,6 +77,11 @@ export default function KaiwaPage() {
 
   const loadNextQuestion = useCallback(async (m: KaiwaMode, exclude: number[] = sessionExcludeIds) => {
     setError('');
+    
+    // Show loading state for slow networks
+    const loadingId = Math.random().toString(36).substring(7);
+    setMessages(prev => [...prev, { id: loadingId, type: 'loading', text: 'Đang tải câu hỏi...' }]);
+
     try {
       const q = await kaiwaService.getNextQuestion({
         // If lesson mode, just do random from lesson 1-25? Wait, user wants "Tuần tự (Bài 1 -> 25)".
@@ -87,6 +92,8 @@ export default function KaiwaPage() {
         mode: m === 'lesson' ? 'lesson' : 'random',
         excludeIds: exclude,
       });
+
+      setMessages(prev => prev.filter(msg => msg.id !== loadingId));
 
       if (!q) {
         addMessage({ type: 'bot_question', text: '🎉 Bạn đã hoàn thành tất cả câu hỏi!' });
@@ -103,6 +110,7 @@ export default function KaiwaPage() {
       });
 
     } catch (e) {
+      setMessages(prev => prev.filter(msg => msg.id !== loadingId));
       setError('Lỗi tải câu hỏi. Thử lại sau.');
       console.error(e);
     }

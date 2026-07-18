@@ -88,6 +88,27 @@ body {
   padding: 20px 12px;
   gap: 24px;
   border-right: 1px solid rgba(255,255,255,.08);
+  transition: width var(--t-base), padding var(--t-base);
+  overflow: hidden;
+}
+
+.sidebar-nav.collapsed {
+  width: 72px;
+}
+.sidebar-nav.collapsed .sidebar-brand-title,
+.sidebar-nav.collapsed .sidebar-brand-sub {
+  opacity: 0;
+  width: 0;
+  display: none;
+}
+.sidebar-nav.collapsed .sidebar-item span {
+  opacity: 0;
+  width: 0;
+  display: none;
+}
+.sidebar-nav.collapsed .sidebar-item {
+  justify-content: center;
+  padding: 12px;
 }
 .sidebar-brand {
   display: flex;

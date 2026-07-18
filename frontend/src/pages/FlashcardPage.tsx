@@ -528,7 +528,7 @@ export default function FlashcardPage() {
                   </div>
                 ))}
               </div>
-            </div>
+             </div>
           </>
         )}
       </div>

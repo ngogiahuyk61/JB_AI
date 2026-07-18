@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import BottomNav from './components/layout/BottomNav';
 import SidebarNav from './components/layout/SidebarNav';
 import Topbar from './components/layout/Topbar';
@@ -10,6 +10,8 @@ import LessonPage from './pages/LessonPage';
 import KaiwaPage from './pages/KaiwaPage';
 import VerbQuizPage from './pages/VerbQuizPage';
 import ParticleQuizPage from './pages/ParticleQuizPage';
+// @ts-ignore: IDE false positive for this import path
+import ChopchepPage from './pages/ChopchepPage'; // Force IDE refresh
 import FloatingChat from './components/chat/FloatingChat';
 import { MessageCircle } from 'lucide-react';
 import { useAppLayout } from './hooks/useAppLayout';
@@ -54,6 +56,7 @@ export default function App() {
       case 'settings': return <SettingsPage />;
       case 'verbquiz': return <VerbQuizPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
       case 'particlequiz': return <ParticleQuizPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
+      case 'chopchep': return <ChopchepPage />;
       default: return <DashboardPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
     }
   };
@@ -78,11 +81,92 @@ export default function App() {
       <FloatingChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
 
       {!isChatOpen && (
-        <button className="fab-chat" onClick={() => setIsChatOpen(true)} aria-label="Mở chat AI">
-          <MessageCircle size={26} />
-        </button>
+        <DraggableFab onClick={() => setIsChatOpen(true)} />
       )}
     </div>
+  );
+}
+
+// ── Draggable FAB Component ───────────────────────────────────
+function DraggableFab({ onClick }: { onClick: () => void }) {
+  const [pos, setPos] = useState({ x: window.innerWidth - 80, y: window.innerHeight - 100 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef<{ startX: number, startY: number, initialX: number, initialY: number } | null>(null);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setPos(prev => ({
+        x: Math.min(prev.x, window.innerWidth - 80),
+        y: Math.min(prev.y, window.innerHeight - 100)
+      }));
+    };
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      initialX: pos.x,
+      initialY: pos.y
+    };
+    setIsDragging(false); // only drag if moved
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!dragRef.current) return;
+    const dx = e.clientX - dragRef.current.startX;
+    const dy = e.clientY - dragRef.current.startY;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+      setIsDragging(true);
+    }
+    if (isDragging) {
+      setPos({
+        x: Math.min(Math.max(0, dragRef.current.initialX + dx), window.innerWidth - 60),
+        y: Math.min(Math.max(0, dragRef.current.initialY + dy), window.innerHeight - 60)
+      });
+    }
+  };
+
+  const handlePointerUp = () => {
+    if (dragRef.current) {
+      dragRef.current = null;
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (isDragging) {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(false);
+    } else {
+      onClick();
+    }
+  };
+
+  return (
+    <button
+      className="fab-chat"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onClick={handleClick}
+      aria-label="Mở chat AI"
+      style={{
+        left: pos.x,
+        top: pos.y,
+        bottom: 'auto',
+        right: 'auto',
+        position: 'fixed',
+        touchAction: 'none',
+        transition: isDragging ? 'none' : 'transform 0.2s'
+      }}
+    >
+      <MessageCircle size={26} />
+    </button>
   );
 }
 

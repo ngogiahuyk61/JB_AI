@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrainCircuit } from 'lucide-react';
 import { NAV_ITEMS, type AppTab } from '../../constants/navItems';
 
@@ -7,8 +8,13 @@ interface SidebarNavProps {
 }
 
 export default function SidebarNav({ activeTab, onTabChange }: SidebarNavProps) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
-    <aside className="sidebar-nav">
+    <aside 
+      className={`sidebar-nav ${isCollapsed ? 'collapsed' : ''}`}
+      onMouseEnter={() => setIsCollapsed(false)}
+    >
       <div className="sidebar-brand">
         <BrainCircuit size={28} className="sidebar-brand-icon" />
         <div>
@@ -26,7 +32,10 @@ export default function SidebarNav({ activeTab, onTabChange }: SidebarNavProps) 
               key={item.id}
               type="button"
               className={`sidebar-item ${isActive ? 'active' : ''}`}
-              onClick={() => onTabChange(item.id)}
+              onClick={() => {
+                onTabChange(item.id);
+                setIsCollapsed(true);
+              }}
             >
               <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
               <span>{item.label}</span>
