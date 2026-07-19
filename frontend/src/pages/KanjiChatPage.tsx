@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Leaf, Send, Volume2, Search, Loader2 } from 'lucide-react';
-import { parseKanjiData, searchKanji, KanjiEntry, KanjiVocab } from '../utils/kanjiParser';
+import { parseKanjiData, searchKanji } from '../utils/kanjiParser';
+import type { KanjiEntry, KanjiVocab } from '../utils/kanjiParser';
 import { speechService } from '../services/speechService';
 import '../styles/kanji-chat.css';
 
