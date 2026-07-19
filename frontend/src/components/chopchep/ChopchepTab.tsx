@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Play, Pause, Loader2, AlertCircle, Volume2, BookOpen } from 'lucide-react';
+import ChopchepLine, { parseForSpeech } from './ChopchepLine';
 import { speechService } from '../../services/speechService';
 
 const isHeaderLine = (text: string) => {
@@ -18,6 +19,7 @@ export default function ChopchepTab() {
   const [error, setError] = useState<string | null>(null);
 
   const isAutoPlayingRef = useRef(false);
+  const currentPlayIdRef = useRef<number>(0);
   const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -92,6 +94,7 @@ export default function ChopchepTab() {
     if (isAutoPlaying) {
       isAutoPlayingRef.current = false;
       setIsAutoPlaying(false);
+      currentPlayIdRef.current = Date.now(); // Cancel current play
       speechService.cancel();
       return;
     }
@@ -99,20 +102,33 @@ export default function ChopchepTab() {
     setIsAutoPlaying(true);
     isAutoPlayingRef.current = true;
     let startIdx = currentLineIndex >= 0 ? currentLineIndex : 0;
+    
+    const playId = Date.now();
+    currentPlayIdRef.current = playId;
 
     for (let i = startIdx; i < lines.length; i++) {
-      if (!isAutoPlayingRef.current) break;
+      if (!isAutoPlayingRef.current || currentPlayIdRef.current !== playId) break;
       const text = lines[i].trim();
       if (!text || isHeaderLine(text) || text.startsWith('第')) continue;
 
       setCurrentLineIndex(i);
-      const lang = detectLang(text);
-      await speechService.speak(text, { lang, rate: 0.9 });
-      if (!isAutoPlayingRef.current) break;
+      const { japanese, vietnamese } = parseForSpeech(text);
+
+      if (japanese && isAutoPlayingRef.current && currentPlayIdRef.current === playId) {
+        await speechService.speak(japanese, { lang: 'ja-JP', rate: 0.9 });
+      }
+      if (vietnamese && isAutoPlayingRef.current && currentPlayIdRef.current === playId) {
+        await delay(200);
+        if (currentPlayIdRef.current === playId) {
+          await speechService.speak(vietnamese, { lang: 'vi-VN', rate: 0.95 });
+        }
+      }
+      
+      if (!isAutoPlayingRef.current || currentPlayIdRef.current !== playId) break;
       await delay(500);
     }
 
-    if (isAutoPlayingRef.current) {
+    if (isAutoPlayingRef.current && currentPlayIdRef.current === playId) {
       setIsAutoPlaying(false);
       isAutoPlayingRef.current = false;
       setCurrentLineIndex(-1);
@@ -125,10 +141,22 @@ export default function ChopchepTab() {
     speechService.cancel();
     
     setCurrentLineIndex(index);
-    const text = lines[index].trim();
-    if (text && !isHeaderLine(text) && !text.startsWith('第')) {
-      const lang = detectLang(text);
-      await speechService.speak(text, { lang, rate: 0.9 });
+    const line = lines[index].trim();
+    if (!line || isHeaderLine(line) || line.startsWith('第')) return;
+
+    const playId = Date.now();
+    currentPlayIdRef.current = playId;
+
+    const { japanese, vietnamese } = parseForSpeech(line);
+    
+    if (japanese && currentPlayIdRef.current === playId) {
+      await speechService.speak(japanese, { lang: 'ja-JP', rate: 0.9 });
+    }
+    if (vietnamese && currentPlayIdRef.current === playId) {
+      await delay(200);
+      if (currentPlayIdRef.current === playId) {
+        await speechService.speak(vietnamese, { lang: 'vi-VN', rate: 0.95 });
+      }
     }
   };
 
@@ -203,59 +231,14 @@ export default function ChopchepTab() {
           )}
 
           {!isLoading && !error && lines.map((line, index) => {
-            const isHeader = isHeaderLine(line) || line.startsWith('第');
-            const isActive = index === currentLineIndex;
-            const isEmpty = !line.trim();
-
-            if (isEmpty) return <div key={index} style={{ height: '16px' }} />;
-
-            if (isHeader) {
-              return (
-                <div 
-                  key={index} 
-                  ref={el => { lineRefs.current[index] = el; }}
-                  className="chopchep-header-sticky"
-                >
-                  <div className="chopchep-header-badge">
-                    {line}
-                  </div>
-                </div>
-              );
-            }
-
-            const isConversation = line.includes('：');
-            const [speaker, ...speechParts] = isConversation ? line.split('：') : [];
-            const speech = speechParts.join('：');
-
             return (
-              <div
-                key={index}
-                ref={el => { lineRefs.current[index] = el; }}
-                onClick={() => playLine(index)}
-                className={`chopchep-line-item ${isActive ? 'active' : ''}`}
-              >
-                <div className="chopchep-icon">
-                  <Volume2 size={20} />
-                </div>
-                
-                <div className="chopchep-text-main">
-                  {isConversation ? (
-                    <div>
-                      <span className="chopchep-speaker">{speaker}</span>
-                      <span>
-                        {speech.split('(').map((part, i) => 
-                          i === 0 ? <span key={i}>{part}</span> : <span key={i} className="chopchep-text-trans">({part}</span>
-                        )}
-                      </span>
-                    </div>
-                  ) : (
-                    <div>
-                      {line.split('(').map((part, i) => 
-                        i === 0 ? <span key={i}>{part}</span> : <span key={i} className="chopchep-text-trans">({part}</span>
-                      )}
-                    </div>
-                  )}
-                </div>
+              <div key={index} ref={el => { lineRefs.current[index] = el; }}>
+                <ChopchepLine 
+                  line={line} 
+                  isActive={index === currentLineIndex}
+                  onClick={() => playLine(index)}
+                  isHeaderLine={isHeaderLine}
+                />
               </div>
             );
           })}

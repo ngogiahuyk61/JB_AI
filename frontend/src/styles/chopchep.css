@@ -219,6 +219,41 @@
   margin-left: 4px;
 }
 
+.kanji-badge {
+  background: var(--warning);
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+  transition: all 0.2s;
+}
+
+.kanji-badge:hover {
+  background: #f97316;
+  transform: scale(1.05);
+}
+
+.kanji-info-box {
+  margin-top: 8px;
+  padding: 12px;
+  background: #fffbeb;
+  border-left: 3px solid var(--warning);
+  border-radius: var(--r-md);
+  color: #92400e;
+  font-size: 14px;
+  font-weight: 600;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* --- Ngữ Pháp Tab --- */
 .np-layout {
   display: flex;
