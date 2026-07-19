@@ -98,30 +98,37 @@ export default function ChopchepTab() {
     setIsAutoPlaying(true);
     isAutoPlayingRef.current = true;
     let startIdx = currentLineIndex >= 0 ? currentLineIndex : 0;
+    if (startIdx >= lines.length - 1) {
+      startIdx = 0;
+    }
     
     const playId = Date.now();
     currentPlayIdRef.current = playId;
 
-    for (let i = startIdx; i < lines.length; i++) {
-      if (!isAutoPlayingRef.current || currentPlayIdRef.current !== playId) break;
-      const text = lines[i].trim();
-      if (!text || isHeaderLine(text) || text.startsWith('第')) continue;
+    try {
+      for (let i = startIdx; i < lines.length; i++) {
+        if (!isAutoPlayingRef.current || currentPlayIdRef.current !== playId) break;
+        const text = lines[i].trim();
+        if (!text || isHeaderLine(text) || text.startsWith('第')) continue;
 
-      setCurrentLineIndex(i);
-      const { japanese, vietnamese } = parseForSpeech(text);
+        setCurrentLineIndex(i);
+        const { japanese, vietnamese } = parseForSpeech(text);
 
-      if (japanese && isAutoPlayingRef.current && currentPlayIdRef.current === playId) {
-        await speechService.speak(japanese, { lang: 'ja-JP', rate: 0.9 });
-      }
-      if (vietnamese && isAutoPlayingRef.current && currentPlayIdRef.current === playId) {
-        await delay(200);
-        if (currentPlayIdRef.current === playId) {
-          await speechService.speak(vietnamese, { lang: 'vi-VN', rate: 0.95 });
+        if (japanese && isAutoPlayingRef.current && currentPlayIdRef.current === playId) {
+          await speechService.speak(japanese, { lang: 'ja-JP', rate: 0.9 });
         }
+        if (vietnamese && isAutoPlayingRef.current && currentPlayIdRef.current === playId) {
+          await delay(200);
+          if (currentPlayIdRef.current === playId) {
+            await speechService.speak(vietnamese, { lang: 'vi-VN', rate: 0.95 });
+          }
+        }
+        
+        if (!isAutoPlayingRef.current || currentPlayIdRef.current !== playId) break;
+        await delay(500);
       }
-      
-      if (!isAutoPlayingRef.current || currentPlayIdRef.current !== playId) break;
-      await delay(500);
+    } catch (err) {
+      console.error('AutoPlay error:', err);
     }
 
     if (isAutoPlayingRef.current && currentPlayIdRef.current === playId) {

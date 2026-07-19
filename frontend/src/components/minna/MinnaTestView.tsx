@@ -160,7 +160,7 @@ export default function MinnaTestView({ lesson, onBack }: MinnaTestViewProps) {
           {error ? (
             <div style={{ color: "#ef4444", marginBottom: 20 }}>
               <p>{error}</p>
-              <button onClick={loadTest} className="btn btn-outline" style={{ marginTop: 12 }}>Thử lại</button>
+              <button onClick={() => loadTest()} className="btn btn-outline" style={{ marginTop: 12 }}>Thử lại</button>
             </div>
           ) : (
             <div style={{ margin: "20px 0", color: "#475569", background: "#f8fafc", padding: 24, borderRadius: 16 }}>

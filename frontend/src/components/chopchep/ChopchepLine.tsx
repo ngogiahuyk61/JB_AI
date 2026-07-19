@@ -22,10 +22,11 @@ export const parseForSpeech = (line: string) => {
 
   let japanese = text;
   let vietnamese = '';
-  const viMatch = text.match(/\(([^)]+)\)$/);
+  // match " (translation)" at the end of string, allowing spaces
+  const viMatch = text.match(/\s*\(([^)]+)\)\s*$/);
   if (viMatch) {
     vietnamese = viMatch[1].trim();
-    japanese = text.replace(/\(([^)]+)\)$/, '').trim();
+    japanese = text.replace(/\s*\(([^)]+)\)\s*$/, '').trim();
   }
 
   return { japanese, vietnamese, speaker };

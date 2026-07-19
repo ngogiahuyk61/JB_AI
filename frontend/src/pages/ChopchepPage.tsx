@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BookOpen, BrainCircuit, Users } from 'lucide-react';
 
 import ChopchepTab from '../components/chopchep/ChopchepTab';
-import NguPhapTab from '../components/chopchep/NguPhapTab';
+import GrammarTab from '../components/chopchep/GrammarTab';
 import NhanVatTab from '../components/chopchep/NhanVatTab';
 import '../styles/chopchep.css';
 
@@ -43,7 +43,7 @@ export default function ChopchepPage() {
       {/* Content Area */}
       <div className="chopchep-content-area">
         {activeTab === 'chopchep' && <ChopchepTab />}
-        {activeTab === 'nguphap' && <NguPhapTab />}
+        {activeTab === 'nguphap' && <GrammarTab />}
         {activeTab === 'nhanvat' && <NhanVatTab />}
       </div>
     </div>
