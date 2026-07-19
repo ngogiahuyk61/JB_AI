@@ -1,0 +1,55 @@
+ngữ pháp
+Bảng tóm tắt ngữ pháp Minna no Nihongo (Bài 1 - 25)
+Bài
+	Cấu trúc ngữ pháp chính
+	1
+	N1 は N2 です; N1 は N2 じゃありません; ...か; N も...
+	2
+	これ/それ/あれ は N です; この/その/あの N は...; そうです/違います
+	3
+	ここ/そこ/あそこ/こちら/そちら/あちら は N です; N は どこ/どちら ですか
+	4
+	N(thời gian) に V ます; N1 から N2 まで; V ました/V ませんでした
+	5
+	N(địa điểm) へ V ます; N(phương tiện) で V ます; N(người) と V ます
+	6
+	N を V ます; N(địa điểm) で V ます; V ませんか / V ましょう
+	7
+	N(công cụ) で V ます; N(người) に N を あげます/もらいます
+	8
+	N1 は な-adj です / い-adj です; Bổ nghĩa cho danh từ (な-adj/い-adj + N)
+	9
+	N が 好き/嫌い です; N が 上手/下手 です; N が わかります
+	10
+	N が あります/います; N1 の N2 に N3 が あります/います
+	11
+	Đếm lượng từ (Số lượng + V); V て います (thói quen, trạng thái)
+	12
+	N は N が な-adj/い-adj です (So sánh); N1 より N2 のほうが...
+	13
+	N が ほしいです; V たいです; N(địa điểm) へ V に 行きます
+	14
+	V て ください; V て います (đang làm gì); V ましょうか
+	15
+	V て も いいです; V て はいけません; V て います (trạng thái lưu giữ)
+	16
+	V1 て, V2 て, V3...; V1 て から, V2; N は な-adj/い-adj です (tính chất)
+	17
+	V ない で ください; V なければ なりません; V なくても いいです
+	18
+	V る こと が できます; 趣味は N です / V る こと です; V る 前に
+	19
+	V た ことが あります; V たり V たり します; い-adj/な-adj く/に なります
+	20
+	Thể ngắn (thông thường) của các bài trước (hỏi/đáp thân mật)
+	21
+	V/adj/N と 思います (tôi nghĩ rằng); ...と言いました (đã nói rằng)
+	22
+	Bổ nghĩa cho danh từ bằng mệnh đề; N1 は N2(v-thể ngắn) N です
+	23
+	V とき, ...; V1 て, ... (khi/sau khi); N/adj/V + V(thể ngắn) と, ...
+	24
+	V て あげます/もらいます/くれます (Hành động cho/nhận)
+	25
+	V たら, ... (nếu/sau khi); V ても, ... (dù cho); V1/adj1/N1 のに, V2...
+	
