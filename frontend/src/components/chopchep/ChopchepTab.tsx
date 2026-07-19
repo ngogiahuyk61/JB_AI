@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Play, Pause, Loader2, AlertCircle, Volume2 } from 'lucide-react';
+import { Play, Pause, Loader2, AlertCircle, Volume2, BookOpen } from 'lucide-react';
 import { speechService } from '../../services/speechService';
 
 const isHeaderLine = (text: string) => {
@@ -133,30 +133,41 @@ export default function ChopchepTab() {
   };
 
   return (
-    <div className="chopchep-content-area">
-      <div className="chopchep-controls">
-        <select 
-          value={selectedLesson}
-          onChange={(e) => setSelectedLesson(Number(e.target.value))}
-          className="chopchep-select"
-        >
+    <div className="np-layout">
+      {/* Sidebar for Lessons */}
+      <div className="np-sidebar">
+        <div className="np-sidebar-header">
+          <BookOpen size={20} />
+          Bài học
+        </div>
+        <div className="np-lesson-list">
           {Array.from({length: 15}, (_, i) => i + 1).map(num => (
-            <option key={num} value={num}>Bài {num}</option>
+            <button
+              key={num}
+              onClick={() => setSelectedLesson(num)}
+              className={`np-lesson-btn ${selectedLesson === num ? 'active' : ''}`}
+            >
+              Bài {num}
+            </button>
           ))}
-        </select>
-
-        <button
-          onClick={toggleAutoPlay}
-          disabled={lines.length === 0}
-          className={`chopchep-btn-play ${isAutoPlaying ? 'playing' : ''}`}
-        >
-          {isAutoPlaying ? <Pause size={18} /> : <Play size={18} />}
-          {isAutoPlaying ? 'Dừng đọc' : 'Đọc tự động'}
-        </button>
+        </div>
       </div>
 
-      <div className="chopchep-list-container">
-        <div className="chopchep-list-inner">
+      {/* Main Content Area */}
+      <div className="chopchep-content-area" style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <div className="chopchep-controls" style={{ justifyContent: 'flex-end', borderBottom: '1px solid var(--border)' }}>
+          <button
+            onClick={toggleAutoPlay}
+            disabled={lines.length === 0}
+            className={`chopchep-btn-play ${isAutoPlaying ? 'playing' : ''}`}
+          >
+            {isAutoPlaying ? <Pause size={18} /> : <Play size={18} />}
+            {isAutoPlaying ? 'Dừng đọc' : 'Đọc tự động'}
+          </button>
+        </div>
+
+        <div className="chopchep-list-container">
+          <div className="chopchep-list-inner">
           {isLoading && (
             <div className="center-message">
               <Loader2 className="animate-spin" size={32} />
