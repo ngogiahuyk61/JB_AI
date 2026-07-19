@@ -9,7 +9,7 @@ const isHeaderLine = (text: string) => {
 };
 
 export default function ChopchepTab() {
-  const [selectedLesson, setSelectedLesson] = useState<number>(1);
+  const [selectedLesson, setSelectedLesson] = useState<number | null>(null);
   const [allLessons, setAllLessons] = useState<Record<number, string[]>>({});
   const [lines, setLines] = useState<string[]>([]);
   const [currentLineIndex, setCurrentLineIndex] = useState<number>(-1);
@@ -64,7 +64,7 @@ export default function ChopchepTab() {
   }, []);
 
   useEffect(() => {
-    if (allLessons[selectedLesson]) {
+    if (selectedLesson !== null && allLessons[selectedLesson]) {
       setLines(allLessons[selectedLesson]);
       setCurrentLineIndex(-1);
       setIsAutoPlaying(false);
@@ -132,6 +132,26 @@ export default function ChopchepTab() {
     }
   };
 
+  if (selectedLesson === null) {
+    return (
+      <div className="lesson-grid-container">
+        <div className="lesson-grid">
+          {Array.from({length: 25}, (_, i) => i + 1).map(num => (
+            <button
+              key={num}
+              onClick={() => setSelectedLesson(num)}
+              disabled={num > 15} // Only 1-15 available for now
+              className="lesson-grid-btn"
+              style={{ opacity: num > 15 ? 0.5 : 1, cursor: num > 15 ? 'not-allowed' : 'pointer' }}
+            >
+              {num}
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="np-layout">
       {/* Sidebar for Lessons */}
@@ -140,14 +160,14 @@ export default function ChopchepTab() {
           <BookOpen size={20} />
           Bài học
         </div>
-        <div className="np-lesson-list">
+        <div className="np-lesson-grid">
           {Array.from({length: 15}, (_, i) => i + 1).map(num => (
             <button
               key={num}
               onClick={() => setSelectedLesson(num)}
-              className={`np-lesson-btn ${selectedLesson === num ? 'active' : ''}`}
+              className={`np-lesson-grid-btn ${selectedLesson === num ? 'active' : ''}`}
             >
-              Bài {num}
+              {num}
             </button>
           ))}
         </div>

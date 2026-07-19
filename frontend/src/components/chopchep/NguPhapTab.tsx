@@ -8,7 +8,7 @@ interface GrammarItem {
 
 export default function NguPhapTab() {
   const [grammarData, setGrammarData] = useState<GrammarItem[]>([]);
-  const [selectedLesson, setSelectedLesson] = useState<number>(1);
+  const [selectedLesson, setSelectedLesson] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -52,6 +52,24 @@ export default function NguPhapTab() {
 
   const currentGrammar = grammarData.find(g => g.lesson === selectedLesson);
 
+  if (selectedLesson === null) {
+    return (
+      <div className="lesson-grid-container">
+        <div className="lesson-grid">
+          {Array.from({length: 25}, (_, i) => i + 1).map(num => (
+            <button
+              key={num}
+              onClick={() => setSelectedLesson(num)}
+              className="lesson-grid-btn"
+            >
+              {num}
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="np-layout">
       {/* Sidebar for Lessons */}
@@ -60,14 +78,14 @@ export default function NguPhapTab() {
           <BookOpen size={20} />
           Bài học
         </div>
-        <div className="np-lesson-list">
+        <div className="np-lesson-grid">
           {Array.from({length: 25}, (_, i) => i + 1).map(num => (
             <button
               key={num}
               onClick={() => setSelectedLesson(num)}
-              className={`np-lesson-btn ${selectedLesson === num ? 'active' : ''}`}
+              className={`np-lesson-grid-btn ${selectedLesson === num ? 'active' : ''}`}
             >
-              Bài {num}
+              {num}
             </button>
           ))}
         </div>
