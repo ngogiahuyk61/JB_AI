@@ -22,7 +22,7 @@ export interface KanjiSearchResult {
 
 export const parseKanjiData = (text: string): KanjiEntry[] => {
   const entries: KanjiEntry[] = [];
-  const blocks = text.split(/Ảnh \d+(?: & \d+)?: Chữ /).filter(b => b.trim() !== '');
+  const blocks = text.split(/(?:Ảnh [0-9 &]+: )?Chữ /).filter(b => b.trim() !== '');
 
   for (const block of blocks) {
     const lines = block.split(/\r?\n/).map(l => l.trim()).filter(l => l !== '');
@@ -102,19 +102,23 @@ export const searchKanji = (query: string, data: KanjiEntry[]): KanjiSearchResul
 
   const checkMatch = (text: string) => {
     if (!text) return false;
+    const cleanText = text.replace(/-/g, ' ').toLowerCase();
+    const cleanQ = qLower.replace(/-/g, ' ');
     if (hasAccents) {
-      return text.toLowerCase().includes(qLower);
+      return cleanText.includes(cleanQ);
     } else {
-      return normalize(text).includes(nq);
+      return normalize(text.replace(/-/g, ' ')).includes(nq.replace(/-/g, ' '));
     }
   };
 
   const checkExact = (text: string) => {
     if (!text) return false;
+    const cleanText = text.replace(/-/g, ' ').toLowerCase();
+    const cleanQ = qLower.replace(/-/g, ' ');
     if (hasAccents) {
-      return text.toLowerCase() === qLower;
+      return cleanText === cleanQ;
     } else {
-      return normalize(text) === nq;
+      return normalize(text.replace(/-/g, ' ')) === nq.replace(/-/g, ' ');
     }
   };
 
