@@ -24,7 +24,6 @@ export default function NguPhapTab() {
         const data: GrammarItem[] = [];
         let i = 0;
         
-        // Find the index where lesson 1 starts
         while (i < splitLines.length && splitLines[i] !== '1') {
           i++;
         }
@@ -54,25 +53,19 @@ export default function NguPhapTab() {
   const currentGrammar = grammarData.find(g => g.lesson === selectedLesson);
 
   return (
-    <div className="flex-1 flex flex-col md:flex-row h-full bg-[#0a0a0a]">
+    <div className="np-layout">
       {/* Sidebar for Lessons */}
-      <div className="w-full md:w-64 bg-[#111111] border-r border-white/5 flex-none overflow-y-auto">
-        <div className="p-4 border-b border-white/5 sticky top-0 bg-[#111111]/90 backdrop-blur z-10">
-          <h2 className="text-lg font-bold text-white/90 flex items-center gap-2">
-            <BookOpen className="text-indigo-400" size={20} />
-            Bài học
-          </h2>
+      <div className="np-sidebar">
+        <div className="np-sidebar-header">
+          <BookOpen size={20} />
+          Bài học
         </div>
-        <div className="p-2 space-y-1">
+        <div className="np-lesson-list">
           {Array.from({length: 25}, (_, i) => i + 1).map(num => (
             <button
               key={num}
               onClick={() => setSelectedLesson(num)}
-              className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors ${
-                selectedLesson === num 
-                  ? 'bg-indigo-600 text-white shadow-md' 
-                  : 'text-white/60 hover:bg-white/5 hover:text-white/90'
-              }`}
+              className={`np-lesson-btn ${selectedLesson === num ? 'active' : ''}`}
             >
               Bài {num}
             </button>
@@ -81,53 +74,49 @@ export default function NguPhapTab() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-4 md:p-8 overflow-y-auto">
-        <div className="max-w-3xl mx-auto">
+      <div className="np-content">
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           {isLoading && (
-            <div className="flex flex-col items-center justify-center py-20 text-white/50">
-              <Loader2 className="w-8 h-8 animate-spin mb-4" />
+            <div className="center-message">
+              <Loader2 className="animate-spin" size={32} />
               <p>Đang tải ngữ pháp...</p>
             </div>
           )}
           
           {error && (
-            <div className="flex flex-col items-center justify-center py-20 text-red-400">
-              <AlertCircle className="w-12 h-12 mb-4 opacity-50" />
+            <div className="center-message error">
+              <AlertCircle size={48} />
               <p>{error}</p>
             </div>
           )}
 
           {!isLoading && !error && currentGrammar && (
-            <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-6 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-8 bg-indigo-500/10 rounded-bl-full w-32 h-32 -z-0"></div>
-              
-              <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 mb-6 relative z-10">
+            <div className="np-card">
+              <h2 className="np-card-title">
                 Ngữ pháp Bài {selectedLesson}
               </h2>
               
-              <div className="space-y-6 relative z-10">
+              <div>
                 {currentGrammar.content.split(';').map((structure, index) => {
                   const s = structure.trim();
                   if (!s) return null;
                   return (
-                    <div key={index} className="bg-black/20 p-4 rounded-xl border border-white/5">
-                      <div className="text-xl font-bold text-amber-400 mb-2">{s}</div>
+                    <div key={index} className="np-structure">
+                      {s}
                     </div>
                   );
                 })}
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/10 flex justify-end">
-                <p className="text-sm text-white/40 flex items-center gap-2">
-                  <MessageCircle size={16} />
-                  Mở Chat AI góc phải dưới để được giải thích chi tiết
-                </p>
+              <div className="np-hint">
+                <MessageCircle size={16} />
+                Mở Chat AI góc phải dưới để được giải thích chi tiết
               </div>
             </div>
           )}
           
           {!isLoading && !error && !currentGrammar && (
-            <div className="text-center py-20 text-white/40">
+            <div className="center-message">
               Không tìm thấy dữ liệu ngữ pháp bài {selectedLesson}
             </div>
           )}

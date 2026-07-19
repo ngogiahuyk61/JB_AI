@@ -28,7 +28,6 @@ export default function ChopchepTab() {
     };
   }, []);
 
-  // Fetch and parse chopchep.txt once
   useEffect(() => {
     const fetchFile = async () => {
       setIsLoading(true);
@@ -64,7 +63,6 @@ export default function ChopchepTab() {
     fetchFile();
   }, []);
 
-  // Update lines when selectedLesson or allLessons changes
   useEffect(() => {
     if (allLessons[selectedLesson]) {
       setLines(allLessons[selectedLesson]);
@@ -135,48 +133,40 @@ export default function ChopchepTab() {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-[#0a0a0a]">
-      {/* Controls */}
-      <div className="flex-none p-4 bg-[#111111] border-b border-white/5 shadow-md flex items-center justify-between z-10">
-        <div className="flex items-center gap-4">
-          <select 
-            value={selectedLesson}
-            onChange={(e) => setSelectedLesson(Number(e.target.value))}
-            className="bg-[#1a1a1a] border border-white/10 text-white rounded-xl px-4 py-2 outline-none focus:border-indigo-500 transition-colors font-medium shadow-inner"
-          >
-            {Array.from({length: 15}, (_, i) => i + 1).map(num => (
-              <option key={num} value={num}>Bài {num}</option>
-            ))}
-          </select>
-        </div>
+    <div className="chopchep-content-area">
+      <div className="chopchep-controls">
+        <select 
+          value={selectedLesson}
+          onChange={(e) => setSelectedLesson(Number(e.target.value))}
+          className="chopchep-select"
+        >
+          {Array.from({length: 15}, (_, i) => i + 1).map(num => (
+            <option key={num} value={num}>Bài {num}</option>
+          ))}
+        </select>
 
         <button
           onClick={toggleAutoPlay}
           disabled={lines.length === 0}
-          className={`flex items-center gap-2 px-6 py-2 rounded-xl font-medium transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed ${
-            isAutoPlaying 
-              ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20'
-              : 'bg-indigo-600 text-white hover:bg-indigo-500'
-          }`}
+          className={`chopchep-btn-play ${isAutoPlaying ? 'playing' : ''}`}
         >
           {isAutoPlaying ? <Pause size={18} /> : <Play size={18} />}
           {isAutoPlaying ? 'Dừng đọc' : 'Đọc tự động'}
         </button>
       </div>
 
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth">
-        <div className="max-w-3xl mx-auto space-y-2 pb-24">
+      <div className="chopchep-list-container">
+        <div className="chopchep-list-inner">
           {isLoading && (
-            <div className="flex flex-col items-center justify-center py-20 text-white/50">
-              <Loader2 className="w-8 h-8 animate-spin mb-4" />
+            <div className="center-message">
+              <Loader2 className="animate-spin" size={32} />
               <p>Đang tải bài học...</p>
             </div>
           )}
           
           {error && (
-            <div className="flex flex-col items-center justify-center py-20 text-red-400">
-              <AlertCircle className="w-12 h-12 mb-4 opacity-50" />
+            <div className="center-message error">
+              <AlertCircle size={48} />
               <p>{error}</p>
             </div>
           )}
@@ -186,16 +176,16 @@ export default function ChopchepTab() {
             const isActive = index === currentLineIndex;
             const isEmpty = !line.trim();
 
-            if (isEmpty) return <div key={index} className="h-4" />;
+            if (isEmpty) return <div key={index} style={{ height: '16px' }} />;
 
             if (isHeader) {
               return (
                 <div 
                   key={index} 
                   ref={el => { lineRefs.current[index] = el; }}
-                  className="pt-8 pb-4 sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-xl z-10"
+                  className="chopchep-header-sticky"
                 >
-                  <div className="inline-block bg-gradient-to-r from-amber-400 to-orange-400 text-black font-black px-6 py-2.5 rounded-xl shadow-[0_4px_20px_rgba(251,191,36,0.3)] text-lg uppercase tracking-widest border border-amber-300">
+                  <div className="chopchep-header-badge">
                     {line}
                   </div>
                 </div>
@@ -204,38 +194,33 @@ export default function ChopchepTab() {
 
             const isConversation = line.includes('：');
             const [speaker, ...speechParts] = isConversation ? line.split('：') : [];
-            const speech = speechParts.join('：'); // in case there are multiple colons
+            const speech = speechParts.join('：');
 
             return (
               <div
                 key={index}
                 ref={el => { lineRefs.current[index] = el; }}
                 onClick={() => playLine(index)}
-                className={`group flex items-start gap-4 p-5 rounded-2xl transition-all duration-300 cursor-pointer border ${
-                  isActive 
-                    ? 'bg-indigo-600/20 border-indigo-500 shadow-[0_0_30px_rgba(79,70,229,0.15)] scale-[1.01] transform' 
-                    : 'bg-[#151515] border-white/5 hover:bg-[#1a1a1a] hover:border-indigo-500/30 hover:shadow-lg'
-                }`}
+                className={`chopchep-line-item ${isActive ? 'active' : ''}`}
               >
-                <button className={`mt-1 flex-none transition-colors duration-300 ${isActive ? 'text-indigo-400 scale-110' : 'text-white/20 group-hover:text-white/40'}`}>
+                <div className="chopchep-icon">
                   <Volume2 size={20} />
-                </button>
-                <div className="flex-1 text-base md:text-lg leading-relaxed">
+                </div>
+                
+                <div className="chopchep-text-main">
                   {isConversation ? (
-                    <div className="flex flex-col gap-1">
-                      <span className={`text-xs font-black uppercase tracking-widest ${isActive ? 'text-indigo-300' : 'text-amber-500/80'}`}>
-                        {speaker}
-                      </span>
-                      <span className={`${isActive ? 'text-indigo-50' : 'text-white/90'}`}>
+                    <div>
+                      <span className="chopchep-speaker">{speaker}</span>
+                      <span>
                         {speech.split('(').map((part, i) => 
-                          i === 0 ? <span key={i}>{part}</span> : <span key={i} className={`${isActive ? 'text-indigo-200/60' : 'text-white/40'} text-sm ml-1`}>({part}</span>
+                          i === 0 ? <span key={i}>{part}</span> : <span key={i} className="chopchep-text-trans">({part}</span>
                         )}
                       </span>
                     </div>
                   ) : (
-                    <div className={`${isActive ? 'text-indigo-50' : 'text-white/90'}`}>
+                    <div>
                       {line.split('(').map((part, i) => 
-                        i === 0 ? <span key={i}>{part}</span> : <span key={i} className={`${isActive ? 'text-indigo-200/60' : 'text-white/40'} text-sm ml-1`}>({part}</span>
+                        i === 0 ? <span key={i}>{part}</span> : <span key={i} className="chopchep-text-trans">({part}</span>
                       )}
                     </div>
                   )}
