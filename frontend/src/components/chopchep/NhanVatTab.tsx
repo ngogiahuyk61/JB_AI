@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Loader2, AlertCircle, Users, BrainCircuit, RefreshCw, CheckCircle2, XCircle } from 'lucide-react';
 
 interface Character {

@@ -109,7 +109,7 @@ export default function ChopchepTab() {
 
       setCurrentLineIndex(i);
       const lang = detectLang(text);
-      await speechService.speak(text, lang, 0.9);
+      await speechService.speak(text, { lang, rate: 0.9 });
       if (!isAutoPlayingRef.current) break;
       await delay(500);
     }
@@ -130,7 +130,7 @@ export default function ChopchepTab() {
     const text = lines[index].trim();
     if (text && !isHeaderLine(text) && !text.startsWith('第')) {
       const lang = detectLang(text);
-      await speechService.speak(text, lang, 0.9);
+      await speechService.speak(text, { lang, rate: 0.9 });
     }
   };
 
@@ -192,34 +192,52 @@ export default function ChopchepTab() {
               return (
                 <div 
                   key={index} 
-                  ref={el => lineRefs.current[index] = el}
-                  className="pt-8 pb-4 sticky top-0 bg-[#0a0a0a]/90 backdrop-blur-sm z-10"
+                  ref={el => { lineRefs.current[index] = el; }}
+                  className="pt-8 pb-4 sticky top-0 bg-[#0a0a0a]/95 backdrop-blur-xl z-10"
                 >
-                  <h2 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 flex items-center gap-2">
-                    <div className="w-1.5 h-6 bg-indigo-500 rounded-full"></div>
+                  <div className="inline-block bg-gradient-to-r from-amber-400 to-orange-400 text-black font-black px-6 py-2.5 rounded-xl shadow-[0_4px_20px_rgba(251,191,36,0.3)] text-lg uppercase tracking-widest border border-amber-300">
                     {line}
-                  </h2>
+                  </div>
                 </div>
               );
             }
 
+            const isConversation = line.includes('：');
+            const [speaker, ...speechParts] = isConversation ? line.split('：') : [];
+            const speech = speechParts.join('：'); // in case there are multiple colons
+
             return (
               <div
                 key={index}
-                ref={el => lineRefs.current[index] = el}
+                ref={el => { lineRefs.current[index] = el; }}
                 onClick={() => playLine(index)}
-                className={`group flex items-start gap-4 p-4 rounded-xl transition-all cursor-pointer ${
+                className={`group flex items-start gap-4 p-5 rounded-2xl transition-all duration-300 cursor-pointer border ${
                   isActive 
-                    ? 'bg-indigo-600/20 border-l-4 border-indigo-500 pl-3 shadow-[inset_0_0_20px_rgba(79,70,229,0.1)]' 
-                    : 'hover:bg-white/5 border-l-4 border-transparent pl-3'
+                    ? 'bg-indigo-600/20 border-indigo-500 shadow-[0_0_30px_rgba(79,70,229,0.15)] scale-[1.01] transform' 
+                    : 'bg-[#151515] border-white/5 hover:bg-[#1a1a1a] hover:border-indigo-500/30 hover:shadow-lg'
                 }`}
               >
-                <button className={`mt-1 flex-none transition-colors ${isActive ? 'text-indigo-400' : 'text-white/20 group-hover:text-white/40'}`}>
-                  <Volume2 size={16} />
+                <button className={`mt-1 flex-none transition-colors duration-300 ${isActive ? 'text-indigo-400 scale-110' : 'text-white/20 group-hover:text-white/40'}`}>
+                  <Volume2 size={20} />
                 </button>
-                <div className={`flex-1 text-base md:text-lg leading-relaxed transition-colors ${isActive ? 'text-indigo-100' : 'text-white/80'}`}>
-                  {line.split('(').map((part, i) => 
-                    i === 0 ? <span key={i}>{part}</span> : <span key={i} className="text-white/40">({part}</span>
+                <div className="flex-1 text-base md:text-lg leading-relaxed">
+                  {isConversation ? (
+                    <div className="flex flex-col gap-1">
+                      <span className={`text-xs font-black uppercase tracking-widest ${isActive ? 'text-indigo-300' : 'text-amber-500/80'}`}>
+                        {speaker}
+                      </span>
+                      <span className={`${isActive ? 'text-indigo-50' : 'text-white/90'}`}>
+                        {speech.split('(').map((part, i) => 
+                          i === 0 ? <span key={i}>{part}</span> : <span key={i} className={`${isActive ? 'text-indigo-200/60' : 'text-white/40'} text-sm ml-1`}>({part}</span>
+                        )}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className={`${isActive ? 'text-indigo-50' : 'text-white/90'}`}>
+                      {line.split('(').map((part, i) => 
+                        i === 0 ? <span key={i}>{part}</span> : <span key={i} className={`${isActive ? 'text-indigo-200/60' : 'text-white/40'} text-sm ml-1`}>({part}</span>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
