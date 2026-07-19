@@ -52,7 +52,7 @@ export default function ChopchepLine({ line, isActive, onClick, isHeaderLine }: 
   text = text.replace(/^\*\s*/, '');
 
   let kanjiInfo = '';
-  text = text.replace(/\(([\u4e00-\u9faf]+)\s*-\s*([^\)]+)\)/g, (match, kanji, hanviet) => {
+  text = text.replace(/\(([\u4e00-\u9faf]+)\s*-\s*([^\)]+)\)/g, (_, kanji, hanviet) => {
     kanjiInfo += (kanjiInfo ? ' | ' : '') + `${kanji} - ${hanviet}`;
     return '';
   });

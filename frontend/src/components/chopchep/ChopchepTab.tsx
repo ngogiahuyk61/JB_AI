@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Play, Pause, Loader2, AlertCircle, Volume2, BookOpen } from 'lucide-react';
+import { Play, Pause, Loader2, AlertCircle, BookOpen } from 'lucide-react';
 import ChopchepLine, { parseForSpeech } from './ChopchepLine';
 import { speechService } from '../../services/speechService';
 
@@ -83,10 +83,6 @@ export default function ChopchepTab() {
       });
     }
   }, [currentLineIndex]);
-
-  const detectLang = (text: string): 'ja-JP' | 'vi-VN' => {
-    return /[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uffef\u4e00-\u9faf]/.test(text) ? 'ja-JP' : 'vi-VN';
-  };
 
   const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
