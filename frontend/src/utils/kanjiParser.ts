@@ -94,8 +94,29 @@ const normalize = (str: string) => {
 
 export const searchKanji = (query: string, data: KanjiEntry[]): KanjiSearchResult[] => {
   const q = query.trim();
+  const qLower = q.toLowerCase();
   const nq = normalize(q);
   if (!q) return [];
+
+  const hasAccents = qLower !== nq;
+
+  const checkMatch = (text: string) => {
+    if (!text) return false;
+    if (hasAccents) {
+      return text.toLowerCase().includes(qLower);
+    } else {
+      return normalize(text).includes(nq);
+    }
+  };
+
+  const checkExact = (text: string) => {
+    if (!text) return false;
+    if (hasAccents) {
+      return text.toLowerCase() === qLower;
+    } else {
+      return normalize(text) === nq;
+    }
+  };
 
   const results: KanjiSearchResult[] = [];
 
@@ -107,31 +128,40 @@ export const searchKanji = (query: string, data: KanjiEntry[]): KanjiSearchResul
     }
 
     // 2. Exact Han Viet Match
-    if (normalize(entry.hanViet) === nq || entry.hanViet.toLowerCase() === q.toLowerCase()) {
+    if (checkExact(entry.hanViet)) {
       results.push({ type: 'exact_hanviet', kanjiEntry: entry, score: 90 });
       continue;
     }
 
     // 3. Kanji Meaning Match
-    if (normalize(entry.meaning).includes(nq)) {
-      results.push({ type: 'meaning_match', kanjiEntry: entry, score: 80 });
+    if (checkMatch(entry.meaning)) {
+      const meanings = entry.meaning.split(/[,\-]/).map(m => m.trim());
+      const exactMeaning = meanings.some(m => hasAccents ? m.toLowerCase() === qLower : normalize(m) === nq);
+      results.push({ type: 'meaning_match', kanjiEntry: entry, score: exactMeaning ? 80 : 70 });
       continue;
     }
 
     // 4. Vocab Match
     const matchedVocab = entry.vocab.filter(v => {
       return v.kanji === q || 
-             normalize(v.hanViet) === nq || 
+             checkExact(v.hanViet) || 
              v.kana === q || 
-             normalize(v.meaning).includes(nq);
+             checkMatch(v.meaning);
     });
 
     if (matchedVocab.length > 0) {
       // Determine highest relevance in vocab
       let score = 50;
-      if (matchedVocab.some(v => v.kanji === q)) score = 70;
-      else if (matchedVocab.some(v => v.kana === q)) score = 65;
-      else if (matchedVocab.some(v => normalize(v.hanViet) === nq)) score = 60;
+      if (matchedVocab.some(v => v.kanji === q)) score = 95;
+      else if (matchedVocab.some(v => checkExact(v.hanViet))) score = 85;
+      else if (matchedVocab.some(v => v.kana === q)) score = 85;
+      else {
+        const exactMeaning = matchedVocab.some(v => {
+           const meanings = v.meaning.split(/[,\-]/).map(m => m.trim());
+           return meanings.some(m => hasAccents ? m.toLowerCase() === qLower : normalize(m) === nq);
+        });
+        if (exactMeaning) score = 85;
+      }
       
       results.push({ type: 'vocab_match', kanjiEntry: entry, matchedVocab, score });
     }
