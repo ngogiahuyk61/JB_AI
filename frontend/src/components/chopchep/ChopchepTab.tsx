@@ -239,8 +239,9 @@ export default function ChopchepTab() {
               </div>
             );
           })}
-        </div>
       </div>
+    </div>
+    </div>
     </div>
   );
 }
