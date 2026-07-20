@@ -66,6 +66,7 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
   // Auto-read state
   const [showAutoRead, setShowAutoRead] = useState(false);
   const [autoReadLevels, setAutoReadLevels] = useState<Set<string>>(new Set(['N5']));
+  const [autoReadLessons, setAutoReadLessons] = useState<Set<number>>(new Set());
   const [autoReadMode] = useState<'sequential' | 'random'>('sequential');
   const [autoReadDelay] = useState(3000); // ms
   const [autoReadState, setAutoReadState] = useState<AutoReadState>('idle');
@@ -159,6 +160,21 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
     const selectedJlpt = ['N5', 'N4', 'N3', 'N2', 'N1'].filter(l => autoReadLevels.has(l));
     let list = ALL_VOCAB.filter(v => selectedJlpt.includes(v.level));
     
+    // Apply lesson filter for N5 if specific lessons are selected in auto-read
+    if (autoReadLevels.has('N5') && autoReadLessons.size > 0) {
+      // Keep all non-N5 items + N5 items that match selected lessons
+      list = list.filter(v => {
+        if (v.level !== 'N5') return true;
+        if (!v.stt) return false;
+        
+        // Check if the vocab's STT falls into any of the selected lesson ranges
+        return Array.from(autoReadLessons).some(lessonNum => {
+          const def = N5_LESSONS.find(l => l.lessonNum === lessonNum);
+          return def ? def.sttRanges.some(([min, max]) => v.stt! >= min && v.stt! <= max) : false;
+        });
+      });
+    }
+
     // Special categories
     if (autoReadLevels.has('n2_bs')) list = [...list, ...getSpecialCategoryVocab('n2_bs')];
     if (autoReadLevels.has('tu_lay')) list = [...list, ...getSpecialCategoryVocab('tu_lay')];
@@ -566,6 +582,42 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
                   );
                 })}
               </div>
+
+              {autoReadLevels.has('N5') && (
+                <div style={{ marginTop: 8 }}>
+                  <div style={{ fontSize: 11, opacity: 0.6, textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span>Chọn bài N5 (tùy chọn)</span>
+                    {autoReadLessons.size > 0 && (
+                      <button onClick={() => setAutoReadLessons(new Set())} style={{ background: 'none', border: 'none', color: '#818cf8', cursor: 'pointer', fontSize: 11, textDecoration: 'underline', padding: 0 }}>
+                        Bỏ chọn tất cả
+                      </button>
+                    )}
+                  </div>
+                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', maxHeight: '140px', overflowY: 'auto', paddingRight: 4, msOverflowStyle: 'none', scrollbarWidth: 'thin' }}>
+                    {N5_LESSONS.map(lesson => {
+                      const active = autoReadLessons.has(lesson.lessonNum);
+                      return (
+                        <button key={lesson.lessonNum} onClick={() => {
+                          setAutoReadLessons(prev => {
+                            const next = new Set(prev);
+                            if (next.has(lesson.lessonNum)) next.delete(lesson.lessonNum);
+                            else next.add(lesson.lessonNum);
+                            return next;
+                          });
+                        }}
+                          style={{
+                            padding: '6px 12px', borderRadius: 8, border: `1px solid ${active ? '#4ade80' : 'rgba(255,255,255,.2)'}`,
+                            background: active ? 'rgba(74,222,128,.2)' : 'rgba(255,255,255,.05)',
+                            color: active ? '#4ade80' : 'rgba(255,255,255,.6)',
+                            cursor: 'pointer', fontWeight: 600, fontSize: 12, transition: 'all 150ms',
+                          }}>
+                          Bài {lesson.lessonNum}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div>
