@@ -1867,3 +1867,60 @@ Theo design system hiện tại của app (dark mode / glassmorphism):
 8. ✅ Cập nhật task.md khi thực hiện
 
 ---
+
+## 22. Kaiwa Topics mới & Tính năng Nội quy Cấm (2026-07-20)
+
+### 22.1 Mô tả
+
+Bổ sung 3 topic Kaiwa mới (Topic 3-5) theo ngữ cảnh bài học thực tế KAIZEN YOSHIDA, đồng thời xây dựng tính năng **Nội quy Cấm (Prohibitions)** giúp học sinh học cấu trúc ngữ pháp 「～てはいけません」một cách trực quan và tương tác.
+
+### 22.2 Các Topic được thêm
+
+| Topic | Nội dung | Địa điểm | Điểm di chuyển | Giá vé |
+|-------|----------|----------|----------------|--------|
+| Topic 3 | Triển lãm tranh | Bảo tàng Sakura | Xe điện 15 phút từ ga KAIZEN | 500 yên |
+| Topic 4 | Xem phim "Tarou-chan và một chú chó" | Rạp chiếu phim Sakura | Đi bộ 3 phút từ trường KAIZEN | 1800 yên |
+| Topic 5 | Hòa nhạc Piano – Mike Miller | Sakura Bldg tầng 1, TP. HCM | Đi bộ 5 phút từ KAIZEN YOSHIDA | 1300 yên |
+
+### 22.3 Tính năng Nội quy Cấm (ProhibitionCard)
+
+**Thiết kế UX:**
+- Mỗi biển cấm hiển thị dưới dạng thẻ (card) tương tác trong phần *bối cảnh* của topic.
+- Mặc định chỉ hiển thị: icon + tên cấm bằng tiếng Nhật (ví dụ: `📷 撮影禁止`).
+- Khi **bấm vào**, thẻ mở rộng hiển thị 3 tầng thông tin:
+  1. Câu tiếng Nhật đầy đủ: `写真を撮ってはいけません。`
+  2. Romaji: `Shashin o totte wa ikemasen.`
+  3. Nghĩa tiếng Việt: `→ Không được chụp ảnh.`
+- Bấm lại → thu nhỏ (toggle).
+
+**Ngữ pháp được củng cố:**
+```
+「～てはいけません」= Không được phép làm gì
+```
+
+**4 loại biển cấm trong hệ thống:**
+
+| Icon | Tên Nhật | Câu Kaiwa | Nghĩa |
+|------|----------|-----------|-------|
+| 🚬 | 喫煙禁止 | たばこを吸ってはいけません | Không được hút thuốc |
+| 📷 | 撮影禁止 | 写真を撮ってはいけません / 携帯電話を使ってはいけません | Không được chụp ảnh / dùng điện thoại |
+| 🍔 | 飲食禁止 | 食べたり飲んだりしてはいけません | Không được ăn uống |
+| 🏍️ | バイク禁止 | バイクで行ってはいけません | Không được đi bằng xe máy |
+
+### 22.4 File thay đổi
+
+| File | Thay đổi |
+|------|---------|
+| `frontend/src/data/kaiwaTopics.ts` | Thêm interface `TopicProhibition`, trường `prohibitions?` vào `KaiwaTopic`, thêm 3 topic mới (art_exhibition, movie, piano_concert) với dữ liệu cấm đầy đủ |
+| `frontend/src/components/kaiwa/TopicPlayer.tsx` | Thêm component `ProhibitionCard` (interactive toggle), render phần "Nội quy — Bấm để xem nghĩa" và banner giải thích cấu trúc ngữ pháp |
+
+### 22.5 Xác nhận kết quả
+
+- [x] Mở KaiwaPage → thấy 5 topic (thay vì 2)
+- [x] Bấm Topic 3/4/5 → hiển thị đúng bối cảnh + hội thoại
+- [x] Thấy phần 🚫 **Nội quy** với các thẻ cấm
+- [x] Bấm vào thẻ → nội dung hiển thị (câu + romaji + nghĩa Việt)
+- [x] Bấm lại → thu nhỏ
+- [x] Banner ngữ pháp hiển thị: `「～てはいけません」= Không được phép làm gì`
+
+---

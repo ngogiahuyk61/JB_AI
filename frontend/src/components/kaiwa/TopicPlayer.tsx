@@ -1,7 +1,50 @@
 import { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, Play, Pause, RefreshCw, Volume2, Languages, Type } from 'lucide-react';
 import { speechService } from '../../services/speechService';
-import type { KaiwaTopic } from '../../data/kaiwaTopics';
+import type { KaiwaTopic, TopicProhibition } from '../../data/kaiwaTopics';
+
+// ── Prohibition Card (interactive, tap to reveal grammar) ────────────────
+function ProhibitionCard({ prohibition }: { prohibition: TopicProhibition }) {
+  const [revealed, setRevealed] = useState(false);
+  return (
+    <button
+      onClick={() => setRevealed(r => !r)}
+      style={{
+        background: revealed ? 'rgba(239,68,68,0.15)' : 'rgba(255,255,255,0.07)',
+        border: `1px solid ${revealed ? 'rgba(239,68,68,0.4)' : 'rgba(255,255,255,0.12)'}`,
+        borderRadius: 14,
+        padding: revealed ? '14px 16px' : '12px 16px',
+        cursor: 'pointer',
+        textAlign: 'left',
+        transition: 'all 0.3s ease',
+        minWidth: 130,
+        flex: '1 1 130px',
+        maxWidth: 240,
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{ fontSize: 22 }}>{prohibition.icon}</span>
+        <div>
+          <div style={{ color: revealed ? '#fca5a5' : '#f87171', fontWeight: 800, fontSize: 14 }}>
+            {prohibition.japanese}
+          </div>
+          {!revealed && (
+            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, marginTop: 2 }}>Bấm để xem câu cấm</div>
+          )}
+        </div>
+      </div>
+      {revealed && (
+        <div style={{ marginTop: 10, borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: 8, display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <div style={{ color: 'white', fontWeight: 700, fontSize: 14, lineHeight: 1.4 }}>
+            {prohibition.sentence}
+          </div>
+          <div style={{ color: '#94a3b8', fontSize: 12, fontStyle: 'italic' }}>{prohibition.romaji}</div>
+          <div style={{ color: '#fde68a', fontSize: 13, fontWeight: 600, marginTop: 2 }}>→ {prohibition.vietnamese}</div>
+        </div>
+      )}
+    </button>
+  );
+}
 
 interface TopicPlayerProps {
   topic: KaiwaTopic;
@@ -146,6 +189,24 @@ export default function TopicPlayer({ topic, onBack }: TopicPlayerProps) {
             </p>
           </div>
         </div>
+
+        {/* Prohibition Cards */}
+        {topic.prohibitions && topic.prohibitions.length > 0 && (
+          <div style={{ marginBottom: 28 }}>
+            <h3 style={{ color: '#fbbf24', fontSize: 13, textTransform: 'uppercase', fontWeight: 800, margin: '0 0 12px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span>🚫</span> Nội quy — Bấm để xem nghĩa
+            </h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+              {topic.prohibitions.map((p, i) => (
+                <ProhibitionCard key={i} prohibition={p} />
+              ))}
+            </div>
+            <div style={{ marginTop: 10, padding: '10px 14px', background: 'rgba(251,191,36,0.08)', border: '1px solid rgba(251,191,36,0.2)', borderRadius: 10, color: '#fde68a', fontSize: 13, lineHeight: 1.5 }}>
+              <strong>📚 Cấu trúc ngữ pháp:</strong> 「～て<span style={{ color: '#fbbf24' }}>はいけません</span>」= Không được phép làm gì
+            </div>
+          </div>
+        )}
+
 
         {/* Dialogues */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16, paddingBottom: 100 }}>
