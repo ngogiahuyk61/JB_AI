@@ -184,7 +184,7 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
       list = [...list].sort(() => Math.random() - 0.5);
     }
     return list;
-  }, [autoReadLevels, autoReadMode]);
+  }, [autoReadLevels, autoReadLessons, autoReadMode]);
 
   const availablePos = useMemo(() => {
     return Object.keys(POS_LABELS);
