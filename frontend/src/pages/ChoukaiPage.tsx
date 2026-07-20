@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { Play, Pause, Disc, ChevronDown, ChevronRight, Headphones } from 'lucide-react';
+import '../styles/choukai.css';
 
 interface ChoukaiLesson {
   lessonNum: number;
@@ -68,7 +69,6 @@ export default function ChoukaiPage() {
   };
 
   const handleEnded = () => {
-    // Optionally auto-play next track if we know what lesson we are in
     setIsPlaying(false);
   };
 
@@ -81,27 +81,15 @@ export default function ChoukaiPage() {
   };
 
   return (
-    <div className="page-inner" style={{ paddingBottom: currentTrack ? '100px' : '40px', maxWidth: 800, margin: '0 auto' }}>
+    <div className={`page-inner choukai-page ${currentTrack ? 'has-player' : ''}`}>
       
       {/* Levels Header */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 24, overflowX: 'auto', paddingBottom: 8, whiteSpace: 'nowrap', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+      <div className="choukai-levels-wrapper">
         {levels.map(level => (
           <button
             key={level}
             onClick={() => setActiveLevel(level)}
-            style={{
-              padding: '10px 24px',
-              borderRadius: '99px',
-              border: 'none',
-              background: activeLevel === level ? 'linear-gradient(135deg, #6366f1, #4f46e5)' : '#f1f5f9',
-              color: activeLevel === level ? 'white' : '#475569',
-              fontWeight: 800,
-              fontSize: '15px',
-              cursor: 'pointer',
-              boxShadow: activeLevel === level ? '0 4px 12px rgba(79, 70, 229, 0.3)' : 'none',
-              transition: 'all 0.2s ease',
-              flex: '0 0 auto'
-            }}
+            className={`choukai-level-btn ${activeLevel === level ? 'active' : ''}`}
           >
             {level}
           </button>
@@ -109,109 +97,64 @@ export default function ChoukaiPage() {
       </div>
 
       <div className="card card-p">
-        <h2 style={{ fontSize: 22, fontWeight: 800, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 10 }}>
+        <h2 className="choukai-header">
           <Headphones style={{ color: '#4f46e5' }} /> 
           Luyện nghe Choukai - {activeLevel}
         </h2>
-        <p style={{ color: 'var(--text-muted)', marginBottom: 24 }}>
+        <p className="choukai-subtitle">
           {activeLevel === 'N5' 
             ? 'Các bài nghe Choukai tương ứng với giáo trình Minna no Nihongo N5 (Bài 1 - 25).'
             : `Dữ liệu luyện nghe ${activeLevel} đang được cập nhật.`}
         </p>
 
         {activeLevel === 'N5' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div className="choukai-lessons-list">
             {n5Lessons.map((lesson) => {
               const isExpanded = expandedLesson === lesson.lessonNum;
-              // Check if the current playing track is in this lesson
               const isPlayingInLesson = currentTrack !== null && lesson.tracks.includes(currentTrack);
 
               return (
-                <div key={lesson.lessonNum} style={{
-                  border: isExpanded ? '2px solid #6366f1' : '1px solid #e2e8f0',
-                  borderRadius: 16,
-                  overflow: 'hidden',
-                  background: isExpanded ? '#f8fafc' : 'white',
-                  transition: 'all 0.3s ease'
-                }}>
+                <div key={lesson.lessonNum} className={`choukai-lesson-card ${isExpanded ? 'expanded' : ''}`}>
                   {/* Accordion Header */}
                   <button
                     onClick={() => toggleLesson(lesson.lessonNum)}
-                    style={{
-                      width: '100%',
-                      padding: '16px 20px',
-                      background: 'transparent',
-                      border: 'none',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      cursor: 'pointer',
-                      textAlign: 'left'
-                    }}
+                    className="choukai-lesson-header"
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <div style={{ 
-                        width: 40, height: 40, 
-                        borderRadius: '50%', 
-                        background: isPlayingInLesson ? '#e0e7ff' : '#f1f5f9',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: isPlayingInLesson ? '#4f46e5' : '#64748b'
-                      }}>
-                        {isPlayingInLesson && isPlaying ? <Disc size={20} className="animate-spin" /> : <Disc size={20} />}
+                    <div className="choukai-lesson-info">
+                      <div className={`choukai-lesson-icon ${isPlayingInLesson ? 'playing' : ''}`}>
+                        {isPlayingInLesson && isPlaying ? <Disc size={22} className="animate-spin" /> : <Disc size={22} />}
                       </div>
                       <div>
-                        <div style={{ fontWeight: 800, fontSize: 16, color: isPlayingInLesson ? '#4f46e5' : '#1e293b' }}>
+                        <div className={`choukai-lesson-title ${isPlayingInLesson ? 'playing' : ''}`}>
                           {lesson.title}
                         </div>
-                        <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>
+                        <div className="choukai-lesson-meta">
                           {lesson.tracks.length} file nghe
                         </div>
                       </div>
                     </div>
                     <div>
-                      {isExpanded ? <ChevronDown size={20} color="#64748b" /> : <ChevronRight size={20} color="#64748b" />}
+                      {isExpanded ? <ChevronDown size={22} color={isPlayingInLesson ? '#4f46e5' : '#64748b'} /> : <ChevronRight size={22} color="#64748b" />}
                     </div>
                   </button>
 
                   {/* Accordion Content */}
                   {isExpanded && (
-                    <div style={{ padding: '0 20px 20px 20px' }}>
-                      <div style={{ 
-                        display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', 
-                        gap: 12,
-                        marginTop: 8
-                      }}>
-                        {lesson.tracks.map(trackNum => {
-                          const isActive = currentTrack === trackNum;
-                          const trackName = `A-${trackNum}`;
-                          return (
-                            <button
-                              key={trackNum}
-                              onClick={() => playTrack(trackNum)}
-                              style={{
-                                padding: '12px',
-                                borderRadius: '12px',
-                                border: `2px solid ${isActive ? '#4f46e5' : '#e2e8f0'}`,
-                                background: isActive ? '#4f46e5' : 'white',
-                                color: isActive ? 'white' : '#475569',
-                                fontWeight: 700,
-                                fontSize: '14px',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '8px',
-                                transition: 'all 0.2s ease',
-                                boxShadow: isActive ? '0 4px 12px rgba(79, 70, 229, 0.25)' : 'none'
-                              }}
-                            >
-                              {isActive && isPlaying ? <Pause size={16} /> : <Play size={16} />}
-                              {trackName}
-                            </button>
-                          );
-                        })}
-                      </div>
+                    <div className="choukai-tracks-grid">
+                      {lesson.tracks.map(trackNum => {
+                        const isActive = currentTrack === trackNum;
+                        const trackName = `A-${trackNum}`;
+                        return (
+                          <button
+                            key={trackNum}
+                            onClick={() => playTrack(trackNum)}
+                            className={`choukai-track-btn ${isActive ? 'active' : ''}`}
+                          >
+                            {isActive && isPlaying ? <Pause size={18} /> : <Play size={18} />}
+                            {trackName}
+                          </button>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
@@ -221,32 +164,18 @@ export default function ChoukaiPage() {
         )}
 
         {activeLevel !== 'N5' && (
-          <div style={{ textAlign: 'center', padding: '40px 20px', background: '#f8fafc', borderRadius: 16 }}>
+          <div className="choukai-empty">
             <Headphones size={48} color="#cbd5e1" style={{ margin: '0 auto 16px' }} />
-            <h3 style={{ fontSize: 18, fontWeight: 700, color: '#475569', marginBottom: 8 }}>Chưa có dữ liệu</h3>
-            <p style={{ color: '#64748b' }}>Phần luyện nghe cho {activeLevel} sẽ được cập nhật trong tương lai.</p>
+            <h3>Chưa có dữ liệu</h3>
+            <p>Phần luyện nghe cho {activeLevel} sẽ được cập nhật trong tương lai.</p>
           </div>
         )}
       </div>
 
       {currentTrack && (
-        <div style={{
-          position: 'fixed',
-          bottom: 'var(--nav-height, 0px)', left: 0, right: 0,
-          background: 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(10px)',
-          borderTop: '1px solid #e2e8f0',
-          padding: '16px 20px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 12,
-          boxShadow: '0 -4px 20px rgba(0,0,0,0.08)',
-          zIndex: 90
-        }}>
-          <div style={{ fontWeight: 800, color: '#4f46e5', fontSize: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
-            {isPlaying && <Disc size={18} className="animate-spin" />}
+        <div className="choukai-player-bar">
+          <div className="choukai-player-info">
+            {isPlaying && <Disc size={20} className="animate-spin" />}
             Đang phát: Track A-{currentTrack}
           </div>
           <audio
@@ -257,7 +186,7 @@ export default function ChoukaiPage() {
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onEnded={handleEnded}
-            style={{ height: 40, width: '100%', maxWidth: 500 }}
+            className="choukai-audio-element"
           />
         </div>
       )}

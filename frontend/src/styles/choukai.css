@@ -1,0 +1,293 @@
+/* ── Choukai Page Styles ── */
+
+.choukai-page {
+  padding-bottom: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.choukai-page.has-player {
+  padding-bottom: 120px;
+}
+
+/* Level Tabs */
+.choukai-levels-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.choukai-levels-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.choukai-level-btn {
+  padding: 10px 24px;
+  border-radius: 99px;
+  border: none;
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex: 0 0 auto;
+}
+
+.choukai-level-btn.active {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+.choukai-level-btn:active {
+  transform: translateY(1px);
+}
+
+/* Header */
+.choukai-header {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.choukai-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* Accordion Lessons */
+.choukai-lessons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.choukai-lesson-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.choukai-lesson-card.expanded {
+  border-color: #6366f1;
+  background: #f8fafc;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08);
+}
+
+.choukai-lesson-header {
+  width: 100%;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+@media (hover: hover) {
+  .choukai-lesson-header:hover {
+    background: rgba(99, 102, 241, 0.04);
+  }
+}
+
+.choukai-lesson-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.choukai-lesson-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: all 0.3s ease;
+}
+
+.choukai-lesson-icon.playing {
+  background: #e0e7ff;
+  color: #4f46e5;
+  box-shadow: 0 0 15px rgba(79, 70, 229, 0.2);
+}
+
+.choukai-lesson-title {
+  font-weight: 800;
+  font-size: 16px;
+  color: #1e293b;
+  transition: color 0.3s ease;
+}
+
+.choukai-lesson-title.playing {
+  color: #4f46e5;
+}
+
+.choukai-lesson-meta {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* Track Grid */
+.choukai-tracks-grid {
+  padding: 0 20px 20px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.choukai-track-btn {
+  padding: 14px 10px;
+  border-radius: 14px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  color: #475569;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.choukai-track-btn:active {
+  transform: scale(0.96);
+}
+
+.choukai-track-btn.active {
+  border-color: #4f46e5;
+  background: #4f46e5;
+  color: white;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.25);
+}
+
+/* Empty State */
+.choukai-empty {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f8fafc;
+  border-radius: 20px;
+  border: 2px dashed #e2e8f0;
+}
+
+.choukai-empty h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.choukai-empty p {
+  color: #64748b;
+}
+
+/* Audio Player Floating Bar */
+.choukai-player-bar {
+  position: fixed;
+  bottom: var(--nav-height, 0px);
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.08);
+  z-index: 90;
+  animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.choukai-player-info {
+  font-weight: 800;
+  color: #4f46e5;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.choukai-audio-element {
+  height: 44px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 99px;
+  background: #f1f5f9;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 600px) {
+  .choukai-page {
+    padding-bottom: 60px;
+  }
+  
+  .choukai-page.has-player {
+    padding-bottom: 140px;
+  }
+
+  .choukai-header {
+    font-size: 20px;
+  }
+
+  .choukai-tracks-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  
+  .choukai-track-btn {
+    padding: 12px 6px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+  
+  .choukai-lesson-icon {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .choukai-lesson-title {
+    font-size: 15px;
+  }
+  
+  .choukai-player-bar {
+    padding: 12px 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+}
