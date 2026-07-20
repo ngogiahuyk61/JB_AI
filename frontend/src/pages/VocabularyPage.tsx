@@ -5,7 +5,7 @@ import {
 } from 'lucide-react';
 import { ALL_VOCAB, POS_LABELS, type VocabEntry } from '../constants/jlptData';
 import { SPECIAL_CATEGORIES, type SpecialCategory } from '../constants/specialCategories';
-import { N5_LESSONS, type LessonDefinition } from '../constants/lessonData';
+import { N5_LESSONS } from '../constants/lessonData';
 import { speechService, autoReadWords, cancelAutoRead, pauseAutoRead, resumeAutoRead } from '../services/speechService';
 import { analyzeWord } from '../constants/kanjiDB';
 import { apiService, getSpecialCategoryVocab } from '../services/apiService';
