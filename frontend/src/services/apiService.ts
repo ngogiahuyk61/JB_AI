@@ -55,6 +55,7 @@ function mapVocabEntry(v: Record<string, unknown>): VocabEntry {
     level: v.jlptLevel as VocabEntry['level'],
     pos: (v.partOfSpeech as string) ?? '名詞',
     tags: (v.tags as string) ?? undefined,
+    stt: v.sortOrder as number | undefined,
     lesson: v.sortOrder as number | undefined,
     exampleSentence: v.exampleSentence as string | undefined,
     exampleTranslation: v.exampleTranslation as string | undefined,

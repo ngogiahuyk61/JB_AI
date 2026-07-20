@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { ALL_VOCAB, POS_LABELS, type VocabEntry } from '../constants/jlptData';
 import { SPECIAL_CATEGORIES, type SpecialCategory } from '../constants/specialCategories';
+import { N5_LESSONS, type LessonDefinition } from '../constants/lessonData';
 import { speechService, autoReadWords, cancelAutoRead, pauseAutoRead, resumeAutoRead } from '../services/speechService';
 import { analyzeWord } from '../constants/kanjiDB';
 import { apiService, getSpecialCategoryVocab } from '../services/apiService';
@@ -48,6 +49,7 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
   const isMobile = deviceLayout === 'mobile';
   const [levelFilter, setLevelFilter] = useState<LevelFilter>('all');
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all');
+  const [lessonFilter, setLessonFilter] = useState<number | null>(null);
   const [posFilter, setPosFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedWord, setSelectedWord] = useState<VocabEntry | null>(null);
@@ -126,6 +128,16 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
           if (searchQuery.trim() && posFilter) {
             data = data.filter(v => v.pos === posFilter);
           }
+          // Apply lesson filter client-side if a lesson is selected
+          if (lessonFilter !== null && levelFilter === 'N5') {
+            const lessonDef = N5_LESSONS.find(l => l.lessonNum === lessonFilter);
+            if (lessonDef) {
+              data = data.filter(v => {
+                if (!v.stt) return false;
+                return lessonDef.sttRanges.some(([min, max]) => v.stt! >= min && v.stt! <= max);
+              });
+            }
+          }
           setVocabList(data);
         }
       } catch (err) {
@@ -137,7 +149,7 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
 
     fetchVocab();
     return () => { active = false; };
-  }, [levelFilter, categoryFilter, posFilter, searchQuery, dbOnline]);
+  }, [levelFilter, categoryFilter, posFilter, searchQuery, lessonFilter, dbOnline]);
 
   // Words for auto-read (always pull from local ALL_VOCAB to get all items regardless of pagination)
   const autoReadWordList = useMemo(() => {
@@ -765,7 +777,7 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
         </div>
         <div style={{ display: 'flex', background: '#f1f5f9', borderRadius: 12, padding: 3, gap: 2, flexWrap: 'wrap' }}>
           {(['all', 'N5', 'N4', 'N3', 'N2', 'N1'] as const).map(lv => (
-            <button key={lv} onClick={() => { setLevelFilter(lv); setCategoryFilter('all'); setSearchQuery(''); }}
+            <button key={lv} onClick={() => { setLevelFilter(lv); setCategoryFilter('all'); setSearchQuery(''); setLessonFilter(null); }}
               style={{
                 padding: '8px 14px', border: 'none', borderRadius: 10, cursor: 'pointer',
                 fontSize: 13, fontWeight: 700, transition: 'all 150ms ease',
@@ -782,6 +794,7 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
                 setCategoryFilter(categoryFilter === cat.id ? 'all' : cat.id);
                 setLevelFilter('all');
                 setSearchQuery('');
+                setLessonFilter(null);
               }}
               style={{
                 padding: '8px 12px', borderRadius: 10, cursor: 'pointer',
@@ -830,6 +843,51 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
               {POS_LABELS[pos] || pos}
             </button>
           ))}
+        </div>
+      )}
+
+      {/* Lesson Chips Filter Panel for N5/N4/N3/N2/N1 */}
+      {levelFilter !== 'all' && categoryFilter === 'all' && !searchQuery && (
+        <div style={{ 
+          display: 'flex', gap: 10, overflowX: 'auto', padding: '8px 0', 
+          msOverflowStyle: 'none', scrollbarWidth: 'none', 
+          borderBottom: '1px solid var(--border)', marginBottom: 8 
+        }}>
+          <style>{`.lesson-chips::-webkit-scrollbar { display: none; }`}</style>
+          <div className="lesson-chips" style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 4 }}>
+            <button
+              onClick={() => setLessonFilter(null)}
+              style={{
+                padding: '8px 16px', borderRadius: 20, border: 'none', whiteSpace: 'nowrap',
+                background: lessonFilter === null ? 'var(--primary)' : '#f1f5f9',
+                color: lessonFilter === null ? 'white' : 'var(--text-secondary)',
+                fontWeight: 700, fontSize: 13, cursor: 'pointer', transition: 'all 0.2s'
+              }}
+            >
+              Tất cả bài {levelFilter}
+            </button>
+            
+            {levelFilter === 'N5' && N5_LESSONS.map(lesson => (
+              <button
+                key={lesson.lessonNum}
+                onClick={() => setLessonFilter(lesson.lessonNum)}
+                style={{
+                  padding: '8px 16px', borderRadius: 20, border: 'none', whiteSpace: 'nowrap',
+                  background: lessonFilter === lesson.lessonNum ? 'var(--primary)' : '#f1f5f9',
+                  color: lessonFilter === lesson.lessonNum ? 'white' : 'var(--text-secondary)',
+                  fontWeight: 600, fontSize: 13, cursor: 'pointer', transition: 'all 0.2s'
+                }}
+              >
+                <strong>Bài {lesson.lessonNum}</strong> · {lesson.theme}
+              </button>
+            ))}
+
+            {levelFilter !== 'N5' && (
+              <div style={{ padding: '8px 16px', color: 'var(--text-muted)', fontSize: 13, fontStyle: 'italic', whiteSpace: 'nowrap' }}>
+                Đang cập nhật danh sách bài học...
+              </div>
+            )}
+          </div>
         </div>
       )}
 

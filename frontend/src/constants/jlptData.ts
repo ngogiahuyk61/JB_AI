@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // JLPT Vocabulary Database – Loaded from generated JSON
 // Source: data/vocabulary/all_vocabulary.json
 // ============================================================
@@ -17,6 +17,7 @@ export interface VocabEntry {
   level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
   pos: string;
   tags?: string;
+  stt?: number;
   lesson?: number;
   exampleSentence?: string;
   exampleTranslation?: string;
@@ -45,6 +46,7 @@ const rawVocabulary = allVocabulary as RawVocabEntry[];
 
 export const ALL_VOCAB: VocabEntry[] = rawVocabulary.map((entry, idx) => ({
   id: entry.id ?? `${entry.jlptLevel.toLowerCase()}_${String(entry.sortOrder ?? idx + 1).padStart(4, '0')}`,
+  stt: entry.sortOrder ?? idx + 1,
   kanji: entry.kanji,
   kana: entry.kana,
   hanViet: entry.hanViet ?? '',
