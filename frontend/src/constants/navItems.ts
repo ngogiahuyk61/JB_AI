@@ -1,7 +1,7 @@
 import { Home, BookMarked, Layers, GraduationCap, Settings, MessageSquareMore, Headphones, Leaf } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-export type AppTab = 'dashboard' | 'flashcard' | 'exam' | 'vocabulary' | 'lesson' | 'settings' | 'kaiwa' | 'verbquiz' | 'particlequiz' | 'chopchep' | 'kanjichat';
+export type AppTab = 'dashboard' | 'flashcard' | 'exam' | 'vocabulary' | 'lesson' | 'settings' | 'kaiwa' | 'verbquiz' | 'particlequiz' | 'chopchep' | 'kanjichat' | 'choukai';
 
 export interface NavItem {
   id: AppTab;
@@ -16,6 +16,7 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'flashcard', label: 'Flashcard', shortLabel: 'Flashcard', icon: Layers },
   { id: 'lesson', label: 'Bài học', shortLabel: 'Bài học', icon: GraduationCap },
   { id: 'kaiwa', label: 'Kaiwa N5', shortLabel: 'Kaiwa', icon: MessageSquareMore },
+  { id: 'choukai', label: 'Luyện Nghe', shortLabel: 'Nghe', icon: Headphones },
   { id: 'chopchep', label: 'Chopchep', shortLabel: 'Chopchep', icon: Headphones },
   { id: 'kanjichat', label: 'Kanji Chat', shortLabel: 'Kanji', icon: Leaf },
   { id: 'settings', label: 'Cài đặt', shortLabel: 'Cài đặt', icon: Settings },

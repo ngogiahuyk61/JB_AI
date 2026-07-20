@@ -13,6 +13,7 @@ import ParticleQuizPage from './pages/ParticleQuizPage';
 // @ts-ignore: IDE false positive for this import path
 import ChopchepPage from './pages/ChopchepPage'; // Force IDE refresh
 import KanjiChatPage from './pages/KanjiChatPage';
+import ChoukaiPage from './pages/ChoukaiPage';
 import FloatingChat from './components/chat/FloatingChat';
 import { MessageCircle } from 'lucide-react';
 import { useAppLayout } from './hooks/useAppLayout';
@@ -59,6 +60,7 @@ export default function App() {
       case 'particlequiz': return <ParticleQuizPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
       case 'chopchep': return <ChopchepPage />;
       case 'kanjichat': return <KanjiChatPage />;
+      case 'choukai': return <ChoukaiPage />;
       default: return <DashboardPage onNavigate={(tab) => handleTabChange(tab as AppTab)} />;
     }
   };
