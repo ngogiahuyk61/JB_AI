@@ -238,6 +238,7 @@ export default function FlashcardPage() {
   }, [autoPlayState, idx, phase, card]);
 
   const toggleAutoPlay = () => {
+    speechService.unlockAudioSync();
     setAutoPlayState(prev => prev === 'idle' ? 'playing' : 'idle');
   };
 

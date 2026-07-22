@@ -337,10 +337,7 @@ export default function TopicPlayer({ topic, onBack }: TopicPlayerProps) {
         
         {topic.id === 'hometown' && (
           <button
-            onClick={() => {
-              speechService.unlockAudioSync();
-              setShowChatbot(true);
-            }}
+            onClick={() => setShowChatbot(true)}
             style={{
               height: 64, borderRadius: 32, border: 'none', padding: '0 24px',
               background: 'linear-gradient(135deg, #4f46e5, #6366f1)', color: 'white', cursor: 'pointer',

@@ -213,6 +213,7 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
   // ── Speak single word ──
   const handleSpeak = useCallback(async (word: VocabEntry, e?: React.MouseEvent) => {
     e?.stopPropagation();
+    speechService.unlockAudioSync();
     setSpeakingId(word.id);
     try {
       await speechService.speakFlashcard(word.kana, word.vietnamese, word.hanViet);
@@ -223,6 +224,7 @@ export default function VocabularyPage({ onNavigate }: VocabularyPageProps) {
 
   // ── Auto-read controls ──
   const startAutoRead = useCallback(() => {
+    speechService.unlockAudioSync();
     const words = autoReadMode === 'random'
       ? [...autoReadWordList].sort(() => Math.random() - 0.5)
       : autoReadWordList;
