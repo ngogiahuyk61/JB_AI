@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, Play, Pause, RefreshCw, Volume2, Languages, Type } from 'lucide-react';
+import { ArrowLeft, Play, Pause, RefreshCw, Volume2, Languages, Type, BrainCircuit } from 'lucide-react';
 import { speechService } from '../../services/speechService';
 import type { KaiwaTopic, TopicProhibition } from '../../data/kaiwaTopics';
+import HometownChatbot from './HometownChatbot';
 
 // ── Prohibition Card (interactive, tap to reveal grammar) ────────────────
 function ProhibitionCard({ prohibition }: { prohibition: TopicProhibition }) {
@@ -56,6 +57,7 @@ export default function TopicPlayer({ topic, onBack }: TopicPlayerProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const [showRomaji, setShowRomaji] = useState<Set<number>>(new Set());
   const [showMeaning, setShowMeaning] = useState<Set<number>>(new Set());
+  const [showChatbot, setShowChatbot] = useState(false);
   
   const scrollRef = useRef<HTMLDivElement>(null);
   const isPlayingRef = useRef(false);
@@ -109,27 +111,35 @@ export default function TopicPlayer({ topic, onBack }: TopicPlayerProps) {
     const abortCtrl = new AbortController();
     abortCtrlRef.current = abortCtrl;
 
-    const startIdx = currentIndex >= 0 && currentIndex < topic.dialogues.length - 1 ? currentIndex + 1 : 0;
+    let startIdx = currentIndex >= 0 && currentIndex < topic.dialogues.length - 1 ? currentIndex + 1 : 0;
     
     await speechService.unlockAudio(); // Important for Android
 
-    for (let i = startIdx; i < topic.dialogues.length; i++) {
-      if (!isPlayingRef.current || abortCtrl.signal.aborted) break;
-      
-      setCurrentIndex(i);
-      
-      const dialogue = topic.dialogues[i];
-      // Clean up brackets for TTS
-      const cleanText = dialogue.japanese.replace(/[「」\[\]]/g, '');
-      
-      try {
-        await speechService.speak(cleanText, { lang: 'ja-JP', rate: 0.85 });
-      } catch (e) {
-        console.error('Speech error', e);
+    while (isPlayingRef.current && !abortCtrl.signal.aborted) {
+      for (let i = startIdx; i < topic.dialogues.length; i++) {
+        if (!isPlayingRef.current || abortCtrl.signal.aborted) break;
+        
+        setCurrentIndex(i);
+        
+        const dialogue = topic.dialogues[i];
+        // Clean up brackets for TTS
+        const cleanText = dialogue.japanese.replace(/[「」\[\]]/g, '');
+        
+        try {
+          await speechService.speak(cleanText, { lang: 'ja-JP', rate: 0.85 });
+        } catch (e) {
+          console.error('Speech error', e);
+        }
+        
+        // Add a small pause between dialogues
+        await new Promise(res => setTimeout(res, 500));
       }
-      
-      // Add a small pause between dialogues
-      await new Promise(res => setTimeout(res, 500));
+
+      if (isPlayingRef.current && !abortCtrl.signal.aborted) {
+        // Wait a bit before repeating
+        await new Promise(res => setTimeout(res, 1500));
+        startIdx = 0; // restart from beginning
+      }
     }
     
     setIsPlaying(false);
@@ -324,7 +334,23 @@ export default function TopicPlayer({ topic, onBack }: TopicPlayerProps) {
         >
           {isPlaying ? <Pause size={28} fill="currentColor" /> : <Play size={28} fill="currentColor" style={{ marginLeft: 4 }} />}
         </button>
+        
+        {topic.id === 'hometown' && (
+          <button
+            onClick={() => setShowChatbot(true)}
+            style={{
+              height: 64, borderRadius: 32, border: 'none', padding: '0 24px',
+              background: 'linear-gradient(135deg, #4f46e5, #6366f1)', color: 'white', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+              boxShadow: '0 4px 20px rgba(79, 70, 229, 0.4)', fontWeight: 700
+            }}
+          >
+            <BrainCircuit size={20} /> Luyện tập với AI
+          </button>
+        )}
       </div>
+
+      <HometownChatbot isOpen={showChatbot} onClose={() => setShowChatbot(false)} />
     </div>
   );
 }

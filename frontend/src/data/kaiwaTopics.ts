@@ -242,5 +242,21 @@ export const KAIWA_TOPICS: KaiwaTopic[] = [
       { speaker: "S", japanese: "KAIZEN YOSHIDA SCHOOLの門で会いましょう。", romaji: "KAIZEN YOSHIDA SCHOOL no mon de aimashou.", vietnamese: "Mình gặp nhau ở cổng trường KAIZEN YOSHIDA cô nhé." },
       { speaker: "T", japanese: "いいですね。楽しみにしています。", romaji: "Ii desu ne. Tanoshimi ni shite imasu.", vietnamese: "Được đấy. Cô rất mong chờ." }
     ]
+  },
+  {
+    id: "hometown",
+    title: "Topic 6: Giới thiệu về quê hương",
+    context: "Bài độc thoại N5 – Giới thiệu thành phố Thủ Đức nơi bạn sinh sống: thời tiết, ẩm thực, điểm du lịch và lý do yêu thích quê hương.",
+    image: "https://placehold.co/600x400/0f172a/a5b4fc?text=Qu%C3%AA+H%C6%B0%C6%A1ng+%F0%9F%8F%A0",
+    dialogues: [
+      { speaker: "S", japanese: "わたしの いなかは トゥドゥックし です。", romaji: "Watashi no inaka wa Tudokku-shi desu.", vietnamese: "Quê tôi là thành phố Thủ Đức." },
+      { speaker: "S", japanese: "だいがくが たくさん あって、がくせいや わかいひとが おおい です。", romaji: "Daigaku ga takusan atte, gakusei ya wakai hito ga ooi desu.", vietnamese: "Có nhiều trường đại học, nhiều sinh viên và người trẻ." },
+      { speaker: "S", japanese: "そして とても にぎやかな まち です。", romaji: "Soshite totemo nigiyakana machi desu.", vietnamese: "Và là một thành phố rất nhộn nhịp." },
+      { speaker: "S", japanese: "おいしい たべものが たくさん あって、とても にんきが あります。", romaji: "Oishii tabemono ga takusan atte, totemo ninki ga arimasu.", vietnamese: "Có nhiều đồ ăn ngon và rất được yêu thích." },
+      { speaker: "S", japanese: "１ねんじゅう あたたかくて、すみやすい まち です。", romaji: "Ichinenjuu atatakakute, sumiyasui machi desu.", vietnamese: "Quanh năm ấm áp, là thành phố dễ sống." },
+      { speaker: "S", japanese: "わたしは じぶんの まちが だいすき です。", romaji: "Watashi wa jibun no machi ga daisuki desu.", vietnamese: "Tôi rất yêu thích thành phố của mình." },
+      { speaker: "S", japanese: "みなさん、わたしの まちへ きて ください。", romaji: "Minasan, watashi no machi e kite kudasai.", vietnamese: "Mọi người hãy đến thành phố của tôi nhé." },
+      { speaker: "S", japanese: "どうも ありがとうございました。", romaji: "Doumo arigatou gozaimashita.", vietnamese: "Xin cảm ơn rất nhiều." }
+    ]
   }
 ];
